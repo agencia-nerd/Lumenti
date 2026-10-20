@@ -1,0 +1,155 @@
+/*
+ * "¿Cómo podemos ayudarte?" (portada). Tarjeta blanca; al pasar el mouse o enfocar con teclado
+ * un círculo verde la rellena desde el centro, el nombre sube y aparece "Saber más".
+ * En pantallas táctiles el nombre ya está arriba y "Saber más" visible (sin hover que esperar).
+ * Celular: ícono arriba y texto abajo; desde md, texto a la izquierda e ícono a la derecha.
+ */
+.ayuda-tarjeta {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex: 1;
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 14px;
+    min-width: 0;
+    height: 200px;
+    padding: 18px 16px 16px;
+    overflow: hidden;
+    border-radius: 6px;
+    background: var(--color-white);
+    color: var(--color-titulo);
+    transition: color 300ms linear;
+
+    @variant md {
+        flex-direction: row;
+        gap: 24px;
+        height: 168px;
+        padding: 28px clamp(24px, 2.9vw, 56px) 28px clamp(20px, 1.5625vw, 30px);
+    }
+
+    @variant lg {
+        height: clamp(168px, 9.1vw, 175px);
+    }
+}
+
+/* Círculo que crece desde el centro. */
+.ayuda-relleno {
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    width: calc(100% + 80px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--color-primario);
+    translate: -50% -50%;
+    scale: 0;
+    transition: scale 560ms linear;
+    pointer-events: none;
+}
+
+.ayuda-textos {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+}
+
+.ayuda-nombre {
+    position: absolute;
+    top: 0;
+    inset-inline: 0;
+    max-width: 300px;
+    font-size: 0.9375rem; /* 15 */
+    line-height: 1.35;
+    letter-spacing: 0.01em;
+    transition:
+        top 460ms var(--ease-suave),
+        translate 460ms var(--ease-suave);
+
+    @variant md {
+        font-size: clamp(1.125rem, 1.0417vw, 1.25rem); /* 18 → 20 */
+        line-height: 1.5;
+    }
+}
+
+.ayuda-mas {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+
+    & > span {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.875rem; /* 14 */
+        line-height: 1.5rem;
+        transition: translate 460ms var(--ease-suave);
+
+        @variant md {
+            gap: 16px;
+            font-size: 1rem;
+        }
+    }
+}
+
+.ayuda-icono {
+    flex: none;
+    align-self: flex-start;
+    display: block;
+    width: 34px;
+    height: auto;
+    aspect-ratio: 1;
+    color: var(--color-primario);
+    transition: color 300ms linear;
+
+    @variant md {
+        align-self: center;
+        width: clamp(44px, 2.9167vw, 56px);
+    }
+}
+
+/* Ícono subido en el admin: se usa como máscara para que tome el color como el del tema. */
+.ayuda-icono-mascara {
+    background-color: currentColor;
+    mask: var(--icono) center / contain no-repeat;
+}
+
+/* Con mouse: en reposo el nombre va centrado y "Saber más" escondido abajo. */
+@media (hover: hover) and (pointer: fine) {
+    [data-ayuda-tarjeta]:not(:hover, :focus-visible) {
+        .ayuda-nombre {
+            top: 50%;
+            translate: 0 -50%;
+        }
+
+        .ayuda-mas > span {
+            translate: 0 105%;
+        }
+    }
+
+    [data-ayuda-tarjeta]:hover {
+        color: var(--color-white);
+
+        .ayuda-relleno {
+            scale: 1;
+        }
+
+        .ayuda-icono {
+            color: var(--color-white);
+        }
+    }
+}
+
+[data-ayuda-tarjeta]:focus-visible {
+    color: var(--color-white);
+
+    .ayuda-relleno {
+        scale: 1;
+    }
+
+    .ayuda-icono {
+        color: var(--color-white);
+    }
+}

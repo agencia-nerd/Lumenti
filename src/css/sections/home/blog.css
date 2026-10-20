@@ -1,0 +1,18 @@
+/* Blog (portada): al pasar el mouse o enfocar una tarjeta, la foto se acerca y la flecha avanza. */
+.blog-foto {
+    transition: scale 900ms var(--ease-suave);
+}
+
+.blog-flecha {
+    transition: translate 260ms linear;
+}
+
+.blog-tarjeta:is(:hover, :focus-visible) {
+    .blog-foto {
+        scale: 1.06;
+    }
+
+    .blog-flecha {
+        translate: 4px 0;
+    }
+}

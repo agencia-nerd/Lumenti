@@ -8,11 +8,15 @@
 
 $lumenti_item = $args['item'];
 
-// Tarjeta: sin título no se muestra; sin enlace propio lleva a WhatsApp.
-$lumenti_promo_titulo = (string) lumenti_ajuste('promo_titulo');
-$lumenti_promo_link = lumenti_ajuste('promo_enlace');
+// Tarjeta: sin título no se muestra; sin enlace válido lleva a WhatsApp; sin texto, "Contáctanos".
+$lumenti_promo_titulo = trim((string) lumenti_ajuste('promo_titulo'));
+$lumenti_promo_link = is_array(lumenti_ajuste('promo_enlace')) ? lumenti_ajuste('promo_enlace') : [];
+if (trim((string) ($lumenti_promo_link['title'] ?? '')) === '') {
+    $lumenti_promo_link['title'] = __('Contáctanos', 'lumenti');
+}
 if (!lumenti_link_data($lumenti_promo_link) && $args['whatsapp'] !== '') {
-    $lumenti_promo_link = ['url' => $args['whatsapp'], 'title' => __('Contáctanos', 'lumenti'), 'target' => '_blank'];
+    $lumenti_promo_link['url'] = $args['whatsapp'];
+    $lumenti_promo_link['target'] = '_blank';
 }
 $lumenti_promo_data = lumenti_link_data($lumenti_promo_link);
 $lumenti_cols = count($lumenti_item->children);

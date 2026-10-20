@@ -1,0 +1,192 @@
+/*
+ * "Psicología para el día a día" (portada).
+ * Fotos: todas apiladas y recortadas (clip-path); la del tema activo se descubre de izquierda a
+ * derecha sobre la anterior y se acerca despacio. psicologia.js pone data-estado (activo | previa)
+ * y data-entra en cada foto, y data-zoom en el contenedor. Sin JS se ve la primera.
+ */
+.psico-foto {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    clip-path: inset(0 100% 0 0);
+    will-change: transform;
+}
+
+.psico-foto[data-estado] {
+    clip-path: none;
+}
+
+.psico-foto[data-estado='previa'] {
+    z-index: 2;
+}
+
+.psico-foto[data-estado='activo'] {
+    z-index: 3;
+}
+
+.psico-foto[data-entra] {
+    animation: psico-barrido 700ms var(--ease-cortina) both;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    [data-psico-fotos][data-zoom] .psico-foto[data-estado] {
+        scale: 1.09;
+        transition: scale 16s cubic-bezier(0.3, 0.1, 0.3, 1);
+    }
+}
+
+@keyframes psico-barrido {
+    from {
+        clip-path: inset(0 100% 0 0);
+    }
+
+    to {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+/* Fila de un tema: título, texto y flecha. Celular: texto debajo y flecha a la derecha de ambos. */
+.psico-tema {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 40px;
+    align-items: center;
+    gap: 12px 32px;
+    padding: 20px 12px;
+    overflow: hidden;
+    border-top: 1px solid var(--color-primario-400);
+    color: var(--color-white);
+
+    @variant md {
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) 40px;
+    }
+
+    @variant lg {
+        padding: 22px 20px;
+    }
+}
+
+div.psico-tema {
+    grid-template-columns: minmax(0, 1fr);
+
+    @variant md {
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    }
+}
+
+.psico-tema-texto {
+    grid-column: 1;
+
+    @variant md {
+        grid-column: auto;
+    }
+}
+
+.psico-tema-flecha {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    place-items: center;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    justify-self: end;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 6px;
+    background: var(--color-primario-600);
+    color: var(--color-white);
+    transition: color 300ms linear;
+
+    @variant md {
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    /* Relleno blanco de la flecha al pasar. */
+    &::before {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        top: 50%;
+        left: 50%;
+        width: calc(100% + 20px);
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: var(--color-white);
+        translate: -50% -50%;
+        scale: 0;
+        transition: scale 420ms linear;
+    }
+}
+
+/* Círculo que rellena la fila desde el centro. */
+.psico-relleno {
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    width: calc(100% + 80px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--color-primario);
+    translate: -50% -50%;
+    scale: 0;
+    transition: scale 560ms linear;
+    pointer-events: none;
+}
+
+a.psico-tema:is(:hover, :focus-visible) {
+    color: var(--color-white);
+
+    .psico-relleno,
+    .psico-tema-flecha::before {
+        scale: 1;
+    }
+
+    .psico-tema-flecha {
+        color: var(--color-primario);
+    }
+}
+
+/* Franja de evaluaciones: celular con la foto arriba; desde lg, texto a la izquierda y foto a la derecha. */
+.psico-banda-contenido {
+    padding: 48px var(--spacing-gutter);
+
+    @variant md {
+        padding-block: 56px;
+    }
+
+    @variant lg {
+        padding-block: 64px;
+    }
+}
+
+.psico-banda-con-foto .psico-banda-contenido {
+    padding-top: 236px;
+
+    @variant md {
+        padding-top: 248px;
+    }
+
+    @variant lg {
+        padding-top: 64px;
+    }
+}
+
+.psico-banda-degradado {
+    background: linear-gradient(180deg, rgb(36 36 36 / 0) 0, rgb(36 36 36 / 0) 120px, #242424 220px);
+
+    @variant lg {
+        background: linear-gradient(90deg, #242424 0%, #242424 44%, rgb(36 36 36 / 0.85) 52%, rgb(36 36 36 / 0) 70%);
+    }
+}
+
+.psico-banda-titulo {
+    font-size: clamp(1.875rem, 2.3vw, 2.75rem); /* 30 → 44 */
+    line-height: 1.25;
+}

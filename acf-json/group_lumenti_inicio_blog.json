@@ -1,0 +1,75 @@
+{
+    "key": "group_lumenti_inicio_blog",
+    "title": "Inicio · Blog",
+    "fields": [
+        {
+            "key": "field_lumenti_blog_titulo",
+            "label": "Título",
+            "name": "blog_titulo",
+            "type": "text",
+            "instructions": "Ej.: Nuestros artículos para el bienestar"
+        },
+        {
+            "key": "field_lumenti_blog_texto",
+            "label": "Texto",
+            "name": "blog_texto",
+            "type": "textarea",
+            "instructions": "Frase debajo del título.",
+            "rows": 3,
+            "new_lines": ""
+        },
+        {
+            "key": "field_lumenti_blog_boton",
+            "label": "Botón",
+            "name": "blog_boton",
+            "type": "link",
+            "instructions": "Si queda vacío: «Explora nuestro blog» a la página del blog.",
+            "return_format": "array"
+        },
+        {
+            "key": "field_lumenti_blog_articulos",
+            "label": "Artículos",
+            "name": "blog_articulos",
+            "type": "relationship",
+            "instructions": "Arrastra para cambiar el orden. Si queda vacío, salen los 4 más recientes.",
+            "post_type": [
+                "post"
+            ],
+            "post_status": [
+                "publish"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search",
+                "taxonomy"
+            ],
+            "return_format": "id",
+            "elements": [
+                "featured_image"
+            ],
+            "min": "",
+            "max": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_type",
+                "operator": "==",
+                "value": "front_page"
+            }
+        ]
+    ],
+    "menu_order": 7,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content"
+    ],
+    "active": true,
+    "description": "Portada: últimos artículos del blog.",
+    "show_in_rest": 0,
+    "modified": 1792536612
+}

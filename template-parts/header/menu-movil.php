@@ -79,7 +79,7 @@ $lumenti_link_movil = static function (WP_Post $item, string $class) {
 
         <?php if ($args['whatsapp'] !== '') : ?>
             <div class="sticky bottom-0 -mx-4 bg-fondo-alt px-4 pt-5">
-                <a href="<?php echo esc_url($args['whatsapp']); ?>" class="btn btn-primario w-full [--btn-fs:1.1875rem] [--btn-h:4rem]" target="_blank" rel="noopener noreferrer">
+                <a<?php echo lumenti_link_attrs(['url' => $args['whatsapp'], 'target' => '_blank'], ['class' => 'btn btn-primario w-full [--btn-fs:1.1875rem] [--btn-h:4rem]']); ?>>
                     WhatsApp
                     <?php echo lumenti_icon('whatsapp', 'size-[18px]'); ?>
                     <span class="sr-only">(<?php esc_html_e('se abre en una pestaña nueva', 'lumenti'); ?>)</span>

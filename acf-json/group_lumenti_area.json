@@ -1,0 +1,33 @@
+{
+    "key": "group_lumenti_area",
+    "title": "Áreas",
+    "fields": [
+        {
+            "key": "field_lumenti_area_orden",
+            "label": "Orden",
+            "name": "orden",
+            "type": "number",
+            "step": 1,
+            "instructions": "Posición de la columna en el menú «Qué tratamos». Ej.: 1"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "area"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Áreas de condiciones: orden de las columnas del mega menú.",
+    "show_in_rest": 0,
+    "modified": 1792533404
+}

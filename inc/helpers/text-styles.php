@@ -11,5 +11,6 @@ defined('ABSPATH') || exit;
 
 return [
     // wp-helper:styles:start
+    'primario' => ['marker' => '*', 'class' => 'text-primario'],
     // wp-helper:styles:end
 ];

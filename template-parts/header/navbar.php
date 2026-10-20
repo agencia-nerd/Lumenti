@@ -65,7 +65,7 @@ $lumenti_item_color = static fn(WP_Post $item): string => $item->is_current
             <div class="col-start-3 flex items-center justify-self-end" data-mega-plain>
                 <?php if ($lumenti_whatsapp !== '') : ?>
                     <div class="hidden xl:block">
-                        <a href="<?php echo esc_url($lumenti_whatsapp); ?>" class="btn btn-primario" target="_blank" rel="noopener noreferrer">
+                        <a<?php echo lumenti_link_attrs(['url' => $lumenti_whatsapp, 'target' => '_blank'], ['class' => 'btn btn-primario']); ?>>
                             WhatsApp
                             <?php echo lumenti_icon('whatsapp', 'size-[18px]'); ?>
                             <span class="sr-only">(<?php esc_html_e('se abre en una pestaña nueva', 'lumenti'); ?>)</span>

@@ -14,15 +14,14 @@
             "label": "Número de WhatsApp del sitio",
             "type": "text",
             "default_value": "51939033999",
-            "instructions": "Número al que llegan todos los mensajes: botón \"WhatsApp\" de la navbar, botón del menú móvil, botón flotante y enlaces \"Contáctanos\". Escríbelo con el código de país y sin espacios ni signos (ej. 51939033999). Si queda vacío, esos botones y enlaces no se muestran."
+            "instructions": "Con código de país, sin espacios. Ej.: 51939033999"
         },
         {
             "key": "field_lumenti_whatsapp_mensaje",
             "name": "whatsapp_mensaje",
             "label": "Mensaje inicial del chat de WhatsApp",
             "type": "text",
-            "maxlength": 160,
-            "instructions": "Texto que aparece ya escrito cuando la persona abre el chat (ej. \"Hola, quisiera agendar una cita\"). Máximo 160 caracteres. Opcional: si queda vacío, el chat se abre en blanco."
+            "instructions": "Texto que aparece ya escrito al abrir el chat. Opcional."
         },
         {
             "key": "field_lumenti_tab_contacto",
@@ -36,7 +35,7 @@
             "label": "Teléfono de atención al paciente",
             "type": "text",
             "default_value": "+51 939 033 999",
-            "instructions": "Primer dato de la columna \"Contacto\" del footer; al tocarlo se llama a este número. Escríbelo como quieres que se lea (ej. +51 939 033 999). Si queda vacío, la fila no se muestra."
+            "instructions": "Ej.: +51 939 033 999"
         },
         {
             "key": "field_lumenti_tel_corporativo",
@@ -44,7 +43,7 @@
             "label": "Teléfono de atención corporativa",
             "type": "text",
             "default_value": "+51 942 901 535",
-            "instructions": "Segundo dato de la columna \"Contacto\" del footer, para empresas. Mismo formato que el teléfono de pacientes. Si queda vacío, la fila no se muestra."
+            "instructions": "Ej.: +51 942 901 535"
         },
         {
             "key": "field_lumenti_correo",
@@ -52,7 +51,7 @@
             "label": "Correo de contacto del footer",
             "type": "email",
             "default_value": "contacto@lumentisaludmental.com",
-            "instructions": "Correo de la columna \"Contacto\" del footer; al tocarlo se abre el programa de correo. Si queda vacío, la fila no se muestra."
+            "instructions": "Se muestra en el footer."
         },
         {
             "key": "field_lumenti_direccion",
@@ -60,7 +59,7 @@
             "label": "Dirección del consultorio",
             "type": "text",
             "default_value": "C. Los Antares 320, Santiago de Surco 15038",
-            "instructions": "Última fila de la columna \"Contacto\" del footer, en una línea (ej. C. Los Antares 320, Santiago de Surco 15038). Si queda vacía, la fila no se muestra."
+            "instructions": "En una línea."
         },
         {
             "key": "field_lumenti_mapa",
@@ -68,7 +67,7 @@
             "label": "Enlace de la dirección en Google Maps",
             "type": "url",
             "default_value": "https://maps.google.com/?q=C.+Los+Antares+320,+Santiago+de+Surco+15038",
-            "instructions": "Al tocar la dirección del footer se abre este enlace en una pestaña nueva. En Google Maps: Compartir → Copiar enlace. Si queda vacío, la dirección se muestra como texto, sin enlace."
+            "instructions": "En Google Maps: Compartir → Copiar enlace."
         },
         {
             "key": "field_lumenti_tab_redes",
@@ -84,7 +83,7 @@
             "layout": "table",
             "button_label": "Agregar red social",
             "max": 6,
-            "instructions": "Íconos de la columna \"Síguenos\" del footer y del bloque \"Síguenos\" del menú móvil, en este mismo orden (arrastra las filas para cambiarlo). Cada red se abre en una pestaña nueva. Una fila sin enlace no se muestra; sin filas, el bloque \"Síguenos\" desaparece.",
+            "instructions": "Arrastra para cambiar el orden.",
             "sub_fields": [
                 {
                     "key": "field_lumenti_red_tipo",
@@ -99,14 +98,14 @@
                         "x": "X",
                         "youtube": "YouTube"
                     },
-                    "instructions": "Define el ícono que se muestra."
+                    "instructions": ""
                 },
                 {
                     "key": "field_lumenti_red_url",
                     "name": "url",
                     "label": "Enlace al perfil de la red social",
                     "type": "url",
-                    "instructions": "Dirección completa del perfil (ej. https://www.instagram.com/lumenti)."
+                    "instructions": "Ej.: https://instagram.com/lumenti"
                 }
             ]
         },
@@ -121,19 +120,17 @@
             "name": "promo_titulo",
             "label": "Título de la tarjeta del menú \"Qué tratamos\"",
             "type": "text",
-            "maxlength": 60,
             "default_value": "¿No sabes qué condición te afecta?",
-            "instructions": "Tarjeta con foto a la derecha del menú desplegable \"Qué tratamos\" (solo en computadora). Se muestra en mayúsculas. Máximo 60 caracteres. Si queda vacío, la tarjeta no se muestra."
+            "instructions": "Tarjeta con foto del menú «Qué tratamos»."
         },
         {
             "key": "field_lumenti_promo_imagen",
             "name": "promo_imagen",
-            "label": "Foto de la tarjeta del menú \"Qué tratamos\"",
+            "label": "Foto de la tarjeta del menú «Qué tratamos»",
             "type": "image",
             "return_format": "id",
             "preview_size": "medium",
-            "mime_types": "jpg,jpeg,webp",
-            "instructions": "Ocupa la parte superior de la tarjeta; el texto va sobre la parte inferior oscura. JPG o WebP de 1250 × 770 px, máximo 200 KB. Si queda vacía, la tarjeta se ve con fondo oscuro sin foto."
+            "instructions": "Foto de la tarjeta."
         },
         {
             "key": "field_lumenti_promo_enlace",
@@ -141,7 +138,7 @@
             "label": "Enlace de la tarjeta del menú \"Qué tratamos\"",
             "type": "link",
             "return_format": "array",
-            "instructions": "A dónde lleva la tarjeta. El texto del enlace se muestra bajo el título (ej. \"Contáctanos\"). Si queda vacío, la tarjeta lleva a WhatsApp con el texto \"Contáctanos\"."
+            "instructions": "Si queda vacío, lleva a WhatsApp."
         },
         {
             "key": "field_lumenti_tab_footer",
@@ -156,8 +153,7 @@
             "type": "image",
             "return_format": "id",
             "preview_size": "medium",
-            "mime_types": "png,webp",
-            "instructions": "Logo en blanco que ocupa el ancho del footer, debajo de las columnas, sobre fondo verde azulado. PNG o WebP con fondo transparente, mínimo 1728 px de ancho, máximo 100 KB. Si queda vacío, se muestra el nombre del sitio."
+            "instructions": "Logo blanco grande del footer."
         },
         {
             "key": "field_lumenti_copyright",
@@ -165,7 +161,7 @@
             "label": "Texto de derechos de autor del footer",
             "type": "text",
             "default_value": "© {año} Lumenti · Todos los derechos reservados.",
-            "instructions": "Franja inferior del footer, a la izquierda. Escribe {año} donde quieras el año actual: se actualiza solo. Si queda vacío, no se muestra."
+            "instructions": "{año} se cambia solo por el año actual."
         }
     ],
     "location": [
@@ -186,5 +182,5 @@
     "active": true,
     "description": "Datos globales del sitio: navbar, footer y botón flotante de WhatsApp.",
     "show_in_rest": 0,
-    "modified": 1792524617
+    "modified": 1792527632
 }

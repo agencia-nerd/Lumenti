@@ -1,3 +1,21 @@
 import { initHeader } from './header.js';
+import { initHero } from './sections/home/hero.js';
+import { initSobre } from './sections/home/sobre.js';
+import { initServicios } from './sections/home/servicios.js';
+import { initPsicologia } from './sections/home/psicologia.js';
+import { initTestimonios } from './sections/home/testimonios.js';
+import { initCta } from './sections/components/cta.js';
+import { initReveal } from './reveal.js';
+import { initContador } from './contador.js';
+import { initVerMas } from './ver-mas.js';
 
 initHeader();
+initHero();
+initSobre();
+initServicios();
+initPsicologia();
+initTestimonios();
+initCta();
+initReveal();
+initContador();
+initVerMas();

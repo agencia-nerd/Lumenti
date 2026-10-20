@@ -20,15 +20,19 @@
     align-items: center;
     justify-content: center;
     gap: 0.625rem;
-    height: var(--btn-h, 3.5rem);
+    /* Alto mínimo (no fijo) y texto que salta de línea: un texto largo nunca se sale de la pantalla. */
+    min-height: var(--btn-h, 3.5rem);
+    max-width: 100%;
+    padding-block: 0.5rem;
     padding-inline: var(--btn-px, 1.5rem);
+    text-align: center;
+    text-wrap: balance;
     border: 1px solid var(--btn-borde, transparent);
     border-radius: var(--btn-radius, var(--radius-lg));
     background-color: var(--btn-bg, var(--color-primario));
     color: var(--btn-fg, var(--color-white));
     font-size: var(--btn-fs, var(--text-body));
     line-height: var(--btn-lh, 1.5rem);
-    white-space: nowrap;
     text-decoration: none;
     cursor: pointer;
 
@@ -263,5 +267,63 @@
 
     &[aria-invalid='true'] {
         border-color: var(--color-error);
+    }
+}
+
+/*
+ * Entrada al hacer scroll: data-reveal (sube 48px y se descubre) o data-reveal="img" (solo se
+ * descubre). reveal.js marca data-reveal-pendiente en lo que está fuera de pantalla al cargar
+ * y lo quita al aparecer; --reveal-delay escalona los que aparecen juntos. Sin JS, todo visible.
+ */
+@layer components {
+    [data-reveal] {
+        --reveal-dur: 900ms;
+        transition:
+            clip-path var(--reveal-dur) var(--ease-suave) var(--reveal-delay, 0ms),
+            translate var(--reveal-dur) var(--ease-suave) var(--reveal-delay, 0ms);
+    }
+
+    [data-reveal='img'] {
+        --reveal-dur: 1100ms;
+    }
+
+    [data-reveal][data-reveal-pendiente] {
+        clip-path: inset(0 0 100% 0);
+        translate: 0 48px;
+    }
+
+    [data-reveal='img'][data-reveal-pendiente] {
+        translate: none;
+    }
+}
+
+/*
+ * "Ver más" en celular (src/js/ver-mas.js): esconde los ítems que pasan del límite y anima los que
+ * entran. Desde md se ven todos y el botón no se muestra (su contenedor lleva md:hidden).
+ */
+@layer components {
+    @media (width < 48rem) {
+        [data-ver-mas-item][data-oculta] {
+            display: none;
+        }
+
+        [data-ver-mas-item][data-entra] {
+            animation: ver-mas-entra 520ms var(--ease-suave) var(--entra-delay, 0ms) both;
+        }
+    }
+
+    [data-ver-mas-boton] .ver-mas-flecha {
+        transition: rotate 300ms var(--ease-suave);
+    }
+
+    [data-ver-mas-boton][data-todo] .ver-mas-flecha {
+        rotate: 180deg;
+    }
+
+    @keyframes ver-mas-entra {
+        from {
+            opacity: 0;
+            translate: 0 16px;
+        }
     }
 }

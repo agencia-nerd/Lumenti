@@ -28,6 +28,14 @@ function lumenti_menu_arbol(string $location): array
         $by_id[$item->ID] = $item;
     }
 
+    // El ítem "Condiciones" (archivo de condicion) no tiene hijos a mano: se arman por área.
+    foreach ($by_id as $item) {
+        if (lumenti_menu_es_condiciones($item)) {
+            $item->children = lumenti_menu_condiciones();
+            $item->is_current = $item->is_current || (bool) array_filter($item->children, static fn(WP_Post $c): bool => $c->is_current);
+        }
+    }
+
     $tree = [];
     foreach ($by_id as $item) {
         $parent = (int) $item->menu_item_parent;

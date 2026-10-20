@@ -1,0 +1,143 @@
+{
+    "key": "group_lumenti_inicio_psicologia",
+    "title": "Inicio · Psicología para el día a día",
+    "fields": [
+        {
+            "key": "field_lumenti_psico_antetitulo",
+            "label": "Antetítulo",
+            "name": "psico_antetitulo",
+            "type": "text",
+            "instructions": "Ej.: Acompañamiento psicológico"
+        },
+        {
+            "key": "field_lumenti_psico_titulo",
+            "label": "Título",
+            "name": "psico_titulo",
+            "type": "textarea",
+            "instructions": "Enter para cada línea.",
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
+            "key": "field_lumenti_psico_texto",
+            "label": "Texto",
+            "name": "psico_texto",
+            "type": "textarea",
+            "instructions": "Frase debajo del título.",
+            "rows": 3,
+            "new_lines": ""
+        },
+        {
+            "key": "field_lumenti_psico_pagina",
+            "label": "Página",
+            "name": "psico_pagina",
+            "type": "post_object",
+            "instructions": "Todos los temas llevan aquí.",
+            "post_type": [
+                "page"
+            ],
+            "post_status": [
+                "publish"
+            ],
+            "return_format": "id",
+            "multiple": 0,
+            "allow_null": 1,
+            "ui": 1
+        },
+        {
+            "key": "field_lumenti_psico_temas",
+            "label": "Temas",
+            "name": "psico_temas",
+            "type": "repeater",
+            "layout": "row",
+            "min": 0,
+            "max": 0,
+            "button_label": "Agregar tema",
+            "instructions": "La foto cambia al pasar por cada tema. Arrastra para cambiar el orden.",
+            "sub_fields": [
+                {
+                    "key": "field_lumenti_psico_tema_titulo",
+                    "label": "Título",
+                    "name": "titulo",
+                    "type": "text",
+                    "instructions": "Ej.: Regulación emocional",
+                    "parent_repeater": "field_lumenti_psico_temas"
+                },
+                {
+                    "key": "field_lumenti_psico_tema_texto",
+                    "label": "Texto",
+                    "name": "texto",
+                    "type": "text",
+                    "instructions": "Ej.: Aprende a reconocer y manejar lo que sientes.",
+                    "parent_repeater": "field_lumenti_psico_temas"
+                },
+                {
+                    "key": "field_lumenti_psico_tema_imagen",
+                    "label": "Foto",
+                    "name": "imagen",
+                    "type": "image",
+                    "instructions": "Se muestra al pasar por este tema.",
+                    "return_format": "id",
+                    "preview_size": "medium",
+                    "library": "all",
+                    "parent_repeater": "field_lumenti_psico_temas"
+                }
+            ]
+        },
+        {
+            "key": "field_lumenti_psico_banda_imagen",
+            "label": "Foto de la franja",
+            "name": "psico_banda_imagen",
+            "type": "image",
+            "instructions": "Franja de abajo, a la derecha del texto.",
+            "return_format": "id",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
+            "key": "field_lumenti_psico_banda_titulo",
+            "label": "Título de la franja",
+            "name": "psico_banda_titulo",
+            "type": "text",
+            "instructions": "Ej.: Evaluaciones psicológicas con respaldo profesional"
+        },
+        {
+            "key": "field_lumenti_psico_banda_texto",
+            "label": "Texto de la franja",
+            "name": "psico_banda_texto",
+            "type": "textarea",
+            "instructions": "Frase debajo del título.",
+            "rows": 3,
+            "new_lines": ""
+        },
+        {
+            "key": "field_lumenti_psico_banda_boton",
+            "label": "Botón de la franja",
+            "name": "psico_banda_boton",
+            "type": "link",
+            "instructions": "Si queda vacío: «Quiero mi evaluación» con WhatsApp.",
+            "return_format": "array"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_type",
+                "operator": "==",
+                "value": "front_page"
+            }
+        ]
+    ],
+    "menu_order": 5,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content"
+    ],
+    "active": true,
+    "description": "Portada: temas de psicología del día a día y franja de evaluaciones.",
+    "show_in_rest": 0,
+    "modified": 1792534834
+}

@@ -10,11 +10,6 @@ function lumenti_crear_menus()
 {
     $url = static fn(string $path): string => home_url('/' . ltrim($path, '/'));
 
-    $condiciones = static fn(array $items): array => array_map(
-        static fn(array $c): array => ['title' => $c[0], 'url' => $url('condiciones/' . $c[1] . '/')],
-        $items
-    );
-
     $menus = [
         'primary' => [
             'name'  => __('Menú principal', 'lumenti'),
@@ -26,30 +21,8 @@ function lumenti_crear_menus()
                     ['title' => 'Empresas', 'url' => $url('empresas/'), 'description' => 'Talleres y programas de salud mental para organizaciones.'],
                     ['title' => 'Informes y certificados', 'url' => $url('informes-y-certificados/'), 'description' => 'Documentos clínicos elaborados previa evaluación profesional.'],
                 ]],
-                ['title' => 'Qué tratamos', 'url' => '#', 'children' => [
-                    ['title' => 'Estado del ánimo', 'url' => '#', 'children' => $condiciones([
-                        ['Depresión', 'depresion'],
-                        ['Trastorno bipolar', 'bipolar'],
-                        ['Trastornos de la personalidad', 'personalidad'],
-                        ['Trastorno dismórfico corporal', 'tdc'],
-                        ['Trastorno disfórico premenstrual', 'tdpm'],
-                    ])],
-                    ['title' => 'Ansiedad y trauma', 'url' => '#', 'children' => $condiciones([
-                        ['Trastornos de ansiedad', 'ansiedad'],
-                        ['Trauma y estrés postraumático (TEPT)', 'trauma'],
-                        ['Trastorno obsesivo compulsivo (TOC)', 'toc'],
-                        ['Adicciones', 'adicciones'],
-                    ])],
-                    ['title' => 'Otras condiciones', 'url' => '#', 'children' => $condiciones([
-                        ['Trastornos de la conducta alimentaria (TCA)', 'tca'],
-                        ['Alteraciones del sueño', 'sueno'],
-                        ['Psicosis y esquizofrenia', 'psicosis'],
-                        ['Salud mental perinatal', 'perinatal'],
-                        ['TDAH: evaluación y tratamiento', 'tdah'],
-                        ['Autismo (TEA): acompañamiento clínico', 'autismo'],
-                        ['Trastorno límite de la personalidad (TLP)', 'tlp'],
-                    ])],
-                ]],
+                // Sus columnas y enlaces salen solos de Condiciones → Áreas (inc/condiciones.php).
+                ['title' => 'Qué tratamos', 'type' => 'post_type_archive', 'object' => 'condicion'],
                 ['title' => 'Especialistas', 'url' => $url('especialistas/')],
                 ['title' => 'Empresas', 'url' => $url('empresas/')],
                 ['title' => 'Blog', 'url' => $url('blog/')],
@@ -115,10 +88,11 @@ function lumenti_crear_menu_items(int $menu_id, array $items, int $parent = 0)
     foreach ($items as $item) {
         $item_id = wp_update_nav_menu_item($menu_id, 0, [
             'menu-item-title'       => $item['title'],
-            'menu-item-url'         => $item['url'],
+            'menu-item-url'         => $item['url'] ?? '',
             'menu-item-description' => $item['description'] ?? '',
             'menu-item-target'      => $item['target'] ?? '',
-            'menu-item-type'        => 'custom',
+            'menu-item-type'        => $item['type'] ?? 'custom',
+            'menu-item-object'      => $item['object'] ?? '',
             'menu-item-status'      => 'publish',
             'menu-item-parent-id'   => $parent,
         ]);
