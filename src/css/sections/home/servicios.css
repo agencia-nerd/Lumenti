@@ -1,0 +1,103 @@
+/*
+ * Servicios (portada). En pantallas táctiles la descripción y la flecha se ven siempre; con
+ * mouse, la descripción sube al pasar o al enfocar con teclado y la foto se acerca un poco.
+ * servicios.js marca [data-cursor] en la sección cuando activa el círculo que sigue al mouse:
+ * entonces se esconden la flecha y el cursor del sistema.
+ */
+.servicio-foto {
+    transition: scale 1100ms var(--ease-suave);
+}
+
+/* La fila de la grilla pasa de 0fr a 1fr: cualquier largo de texto se abre completo. */
+.servicio-desc {
+    display: grid;
+    grid-template-rows: 1fr;
+    overflow: hidden;
+    transition: grid-template-rows 520ms var(--ease-suave);
+
+    & > span {
+        min-height: 0;
+        transition: translate 520ms var(--ease-suave);
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    [data-servicio]:not(:hover, :focus-visible) .servicio-desc {
+        grid-template-rows: 0fr;
+
+        & > span {
+            translate: 0 100%;
+        }
+    }
+
+    [data-servicio]:is(:hover, :focus-visible) .servicio-foto {
+        scale: 1.05;
+    }
+}
+
+[data-servicios][data-cursor] [data-servicio] {
+    cursor: none;
+}
+
+[data-servicios][data-cursor] .servicio-flecha {
+    display: none;
+}
+
+/* Círculo "Saber más": fijo en pantalla, lo mueven --cursor-x / --cursor-y. */
+.servicios-cursor {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    pointer-events: none;
+    translate: var(--cursor-x, -300px) var(--cursor-y, -300px);
+}
+
+[data-servicios][data-cursor] .servicios-cursor {
+    display: block;
+}
+
+.servicios-cursor-circulo {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgb(255 255 255 / 0.55);
+    border-radius: 50%;
+    background: rgb(20 24 30 / 0.22);
+    color: var(--color-white);
+    backdrop-filter: blur(6px);
+    scale: 0;
+    transition: scale 380ms var(--ease-suave);
+
+    & > * {
+        grid-area: 1 / 1;
+    }
+}
+
+[data-servicios-cursor][data-visible] .servicios-cursor-circulo {
+    scale: 1;
+}
+
+.servicios-cursor-orbita {
+    position: relative;
+    align-self: stretch;
+    justify-self: stretch;
+    margin: -1px;
+    animation-duration: 5s;
+
+    & > span {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 8px;
+        height: 8px;
+        margin: -4px 0 0 -4px;
+        border-radius: 50%;
+        background: currentColor;
+    }
+}

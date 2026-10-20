@@ -1,0 +1,94 @@
+/*
+ * Hero de la portada (template-parts/sections/home/hero.php, src/js/sections/home/hero.js).
+ * Fases de cada diapositiva (data-fase): estatica (carga inicial), in (entrando),
+ * out (saliendo), oculta. El barrido es un clip-path de izquierda a derecha.
+ */
+
+@keyframes barrido-entra {
+    from {
+        clip-path: inset(0 100% 0 0);
+    }
+    to {
+        clip-path: inset(0);
+    }
+}
+
+@keyframes barrido-sale {
+    from {
+        clip-path: inset(0);
+    }
+    to {
+        clip-path: inset(0 0 0 100%);
+    }
+}
+
+@keyframes ken-burns {
+    from {
+        scale: 1;
+    }
+    to {
+        scale: 1.1;
+    }
+}
+
+@layer components {
+    /* Textos y números grandes. */
+    [data-hero-texto] {
+        &[data-fase='oculta'] {
+            clip-path: inset(0 100% 0 0);
+        }
+        &[data-fase='in'] {
+            animation: barrido-entra 560ms var(--ease-cortina) 200ms both;
+        }
+        &[data-fase='out'] {
+            animation: barrido-sale 340ms var(--ease-cortina) both;
+        }
+    }
+
+    /* Fotos: la que entra barre sobre la que sale, que queda quieta debajo. */
+    [data-hero-foto] {
+        z-index: 2;
+
+        &[data-fase='oculta'] {
+            z-index: 0;
+            clip-path: inset(0 100% 0 0);
+        }
+        &[data-fase='in'] {
+            animation: barrido-entra 700ms var(--ease-cortina) both;
+        }
+        &[data-fase='out'] {
+            z-index: 1;
+        }
+
+        /* Zoom lento; data-ken alterna para reiniciarlo al volver a la diapositiva. */
+        & img {
+            transform-origin: 60% 40%;
+            animation: ken-burns 22s cubic-bezier(0.25, 0.5, 0.4, 1) both;
+        }
+        &[data-ken='1'] img {
+            animation-name: ken-burns-b;
+        }
+        &[data-fase='oculta'] img {
+            animation: none;
+        }
+    }
+}
+
+/*
+ * Pausa: congela la barra de progreso (y con ella el avance). Va fuera de @layer a propósito: la
+ * barra usa la utilidad animate-llenar (capa utilities), cuyo atajo `animation` vuelve a poner
+ * `running` y le ganaría a una regla dentro de @layer components.
+ */
+[data-hero][data-pausado] [data-hero-fill] {
+    animation-play-state: paused;
+}
+
+/* Copia de ken-burns con otro nombre: cambiar el nombre reinicia la animación. */
+@keyframes ken-burns-b {
+    from {
+        scale: 1;
+    }
+    to {
+        scale: 1.1;
+    }
+}

@@ -1,0 +1,64 @@
+{
+    "key": "group_lumenti_inicio_metricas",
+    "title": "Inicio · Métricas",
+    "fields": [
+        {
+            "key": "field_lumenti_metricas_cifras",
+            "label": "Cifras",
+            "name": "metricas_cifras",
+            "type": "repeater",
+            "layout": "row",
+            "min": 1,
+            "max": 4,
+            "button_label": "Agregar cifra",
+            "instructions": "Arrastra para cambiar el orden.",
+            "sub_fields": [
+                {
+                    "key": "field_lumenti_metricas_numero",
+                    "label": "Número",
+                    "name": "numero",
+                    "type": "text",
+                    "instructions": "Ej.: +3,000 — cuenta desde 0 al aparecer.",
+                    "parent_repeater": "field_lumenti_metricas_cifras"
+                },
+                {
+                    "key": "field_lumenti_metricas_titulo",
+                    "label": "Título",
+                    "name": "titulo",
+                    "type": "text",
+                    "instructions": "Ej.: Pacientes atendidos",
+                    "parent_repeater": "field_lumenti_metricas_cifras"
+                },
+                {
+                    "key": "field_lumenti_metricas_texto",
+                    "label": "Descripción",
+                    "name": "texto",
+                    "type": "text",
+                    "instructions": "Ej.: En atención presencial y online",
+                    "parent_repeater": "field_lumenti_metricas_cifras"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_type",
+                "operator": "==",
+                "value": "front_page"
+            }
+        ]
+    ],
+    "menu_order": 1,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content"
+    ],
+    "active": true,
+    "description": "Portada: sección Métricas (Lumenti en cifras).",
+    "show_in_rest": 0,
+    "modified": 1792528063
+}

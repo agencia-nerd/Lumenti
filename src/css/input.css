@@ -4,3 +4,11 @@
 @import './theme.css';
 @import './base.css';
 @import './components.css';
+@import './sections/home/hero.css';
+@import './sections/home/sobre.css';
+@import './sections/home/servicios.css';
+@import './sections/home/ayuda.css';
+@import './sections/home/psicologia.css';
+@import './sections/home/testimonios.css';
+@import './sections/home/blog.css';
+@import './sections/components/cta.css';

@@ -62,20 +62,55 @@ function lumenti_whatsapp_url(): string
     if ($digits === '') {
         return '';
     }
+    // Celular peruano escrito sin código de país (9 dígitos que empiezan en 9): se antepone 51.
+    if (strlen($digits) === 9 && $digits[0] === '9') {
+        $digits = '51' . $digits;
+    }
 
     $message = trim((string) lumenti_ajuste('whatsapp_mensaje'));
 
     return 'https://wa.me/' . $digits . ($message !== '' ? '?text=' . rawurlencode($message) : '');
 }
 
+// Red según el dominio del enlace ('' si no es una red conocida).
+function lumenti_red_por_url(string $url): string
+{
+    $host = preg_replace('/^(www\.|m\.)/', '', strtolower((string) wp_parse_url($url, PHP_URL_HOST)));
+    $dominios = [
+        'instagram.com' => 'instagram',
+        'facebook.com'  => 'facebook',
+        'fb.com'        => 'facebook',
+        'linkedin.com'  => 'linkedin',
+        'tiktok.com'    => 'tiktok',
+        'x.com'         => 'x',
+        'twitter.com'   => 'x',
+        'youtube.com'   => 'youtube',
+        'youtu.be'      => 'youtube',
+    ];
+
+    return $dominios[$host] ?? '';
+}
+
 // Redes con enlace: [['red' => 'instagram', 'nombre' => 'Instagram', 'url' => …], …].
+// El ícono sale del dominio del enlace (corrige si en la lista se eligió otra red);
+// solo si el dominio no es conocido se usa la red elegida.
 function lumenti_redes(): array
 {
     $redes = [];
     foreach ((array) lumenti_ajuste('redes') as $row) {
-        $red = (string) ($row['red'] ?? '');
         $url = trim((string) ($row['url'] ?? ''));
-        if ($url !== '' && isset(LUMENTI_REDES[$red])) {
+        if ($url === '') {
+            continue;
+        }
+        if (!preg_match('#^[a-z][a-z0-9+.\-]*://#i', $url)) {
+            $url = 'https://' . ltrim($url, '/'); // "instagram.com/lumenti" → https://…
+        }
+        // Sin dominio con punto ("#", "lumenti") no es un enlace utilizable.
+        if (strpos((string) wp_parse_url($url, PHP_URL_HOST), '.') === false) {
+            continue;
+        }
+        $red = lumenti_red_por_url($url) ?: (string) ($row['red'] ?? '');
+        if (isset(LUMENTI_REDES[$red])) {
             $redes[] = ['red' => $red, 'nombre' => LUMENTI_REDES[$red], 'url' => $url];
         }
     }

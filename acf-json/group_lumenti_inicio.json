@@ -1,0 +1,180 @@
+{
+    "key": "group_lumenti_inicio",
+    "title": "Inicio · Hero",
+    "fields": [
+        {
+            "key": "field_lumenti_hero_diapositivas",
+            "label": "Diapositivas del hero",
+            "name": "hero_diapositivas",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Pasan solas. Arrastra desde el número para cambiar el orden.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "row",
+            "pagination": 0,
+            "min": 1,
+            "max": 2,
+            "collapsed": "",
+            "button_label": "Agregar diapositiva",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_lumenti_hero_pestana",
+                    "label": "Nombre de la pestaña",
+                    "name": "pestana",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Ej.: Integral",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "parent_repeater": "field_lumenti_hero_diapositivas",
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_lumenti_hero_titulo",
+                    "label": "Título",
+                    "name": "titulo",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "Enter para cada línea. Entre *asteriscos* sale en verde.",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "rows": 3,
+                    "new_lines": "",
+                    "parent_repeater": "field_lumenti_hero_diapositivas",
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_lumenti_hero_texto",
+                    "label": "Texto",
+                    "name": "texto",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "Frase debajo del título.",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "rows": 2,
+                    "new_lines": "",
+                    "parent_repeater": "field_lumenti_hero_diapositivas",
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_lumenti_hero_boton",
+                    "label": "Botón",
+                    "name": "boton",
+                    "aria-label": "",
+                    "type": "link",
+                    "instructions": "Si queda vacío: «Agenda tu cita» con WhatsApp.",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "parent_repeater": "field_lumenti_hero_diapositivas"
+                },
+                {
+                    "key": "field_lumenti_hero_imagen",
+                    "label": "Foto",
+                    "name": "imagen",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "Foto al lado del título.",
+                    "required": false,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "id",
+                    "preview_size": "medium",
+                    "parent_repeater": "field_lumenti_hero_diapositivas",
+                    "library": "all",
+                    "min_width": 0,
+                    "min_height": 0,
+                    "min_size": 0,
+                    "max_width": 0,
+                    "max_height": 0,
+                    "max_size": 0,
+                    "mime_types": ""
+                }
+            ]
+        },
+        {
+            "key": "field_lumenti_hero_sello",
+            "label": "Texto del círculo dorado",
+            "name": "hero_sello_palabras",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Separadas por comas.",
+            "required": false,
+            "conditional_logic": false,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Acompañamos, Escuchamos, Transformamos",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_type",
+                "operator": "==",
+                "value": "front_page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content"
+    ],
+    "active": true,
+    "description": "Portada: sección Hero (carrusel principal).",
+    "show_in_rest": 0,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1792527908
+}

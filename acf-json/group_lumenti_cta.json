@@ -1,0 +1,94 @@
+{
+    "key": "group_lumenti_cta",
+    "title": "CTA final",
+    "fields": [
+        {
+            "key": "field_lumenti_cta_titulo",
+            "label": "Título",
+            "name": "cta_titulo",
+            "type": "text",
+            "instructions": "Si queda vacío, la sección no se muestra."
+        },
+        {
+            "key": "field_lumenti_cta_texto",
+            "label": "Texto",
+            "name": "cta_texto",
+            "type": "textarea",
+            "instructions": "Frase debajo del título.",
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
+            "key": "field_lumenti_cta_boton",
+            "label": "Botón",
+            "name": "cta_boton",
+            "type": "link",
+            "instructions": "Si queda vacío: «Escríbenos por WhatsApp».",
+            "return_format": "array"
+        },
+        {
+            "key": "field_lumenti_cta_fondo",
+            "label": "Fondo",
+            "name": "cta_fondo",
+            "type": "file",
+            "instructions": "Foto o video. El video corre en silencio y en bucle.",
+            "return_format": "id",
+            "library": "all",
+            "mime_types": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_type",
+                "operator": "==",
+                "value": "front_page"
+            }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "pages/template-psiquiatria.php"
+            }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "pages/template-psicologia.php"
+            }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "pages/template-informes.php"
+            }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "pages/template-empresas.php"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "condicion"
+            }
+        ]
+    ],
+    "menu_order": 99,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Sección CTA final, compartida: cada página guarda su propio contenido.",
+    "show_in_rest": 0,
+    "modified": 1792537518
+}

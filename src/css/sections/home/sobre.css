@@ -1,0 +1,17 @@
+/*
+ * Sobre Lumenti (portada): las fotos salen de detrás de la tarjeta del logo hacia los lados.
+ * --abanico va de 0 (cerrado) a 1 (abierto); lo pone sobre.js según el scroll. Sin JS o con
+ * movimiento reducido no se define y las fotos quedan abiertas.
+ * Medidas sobre el envoltorio (la foto ocupa el 88 % central): 72 % ≈ 82 % del ancho de la foto.
+ */
+[data-sobre-foto] {
+    --lado: -1;
+    transform-origin: 50% 94%;
+    transform: translate3d(calc(var(--lado) * 72% * var(--abanico, 1)), calc(2.6% * var(--abanico, 1)), 0)
+        rotate(calc(var(--lado) * 9deg * var(--abanico, 1)));
+    will-change: transform;
+}
+
+[data-sobre-foto='der'] {
+    --lado: 1;
+}

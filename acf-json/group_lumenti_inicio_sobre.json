@@ -1,0 +1,73 @@
+{
+    "key": "group_lumenti_inicio_sobre",
+    "title": "Inicio · Sobre Lumenti",
+    "fields": [
+        {
+            "key": "field_lumenti_sobre_antetitulo",
+            "label": "Antetítulo",
+            "name": "sobre_antetitulo",
+            "type": "text",
+            "instructions": "Ej.: Un equipo con enfoque integral"
+        },
+        {
+            "key": "field_lumenti_sobre_texto",
+            "label": "Texto",
+            "name": "sobre_texto",
+            "type": "textarea",
+            "rows": 4,
+            "new_lines": "",
+            "instructions": "Entre *asteriscos* sale en verde."
+        },
+        {
+            "key": "field_lumenti_sobre_foto_1",
+            "label": "Foto izquierda",
+            "name": "sobre_foto_1",
+            "type": "image",
+            "return_format": "id",
+            "preview_size": "medium",
+            "library": "all",
+            "instructions": "Se abre hacia la izquierda al bajar."
+        },
+        {
+            "key": "field_lumenti_sobre_foto_2",
+            "label": "Foto derecha",
+            "name": "sobre_foto_2",
+            "type": "image",
+            "return_format": "id",
+            "preview_size": "medium",
+            "library": "all",
+            "instructions": "Se abre hacia la derecha al bajar."
+        },
+        {
+            "key": "field_lumenti_sobre_logo",
+            "label": "Logo",
+            "name": "sobre_logo",
+            "type": "image",
+            "return_format": "id",
+            "preview_size": "medium",
+            "library": "all",
+            "instructions": "Blanco, va sobre fondo verde. Si queda vacío, usa el logo del pie de página."
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_type",
+                "operator": "==",
+                "value": "front_page"
+            }
+        ]
+    ],
+    "menu_order": 2,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content"
+    ],
+    "active": true,
+    "description": "Portada: sección Sobre Lumenti (frase y fotos en abanico).",
+    "show_in_rest": 0,
+    "modified": 1792530857
+}

@@ -1,0 +1,82 @@
+{
+    "key": "group_lumenti_inicio_servicios",
+    "title": "Inicio · Servicios",
+    "fields": [
+        {
+            "key": "field_lumenti_servicios_items",
+            "label": "Servicios",
+            "name": "servicios_items",
+            "type": "repeater",
+            "layout": "row",
+            "min": 0,
+            "max": 0,
+            "button_label": "Agregar servicio",
+            "instructions": "Los dos primeros van a todo el ancho y el resto de a dos. Arrastra para cambiar el orden.",
+            "sub_fields": [
+                {
+                    "key": "field_lumenti_servicios_pagina",
+                    "label": "Página",
+                    "name": "pagina",
+                    "type": "post_object",
+                    "post_type": [
+                        "page"
+                    ],
+                    "post_status": [
+                        "publish"
+                    ],
+                    "return_format": "id",
+                    "multiple": 0,
+                    "allow_null": 1,
+                    "ui": 1,
+                    "instructions": "A dónde lleva la tarjeta. La foto es la imagen destacada de esa página.",
+                    "parent_repeater": "field_lumenti_servicios_items"
+                },
+                {
+                    "key": "field_lumenti_servicios_titulo",
+                    "label": "Título",
+                    "name": "titulo",
+                    "type": "text",
+                    "instructions": "Si queda vacío, usa el título de la página.",
+                    "parent_repeater": "field_lumenti_servicios_items"
+                },
+                {
+                    "key": "field_lumenti_servicios_descripcion",
+                    "label": "Descripción",
+                    "name": "descripcion",
+                    "type": "text",
+                    "instructions": "Ej.: Evaluación, diagnóstico y tratamiento integral.",
+                    "parent_repeater": "field_lumenti_servicios_items"
+                }
+            ]
+        },
+        {
+            "key": "field_lumenti_servicios_cursor",
+            "label": "Texto del cursor",
+            "name": "servicios_cursor",
+            "type": "text",
+            "placeholder": "Saber más",
+            "instructions": "Sale en el círculo que sigue al mouse. Si queda vacío: «Saber más»."
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_type",
+                "operator": "==",
+                "value": "front_page"
+            }
+        ]
+    ],
+    "menu_order": 3,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content"
+    ],
+    "active": true,
+    "description": "Portada: tarjetas de servicios que llevan a sus páginas.",
+    "show_in_rest": 0,
+    "modified": 1792532410
+}

@@ -1,0 +1,96 @@
+{
+    "key": "group_lumenti_inicio_testimonios",
+    "title": "Inicio · Testimonios",
+    "fields": [
+        {
+            "key": "field_lumenti_testimonios_titulo",
+            "label": "Título",
+            "name": "testimonios_titulo",
+            "type": "textarea",
+            "instructions": "Enter para cada línea.",
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
+            "key": "field_lumenti_testimonios_texto",
+            "label": "Texto",
+            "name": "testimonios_texto",
+            "type": "textarea",
+            "instructions": "Frase debajo del título.",
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
+            "key": "field_lumenti_testimonios_items",
+            "label": "Testimonios",
+            "name": "testimonios_items",
+            "type": "repeater",
+            "layout": "row",
+            "min": 0,
+            "max": 0,
+            "button_label": "Agregar testimonio",
+            "instructions": "Arrastra para cambiar el orden.",
+            "sub_fields": [
+                {
+                    "key": "field_lumenti_testimonios_item_texto",
+                    "label": "Testimonio",
+                    "name": "texto",
+                    "type": "textarea",
+                    "instructions": "Sin comillas: el diseño las pone solo.",
+                    "rows": 3,
+                    "new_lines": "",
+                    "parent_repeater": "field_lumenti_testimonios_items"
+                },
+                {
+                    "key": "field_lumenti_testimonios_item_nombre",
+                    "label": "Nombre",
+                    "name": "nombre",
+                    "type": "text",
+                    "instructions": "Ej.: Luz del Pilar S.",
+                    "parent_repeater": "field_lumenti_testimonios_items"
+                },
+                {
+                    "key": "field_lumenti_testimonios_item_fuente",
+                    "label": "Fuente",
+                    "name": "fuente",
+                    "type": "text",
+                    "instructions": "Ej.: Google Reviews",
+                    "parent_repeater": "field_lumenti_testimonios_items"
+                },
+                {
+                    "key": "field_lumenti_testimonios_item_estrellas",
+                    "label": "Estrellas",
+                    "name": "estrellas",
+                    "type": "number",
+                    "instructions": "De 1 a 5.",
+                    "min": 1,
+                    "max": 5,
+                    "step": 1,
+                    "default_value": 5,
+                    "parent_repeater": "field_lumenti_testimonios_items"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_type",
+                "operator": "==",
+                "value": "front_page"
+            }
+        ]
+    ],
+    "menu_order": 6,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content"
+    ],
+    "active": true,
+    "description": "Portada: carrusel de testimonios.",
+    "show_in_rest": 0,
+    "modified": 1792535712
+}

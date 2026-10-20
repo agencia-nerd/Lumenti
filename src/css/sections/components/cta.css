@@ -1,0 +1,23 @@
+/*
+ * CTA final (componente compartido). La caja nace con el borde de arriba en arco y se aplana al
+ * entrar en pantalla: cta.js pone --cta-r (radio del círculo que la recorta) o data-plano.
+ * Sin JS o con movimiento reducido, la caja queda recta.
+ */
+.cta-caja {
+    min-height: 520px;
+    padding: 80px var(--spacing-gutter);
+
+    @variant md {
+        min-height: 560px;
+        padding-block: 96px;
+    }
+
+    @variant lg {
+        min-height: clamp(600px, 45.8vw, 880px);
+        padding-block: 120px;
+    }
+
+    &[data-arco]:not([data-plano]) {
+        clip-path: circle(var(--cta-r) at 50% var(--cta-r));
+    }
+}

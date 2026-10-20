@@ -1,0 +1,128 @@
+/*
+ * Testimonios (portada). Sin JS: tarjetas en lista. Con JS (data-listo en la escena): mazo con la
+ * tarjeta actual al centro y las demás corridas y giradas a los lados. testimonios.js pone en cada
+ * tarjeta --tx / --ty / --rot y data-pos (-2…2, color) y data-dist (0…3, capa y sombra); en la
+ * escena, --card-w, --card-h y --escena-h.
+ */
+.testimonios {
+    padding-bottom: 40px;
+
+    @variant md {
+        padding-bottom: 56px;
+    }
+
+    @variant lg {
+        padding-bottom: clamp(48px, 4.1667vw, 80px);
+    }
+}
+
+.testimonios-escena {
+    display: grid;
+    gap: 16px;
+    max-width: 589px;
+    margin-inline: auto;
+}
+
+.testimonio {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 32px;
+    margin: 0;
+    padding: clamp(24px, 2.1vw, 40px);
+    border-radius: 8px;
+    background: var(--color-white);
+    box-shadow: 0 12px 40px rgb(26 32 44 / 0.06);
+}
+
+[data-testimonios-escena][data-listo] {
+    position: relative;
+    display: block;
+    max-width: none;
+    height: var(--escena-h);
+    touch-action: pan-y;
+    user-select: none;
+
+    .testimonio {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: var(--card-w);
+        min-height: var(--card-h);
+        transform: translate3d(calc(-50% + var(--tx, 0px)), var(--ty, 0px), 0) rotate(var(--rot, 0deg));
+        transform-origin: 50% 50%;
+        transition:
+            transform 800ms var(--ease-desliza),
+            background-color 800ms linear,
+            box-shadow 800ms linear;
+        will-change: transform;
+    }
+
+    .testimonio[data-salto] {
+        transition: none;
+    }
+}
+
+/* Color por posición (izquierda → derecha) y capa/sombra por distancia a la actual. */
+.testimonio[data-pos='-2'] {
+    background: rgb(236 227 211 / 0.9);
+}
+.testimonio[data-pos='-1'] {
+    background: rgb(231 230 232 / 0.86);
+}
+.testimonio[data-pos='1'] {
+    background: rgb(194 212 214 / 0.86);
+}
+.testimonio[data-pos='2'] {
+    background: rgb(240 231 222 / 0.9);
+}
+
+.testimonio[data-dist='0'] {
+    z-index: 5;
+}
+.testimonio[data-dist='1'] {
+    z-index: 4;
+    box-shadow: 0 8px 28px rgb(26 32 44 / 0.03);
+}
+.testimonio[data-dist='2'] {
+    z-index: 3;
+    box-shadow: 0 8px 28px rgb(26 32 44 / 0.03);
+}
+.testimonio[data-dist='3'] {
+    z-index: 2;
+    box-shadow: none;
+}
+
+/* Puntos: barra fina dentro de un área de 24 px; la actual se alarga. */
+.testimonios-punto {
+    display: grid;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    cursor: pointer;
+    transition: width 500ms var(--ease-desliza);
+
+    & > span {
+        height: 3px;
+        border-radius: 2px;
+        background: #d9d9d9;
+        transition: background-color 300ms linear;
+    }
+
+    &[aria-current='true'] {
+        width: 56px;
+
+        & > span {
+            background: var(--color-primario);
+        }
+    }
+
+    &:hover > span {
+        background: var(--color-primario-400);
+    }
+
+    &[aria-current='true']:hover > span {
+        background: var(--color-primario);
+    }
+}

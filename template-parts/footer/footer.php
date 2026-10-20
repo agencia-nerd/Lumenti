@@ -36,9 +36,10 @@ $lumenti_hay_contacto = $lumenti_tel_paciente . $lumenti_tel_corporativo . $lume
 ?>
 <footer class="bg-primario-700 text-inverso">
     <div class="contenedor pt-14 pb-14 md:pt-18 xl:py-20">
-        <div class="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2 xl:grid-cols-[minmax(0,1fr)_minmax(0,313px)_minmax(0,279px)_auto] xl:gap-0">
+        <?php // 4 columnas desde 1440: antes la columna Contacto queda angosta y el correo se corta. ?>
+        <div class="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2 min-[90rem]:grid-cols-[minmax(0,1fr)_minmax(0,313px)_minmax(0,279px)_auto]">
             <?php if ($lumenti_hay_contacto) : ?>
-                <div class="md:col-span-full xl:col-span-1">
+                <div class="md:col-span-full min-[90rem]:col-span-1">
                     <h2 class="<?php echo esc_attr($lumenti_titulo_col); ?>"><?php esc_html_e('Contacto', 'lumenti'); ?></h2>
                     <ul class="mt-9 flex flex-col gap-4">
                         <?php if ($lumenti_tel_paciente !== '') : ?>

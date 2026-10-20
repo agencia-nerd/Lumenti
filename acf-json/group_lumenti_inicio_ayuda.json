@@ -1,0 +1,83 @@
+{
+    "key": "group_lumenti_inicio_ayuda",
+    "title": "Inicio · Cómo podemos ayudarte",
+    "fields": [
+        {
+            "key": "field_lumenti_ayuda_titulo",
+            "label": "Título",
+            "name": "ayuda_titulo",
+            "type": "text",
+            "instructions": "Ej.: ¿Cómo podemos ayudarte?"
+        },
+        {
+            "key": "field_lumenti_ayuda_texto",
+            "label": "Texto",
+            "name": "ayuda_texto",
+            "type": "textarea",
+            "rows": 3,
+            "new_lines": "",
+            "instructions": "Frase debajo del título."
+        },
+        {
+            "key": "field_lumenti_ayuda_condiciones",
+            "label": "Condiciones",
+            "name": "ayuda_condiciones",
+            "type": "relationship",
+            "post_type": [
+                "condicion"
+            ],
+            "post_status": [
+                "publish"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search",
+                "taxonomy"
+            ],
+            "return_format": "id",
+            "elements": "",
+            "min": "",
+            "max": "",
+            "instructions": "Arrastra para cambiar el orden. Si queda vacío, salen todas."
+        },
+        {
+            "key": "field_lumenti_ayuda_icono",
+            "label": "Ícono de las tarjetas",
+            "name": "ayuda_icono",
+            "type": "image",
+            "return_format": "id",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "instructions": "Toma el color de la tarjeta. Si queda vacío, usa el del diseño."
+        },
+        {
+            "key": "field_lumenti_ayuda_tarjeta_texto",
+            "label": "Texto de las tarjetas",
+            "name": "ayuda_saber_mas",
+            "type": "text",
+            "placeholder": "Saber más",
+            "instructions": "Si queda vacío: «Saber más»."
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_type",
+                "operator": "==",
+                "value": "front_page"
+            }
+        ]
+    ],
+    "menu_order": 4,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content"
+    ],
+    "active": true,
+    "description": "Portada: grilla de condiciones que tratamos.",
+    "show_in_rest": 0,
+    "modified": 1792533404
+}
