@@ -1,0 +1,50 @@
+@layer base {
+    html {
+        background-color: var(--color-fondo);
+        color: var(--color-cuerpo);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+        font-size: var(--text-body);
+        line-height: var(--text-body--line-height);
+    }
+
+    /* Títulos en Abenda; el tamaño lo pone la clase de rol (text-h2, text-display-1…). */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: var(--font-titulo);
+        font-weight: 400;
+        color: var(--color-titulo);
+    }
+
+    a {
+        color: var(--color-primario);
+        transition: color 300ms linear;
+
+        &:hover {
+            color: var(--color-primario-700);
+        }
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--color-primario);
+        outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        ::before,
+        ::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
+}

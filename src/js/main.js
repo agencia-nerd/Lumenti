@@ -1,1 +1,3 @@
-console.log('lumenti: main.js cargado');
+import { initHeader } from './header.js';
+
+initHeader();
