@@ -1,0 +1,306 @@
+/*
+ * Tokens del diseño Lumenti. El prototipo se diseñó a 1920px: en los clamp(),
+ * el valor vw × 19.2 da el máximo (ej. 2.8646vw → 55px).
+ * Escalas por defecto de Tailwind desactivadas: solo existen los tokens del proyecto.
+ */
+
+@theme {
+    /* Breakpoints: md tablet, lg desktop de páginas, xl nav/footer y grillas de 3-4 columnas. */
+    --breakpoint-*: initial;
+    --breakpoint-sm: 30rem; /* 480 */
+    --breakpoint-md: 48rem; /* 768 */
+    --breakpoint-lg: 64rem; /* 1024 */
+    --breakpoint-xl: 75rem; /* 1200 */
+    --breakpoint-2xl: 120rem; /* 1920 */
+
+    /* Colores */
+    --color-*: initial;
+    --color-white: #ffffff;
+    --color-black: #000000;
+
+    --color-fondo: #f5f3ee;
+    --color-fondo-alt: #efebe3;
+    --color-fondo-suave: #faf9f5;
+
+    --color-superficie-2: #e4e3de;
+    --color-superficie-2-hover: #d6d4cd;
+    --color-chip: #f4f4f4;
+
+    --color-borde: #e3dfd7;
+    --color-divisor: #ece9e2;
+    --color-borde-frio: #e2e4e6;
+
+    --color-primario-50: #f3f8f8;
+    --color-primario-200: #dbe6e7;
+    --color-primario-400: #73939a;
+    --color-primario-600: #49737c;
+    --color-primario: #2e6c79;
+    --color-primario-700: #295a65;
+    --color-primario-800: #244b53;
+    --color-primario-900: #1f393e;
+
+    --color-titulo: #1a202c;
+    --color-ui: #1c2c3a;
+    --color-cuerpo: #626771;
+    --color-cuerpo-2: #4e5e68;
+    --color-tenue: #7b8088;
+    --color-sutil: #9398a0;
+
+    --color-inverso: #c3d1d4;
+    --color-inverso-2: #abc4c9;
+
+    --color-dorado: #c6a36c;
+    --color-cafe: #8c6a45;
+    --color-dorado-bg: #efe6d6;
+    --color-dorado-texto: #7a5a2e;
+
+    --color-error: #b3443f;
+    --color-error-inverso: #ffd9cf;
+    --color-valido: #8fb3ba;
+
+    --color-media: #2b2722;
+
+    /* Fuentes */
+    --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-titulo: 'Abenda', Georgia, serif;
+
+    /* Tipografía de tamaño fijo (las responsivas están en @theme inline). */
+    --text-*: initial;
+    --text-body: 1rem; /* 16 */
+    --text-body--line-height: 1.7;
+    --text-sm: 0.9375rem; /* 15 */
+    --text-sm--line-height: 1.375rem;
+    --text-caption: 0.875rem; /* 14 */
+    --text-caption--line-height: 1.25rem;
+    --text-micro: 0.8125rem; /* 13 */
+    --text-micro--line-height: 1.125rem;
+    --text-badge: 0.6875rem; /* 11 */
+    --text-badge--line-height: 1rem;
+    --text-badge--letter-spacing: 0.06em;
+    --text-eyebrow: 1.125rem; /* 18 */
+    --text-eyebrow--line-height: 1.5rem;
+    --text-eyebrow--letter-spacing: 0.06em;
+    --text-overline: 0.8125rem; /* 13 */
+    --text-overline--line-height: 1.125rem;
+    --text-overline--letter-spacing: 0.12em;
+
+    --leading-prosa: 1.8;
+
+    /* Anchos máximos (max-w-*) */
+    --container-site: 100rem; /* 1600 */
+    --container-prosa: 60rem; /* 960 */
+    --container-titulo: 45rem; /* 720 */
+    --container-lead: 40rem; /* 640 */
+    --container-texto: 35rem; /* 560 */
+    --container-corto: 26.25rem; /* 420 */
+
+    /* Sombras */
+    --shadow-*: initial;
+    --shadow-sm: 0 8px 24px rgb(28 44 58 / 0.06);
+    --shadow-md: 0 18px 40px rgb(28 44 58 / 0.06);
+    --shadow-lg: 0 24px 48px rgb(28 44 58 / 0.08);
+    --shadow-flotante: 0 12px 32px rgb(28 44 58 / 0.18);
+
+    /* Movimiento */
+    --ease-suave: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --ease-desliza: cubic-bezier(0.65, 0, 0.25, 1);
+    --ease-cortina: cubic-bezier(0.77, 0, 0.18, 1);
+
+    --animate-subir: subir 900ms var(--ease-suave) both;
+    --animate-aparecer: aparecer 900ms var(--ease-suave) both;
+    --animate-nav-entra: nav-entra 600ms var(--ease-suave) both;
+    --animate-menu-entra: menu-entra 420ms var(--ease-suave) both;
+    --animate-fab: fab-entra 600ms var(--ease-suave) 900ms both, fab-salto 7s cubic-bezier(0.4, 0, 0.2, 1) 4s infinite;
+
+    /* Menú móvil: aparece desplegándose de arriba hacia abajo. */
+    @keyframes menu-entra {
+        from {
+            opacity: 0;
+            clip-path: inset(0 0 100% 0);
+        }
+        to {
+            opacity: 1;
+            clip-path: inset(0);
+        }
+    }
+
+    @keyframes fab-entra {
+        from {
+            opacity: 0;
+            transform: translateY(16px) scale(0.9);
+        }
+    }
+
+    /* Botón flotante: quieto casi todo el ciclo y un doble salto al final. */
+    @keyframes fab-salto {
+        0%,
+        85%,
+        92%,
+        97%,
+        100% {
+            transform: none;
+        }
+        89% {
+            transform: translateY(-6px);
+        }
+        94.5% {
+            transform: translateY(-2.5px);
+        }
+    }
+
+    /* Texto que sube dentro de una línea con overflow-hidden. */
+    @keyframes subir {
+        from {
+            transform: translateY(105%);
+        }
+        to {
+            transform: none;
+        }
+    }
+
+    @keyframes aparecer {
+        from {
+            opacity: 0;
+            transform: translateY(16px);
+        }
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    @keyframes nav-entra {
+        from {
+            transform: translateY(-100%);
+        }
+        to {
+            transform: none;
+        }
+    }
+}
+
+/* Tokens responsivos: la clase (text-h2, py-seccion, h-nav…) lee una variable que cambia por breakpoint. */
+@theme inline {
+    --text-display-1: var(--fs-display-1);
+    --text-display-1--line-height: 1.12;
+    --text-display-1--letter-spacing: -0.01em;
+    --text-display-2: var(--fs-display-2);
+    --text-display-2--line-height: 1.12;
+    --text-display-2--letter-spacing: -0.01em;
+    --text-h1-detalle: var(--fs-h1-detalle);
+    --text-h1-detalle--line-height: 1.2;
+    --text-h1-detalle--letter-spacing: -0.005em;
+    --text-h2: var(--fs-h2);
+    --text-h2--line-height: 1.2;
+    --text-h2--letter-spacing: -0.01em;
+    --text-h3: var(--fs-h3);
+    --text-h3--line-height: 1.3;
+    --text-h3--letter-spacing: 0.01em;
+    --text-h4: var(--fs-h4);
+    --text-h4--line-height: 1.3;
+    --text-h4--letter-spacing: 0.01em;
+    --text-titulo-lg: var(--fs-titulo-lg);
+    --text-titulo-lg--line-height: 1.3;
+    --text-titulo-lg--letter-spacing: 0.01em;
+    --text-titulo-md: var(--fs-titulo-md);
+    --text-titulo-md--line-height: 1.3;
+    --text-titulo-md--letter-spacing: 0.01em;
+    --text-titulo-sm: var(--fs-titulo-sm);
+    --text-titulo-sm--line-height: 1.35;
+    --text-titulo-sm--letter-spacing: 0.01em;
+    --text-titulo-xs: var(--fs-titulo-xs);
+    --text-titulo-xs--line-height: 1.45;
+    --text-titulo-xs--letter-spacing: 0.02em;
+    --text-statement: var(--fs-statement);
+    --text-statement--line-height: 1.38;
+    --text-statement--letter-spacing: -0.01em;
+    --text-lead: var(--fs-lead);
+    --text-lead--line-height: 1.6;
+    --text-stat: var(--fs-stat);
+    --text-stat--line-height: 1.2;
+    --text-quote: var(--fs-quote);
+    --text-quote--line-height: 1.55;
+    --text-quote--letter-spacing: 0.01em;
+    --text-body-lg: var(--fs-body-lg);
+    --text-body-lg--line-height: 1.8;
+
+    --spacing-seccion-sm: var(--sp-seccion-sm);
+    --spacing-seccion: var(--sp-seccion);
+    --spacing-seccion-lg: var(--sp-seccion-lg);
+    --spacing-seccion-xl: var(--sp-seccion-xl);
+    --spacing-gutter: var(--sp-gutter);
+    --spacing-gutter-nav: var(--sp-gutter-nav);
+    --spacing-nav: var(--sp-nav);
+}
+
+/* Valores por breakpoint: móvil → md (768) → lg (1024) → xl (1200). */
+:root {
+    --fs-display-1: 2rem; /* 32 */
+    --fs-display-2: 2rem; /* 32 */
+    --fs-h1-detalle: 1.75rem; /* 28 */
+    --fs-h2: 1.75rem; /* 28 */
+    --fs-h3: 1.5rem; /* 24 */
+    --fs-h4: 1.375rem; /* 22 */
+    --fs-titulo-lg: 1.25rem; /* 20 */
+    --fs-titulo-md: 1.1875rem; /* 19 */
+    --fs-titulo-sm: 1.125rem; /* 18 */
+    --fs-titulo-xs: 1rem; /* 16 */
+    --fs-statement: 1.3125rem; /* 21 */
+    --fs-lead: 1.125rem; /* 18 */
+    --fs-stat: 2.5rem; /* 40 */
+    --fs-quote: 1rem; /* 16 */
+    --fs-body-lg: 1rem; /* 16 */
+
+    --sp-seccion-sm: 4rem; /* 64 */
+    --sp-seccion: 5rem; /* 80 */
+    --sp-seccion-lg: 5rem; /* 80 */
+    --sp-seccion-xl: 5.5rem; /* 88 */
+    --sp-gutter: 1.25rem; /* 20 */
+    --sp-gutter-nav: 1.25rem; /* 20 */
+    --sp-nav: 4.75rem; /* 76 */
+
+    @variant md {
+        --fs-display-1: 3rem; /* 48 */
+        --fs-display-2: 2.75rem; /* 44 */
+        --fs-h1-detalle: 2.25rem; /* 36 */
+        --fs-h2: 2.25rem; /* 36 */
+        --fs-statement: 1.625rem; /* 26 */
+
+        --sp-seccion-sm: 5rem; /* 80 */
+        --sp-seccion: 7rem; /* 112 */
+        --sp-seccion-lg: 7rem; /* 112 */
+        --sp-seccion-xl: 7.5rem; /* 120 */
+        --sp-gutter: 2.5rem; /* 40 */
+        --sp-gutter-nav: 2.5rem; /* 40 */
+        --sp-nav: 5.25rem; /* 84 */
+    }
+
+    @variant lg {
+        --fs-display-1: clamp(2.75rem, 4.5833vw, 5.5rem); /* 44 → 88 */
+        --fs-display-2: clamp(2.5rem, 3.6458vw, 4.375rem); /* 40 → 70 */
+        --fs-h1-detalle: clamp(2.125rem, 2.6vw, 3.125rem); /* 34 → 50 */
+        --fs-h2: clamp(2.125rem, 2.8646vw, 3.4375rem); /* 34 → 55 */
+        --fs-h3: clamp(1.5rem, 1.6667vw, 2rem); /* 24 → 32 */
+        --fs-h4: clamp(1.375rem, 1.4583vw, 1.75rem); /* 22 → 28 */
+        --fs-titulo-lg: clamp(1.25rem, 1.25vw, 1.5rem); /* 20 → 24 */
+        --fs-titulo-md: clamp(1.1875rem, 1.1458vw, 1.375rem); /* 19 → 22 */
+        --fs-titulo-sm: clamp(1.125rem, 1.0417vw, 1.25rem); /* 18 → 20 */
+        --fs-titulo-xs: clamp(1rem, 0.9375vw, 1.125rem); /* 16 → 18 */
+        --fs-statement: clamp(1.625rem, 1.7708vw, 2.125rem); /* 26 → 34 */
+        --fs-lead: clamp(1.125rem, 1.1458vw, 1.375rem); /* 18 → 22 */
+        --fs-stat: clamp(2.5rem, 2.8125vw, 3.375rem); /* 40 → 54 */
+        --fs-quote: clamp(1rem, 0.9375vw, 1.125rem); /* 16 → 18 */
+        --fs-body-lg: 1.0625rem; /* 17 */
+
+        --sp-seccion-sm: clamp(5rem, 7vw, 8.5rem); /* 80 → 136 */
+        --sp-seccion: clamp(6rem, 8.3333vw, 10rem); /* 96 → 160 */
+        --sp-seccion-lg: clamp(7.5rem, 10.4167vw, 12.5rem); /* 120 → 200 */
+        --sp-seccion-xl: clamp(9.375rem, 12.5vw, 15rem); /* 150 → 240 */
+        --sp-gutter: clamp(1.5rem, 8.3333vw, 10rem); /* 24 → 160 */
+    }
+
+    @variant xl {
+        --sp-gutter-nav: clamp(1.5rem, 5.2vw, 6.25rem); /* 24 → 100 */
+        --sp-nav: 6.5rem; /* 104 */
+    }
+}
