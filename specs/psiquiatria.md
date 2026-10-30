@@ -17,7 +17,7 @@
   - `<main id="main-content" class="lm-service">`; el `<body>` lleva `lm-page lm-page--psiquiatria` (vía `body_class`).
   - En el header, "Servicios" y el ítem "Psiquiatría" del mega menú van con `aria-current="page"` (lo resuelve el menú `servicios`).
   - JS: el carrusel de especialistas (módulo de `specialists-carousel`, hoy `condition-filter.js`); esta página no usa las pills.
-  - Todos los WhatsApp usan `opciones_contacto_whatsapp_paciente` (`opciones.md`).
+  - Todos los WhatsApp usan `opciones_contacto_telefono_paciente` (`opciones.md`).
 - **Estado:** aplicado
 
 <!-- Una sección por bloque, con el formato de references/formato-spec.md -->
@@ -105,7 +105,7 @@
 - **Destino:** `pages/template-psiquiatria.php`, `template-parts/pages/psiquiatria/especialistas.php`, `template-parts/components/specialists-carousel.php`, `template-parts/components/especialista-card.php`, `template-parts/components/enlace-flecha.php`
 - **Grupo:** `psiquiatria_especialistas`
 - **Skill:** wp-helper
-- **Comportamiento:** componente `specialists-carousel` con `filtro` en `false` (sin pills). Muestra 7 cards de muestra fijas (Dra. Mariela Linares, Dra. Francesca Valdivia, Dr. Fabrizio Martínez, Dra. Francesca Demarini, Dr. Derek Tantaleán, Dra. Claudia Campos, Dra. Fiorella Ruiz) con `especialista-card`; no hay consulta en esta etapa (la consulta de psiquiatras por `orden` es un paso posterior). Pista con desplazamiento horizontal (`tabindex="0"`), flechas Anterior/Siguiente (la de atrás oculta al inicio) y degradado al borde. Cada card: "Ver perfil" a la ficha del especialista y "Agenda tu cita" a WhatsApp (`opciones_contacto_whatsapp_paciente`, "Hola, quisiera agendar una cita con {nombre}."), popover "+N" de lo que atiende. El título usa el marcador de `lumenti_highlight`; "Ver todos" es un campo link que pasa por `lumenti_link_attrs()` con la flecha como hijo. Necesita en `specialists-carousel` los argumentos nuevos `texto` (bajada) y `enlace` (Ver todos). La bajada y el enlace se ocultan si están vacíos.
+- **Comportamiento:** componente `specialists-carousel` con `filtro` en `false` (sin pills). Muestra 7 cards de muestra fijas (Dra. Mariela Linares, Dra. Francesca Valdivia, Dr. Fabrizio Martínez, Dra. Francesca Demarini, Dr. Derek Tantaleán, Dra. Claudia Campos, Dra. Fiorella Ruiz) con `especialista-card`; no hay consulta en esta etapa (la consulta de psiquiatras por `orden` es un paso posterior). Pista con desplazamiento horizontal (`tabindex="0"`), flechas Anterior/Siguiente (la de atrás oculta al inicio) y degradado al borde. Cada card: "Ver perfil" a la ficha del especialista y "Agenda tu cita" a WhatsApp (`opciones_contacto_telefono_paciente`, "Hola, quisiera agendar una cita con {nombre}."), popover "+N" de lo que atiende. El título usa el marcador de `lumenti_highlight`; "Ver todos" es un campo link que pasa por `lumenti_link_attrs()` con la flecha como hijo. Necesita en `specialists-carousel` los argumentos nuevos `texto` (bajada) y `enlace` (Ver todos). La bajada y el enlace se ocultan si están vacíos.
 - **Estado:** aplicado
 
 **Campos ACF**
@@ -131,7 +131,7 @@
 - **Destino:** `pages/template-psiquiatria.php`, `template-parts/pages/psiquiatria/cta.php`, `template-parts/components/cta.php`, `template-parts/components/boton.php`
 - **Grupo:** `psiquiatria_cta`
 - **Skill:** ninguna
-- **Comportamiento:** componente `cta` (mismo video `cta-mar-v4.mp4`, insignia del cerebro y overlay del resto del sitio: son del componente, no campos). El botón abre WhatsApp con `opciones_contacto_whatsapp_paciente` y el mensaje del campo, en pestaña nueva con `rel="noopener"`; ícono de WhatsApp. El título entra con `data-lm-reveal="up"`. El texto se oculta si está vacío.
+- **Comportamiento:** componente `cta` (mismo video `cta-mar-v4.mp4`, insignia del cerebro y overlay del resto del sitio: son del componente, no campos). El botón abre WhatsApp con `opciones_contacto_telefono_paciente` y el mensaje del campo, en pestaña nueva con `rel="noopener"`; ícono de WhatsApp. El título entra con `data-lm-reveal="up"`. El texto se oculta si está vacío.
 - **Estado:** aplicado
 
 **Campos ACF**

@@ -18,7 +18,7 @@
   - `<main id="main-content" class="lm-service">`; el `<body>` lleva `lm-page lm-page--informes` (vía `body_class`).
   - En el header, "Servicios" y el ítem "Informes y certificados" del mega menú van con `aria-current="page"`.
   - El diseño carga `specialists-filter.js` y `condition-filter.js` aunque la página no los usa: no se cargan aquí.
-  - El WhatsApp usa `opciones_contacto_whatsapp_paciente` (`opciones.md`).
+  - El WhatsApp usa `opciones_contacto_telefono_paciente` (`opciones.md`).
 - **Estado:** aplicado
 
 <!-- Una sección por bloque, con el formato de references/formato-spec.md -->
@@ -110,7 +110,7 @@
 - **Destino:** `pages/template-informes.php`, `template-parts/pages/informes/cta.php`, `template-parts/components/cta.php`, `template-parts/components/boton.php`
 - **Grupo:** `informes_cta`
 - **Skill:** ninguna
-- **Comportamiento:** componente `cta` (video, insignia y overlay propios del componente). El botón abre WhatsApp con `opciones_contacto_whatsapp_paciente` y el mensaje del campo, con ícono de WhatsApp. El texto se oculta si está vacío.
+- **Comportamiento:** componente `cta` (video, insignia y overlay propios del componente). El botón abre WhatsApp con `opciones_contacto_telefono_paciente` y el mensaje del campo, con ícono de WhatsApp. El texto se oculta si está vacío.
 - **Estado:** aplicado
 
 **Campos ACF**

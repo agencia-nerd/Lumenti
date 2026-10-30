@@ -1,0 +1,501 @@
+{
+    "key": "group_bf442b580b08f",
+    "title": "Ajustes del sitio",
+    "fields": [
+        {
+            "key": "field_9c6ec135bea04",
+            "label": "Cabecera",
+            "name": "opciones_cabecera",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_416f2f0bd6200",
+                    "label": "Logo alternativo",
+                    "name": "logo_alternativo",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "Versión blanca del logo. Se usa en la cabecera sobre fondos oscuros y en el pie.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "allow_in_bindings": 0,
+                    "preview_size": "medium"
+                },
+                {
+                    "key": "field_e00116cf5eefa",
+                    "label": "Botón texto",
+                    "name": "boton_texto",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Texto del botón de WhatsApp de la cabecera y del menú móvil.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_783d6cb2e49a7",
+                    "label": "Mensaje whatsapp",
+                    "name": "mensaje_whatsapp",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Mensaje que se escribe solo al abrir WhatsApp desde la cabecera, los mega menús y el botón flotante.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_55f436af5ed1a",
+                    "label": "Ayuda texto",
+                    "name": "ayuda_texto",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Texto al pie de los mega menús, antes del enlace de contacto.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_66335382bf54c",
+                    "label": "Ayuda enlace",
+                    "name": "ayuda_enlace",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Texto del enlace al pie de los mega menús (abre WhatsApp).",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_7801e111ca28c",
+                    "label": "Tratamos título",
+                    "name": "tratamos_titulo",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Título de la card con imagen del mega menú \"Qué tratamos\".",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_320a41023e2d3",
+                    "label": "Tratamos imagen",
+                    "name": "tratamos_imagen",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "Imagen de la card del mega menú \"Qué tratamos\".",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "allow_in_bindings": 0,
+                    "preview_size": "medium"
+                }
+            ]
+        },
+        {
+            "key": "field_fa1176baffd71",
+            "label": "Contacto",
+            "name": "opciones_contacto",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_0a649b5f185ea",
+                    "label": "Teléfono paciente",
+                    "name": "telefono_paciente",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Teléfono y WhatsApp de atención al paciente, con código de país. Lo usan el pie y los botones de WhatsApp de todo el sitio.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_e55db8cc58fc9",
+                    "label": "Teléfono corporativo",
+                    "name": "telefono_corporativo",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Teléfono y WhatsApp de atención corporativa, con código de país. Lo usan el pie y los botones de WhatsApp de Empresas.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_cf550146e995a",
+                    "label": "Correo",
+                    "name": "correo",
+                    "aria-label": "",
+                    "type": "email",
+                    "instructions": "Correo de contacto del pie",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_f98711cd8a18c",
+                    "label": "Dirección",
+                    "name": "direccion",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Dirección del consultorio. Abre Google Maps.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                }
+            ]
+        },
+        {
+            "key": "field_7fea771f0def0",
+            "label": "Redes",
+            "name": "opciones_redes",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_86c562d81a9e1",
+                    "label": "Items",
+                    "name": "items",
+                    "aria-label": "",
+                    "type": "repeater",
+                    "instructions": "Redes sociales, en el orden en que se muestran (6 en el diseño)",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "pagination": 0,
+                    "min": 0,
+                    "max": 0,
+                    "collapsed": "",
+                    "button_label": "Añadir fila",
+                    "rows_per_page": 20,
+                    "sub_fields": [
+                        {
+                            "key": "field_7c862b47da5f0",
+                            "label": "Red",
+                            "name": "red",
+                            "aria-label": "",
+                            "type": "select",
+                            "instructions": "Red social; define el ícono. Opciones: x, facebook, instagram, youtube, linkedin, tiktok",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "x": "x",
+                                "facebook": "facebook",
+                                "instagram": "instagram",
+                                "youtube": "youtube",
+                                "linkedin": "linkedin",
+                                "tiktok": "tiktok"
+                            },
+                            "default_value": false,
+                            "return_format": "value",
+                            "allow_in_bindings": 0,
+                            "multiple": 0,
+                            "allow_null": 0,
+                            "ui": 0,
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_63df400996e5f",
+                            "label": "Enlace",
+                            "name": "enlace",
+                            "aria-label": "",
+                            "type": "url",
+                            "instructions": "Dirección del perfil",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "field_ce44fec6e88e8",
+            "label": "Formularios",
+            "name": "opciones_formularios",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_34cd2b20ac876",
+                    "label": "Empresas correos",
+                    "name": "empresas_correos",
+                    "aria-label": "",
+                    "type": "repeater",
+                    "instructions": "Correos que reciben las solicitudes del formulario de Empresas. Puedes agregar varios.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "pagination": 0,
+                    "min": 0,
+                    "max": 0,
+                    "collapsed": "",
+                    "button_label": "Añadir fila",
+                    "rows_per_page": 20,
+                    "sub_fields": [
+                        {
+                            "key": "field_44cff4b670eb7",
+                            "label": "Correo",
+                            "name": "correo",
+                            "aria-label": "",
+                            "type": "email",
+                            "instructions": "Correo destinatario.",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        }
+                    ]
+                },
+                {
+                    "key": "field_809cb2efc16ec",
+                    "label": "Newsletter correos",
+                    "name": "newsletter_correos",
+                    "aria-label": "",
+                    "type": "repeater",
+                    "instructions": "Correos que reciben las suscripciones al newsletter del blog. Puedes agregar varios.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "pagination": 0,
+                    "min": 0,
+                    "max": 0,
+                    "collapsed": "",
+                    "button_label": "Añadir fila",
+                    "rows_per_page": 20,
+                    "sub_fields": [
+                        {
+                            "key": "field_726a466965892",
+                            "label": "Correo",
+                            "name": "correo",
+                            "aria-label": "",
+                            "type": "email",
+                            "instructions": "Correo destinatario.",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "ajustes-del-sitio"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1793395718
+}

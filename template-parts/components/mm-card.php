@@ -1,7 +1,7 @@
 <?php
 /*
  * Card con imagen de los mega menús.
- * $args: titulo, texto (bajada; opcional), imagen (ruta en el tema), ancho, alto (de la imagen),
+ * $args: titulo, texto (bajada; opcional), imagen (ID o campo de imagen, o ruta en el tema), ancho, alto,
  *        url, externo (bool: abre WhatsApp en pestaña nueva), cta (texto del enlace; solo en la card alta),
  *        alta (bool: card alta de "Qué tratamos").
  */
@@ -22,7 +22,7 @@ $enlace = ['url' => $url, 'title' => $titulo, 'target' => $externo ? '_blank' : 
 $clases = 'lm-mm-card' . ($alta ? ' lm-mm-card--tall lm-megamenu__stagger' : '');
 ?>
 <a<?= lumenti_link_attrs($enlace, ['class' => $clases]) ?>>
-    <img class="lm-mm-card__img" src="<?= esc_url(get_theme_file_uri($imagen)) ?>" alt="" width="<?= esc_attr($ancho) ?>" height="<?= esc_attr($alto_px) ?>" loading="lazy" decoding="async">
+    <?= lumenti_theme_image($imagen, ['class' => 'lm-mm-card__img', 'alt' => '', 'width' => $ancho, 'height' => $alto_px, 'size' => 'large']) ?>
     <span class="lm-mm-card__body">
         <?php if ($alta) : ?>
             <span class="lm-mm-card__title"><?= esc_html($titulo) ?></span>

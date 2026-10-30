@@ -12,7 +12,7 @@ defined('ABSPATH') || exit;
  *               o ['texto', 'url']. Por defecto primary, ícono de WhatsApp y clase lm-cta__btn.
  *   newsletter  (bool)  en lugar del botón, el form de template-parts/forms/newsletter.php (wp-form).
  *   form        (array)  $args del form del newsletter.
- *   video       (string)  ruta del tema. Por defecto assets/video/cta-mar-v4.mp4.
+ *   video       (campo file de ACF | ID | ruta del tema)  por defecto assets/video/cta-mar-v4.mp4 (las páginas aún no conectadas).
  *   poster      ('assets/img/x.webp' | imagen ACF | ID)  imagen fija del video (se ve con movimiento reducido).
  *   variante    ('' | condicion)  condicion = fondo partido arena/verde (lm-cta--condicion).
  *   id          (string)  id del título. Por defecto lm-cta-title.
@@ -27,7 +27,16 @@ $lumenti_texto = (string) ($args['texto'] ?? '');
 $lumenti_id = (string) ($args['id'] ?? 'lm-cta-title');
 $lumenti_nivel = ($args['nivel'] ?? '') === 'h3' ? 'h3' : 'h2';
 $lumenti_clase = 'lm-cta' . (($args['variante'] ?? '') === 'condicion' ? ' lm-cta--condicion' : '');
-$lumenti_video = (string) ($args['video'] ?? 'assets/video/cta-mar-v4.mp4');
+$lumenti_video = $args['video'] ?? 'assets/video/cta-mar-v4.mp4';
+// Archivo de ACF (array o ID) → su URL; ruta del tema → URL del tema.
+if (is_array($lumenti_video)) {
+    $lumenti_video = (string) ($lumenti_video['url'] ?? '');
+} elseif (is_int($lumenti_video) || ctype_digit((string) $lumenti_video)) {
+    $lumenti_video = (string) wp_get_attachment_url((int) $lumenti_video);
+} elseif ((string) $lumenti_video !== '' && !preg_match('#^(https?:)?//#i', (string) $lumenti_video)) {
+    $lumenti_video = get_theme_file_uri('/' . ltrim((string) $lumenti_video, '/'));
+}
+$lumenti_video = (string) $lumenti_video;
 $lumenti_poster = $args['poster'] ?? '';
 if (is_string($lumenti_poster) && $lumenti_poster !== '' && !ctype_digit($lumenti_poster)) {
     $lumenti_poster = preg_match('#^(https?:)?//#i', $lumenti_poster) ? $lumenti_poster : get_theme_file_uri('/' . ltrim($lumenti_poster, '/'));
@@ -39,7 +48,7 @@ $lumenti_form = locate_template('template-parts/forms/newsletter.php') !== '';
 <section aria-labelledby="<?= esc_attr($lumenti_id) ?>" class="<?= esc_attr($lumenti_clase) ?>" data-lm-cta data-lm-section="cta-final">
     <div class="lm-cta__box">
         <?php if ($lumenti_video !== '') : ?>
-            <video src="<?= esc_url(get_theme_file_uri('/' . ltrim($lumenti_video, '/'))) ?>"<?php if ($lumenti_poster !== '') : ?> poster="<?= esc_url($lumenti_poster) ?>"<?php endif; ?> loop preload="metadata" aria-hidden="true" muted playsinline class="lm-cta__video"></video>
+            <video src="<?= esc_url($lumenti_video) ?>"<?php if ($lumenti_poster !== '') : ?> poster="<?= esc_url($lumenti_poster) ?>"<?php endif; ?> loop preload="metadata" aria-hidden="true" muted playsinline class="lm-cta__video"></video>
         <?php endif; ?>
         <span aria-hidden="true" class="lm-cta__overlay"></span>
         <span aria-hidden="true" class="lm-cta__badge">

@@ -18,7 +18,7 @@
   - `<main id="main-content" class="lm-service">`; el `<body>` lleva `lm-page lm-page--psicologia` (vía `body_class`).
   - En el header, "Servicios" y el ítem "Psicología" del mega menú van con `aria-current="page"` (lo resuelve el menú `servicios`).
   - JS: carrusel de especialistas (módulo de `specialists-carousel`) y el ancla con compensación del navbar y resaltado (hoy `hashTarget` de `main.js`).
-  - Todos los WhatsApp usan `opciones_contacto_whatsapp_paciente` (`opciones.md`).
+  - Todos los WhatsApp usan `opciones_contacto_telefono_paciente` (`opciones.md`).
 - **Estado:** aplicado
 
 <!-- Una sección por bloque, con el formato de references/formato-spec.md -->
@@ -81,7 +81,7 @@
 - **Destino:** `template-parts/pages/psicologia/servicios.php`
 - **Grupo:** `psicologia_servicios`
 - **Skill:** wp-helper
-- **Comportamiento:** título centrado (`section-title` con centrado: argumento nuevo `centrado` o clase `lm-section-title--center`) y dos tarjetas blancas en 2 columnas (1 en móvil). Cada tarjeta: título `h3`, párrafo, párrafo destacado opcional, lista opcional de 2 columnas (1 en móvil) con punto verde, y botón `boton` (`primary`, `md`, ícono WhatsApp) pegado abajo, que abre WhatsApp con `opciones_contacto_whatsapp_paciente` y el mensaje de la tarjeta. La tarjeta con `ancla` imprime ese `id` (en el diseño `evaluaciones` en la segunda): al llegar con `#evaluaciones` la página baja compensando la altura del navbar (`scroll-margin-top`) y la tarjeta se resalta 2,2 s con `.is-highlighted` (sombra `0 0 0 2px` brand + `0 18px 48px rgba(46,108,121,.18)`, valor suelto). Párrafo destacado y lista se ocultan si están vacíos. Texto de la lista en 15px/22px (valor suelto).
+- **Comportamiento:** título centrado (`section-title` con centrado: argumento nuevo `centrado` o clase `lm-section-title--center`) y dos tarjetas blancas en 2 columnas (1 en móvil). Cada tarjeta: título `h3`, párrafo, párrafo destacado opcional, lista opcional de 2 columnas (1 en móvil) con punto verde, y botón `boton` (`primary`, `md`, ícono WhatsApp) pegado abajo, que abre WhatsApp con `opciones_contacto_telefono_paciente` y el mensaje de la tarjeta. La tarjeta con `ancla` imprime ese `id` (en el diseño `evaluaciones` en la segunda): al llegar con `#evaluaciones` la página baja compensando la altura del navbar (`scroll-margin-top`) y la tarjeta se resalta 2,2 s con `.is-highlighted` (sombra `0 0 0 2px` brand + `0 18px 48px rgba(46,108,121,.18)`, valor suelto). Párrafo destacado y lista se ocultan si están vacíos. Texto de la lista en 15px/22px (valor suelto).
 - **Estado:** aplicado
 
 **Campos ACF**
@@ -138,7 +138,7 @@
 - **Destino:** `pages/template-psicologia.php`, `template-parts/pages/psicologia/cta.php`, `template-parts/components/cta.php`, `template-parts/components/boton.php`
 - **Grupo:** `psicologia_cta`
 - **Skill:** ninguna
-- **Comportamiento:** componente `cta` (video, insignia y overlay propios del componente). El botón abre WhatsApp con `opciones_contacto_whatsapp_paciente` y el mensaje del campo, con ícono de WhatsApp. El texto se oculta si está vacío.
+- **Comportamiento:** componente `cta` (video, insignia y overlay propios del componente). El botón abre WhatsApp con `opciones_contacto_telefono_paciente` y el mensaje del campo, con ícono de WhatsApp. El texto se oculta si está vacío.
 - **Estado:** aplicado
 
 **Campos ACF**

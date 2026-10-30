@@ -4,46 +4,33 @@ defined('ABSPATH') || exit;
 /*
  * Inicio · ayuda (specs/home.md → ayuda, grupo ACF home_ayuda). id="que-tratamos" es el ancla del menú.
  * En móvil muestra 6 y "Ver más" despliega el resto: src/js/modules/ver-mas.js (data-lm-more / data-lm-more-btn);
- * los ítems desde el 7.º llevan --extra. Cards fijas del diseño; en el paso ACF salen de la relación con `condicion`.
+ * los ítems desde el 7.º llevan --extra. Textos: get_field('home_ayuda'). Cards de muestra en inc/muestras/home-ayuda.php
+ * hasta conectar Condición.
  */
 
-$lumenti_ayuda = [
-    'titulo' => '¿CÓMO PODEMOS AYUDARTE?',
-    'bajada' => 'Brindamos orientación, evaluación, tratamiento y acompañamiento en distintas áreas de la salud mental, según la etapa de vida y situación de cada persona.',
-    'visibles' => 6,
-];
+$lumenti_ayuda = get_field('home_ayuda') ?: [];
+$lumenti_titulo = (string) ($lumenti_ayuda['titulo'] ?? '');
+$lumenti_bajada = (string) ($lumenti_ayuda['bajada'] ?? '');
+$lumenti_visibles = 6;
 // slug de la condición => nombre de la card.
-$lumenti_condiciones = [
-    'depresion' => 'DEPRESIÓN',
-    'ansiedad' => 'TRASTORNOS DE ANSIEDAD',
-    'tdah' => 'TDAH: EVALUACIÓN Y TRATAMIENTO',
-    'tlp' => 'TRASTORNO LÍMITE DE LA PERSONALIDAD',
-    'tca' => 'TRASTORNOS DE LA CONDUCTA ALIMENTARIA',
-    'toc' => 'TRASTORNO OBSESIVO COMPULSIVO (TOC)',
-    'psicosis' => 'PSICOSIS Y ESQUIZOFRENIA',
-    'trauma' => 'TRAUMA Y ESTRÉS POSTRAUMÁTICO (TEPT)',
-    'sueno' => 'ALTERACIONES DEL SUEÑO',
-    'perinatal' => 'SALUD MENTAL PERINATAL',
-    'bipolar' => 'TRASTORNO BIPOLAR',
-    'adicciones' => 'ADICCIONES',
-    'autismo' => 'AUTISMO: EVALUACIÓN Y ACOMPAÑAMIENTO',
-    'personalidad' => 'OTROS TRASTORNOS DE LA PERSONALIDAD',
-    'tdc' => 'TRASTORNO DISMÓRFICO CORPORAL',
-    'tdpm' => 'TRASTORNO DISFÓRICO PREMENSTRUAL',
-];
+$lumenti_condiciones = require get_theme_file_path('inc/muestras/home-ayuda.php');
 $lumenti_flecha = '<svg class="lm-home-ayuda__card-arrow" aria-hidden="true" width="18" height="18" viewBox="0 0 256 256" fill="currentColor"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg>';
-$lumenti_hay_extra = count($lumenti_condiciones) > $lumenti_ayuda['visibles'];
+$lumenti_hay_extra = count($lumenti_condiciones) > $lumenti_visibles;
 ?>
-<section class="lm-home-ayuda" id="que-tratamos" aria-labelledby="lm-ayuda" data-lm-section="como-podemos-ayudarte">
-    <div class="lm-home-ayuda__header" data-lm-reveal="up">
-        <h2 class="lm-h2 lm-home-ayuda__title" id="lm-ayuda"><?= esc_html($lumenti_ayuda['titulo']) ?></h2>
-        <?php if ($lumenti_ayuda['bajada'] !== '') : ?>
-            <p class="lm-home-ayuda__lead"><?= esc_html($lumenti_ayuda['bajada']) ?></p>
-        <?php endif; ?>
-    </div>
-    <ul class="lm-home-ayuda__grid" id="lm-more-help" data-lm-more="<?= (int) $lumenti_ayuda['visibles'] ?>">
+<section class="lm-home-ayuda" id="que-tratamos"<?php if ($lumenti_titulo !== '') : ?> aria-labelledby="lm-ayuda"<?php endif; ?> data-lm-section="como-podemos-ayudarte">
+    <?php if ($lumenti_titulo !== '' || $lumenti_bajada !== '') : ?>
+        <div class="lm-home-ayuda__header" data-lm-reveal="up">
+            <?php if ($lumenti_titulo !== '') : ?>
+                <h2 class="lm-h2 lm-home-ayuda__title" id="lm-ayuda"><?= esc_html($lumenti_titulo) ?></h2>
+            <?php endif; ?>
+            <?php if ($lumenti_bajada !== '') : ?>
+                <p class="lm-home-ayuda__lead"><?= esc_html($lumenti_bajada) ?></p>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+    <ul class="lm-home-ayuda__grid" id="lm-more-help" data-lm-more="<?= (int) $lumenti_visibles ?>">
         <?php $lumenti_n = 0; foreach ($lumenti_condiciones as $lumenti_slug => $lumenti_nombre) : ?>
-            <li class="lm-home-ayuda__item<?= $lumenti_n++ >= $lumenti_ayuda['visibles'] ? ' lm-home-ayuda__item--extra' : '' ?>" data-lm-reveal="up" data-lm-reveal-group>
+            <li class="lm-home-ayuda__item<?= $lumenti_n++ >= $lumenti_visibles ? ' lm-home-ayuda__item--extra' : '' ?>" data-lm-reveal="up" data-lm-reveal-group>
                 <a class="lm-home-ayuda__card" href="<?= esc_url(home_url('/condicion/' . $lumenti_slug . '/')) ?>">
                     <span class="lm-home-ayuda__card-fill" aria-hidden="true"></span>
                     <span class="lm-home-ayuda__card-body">

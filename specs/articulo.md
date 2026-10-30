@@ -89,7 +89,7 @@
 - **Destino:** `single.php`, `template-parts/components/cta.php`
 - **Grupo:** ninguno
 - **Skill:** wp-helper
-- **Comportamiento:** componente `cta` con título "COMPRENDER LO QUE TE OCURRE PUEDE SER EL PRIMER PASO", texto "Encuentra información clara y responsable sobre salud mental. Y si necesitas acompañamiento, te ayudamos a encontrar al especialista adecuado." y botón "Escríbenos por WhatsApp" a `https://wa.me/<opciones_contacto_whatsapp_paciente>?text=Hola, leí un artículo del blog y quisiera orientación.` (mensaje codificado en la URL), en pestaña nueva con el helper de enlaces. Textos fijos de la plantilla, iguales en todos los artículos.
+- **Comportamiento:** componente `cta` con título "COMPRENDER LO QUE TE OCURRE PUEDE SER EL PRIMER PASO", texto "Encuentra información clara y responsable sobre salud mental. Y si necesitas acompañamiento, te ayudamos a encontrar al especialista adecuado." y botón "Escríbenos por WhatsApp" a `https://wa.me/<opciones_contacto_telefono_paciente>?text=Hola, leí un artículo del blog y quisiera orientación.` (mensaje codificado en la URL), en pestaña nueva con el helper de enlaces. Textos fijos de la plantilla, iguales en todos los artículos.
 - **Estado:** aplicado
 
 **Campos ACF**
@@ -100,5 +100,5 @@
 **Criterios de aceptación**
 
 - [x] Cumple los criterios comunes de `_shared.md`
-- [x] El número de WhatsApp sale de `opciones_contacto_whatsapp_paciente`, no está escrito en la plantilla
+- [x] El número de WhatsApp sale de `opciones_contacto_telefono_paciente`, no está escrito en la plantilla
 - [x] El CTA queda dentro de `<main id="main-content">`

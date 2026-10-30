@@ -1,93 +1,97 @@
 <?php
 /*
- * Pie del sitio (specs/opciones.md → contacto, redes, pie). Textos y enlaces fijos del diseño hasta el paso ACF:
- * campos opciones_contacto_*, opciones_redes_*, opciones_pie_*; menús `servicios`, `pie_explora` y `legal`.
+ * Pie del sitio (specs/opciones.md → contacto, redes). Datos de Ajustes del sitio (opciones_contacto,
+ * opciones_redes, logo blanco de opciones_cabecera) y menús `pie_servicios`, `pie_explora` y `legal`
+ * (Apariencia > Menús). Los títulos de las columnas y el copyright son fijos (no son campos).
  */
 defined('ABSPATH') || exit;
 
-$lumenti_contacto = [
-    ['icono' => 'calendar-dots', 'url' => 'tel:+51939033999', 'etiqueta' => 'Atención al paciente:', 'texto' => '+51 939 033 999', 'telefono' => true],
-    ['icono' => 'chat-circle-dots', 'url' => 'tel:+51942901535', 'etiqueta' => 'Atención corporativa:', 'texto' => '+51 942 901 535', 'telefono' => true],
-    ['icono' => 'envelope-simple', 'url' => 'mailto:contacto@lumentisaludmental.com', 'etiqueta' => '', 'texto' => 'contacto@lumentisaludmental.com'],
-    ['icono' => 'map-pin', 'url' => 'https://maps.google.com/?q=C.+Los+Antares+320,+Santiago+de+Surco+15038', 'etiqueta' => '', 'texto' => 'C. Los Antares 320, Santiago de Surco 15038', 'externo' => true],
-];
+$lumenti_contacto = get_field('opciones_contacto', 'option') ?: [];
+$lumenti_redes = get_field('opciones_redes', 'option') ?: [];
+$lumenti_cab = get_field('opciones_cabecera', 'option') ?: [];
 
-$lumenti_pie_servicios = [
-    ['Psiquiatría', home_url('/psiquiatria/')],
-    ['Psicología', home_url('/psicologia/')],
-    ['Informes y certificados', home_url('/informes/')],
-    ['Empresas', home_url('/empresas/')],
-    ['Evaluaciones psicológicas', home_url('/psicologia/#evaluaciones')],
-];
+$lumenti_tel = static fn(string $numero): string => 'tel:+' . preg_replace('/\D+/', '', $numero);
+$lumenti_datos = array_filter([
+    ['icono' => 'calendar-dots', 'url' => $lumenti_tel((string) ($lumenti_contacto['telefono_paciente'] ?? '')), 'etiqueta' => __('Atención al paciente:', 'lumenti'), 'texto' => (string) ($lumenti_contacto['telefono_paciente'] ?? ''), 'telefono' => true],
+    ['icono' => 'chat-circle-dots', 'url' => $lumenti_tel((string) ($lumenti_contacto['telefono_corporativo'] ?? '')), 'etiqueta' => __('Atención corporativa:', 'lumenti'), 'texto' => (string) ($lumenti_contacto['telefono_corporativo'] ?? ''), 'telefono' => true],
+    ['icono' => 'envelope-simple', 'url' => 'mailto:' . ($lumenti_contacto['correo'] ?? ''), 'etiqueta' => '', 'texto' => (string) ($lumenti_contacto['correo'] ?? '')],
+    ['icono' => 'map-pin', 'url' => 'https://maps.google.com/?q=' . rawurlencode((string) ($lumenti_contacto['direccion'] ?? '')), 'etiqueta' => '', 'texto' => (string) ($lumenti_contacto['direccion'] ?? ''), 'externo' => true],
+], static fn($dato) => $dato['texto'] !== '');
 
-$lumenti_pie_explora = [
-    ['Especialistas', home_url('/especialistas/')],
-    ['Qué tratamos', home_url('/#que-tratamos')],
-    ['Blog', home_url('/blog/')],
-    ['Preguntas frecuentes', home_url('/preguntas-frecuentes/')],
-];
+$lumenti_redes_nombres = ['x' => 'X', 'facebook' => 'Facebook', 'instagram' => 'Instagram', 'youtube' => 'YouTube', 'linkedin' => 'LinkedIn', 'tiktok' => 'TikTok'];
+$lumenti_redes_items = array_filter((array) ($lumenti_redes['items'] ?? []), static fn($red) => !empty($red['enlace']));
 
-// URLs de redes pendientes del cliente: el diseño trae href="#".
-$lumenti_redes = ['x-logo' => 'X', 'facebook-logo' => 'Facebook', 'instagram-logo' => 'Instagram', 'youtube-logo' => 'YouTube', 'linkedin-logo' => 'LinkedIn', 'tiktok-logo' => 'TikTok'];
+$lumenti_columnas = [
+    ['titulo' => __('SERVICIOS', 'lumenti'), 'menu' => lumenti_menu_tree('pie_servicios'), 'label' => __('Servicios', 'lumenti')],
+    ['titulo' => __('EXPLORA', 'lumenti'), 'menu' => lumenti_menu_tree('pie_explora'), 'label' => __('Explora', 'lumenti')],
+];
+$lumenti_legal = lumenti_menu_tree('legal');
+$lumenti_nueva = '<span class="sr-only"> (' . esc_html__('se abre en una pestaña nueva', 'lumenti') . ')</span>';
 ?>
     <footer class="lm-footer">
         <div class="lm-footer__main">
             <div class="lm-footer__grid">
                 <div class="lm-footer__col lm-footer__col--contact">
-                    <h2 class="lm-footer__title">CONTACTO</h2>
+                    <h2 class="lm-footer__title"><?php esc_html_e('CONTACTO', 'lumenti'); ?></h2>
                     <ul class="lm-footer__contact">
-                        <?php foreach ($lumenti_contacto as $dato) : ?>
-                            <?php
-                            $clase = 'lm-footer__contact-link' . (!empty($dato['telefono']) ? ' lm-footer__contact-link--phone' : '');
-                            $enlace = ['url' => $dato['url'], 'target' => !empty($dato['externo']) ? '_blank' : ''];
-                            ?>
+                        <?php foreach ($lumenti_datos as $lumenti_dato) : ?>
+                            <?php $lumenti_clase = 'lm-footer__contact-link' . (!empty($lumenti_dato['telefono']) ? ' lm-footer__contact-link--phone' : ''); ?>
                             <li>
-                                <a<?= lumenti_link_attrs($enlace, ['class' => $clase]) ?>>
-                                    <?php get_template_part('template-parts/components/icon-tile', null, ['icono' => $dato['icono']]); ?>
-                                    <span><?php if ($dato['etiqueta'] !== '') : ?><strong><?= esc_html($dato['etiqueta']) ?></strong> <?php endif; ?><?= esc_html($dato['texto']) ?></span>
+                                <a<?= lumenti_link_attrs(['url' => $lumenti_dato['url'], 'target' => !empty($lumenti_dato['externo']) ? '_blank' : ''], ['class' => $lumenti_clase]) ?>>
+                                    <?php get_template_part('template-parts/components/icon-tile', null, ['icono' => $lumenti_dato['icono']]); ?>
+                                    <span><?php if ($lumenti_dato['etiqueta'] !== '') : ?><strong><?= esc_html($lumenti_dato['etiqueta']) ?></strong> <?php endif; ?><?= esc_html($lumenti_dato['texto']) ?><?php if (!empty($lumenti_dato['externo'])) : ?><?= $lumenti_nueva ?><?php endif; ?></span>
                                 </a>
                             </li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
 
-                <nav class="lm-footer__col" aria-label="Servicios">
-                    <h2 class="lm-footer__title">SERVICIOS</h2>
-                    <ul class="lm-footer__list">
-                        <?php foreach ($lumenti_pie_servicios as [$texto, $url]) : ?>
-                            <li><a class="lm-footer__link" href="<?= esc_url($url) ?>"><?= esc_html($texto) ?></a></li>
-                        <?php endforeach; ?>
-                    </ul>
-                </nav>
+                <?php foreach ($lumenti_columnas as $lumenti_col) : ?>
+                    <?php if (!$lumenti_col['menu']) {
+                        continue;
+                    } ?>
+                    <nav class="lm-footer__col" aria-label="<?= esc_attr($lumenti_col['label']) ?>">
+                        <h2 class="lm-footer__title"><?= esc_html($lumenti_col['titulo']) ?></h2>
+                        <ul class="lm-footer__list">
+                            <?php foreach ($lumenti_col['menu'] as $lumenti_item) : ?>
+                                <li><?= lumenti_link(lumenti_menu_link($lumenti_item), ['class' => 'lm-footer__link', 'current' => true]) ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </nav>
+                <?php endforeach; ?>
 
-                <nav class="lm-footer__col" aria-label="Explora">
-                    <h2 class="lm-footer__title">EXPLORA</h2>
-                    <ul class="lm-footer__list">
-                        <?php foreach ($lumenti_pie_explora as [$texto, $url]) : ?>
-                            <li><a class="lm-footer__link" href="<?= esc_url($url) ?>"><?= esc_html($texto) ?></a></li>
-                        <?php endforeach; ?>
-                    </ul>
-                </nav>
-
-                <div class="lm-footer__col">
-                    <h2 class="lm-footer__title">SÍGUENOS</h2>
-                    <ul class="lm-footer__social">
-                        <?php foreach ($lumenti_redes as $icono => $red) : ?>
-                            <li><?php get_template_part('template-parts/components/icon-tile', null, ['icono' => $icono, 'url' => '#', 'etiqueta' => $red, 'variante' => 'sm']); ?></li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
+                <?php if ($lumenti_redes_items) : ?>
+                    <div class="lm-footer__col">
+                        <h2 class="lm-footer__title"><?php esc_html_e('SÍGUENOS', 'lumenti'); ?></h2>
+                        <ul class="lm-footer__social">
+                            <?php foreach ($lumenti_redes_items as $lumenti_red) : ?>
+                                <li><?php get_template_part('template-parts/components/icon-tile', null, [
+                                    'icono' => $lumenti_red['red'] . '-logo',
+                                    'url' => $lumenti_red['enlace'],
+                                    'etiqueta' => $lumenti_redes_nombres[$lumenti_red['red']] ?? '',
+                                    'variante' => 'sm',
+                                    'nueva' => true,
+                                ]); ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
             </div>
-            <a class="lm-footer__brand" href="<?= esc_url(home_url('/')) ?>" aria-label="Lumenti — Inicio"><img src="<?= esc_url(get_theme_file_uri('assets/img/logo-white.svg')) ?>" alt="Lumenti" width="864" height="139" loading="lazy"></a>
+            <?php $lumenti_logo_pie = lumenti_image($lumenti_cab['logo_alternativo'] ?? null, ['alt' => get_bloginfo('name')]); ?>
+            <?php if ($lumenti_logo_pie !== '') : ?>
+                <a class="lm-footer__brand" href="<?= esc_url(home_url('/')) ?>" aria-label="<?= esc_attr(get_bloginfo('name')) ?>"><?= $lumenti_logo_pie ?></a>
+            <?php endif; ?>
         </div>
         <div class="lm-footer__bar">
             <div class="lm-footer__bar-inner">
-                <p>© <?= esc_html(wp_date('Y')) ?> Lumenti · Todos los derechos reservados.</p>
-                <nav class="lm-footer__legal" aria-label="Legal">
-                    <a class="lm-footer__legal-link" href="<?= esc_url(home_url('/politica-de-privacidad/')) ?>">Política de privacidad</a>
-                    <a class="lm-footer__legal-link" href="<?= esc_url(home_url('/terminos-y-condiciones/')) ?>">Términos y condiciones</a>
-                    <a<?= lumenti_link_attrs(['url' => 'https://reclamovirtual.pe/reclamar/lumenti/libro', 'target' => '_blank'], ['class' => 'lm-footer__legal-link']) ?>>Libro de reclamaciones</a>
-                </nav>
+                <p>© <?= esc_html(wp_date('Y')) ?> <?= esc_html(get_bloginfo('name')) ?> · <?php esc_html_e('Todos los derechos reservados.', 'lumenti'); ?></p>
+                <?php if ($lumenti_legal) : ?>
+                    <nav class="lm-footer__legal" aria-label="<?php esc_attr_e('Legal', 'lumenti'); ?>">
+                        <?php foreach ($lumenti_legal as $lumenti_item) : ?>
+                            <?= lumenti_link(lumenti_menu_link($lumenti_item), ['class' => 'lm-footer__legal-link', 'current' => true]) ?>
+                        <?php endforeach; ?>
+                    </nav>
+                <?php endif; ?>
             </div>
         </div>
     </footer>

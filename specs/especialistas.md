@@ -87,7 +87,7 @@
 - **Destino:** `template-parts/pages/especialistas/resultados.php`, `template-parts/components/especialista-card.php`
 - **Grupo:** ninguno
 - **Skill:** ninguna
-- **Comportamiento:** `<ul class="lm-specialists__grid" data-query="resultados">` con las 13 cards de ejemplo del diseño, cada una con `especialista-card` y un array fijo (nombre corto, cargo, cargo destacado, foto, url del perfil, población, qué atiende, idiomas, tipo y nivel `h2`). Botón de cada card ("Agenda tu cita") = Acción de `_shared.md`: WhatsApp a `opciones_contacto_whatsapp_paciente` con "Hola, quisiera agendar una cita con {nombre}." (el diseño antepone "la"/"el" a "Dra."/"Dr.": "…con la Dra. Mariela Linares."), armado con el helper de enlaces. "Ver perfil" lleva al detalle. En "Qué atiende" se ven 6 chips y el resto en el popover "+N" (hover/foco en escritorio, tap expande la lista en táctil). 2 columnas desde 1024 px, 1 en móvil. Las cards entran con la animación escalonada del diseño (`is-entering`, `--lm-i`) al filtrar, sin ella con `prefers-reduced-motion`. El bloque `vacio` se imprime dentro del mismo contenedor `data-query="resultados"` para que wp-query lo reemplace junto con la lista.
+- **Comportamiento:** `<ul class="lm-specialists__grid" data-query="resultados">` con las 13 cards de ejemplo del diseño, cada una con `especialista-card` y un array fijo (nombre corto, cargo, cargo destacado, foto, url del perfil, población, qué atiende, idiomas, tipo y nivel `h2`). Botón de cada card ("Agenda tu cita") = Acción de `_shared.md`: WhatsApp a `opciones_contacto_telefono_paciente` con "Hola, quisiera agendar una cita con {nombre}." (el diseño antepone "la"/"el" a "Dra."/"Dr.": "…con la Dra. Mariela Linares."), armado con el helper de enlaces. "Ver perfil" lleva al detalle. En "Qué atiende" se ven 6 chips y el resto en el popover "+N" (hover/foco en escritorio, tap expande la lista en táctil). 2 columnas desde 1024 px, 1 en móvil. Las cards entran con la animación escalonada del diseño (`is-entering`, `--lm-i`) al filtrar, sin ella con `prefers-reduced-motion`. El bloque `vacio` se imprime dentro del mismo contenedor `data-query="resultados"` para que wp-query lo reemplace junto con la lista.
 - **Estado:** aplicado
 
 **Campos ACF**
@@ -109,7 +109,7 @@
 - **Destino:** `template-parts/pages/especialistas/vacio.php`
 - **Grupo:** `especialistas_vacio`
 - **Skill:** wp-helper
-- **Comportamiento:** estado "sin resultados" (`role="status"`), oculto con `hidden` mientras haya cards. Ícono de persona, título, texto y dos botones: "Limpiar filtros" (enlace a la página sin parámetros; con JS limpia el formulario) y el botón suave de WhatsApp a `opciones_contacto_whatsapp_paciente` con el mensaje del campo. Se incluye dentro del contenedor `data-query="resultados"`.
+- **Comportamiento:** estado "sin resultados" (`role="status"`), oculto con `hidden` mientras haya cards. Ícono de persona, título, texto y dos botones: "Limpiar filtros" (enlace a la página sin parámetros; con JS limpia el formulario) y el botón suave de WhatsApp a `opciones_contacto_telefono_paciente` con el mensaje del campo. Se incluye dentro del contenedor `data-query="resultados"`.
 - **Estado:** aplicado
 
 **Campos ACF**

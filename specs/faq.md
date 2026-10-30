@@ -75,7 +75,7 @@
 - **Destino:** `template-parts/pages/faq/cta.php`, `template-parts/components/cta.php`
 - **Grupo:** `faq_cta`
 - **Skill:** ninguna
-- **Comportamiento:** usa el componente `cta` (video de fondo decorativo, sello, título, texto y botón). El botón abre WhatsApp a `opciones_contacto_whatsapp_paciente` con el mensaje del campo, en pestaña nueva. La sección solo pasa sus `$args` al componente.
+- **Comportamiento:** usa el componente `cta` (video de fondo decorativo, sello, título, texto y botón). El botón abre WhatsApp a `opciones_contacto_telefono_paciente` con el mensaje del campo, en pestaña nueva. La sección solo pasa sus `$args` al componente.
 - **Estado:** aplicado
 
 **Campos ACF**
