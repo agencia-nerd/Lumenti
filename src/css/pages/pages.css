@@ -1,0 +1,72 @@
+@layer components {
+/* Lumenti — estilos compartidos entre plantillas internas (se completa en las fases siguientes).
+   Cada plantilla tiene su propio archivo: home.css, … */
+
+
+/* ===== FAQ (faq.html) — usa .lm-page-hero--service y js/accordion.js ===== */
+.lm-faq { padding: clamp(96px, 8.3333vw, 160px) var(--lm-side) clamp(120px, 10.4167vw, 200px); }
+.lm-faq__inner { max-width: var(--lm-max); margin: 0 auto; display: flex; flex-direction: column; gap: clamp(80px, 6.25vw, 120px); }
+.lm-faq__group { display: grid; grid-template-columns: minmax(0,5fr) minmax(0,11fr); gap: 48px; align-items: start; }
+.lm-faq__group-title { position: sticky; top: calc(var(--lm-nav-h) + 32px); padding-top: 20px; font-family: var(--lm-font-title); font-weight: 400; font-size: clamp(18px, 1.1458vw, 22px); line-height: 1.3; letter-spacing: 0.02em; color: var(--lm-ink); }
+.lm-faq__list { display: flex; flex-direction: column; gap: 8px; }
+.lm-faq__item { border-radius: var(--lm-r-card); background: var(--lm-white); }
+.lm-faq__question { margin: 0; }
+.lm-faq__toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px clamp(20px, 1.5625vw, 30px); border: 0; background: transparent; text-align: left; font-family: var(--lm-font-title); font-weight: 400; font-size: clamp(15px, 0.9375vw, 18px); line-height: 1.45; letter-spacing: 0.02em; color: var(--lm-teal); cursor: pointer; }
+.lm-faq__icon { position: relative; flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--lm-teal); transition: transform 400ms var(--lm-ease); }
+.lm-faq__icon::before, .lm-faq__icon::after { content: ""; position: absolute; border-radius: 1px; background: var(--lm-white); transition: transform 400ms var(--lm-ease); }
+.lm-faq__icon::before { left: 7px; top: 11.25px; width: 10px; height: 1.5px; }
+.lm-faq__icon::after { left: 11.25px; top: 7px; width: 1.5px; height: 10px; }
+.lm-faq__item.is-open .lm-faq__icon { transform: rotate(180deg); }
+.lm-faq__item.is-open .lm-faq__icon::after { transform: scaleY(0); }
+.lm-faq__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 500ms var(--lm-ease); }
+.lm-faq__item.is-open .lm-faq__panel { grid-template-rows: 1fr; }
+.lm-faq__panel-inner { overflow: hidden; }
+.lm-faq__answer { padding: 0 clamp(20px, 1.5625vw, 30px) 26px; max-width: 760px; font-size: var(--lm-fs-body); line-height: 1.8; color: var(--lm-muted); }
+@media (max-width: 767px) {
+  .lm-faq { padding: 72px var(--lm-side) 88px; }
+  .lm-faq__inner { gap: 64px; }
+  .lm-faq__group { grid-template-columns: minmax(0,1fr); gap: 24px; }
+  .lm-faq__group-title { position: static; padding-top: 0; font-size: 18px; }
+  .lm-faq__toggle { padding: 20px; font-size: 15px; }
+  .lm-faq__answer { padding: 0 20px 22px; }
+}
+
+/* ===== Legales (legal.html?d=terminos|privacidad) — js/legal.js ===== */
+.lm-legal-head { padding: 24px var(--lm-side) clamp(64px, 5.8vw, 112px); border-bottom: 1px solid #e3dfd7; }
+.lm-legal-head__inner { max-width: var(--lm-max); margin: clamp(96px, 8.3333vw, 160px) auto 0; }
+.lm-legal-head__title { margin-top: -0.18em; padding-top: 0.18em; overflow: hidden; font-family: var(--lm-font-title); font-weight: 400; font-size: clamp(40px, 3.6458vw, 70px); line-height: 1.12; letter-spacing: -0.01em; color: var(--lm-ink); }
+.lm-legal-head__title-line { display: block; animation: lmRise 950ms var(--lm-ease) 200ms both; }
+.lm-legal-head__updated { margin-top: 24px; display: flex; align-items: center; gap: 10px; font-size: var(--lm-fs-small); line-height: var(--lm-lh-small); color: var(--lm-muted); }
+.lm-legal-head__updated::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--lm-teal); }
+.lm-legal { padding: clamp(64px, 5vw, 96px) var(--lm-side) clamp(120px, 10.4167vw, 200px); }
+.lm-legal__inner { max-width: var(--lm-max); margin: 0 auto; display: grid; grid-template-columns: clamp(220px, 15vw, 290px) minmax(0,1fr); gap: clamp(48px, 5vw, 96px); align-items: start; }
+.lm-legal__toc { position: sticky; top: calc(var(--lm-nav-h) + 32px); }
+.lm-legal__toc-title { font-size: 13px; line-height: 18px; letter-spacing: 0.06em; color: var(--lm-muted-2); }
+.lm-legal__toc-list { margin-top: 20px; display: flex; flex-direction: column; gap: 2px; }
+.lm-legal__toc-link { display: block; padding: 8px 0 8px 14px; border-left: 2px solid transparent; font-size: var(--lm-fs-small); line-height: var(--lm-lh-small); color: var(--lm-muted); transition: color 200ms linear, border-color 250ms linear; }
+.lm-legal__toc-link:hover { color: var(--lm-ink-2); }
+.lm-legal__toc-link[aria-current="true"] { border-left-color: var(--lm-teal); color: var(--lm-teal); font-weight: 500; }
+.lm-legal__content { max-width: 1040px; }
+.lm-legal__section { scroll-margin-top: calc(var(--lm-nav-h) + 32px); }
+.lm-legal__section + .lm-legal__section { margin-top: 56px; }
+.lm-legal__h2 { font-family: var(--lm-font-title); font-weight: 400; font-size: clamp(19px, 1.1458vw, 22px); line-height: 1.4; letter-spacing: 0.02em; color: var(--lm-ink); }
+.lm-legal__p { margin-top: 20px; font-size: var(--lm-fs-body); line-height: 1.8; color: var(--lm-body); }
+.lm-legal__list { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+.lm-legal__li { display: grid; grid-template-columns: 8px minmax(0,1fr); column-gap: 12px; font-size: var(--lm-fs-body); line-height: 1.8; color: var(--lm-body); }
+.lm-legal__li::before { content: "·"; font-size: 15px; line-height: 1.9; font-weight: 500; color: var(--lm-teal); }
+.lm-legal__foot { margin-top: 64px; padding-top: 24px; border-top: 1px solid #e3dfd7; font-size: var(--lm-fs-small); line-height: var(--lm-lh-small); color: var(--lm-muted-2); }
+@media (max-width: 1023px) { .lm-legal__inner { grid-template-columns: minmax(0,1fr); gap: 40px; } .lm-legal__toc { position: static; } }
+@media (max-width: 767px) {
+  .lm-legal-head { padding: 16px var(--lm-side) 48px; }
+  .lm-legal-head__inner { margin-top: 48px; }
+  .lm-legal-head__title { font-size: 30px; }
+  .lm-legal { padding: 40px var(--lm-side) 80px; }
+  .lm-legal__h2 { font-size: 19px; }
+}
+
+/* Solo para html/_preview-partials.html */
+.lm-preview { min-height: 60vh; }
+.lm-preview--dark { background: var(--lm-teal); }
+.lm-preview__text { color: var(--lm-white); }
+.lm-preview .lm-h2 { margin-top: var(--lm-eyebrow-gap); }
+}

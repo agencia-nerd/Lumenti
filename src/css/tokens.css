@@ -1,0 +1,81 @@
+/* Lumenti — variables del diseño (alias de los tokens @theme de input.css)
+   Breakpoints (usar en media queries; las variables CSS no funcionan dentro de @media):
+   mobile  < 768px
+   tablet  768px – 1023px   (layouts de 2 columnas desde 1024px)
+   desktop ≥ 1024px         (navbar completo desde 1200px)
+   Hover solo con @media (hover: hover) and (pointer: fine) */
+@font-face { font-family: 'Abenda'; src: url('../fonts/Abenda.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+/* DM Sans (OFL), autoalojada — subconjunto latino */
+@font-face { font-family: 'DM Sans'; src: url('../fonts/dm-sans-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'DM Sans'; src: url('../fonts/dm-sans-500.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'DM Sans'; src: url('../fonts/dm-sans-600.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+:root {
+  /* Marca */
+  --lm-teal: var(--color-brand);
+  --lm-teal-dark: var(--color-brand-dark);
+  --lm-teal-700: var(--color-brand-700);
+  --lm-teal-600: var(--color-brand-600);
+  --lm-teal-400: var(--color-brand-400);
+  --lm-teal-200: var(--color-brand-200);
+  --lm-teal-150: var(--color-brand-150);
+  --lm-teal-100: var(--color-brand-100);
+  --lm-teal-50: var(--color-brand-50);
+  /* Texto */
+  --lm-ink: var(--color-ink);
+  --lm-ink-2: var(--color-ink-2);
+  --lm-body: var(--color-body);
+  --lm-muted: var(--color-muted);
+  --lm-muted-2: var(--color-muted-2);
+  --lm-footer-text: var(--color-footer-text);
+  /* Fondos */
+  --lm-sand: var(--color-sand);
+  --lm-sand-2: var(--color-sand-2);
+  --lm-line: var(--color-line);
+  --lm-line-2: var(--color-line-2);
+  --lm-nav: var(--color-nav);
+  --lm-white: var(--color-white);
+  --lm-tag: var(--color-tag);
+  --lm-dark: var(--color-dark);
+  /* Acentos */
+  --lm-gold: var(--color-gold);
+  --lm-gold-dark: var(--color-gold-dark);
+  --lm-error: var(--color-error);
+
+  /* Tipografía */
+  --lm-font-title: var(--font-display);
+  --lm-font-body: var(--font-sans);
+  --lm-fs-body: 16px;  --lm-lh-body: 24px;   /* regla del cliente: cuerpo y métricas siempre 16px */
+  --lm-fs-small: 14px; --lm-lh-small: 20px;
+  --lm-fs-h2: var(--text-h2);
+  --lm-fs-h3: var(--text-h3);
+  --lm-fs-card-title: var(--text-card-title);
+  --lm-ls-title: var(--tracking-title);
+
+  /* Espaciado */
+  --lm-max: var(--container-site);
+  --lm-side: clamp(24px, 8.3333vw, 160px); /* desktop; tablet 40px; mobile 20px */
+  --lm-sec-top: 160px;
+  --lm-sec-bottom: 200px;
+  --lm-eyebrow-gap: 20px;
+
+  /* Radios */
+  --lm-r-card: var(--radius-card);
+  --lm-r-img: var(--radius-img);
+  --lm-r-btn: var(--radius-btn);
+  --lm-r-pill: 999px;
+
+  /* Sombras: el sistema casi no usa sombras */
+  --lm-shadow-pop: var(--shadow-pop);
+
+  /* Movimiento */
+  --lm-ease: var(--ease-site);
+  --lm-dur-fill: 420ms; /* círculo de hover en CTA, lineal */
+
+  /* Navbar */
+  --lm-nav-h: 104px; /* ≥1200: 104 · tablet: 84 · mobile: 76 */
+}
+@media (max-width: 1199px) { :root { --lm-nav-h: 84px; } }
+@media (max-width: 1023px) { :root { --lm-side: 40px; --lm-sec-top: 112px; --lm-sec-bottom: 128px; } }
+@media (max-width: 767px)  { :root { --lm-nav-h: 76px; --lm-side: 20px; --lm-sec-top: 80px; --lm-sec-bottom: 96px; } }
+@media (prefers-reduced-motion: reduce) { :root { --lm-dur-fill: 0ms; } }
