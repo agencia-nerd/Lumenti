@@ -15,7 +15,7 @@ get_header();
     get_template_part('template-parts/pages/articulo/contenido');
     get_template_part('template-parts/pages/articulo/relacionados');
 
-    // Artículo → cta: textos fijos de la plantilla; WhatsApp de paciente (opciones_contacto_whatsapp_paciente).
+    // Artículo → cta: textos fijos de la plantilla; WhatsApp de paciente (opciones_contacto_telefono_paciente).
     get_template_part('template-parts/components/cta', null, [
         'id' => 'lm-cta-art',
         'titulo' => 'COMPRENDER LO QUE TE OCURRE PUEDE SER EL PRIMER PASO',

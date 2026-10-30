@@ -70,3 +70,13 @@ Stack: WordPress (Local WP) + Vite + Tailwind + pnpm.
 - Es un `<details>` nativo: no pongas enlaces ni botones dentro del título, no ocultes el panel con `display: none` ni armes uno con `div` y `aria-expanded`. Para enlazar un ítem, dale `id` y usa `<a href="#id">`.
 - No edites el motor (`inc/accordions.php`, `src/js/modules/accordion.js`, `src/css/accordion.css`): se actualiza desde la skill wp-accordion.
 <!-- wp-accordion:end -->
+
+<!-- wp-acf:start -->
+## ACF administrable (wp-acf 1.3.2)
+- Los campos, tipos de contenido, taxonomías y páginas de opciones viven en `acf-json/` y los genera `wp-acf` desde los specs (`generate.mjs`); no los edites a mano. Si algo se cambia desde el admin de ACF, el JSON queda distinto y se avisa como conflicto al regenerar.
+- `inc/acf/runner.php` es el motor: no lo edites (se actualiza desde la skill). Sincroniza el JSON con la base, crea las páginas, carga el contenido inicial, los menús y el logo, al activar el tema y desde Herramientas > Cargar contenido inicial. Nunca pisa lo que ya se cargó.
+- Los datos del proyecto son `inc/acf/paginas.php` (lo genera la skill), `inc/acf/sitio.php` (menús y logo) y `inc/acf/seed/<página>.php` (el texto, las imágenes y los enlaces que salieron de cada plantilla).
+- Una plantilla conectada lee su grupo con `get_field('<página>_<sección>')` y los helpers de `wp-helper`; no deja el texto fijo ni textos de respaldo en el código. Las opciones del sitio se leen con `get_field('opciones_<área>', 'option')`.
+- El puntero del mouse, la precarga y las animaciones no son campos: se quedan como JS.
+- La lógica de los listados (consultas, filtros, buscador, paginación) es de `wp-query`, y WooCommerce de otra skill.
+<!-- wp-acf:end -->

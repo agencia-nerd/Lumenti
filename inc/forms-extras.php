@@ -28,7 +28,8 @@ function lumenti_form_recipients(string $form_key): array
     if (!function_exists('get_field')) {
         return [];
     }
-    $rows = get_field('opciones_formularios_' . $form_key . '_correos', 'option');
+    $grupo = get_field('opciones_formularios', 'option') ?: [];
+    $rows = $grupo[$form_key . '_correos'] ?? null;
     if (!is_array($rows)) {
         return [];
     }

@@ -200,7 +200,7 @@
 - **Destino:** `template-parts/pages/condicion/cta.php`, `template-parts/components/cta.php`
 - **Grupo:** `condicion_cta`
 - **Skill:** wp-helper
-- **Comportamiento:** componente `cta` con la variante `--condicion` (fondo partido arena/verde), el video del mar y la insignia del cerebro (fijos, iguales al resto del sitio). Botón de WhatsApp a `opciones_contacto_whatsapp_paciente` con el mensaje del campo; si el campo está vacío, la Acción de `_shared.md`: "Hola, quisiera orientación sobre {condicion}.". El enlace pasa por el helper de enlaces (pestaña nueva con `rel` y aviso).
+- **Comportamiento:** componente `cta` con la variante `--condicion` (fondo partido arena/verde), el video del mar y la insignia del cerebro (fijos, iguales al resto del sitio). Botón de WhatsApp a `opciones_contacto_telefono_paciente` con el mensaje del campo; si el campo está vacío, la Acción de `_shared.md`: "Hola, quisiera orientación sobre {condicion}.". El enlace pasa por el helper de enlaces (pestaña nueva con `rel` y aviso).
 - **Estado:** aplicado
 
 **Campos ACF**

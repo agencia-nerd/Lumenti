@@ -9,8 +9,7 @@ function lumenti_setup()
     add_theme_support('post-thumbnails');
     add_theme_support('html5', ['search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script']);
 
-    register_nav_menus([
-        'primary' => __('Menú principal', 'lumenti'),
-    ]);
+    // Las ubicaciones de menú las registra inc/acf/runner.php desde inc/acf/sitio.php.
+    add_theme_support('custom-logo');
 }
 add_action('after_setup_theme', 'lumenti_setup');
