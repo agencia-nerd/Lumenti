@@ -1,0 +1,175 @@
+{
+  "nota": "Hoja \"Subgrupos\". El buscador de Especialistas compara el texto (sin tildes, en minúsculas) con estas palabras y filtra por claves_que_trata. La columna de neurodivergencia se conserva solo como sinónimos: la categoría se eliminó del sitio.",
+  "grupos": [
+    {
+      "grupo": "ANSIEDAD",
+      "claves_que_trata": [
+        "ans"
+      ],
+      "palabras": [
+        "Trastornos de ansiedad",
+        "Ataque de pánico",
+        "TAG",
+        "Trastorno de ansiedad generalizada",
+        "Fobias",
+        "Ansiedad social",
+        "Miedo",
+        "Tricotilomania",
+        "Angustia",
+        "Rumiación",
+        "Estrés",
+        "Pensamientos recurrentes",
+        "Dermatilomanía",
+        "Hipocondría",
+        "Mutismo",
+        "Agitado",
+        "Temblores",
+        "Mareos",
+        "Sudoración"
+      ]
+    },
+    {
+      "grupo": "DEPRESION",
+      "claves_que_trata": [
+        "dep"
+      ],
+      "palabras": [
+        "Tristeza",
+        "Trastorno depresivo",
+        "Episodio depresivo",
+        "Depresión mayor",
+        "Depresión recurrente",
+        "Distimia",
+        "Trastorno depresivo persistente",
+        "Depresión resistente",
+        "Depresión crónica",
+        "Recaída depresiva",
+        "Ánimo bajo",
+        "Tristeza persistente",
+        "Pérdida de interés",
+        "Anhedonia",
+        "Apatía",
+        "Me cuesta funcionar",
+        "Desmotivación",
+        "Cansancio emocional",
+        "Agotamiento mental",
+        "Llanto frecuente",
+        "Sensación de soledad",
+        "Aislamiento",
+        "Ideas suicidadas",
+        "Ideas catastroficas",
+        "Pensamiento de hacer daño"
+      ]
+    },
+    {
+      "grupo": "TDAH",
+      "claves_que_trata": [
+        "tdah"
+      ],
+      "palabras": [
+        "Trastorno de atención e hiperactividad",
+        "Déficit de atención",
+        "Hiperactividad",
+        "Impulsividad",
+        "Problemas de concentración",
+        "Me distraigo mucho",
+        "No puedo enfocarme",
+        "Me cuesta terminar tareas",
+        "Soy muy desorganizado/a",
+        "Olvidos frecuentes",
+        "Procrastinación",
+        "Inquietud constante",
+        "Dificultad para manejar el tiempo",
+        "Bajo rendimiento por falta de atención",
+        "Dificultades escolares por atención o conducta",
+        "Dificultades laborales por concentración u organización",
+        "Irritabilidad"
+      ]
+    },
+    {
+      "grupo": "TOC",
+      "claves_que_trata": [
+        "toc"
+      ],
+      "palabras": [
+        "Trastorno obsesivo compulsivo",
+        "Obsesiones",
+        "Compulsiones",
+        "Pensamientos intrusivos",
+        "Pensamientos repetitivos que no puedo controlar",
+        "Ideas que se me vienen a la mente y me generan angustia",
+        "Necesidad de revisar o comprobar",
+        "Necesidad de limpiar o lavarse",
+        "Miedo a contaminarse",
+        "Orden excesivo",
+        "Simetría rígida",
+        "Repetir acciones para sentir alivio",
+        "Rituales mentales",
+        "Pensamientos religiosos, sexuales, agresivos o moralmente angustiantes que la persona vive como intrusivos",
+        "Pellizcarse, rascarse o lastimarse la piel de forma repetitiva",
+        "Acumulación compulsiva",
+        "Dificultad intensa para botar o desprenderse de objetos"
+      ]
+    },
+    {
+      "grupo": "TRASTORNOS DE PERSONALIDAD",
+      "claves_que_trata": [
+        "tlp",
+        "otp"
+      ],
+      "palabras": [
+        "Trastorno límite de la personalidad",
+        "Borderline",
+        "Personalidad límite",
+        "Trastorno evitativo de la personalidad",
+        "Trastorno dependiente de la personalidad",
+        "Trastorno obsesivo-compulsivo de la personalidad",
+        "Trastorno paranoide de la personalidad",
+        "Trastorno histriónico de la personalidad",
+        "Trastorno antisocial de la personalidad",
+        "Trastorno esquizoide de la personalidad",
+        "Trastorno esquizotípico de la personalidad",
+        "Trastorno narcisista de la personalidad"
+      ]
+    },
+    {
+      "grupo": "ATENCIÓN A PERSONAS NEURODIVERGENTES",
+      "claves_que_trata": [
+        "autismo",
+        "tdah",
+        "apr"
+      ],
+      "palabras": [
+        "TEA",
+        "Austismo",
+        "TDAH",
+        "Altas capacidades",
+        "Dislexia",
+        "Discalculia",
+        "Disgrafia",
+        "Tourette",
+        "Dispraxia",
+        "Síndrome de down",
+        "Sinestesia",
+        "Dificultades de aprendizaje",
+        "Perfiles sensoriales particulares",
+        "Otras condiciones del neurodesarrollo"
+      ]
+    },
+    {
+      "grupo": "ADICCIONES",
+      "claves_que_trata": [
+        "adic"
+      ],
+      "palabras": [
+        "Consumo de cocaína, alcohol, marihuana, pasta básica, anfetaminas, éxtasis, ketamina u otras sustancias psicoactivas",
+        "Uso problemático de benzodiacepinas u otros medicamentos",
+        "Dificultad para dejar una sustancia",
+        "Recaídas o craving",
+        "Ludopatía, apuestas deportivas, casino, tragamonedas, juegos de azar o apuestas online",
+        "Juego compulsivo o pérdida de control con videojuegos, cuando se expresa como conducta problemática",
+        "Uso compulsivo de pornografía, sexo u otras conductas impulsivas, cuando el paciente lo plantea como un problema de control o funcionamiento"
+      ]
+    }
+  ]
+}

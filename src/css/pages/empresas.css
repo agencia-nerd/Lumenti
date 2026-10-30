@@ -1,0 +1,125 @@
+@layer components {
+/* Lumenti — Empresas (empresas.html). Reutiliza de components.css: .lm-page-hero(--service), .lm-section-title, .lm-intro-split,
+   .lm-photo-duo(--wide), .lm-btn, .lm-link-arrow, .lm-form, .lm-field(--form), .lm-choice, .lm-checkbox, .lm-form-success, .lm-cta. */
+
+.lm-emp-anchor { scroll-margin-top: calc(var(--lm-nav-h) + 48px); }
+.lm-emp-hero__actions { grid-column: 2; margin-top: 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; }
+
+/* Desafíos */
+.lm-emp-challenges { padding: clamp(120px, 10.4167vw, 200px) var(--lm-side) clamp(80px, 7vw, 136px); }
+.lm-emp-challenges__header { max-width: 760px; margin: 0 auto; text-align: center; }
+.lm-emp-challenges__intro { max-width: 500px; margin: 12px auto 0; }
+.lm-emp-challenges__list { max-width: var(--lm-max); margin: clamp(72px, 5.8333vw, 112px) auto 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 72px 40px; }
+.lm-emp-challenges__item { flex: 0 1 calc((100% - 160px) / 5); min-width: 200px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.lm-emp-challenges__badge { position: relative; width: clamp(130px, 7.8125vw, 150px); aspect-ratio: 1; display: grid; place-items: center; }
+.lm-emp-challenges__badge::before { content: ""; position: absolute; inset: 0; border: 1px solid #dcdfdd; border-radius: 50%; transition: transform 600ms var(--lm-ease); }
+.lm-emp-challenges__core { width: 77%; aspect-ratio: 1; border-radius: 50%; background: var(--lm-teal); display: grid; place-items: center; transition: background-color 400ms linear; }
+.lm-emp-challenges__icon { width: 70%; height: auto; transition: transform 600ms var(--lm-ease); }
+@media (hover: hover) and (pointer: fine) { .lm-emp-challenges__item:hover .lm-emp-challenges__badge::before { transform: scale(1.08); } .lm-emp-challenges__item:hover .lm-emp-challenges__core { background: var(--lm-teal-dark); } .lm-emp-challenges__item:hover .lm-emp-challenges__icon { transform: scale(1.06); } }
+.lm-emp-challenges__title { margin-top: 32px; font-family: var(--lm-font-title); font-weight: 400; font-size: clamp(18px, 1.0417vw, 20px); line-height: 1.3; letter-spacing: 0.02em; color: var(--lm-ink); }
+.lm-emp-challenges__text { margin-top: 12px; max-width: 420px; font-size: var(--lm-fs-body); line-height: 1.7; color: var(--lm-muted); }
+
+/* Soluciones */
+.lm-emp-solutions { padding: clamp(80px, 7vw, 136px) var(--lm-side); }
+.lm-emp-solutions__inner { max-width: var(--lm-max); margin: 0 auto; display: grid; grid-template-columns: minmax(0,5fr) minmax(0,9fr); gap: clamp(40px, 3.3vw, 64px); align-items: start; }
+.lm-emp-solutions__intro { position: sticky; top: calc(var(--lm-nav-h) + 48px); max-width: 480px; }
+.lm-emp-solutions__lead { margin-top: 24px; font-size: var(--lm-fs-body); line-height: 1.8; color: var(--lm-body); }
+.lm-emp-solutions__list { display: flex; flex-direction: column; gap: 12px; }
+.lm-emp-solution { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.75fr); border-radius: var(--lm-r-card); overflow: hidden; background: var(--lm-white); }
+.lm-emp-solution--reverse { grid-template-columns: minmax(0,1.75fr) minmax(0,1fr); }
+.lm-emp-solution--reverse .lm-emp-solution__media { order: 2; }
+.lm-emp-solution__media { position: relative; overflow: hidden; min-height: clamp(240px, 16vw, 308px); }
+.lm-emp-solution__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 900ms var(--lm-ease); }
+.lm-emp-solution:hover .lm-emp-solution__img { transform: scale(1.05); }
+.lm-emp-solution__body { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: clamp(32px, 2.6vw, 48px) clamp(28px, 2.1vw, 40px); }
+.lm-emp-solution__title { font-family: var(--lm-font-title); font-weight: 400; font-size: clamp(24px, 1.6667vw, 32px); line-height: 1.3; letter-spacing: var(--lm-ls-title); color: var(--lm-ink); }
+.lm-emp-solution__text { margin-top: 16px; max-width: 460px; font-size: var(--lm-fs-body); line-height: 1.7; color: var(--lm-muted); }
+.lm-emp-solution__action { margin-top: 28px; }
+
+/* Cómo trabajamos (pasos con scroll; js/empresas-form.js → steps) */
+.lm-emp-steps { position: relative; }
+/* El scroll por pasos solo existe con JS (empresas.js); sin JS se ven todos los pasos en lista. */
+.lm-js .lm-emp-steps { height: 340vh; }
+.lm-emp-steps__list:not(.lm-js *) { gap: 48px; }
+.lm-emp-steps__sticky { position: sticky; top: var(--lm-nav-h); min-height: calc(100vh - var(--lm-nav-h)); display: flex; flex-direction: column; padding: clamp(48px, 7vh, 96px) var(--lm-side) clamp(32px, 5vh, 64px); overflow: hidden; }
+.lm-emp-steps__ring { position: absolute; border-radius: 50%; pointer-events: none; }
+.lm-emp-steps__ring--outer { right: -9vw; top: -14vh; width: 34vw; aspect-ratio: 1.3 / 1; border: 1px solid #e7e4dd; }
+.lm-emp-steps__ring--inner { right: -12vw; top: -8vh; width: 30vw; aspect-ratio: 1.25 / 1; border: 1px solid #ebe8e2; }
+.lm-emp-steps__header { position: relative; width: 100%; max-width: var(--lm-max); margin: 0 auto; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px 48px; align-items: end; }
+.lm-emp-steps__title { grid-column: 1 / -1; font-family: var(--lm-font-title); font-weight: 400; font-size: clamp(44px, 3.9vw, 75px); line-height: 1.1; letter-spacing: -0.01em; color: var(--lm-ink); }
+.lm-emp-steps__lead { grid-column: 2; max-width: 760px; font-size: clamp(18px, 1.1458vw, 22px); line-height: 1.6; color: var(--lm-ink-2); }
+.lm-emp-steps__body { position: relative; width: 100%; max-width: var(--lm-max); margin: clamp(40px, 8vh, 96px) auto 0; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 48px; align-items: start; }
+.lm-emp-steps__list { position: relative; z-index: 1; display: grid; }
+.lm-js .lm-emp-steps__item { grid-area: 1 / 1; max-width: 560px; opacity: 0; visibility: hidden; transform: translateY(12px); transition: opacity 500ms linear, transform 700ms var(--lm-ease), visibility 0s linear 500ms; }
+.lm-js .lm-emp-steps__item.is-active { opacity: 1; visibility: visible; transform: none; transition: opacity 500ms linear 150ms, transform 700ms var(--lm-ease) 150ms, visibility 0s; }
+.lm-emp-steps__step-title { font-family: var(--lm-font-title); font-weight: 400; font-size: clamp(22px, 1.6667vw, 32px); line-height: 1.25; letter-spacing: var(--lm-ls-title); color: var(--lm-ink); }
+.lm-emp-steps__step-text { padding-top: 16px; max-width: 480px; font-size: var(--lm-fs-body); line-height: 1.7; color: var(--lm-body); }
+.lm-emp-steps__close { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: var(--lm-fs-body); color: var(--lm-ink-2); }
+.lm-emp-steps__numbers { position: absolute; z-index: 0; right: calc(2vw + var(--lm-side)); bottom: calc(20px - 0.17 * clamp(260px, 23vw, 440px)); width: min(640px, 42%); height: clamp(260px, 23vw, 440px); pointer-events: none; }
+.lm-emp-steps__number { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: center; font-family: var(--lm-font-title); font-size: clamp(260px, 23vw, 440px); line-height: 1; letter-spacing: -0.02em; color: #5e8d96; opacity: 0; transition: opacity 500ms linear; }
+.lm-emp-steps__number.is-active { opacity: 1; }
+
+/* Por qué Lumenti (.lm-intro-split--reverse + .lm-photo-duo--wide) */
+.lm-emp-why .lm-intro-split__text { max-width: 560px; }
+
+/* Talleres */
+.lm-emp-workshops { padding: clamp(96px, 8.3333vw, 160px) var(--lm-side) clamp(120px, 10.4167vw, 200px); }
+.lm-emp-workshops__header { max-width: var(--lm-max); margin: 0 auto; display: flex; align-items: flex-start; justify-content: space-between; gap: 20px 48px; }
+.lm-emp-workshops__lead { flex: 0 1 600px; max-width: 600px; text-align: right; }
+.lm-emp-workshops__list { max-width: var(--lm-max); margin: 48px auto 0; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+.lm-emp-workshop { display: flex; flex-direction: column; height: 100%; padding: clamp(28px, 2.0833vw, 40px); border-radius: var(--lm-r-card); background: var(--lm-white); }
+.lm-emp-workshop__title { font-family: var(--lm-font-title); font-weight: 400; font-size: clamp(18px, 1.0417vw, 20px); line-height: 1.35; letter-spacing: var(--lm-ls-title); color: var(--lm-ink); }
+.lm-emp-workshop__desc { margin-top: 16px; font-size: var(--lm-fs-body); line-height: 1.7; color: var(--lm-muted); }
+.lm-emp-workshop__topics-label { margin-top: 28px; font-size: var(--lm-fs-small); line-height: var(--lm-lh-small); font-weight: 500; color: var(--lm-body); }
+.lm-emp-workshop__topics { margin-top: 12px; display: flex; flex-direction: column; gap: 10px; }
+.lm-emp-workshop__topic { display: flex; align-items: baseline; gap: 12px; font-size: 15px; line-height: 22px; color: var(--lm-body); }
+.lm-emp-workshop__topic::before { content: ""; flex: none; width: 5px; height: 5px; border-radius: 50%; background: var(--lm-teal); transform: translateY(-3px); }
+.lm-emp-workshop__action { margin-top: auto; padding-top: 36px; }
+.lm-emp-workshop__action .lm-btn { width: 100%; }
+
+/* Solicitar propuesta */
+.lm-emp-proposal { padding: 0 var(--lm-side) clamp(120px, 10.4167vw, 200px); }
+.lm-emp-proposal__inner { max-width: var(--lm-max); margin: 0 auto; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: clamp(64px, 7.8vw, 150px); align-items: start; }
+.lm-emp-proposal__aside { position: sticky; top: calc(var(--lm-nav-h) + 48px); }
+.lm-emp-proposal__lead { margin-top: 24px; max-width: 540px; font-size: var(--lm-fs-body); line-height: 1.7; color: var(--lm-body); }
+.lm-emp-proposal__alt { margin-top: 64px; font-size: 15px; line-height: 22px; color: var(--lm-body); }
+.lm-emp-proposal__wa { margin-top: 8px; }
+.lm-emp-proposal__media { margin-top: 40px; border-radius: var(--lm-r-card); overflow: hidden; aspect-ratio: 980 / 1041; }
+.lm-emp-proposal__img { width: 100%; height: 100%; object-fit: cover; }
+.lm-emp-proposal__help { font-size: var(--lm-fs-small); line-height: var(--lm-lh-small); color: var(--lm-muted); }
+
+@media (max-width: 1023px) {
+  .lm-emp-solutions__inner, .lm-emp-proposal__inner { grid-template-columns: minmax(0,1fr); gap: 40px; }
+  .lm-emp-solutions__intro, .lm-emp-proposal__aside { position: static; }
+  .lm-emp-workshops__list { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 767px) {
+  .lm-emp-hero__actions { grid-column: 1; margin-top: 24px; }
+  .lm-emp-challenges__list { margin-top: 48px; gap: 48px 32px; }
+  .lm-emp-challenges__item { flex-basis: 100%; }
+  .lm-emp-challenges__badge { width: 128px; }
+  .lm-emp-challenges__title { font-size: 18px; }
+  .lm-emp-solution, .lm-emp-solution--reverse { grid-template-columns: minmax(0,1fr); }
+  .lm-emp-solution--reverse .lm-emp-solution__media { order: 0; }
+  .lm-emp-solution__media { min-height: 220px; }
+  .lm-emp-solution__body { padding: 28px 24px 32px; }
+  .lm-emp-solution__title { font-size: 24px; }
+  .lm-emp-steps, .lm-js .lm-emp-steps { height: auto; }
+  .lm-emp-steps__sticky { position: static; min-height: 0; padding: 64px var(--lm-side); }
+  .lm-emp-steps__header, .lm-emp-steps__body { grid-template-columns: minmax(0,1fr); }
+  .lm-emp-steps__title { font-size: 32px; }
+  .lm-emp-steps__lead { grid-column: 1; font-size: 18px; }
+  .lm-emp-steps__body { margin-top: 48px; }
+  .lm-emp-steps__list { display: flex; flex-direction: column; gap: 72px; }
+  .lm-js .lm-emp-steps__item { opacity: 1; visibility: visible; transform: none; }
+  .lm-emp-steps__step-title { font-size: 24px; }
+  .lm-emp-steps__numbers, .lm-emp-steps__ring { display: none; }
+  .lm-emp-workshops__header { flex-direction: column; }
+  .lm-emp-workshops__lead { max-width: 470px; text-align: left; }
+  .lm-emp-workshops__list { margin-top: 32px; grid-template-columns: minmax(0,1fr); gap: 12px; }
+  .lm-emp-workshop { padding: 24px; }
+  .lm-emp-workshop__title { font-size: 18px; }
+  .lm-emp-proposal__inner { gap: 48px; }
+  .lm-emp-proposal__alt { margin-top: 28px; }
+}
+}

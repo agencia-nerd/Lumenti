@@ -1,0 +1,48 @@
+@layer base {
+/* Lumenti — base. Requiere tokens.css (:root con variables globales).
+   Índice: 1. Reset · 2. Estilos base · 3. Layout · 4. Tipografía de sección · 5. Utilidades · 6. Animaciones compartidas · 7. Estados (reveal) · 8. Accesibilidad / movimiento reducido */
+
+/* 1. Reset ------------------------------------------------------------ */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+/* 2. Estilos base ----------------------------------------------------- */
+body { margin: 0; background: var(--lm-sand); color: var(--lm-body); font-family: var(--lm-font-body); font-size: var(--lm-fs-body); line-height: var(--lm-lh-body); -webkit-font-smoothing: antialiased; }
+img, svg, video { display: block; max-width: 100%; }
+h1, h2, h3, h4, p, ul, ol, figure { margin: 0; }
+ul[class], ol[class] { list-style: none; padding: 0; }
+button { font: inherit; color: inherit; }
+a { color: var(--lm-teal); text-decoration: none; }
+a:hover { color: var(--lm-teal-700); }
+:focus-visible { outline: 2px solid var(--lm-teal); outline-offset: 3px; border-radius: 2px; }
+html.lm-menu-open { overflow: hidden; }
+
+/* 3. Layout ---------------------------------------------------------- */
+.lm-container { max-width: var(--lm-max); margin: 0 auto; padding-left: var(--lm-side); padding-right: var(--lm-side); }
+.lm-section { padding-top: var(--lm-sec-top); padding-bottom: var(--lm-sec-bottom); }
+
+/* 4. Tipografía de sección ------------------------------------------- */
+.lm-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: var(--lm-font-title); font-size: 14px; line-height: 20px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--lm-teal); }
+.lm-eyebrow--dot::before { content: ""; flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--lm-teal); transform: translateY(-3.5px); }
+.lm-h2 { font-family: var(--lm-font-title); font-weight: 400; font-size: var(--lm-fs-h2); line-height: 1.1; letter-spacing: var(--lm-ls-title); color: var(--lm-ink); text-wrap: balance; }
+.lm-h2__line { display: block; }
+.lm-lead { font-size: var(--lm-fs-body); line-height: 1.7; color: var(--lm-muted); text-wrap: pretty; }
+
+/* 5. Utilidades ------------------------------------------------------ */
+.lm-visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* 6. Animaciones compartidas ----------------------------------------- */
+@keyframes lmRise { from { transform: translateY(105%); } to { transform: none; } }
+@keyframes lmCardIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes lmSpin { to { transform: rotate(360deg); } }
+
+/* 7. Estados: reveal al hacer scroll (js/main.js). Sin JS el contenido queda visible. */
+.lm-js [data-lm-reveal] { clip-path: inset(0 0 100% 0); transform: translateY(48px); transition: clip-path 900ms var(--lm-ease), transform 900ms var(--lm-ease); transition-delay: var(--lm-reveal-delay, 0ms); }
+.lm-js [data-lm-reveal="img"] { transform: none; }
+.lm-js [data-lm-reveal].is-revealed { clip-path: inset(0 0 0 0); transform: none; }
+
+/* 8. Accesibilidad: movimiento reducido (los !important son intencionales: anulan cualquier animación) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; scroll-behavior: auto !important; }
+  .lm-js [data-lm-reveal] { clip-path: none; transform: none; }
+}
+}

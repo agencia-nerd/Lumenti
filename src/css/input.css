@@ -1,1 +1,108 @@
 @import "tailwindcss";
+@import "./accordion.css";
+
+/* Tokens del diseño (specs/_shared.md → Tokens). `static`: se emiten todos porque el CSS del diseño los lee por variable. */
+@theme static {
+  --color-brand: #2e6c79;
+  --color-brand-dark: #244b53;
+  --color-brand-700: #295a65;
+  --color-brand-600: #49737c;
+  --color-brand-400: #73939a;
+  --color-brand-200: #c3d1d4;
+  --color-brand-150: #abc4c9;
+  --color-brand-100: #dbe6e7;
+  --color-brand-50: #eef4f3;
+  --color-ink: #1a202c;
+  --color-ink-2: #1c2c3a;
+  --color-body: #4e5e68;
+  --color-muted: #626771;
+  --color-muted-2: #7b8088;
+  --color-footer-text: #b4c5c9;
+  --color-sand: #f5f3ee;
+  --color-sand-2: #efebe3;
+  --color-line: #ece9e2;
+  --color-line-2: #e2dfd7;
+  --color-nav: #ecddd2;
+  --color-white: #ffffff;
+  --color-tag: #f4f4f4;
+  --color-dark: #2b2722;
+  --color-gold: #c6a36c;
+  --color-gold-dark: #7a5a2e;
+  --color-error: #b3443f;
+
+  --font-display: 'Abenda', Georgia, serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+
+  --text-body: 16px;
+  --text-body--line-height: 24px;
+  --text-small: 14px;
+  --text-small--line-height: 20px;
+  --text-h2: clamp(40px, 2.8125vw, 54px);
+  --text-h3: clamp(26px, 1.77vw, 34px);
+  --text-card-title: clamp(18px, 1.0417vw, 20px);
+  --tracking-title: 0.01em;
+
+  --container-site: 1600px;
+
+  --radius-card: 6px;
+  --radius-img: 4px;
+  --radius-btn: 8px;
+
+  --shadow-pop: 0 12px 32px rgba(28, 44, 58, 0.12);
+  --ease-site: cubic-bezier(.2, .8, .2, 1);
+
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1200px;
+}
+
+/* CSS del diseño en BEM `lm-`, por capas: variables, base, componentes y una hoja por plantilla. */
+@import "./tokens.css";
+@import "./base.css";
+@import "./components.css";
+@import "./pages/home.css";
+@import "./pages/especialistas.css";
+@import "./pages/condicion.css";
+@import "./pages/servicios.css";
+@import "./pages/empresas.css";
+@import "./pages/blog.css";
+@import "./pages/pages.css";
+
+/* Parte de un texto en otro color: `*texto*` con lumenti_highlight() (inc/helpers/text-styles.php). */
+@layer components {
+  .lm-accent { color: var(--lm-teal); }
+  /* Reveal de lo que ya está en pantalla al cargar: sin transición (antes, style inline desde JS). */
+  .lm-js [data-lm-reveal].is-instant { transition: none; }
+}
+
+/* Estados de wp-form sobre el marcado del diseño: el motor marca aria-invalid y escribe el error en
+   [data-error-for]; el diseño los mostraba con clases .is-invalid desde su propio JS. */
+@layer components {
+  .lm-field__error:has(> [data-error-for]:not(:empty)),
+  .lm-field__error[data-error-for]:not(:empty) { display: flex; }
+  .lm-field:has([aria-invalid="true"]) :is(.lm-field__input, .lm-field__select, .lm-field__textarea) { border-color: var(--lm-error); }
+  .lm-field:has([aria-invalid="true"]) .lm-field__hint { display: none; }
+  .lm-choice:has([aria-invalid="true"]) .lm-choice__chip { border-color: var(--lm-error); }
+  .lm-form__submit[data-loading] .lm-form__spinner { display: block; }
+  .lm-form__status:empty, .lm-cta__status:empty { display: none; }
+  .lm-form__status { width: 100%; font-size: var(--lm-fs-small); line-height: 20px; color: var(--lm-body); }
+  .lm-form__status[data-state="error"] { color: var(--lm-error); }
+  .lm-cta__status { width: 100%; font-size: var(--lm-fs-small); line-height: 20px; color: #ffd2cf; }
+  .lm-form[hidden], .lm-cta__form[hidden] { display: none; }
+}
+
+/* FAQ sobre wp-accordion (<details>): el ícono del motor (SVG "plus") toma la forma del diseño
+   (círculo verde con cruz blanca que gira y pasa a "menos") y el movimiento usa los tiempos del diseño. */
+@layer components {
+  .lm-faq__list { --accordion-duration: 500ms; --accordion-easing: var(--lm-ease); --accordion-easing-out: var(--lm-ease); }
+  .lm-faq__icon.accordion__icon { width: 24px; height: 24px; padding: 3.5px; color: var(--lm-white); }
+  .lm-faq__item[open] > .accordion__summary .lm-faq__icon { transform: rotate(180deg); }
+}
+
+/* Condición: señales y abordaje siempre visibles (sin acordeón en móvil, decisión del proyecto).
+   En móvil el diseño solo separaba título y texto del abordaje en modo acordeón. */
+@media (max-width: 767px) {
+  @layer components {
+    .lm-cond-approach__body { padding-top: 16px; }
+  }
+}
