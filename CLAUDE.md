@@ -36,11 +36,11 @@ Stack: WordPress (Local WP) + Vite + Tailwind + pnpm.
 - No subas al servidor `hot`, `node_modules/`, `src/` ni archivos de config (`package.json`, `pnpm-*`, `vite.config.ts`, `CLAUDE.md`).
 
 <!-- wp-helper:start -->
-## Helpers (wp-helper 1.1.0)
+## Helpers (wp-helper 1.3.0)
 - Los helpers viven en `inc/helpers/` y se cargan con `require_once` desde `functions.php`. No edites los archivos del motor: se actualizan desde la skill wp-helper.
 - Un helper propio de este proyecto va en `inc/helpers/<nombre>.php` con el prefijo `lumenti_`, y también se carga desde `functions.php`.
-- Toda imagen de un campo ACF pasa por `lumenti_image($campo, [...])` (devuelve el `<img>` o `''`) o por `lumenti_image_data($campo)` (`url`, `alt`, `width`, `height` o `null`). No uses `$campo['url']` ni `wp_get_attachment_image_url()` directo en las vistas. Usa `'loading' => 'eager'` en la imagen principal de la página.
-- Un texto con partes de otro color se imprime con `lumenti_highlight($texto)`; ya sale escapado. Los marcadores y sus clases están en `inc/helpers/text-styles.php`: para sumar un estilo corre `install.mjs --add-style` de la skill wp-helper, no lo edites a mano.
+- Toda imagen de un campo ACF pasa por `lumenti_image($campo, [...])` (devuelve el `<img>` o `''`) o por `lumenti_image_data($campo)` (`url`, `alt`, `width`, `height` o `null`). No uses `$campo['url']` ni `wp_get_attachment_image_url()` directo en las vistas. Usa `'loading' => 'eager'` en la imagen principal de la página. Si el cliente no escribe el alt, pasa `'alt_fallback'` con el título de la sección (o el de su tarjeta); `'alt' => ''` solo para imágenes decorativas.
+- Un texto con partes de otro color, y todo campo textarea, se imprime con `lumenti_highlight($texto)`; ya sale escapado y respeta los saltos de línea. Los marcadores y sus clases están en `inc/helpers/text-styles.php`: para sumar un estilo corre `install.mjs --add-style` de la skill wp-helper, no lo edites a mano.
 - Todo enlace de un campo ACF (Link o URL) pasa por `lumenti_link($campo, [...])` (el `<a>` completo) o por `<a<?= lumenti_link_attrs($campo, [...]) ?>>` cuando el diseño lleva íconos u otros hijos. No escribas `target="_blank"`, `rel` ni `$campo['url']` a mano: el helper pone `rel`, descarta enlaces vacíos o inseguros y avisa de la pestaña nueva (clase `sr-only`).
 <!-- wp-helper:end -->
 
@@ -72,11 +72,11 @@ Stack: WordPress (Local WP) + Vite + Tailwind + pnpm.
 <!-- wp-accordion:end -->
 
 <!-- wp-acf:start -->
-## ACF administrable (wp-acf 1.3.2)
+## ACF administrable (wp-acf 1.6.0)
 - Los campos, tipos de contenido, taxonomías y páginas de opciones viven en `acf-json/` y los genera `wp-acf` desde los specs (`generate.mjs`); no los edites a mano. Si algo se cambia desde el admin de ACF, el JSON queda distinto y se avisa como conflicto al regenerar.
 - `inc/acf/runner.php` es el motor: no lo edites (se actualiza desde la skill). Sincroniza el JSON con la base, crea las páginas, carga el contenido inicial, los menús y el logo, al activar el tema y desde Herramientas > Cargar contenido inicial. Nunca pisa lo que ya se cargó.
 - Los datos del proyecto son `inc/acf/paginas.php` (lo genera la skill), `inc/acf/sitio.php` (menús y logo) y `inc/acf/seed/<página>.php` (el texto, las imágenes y los enlaces que salieron de cada plantilla).
-- Una plantilla conectada lee su grupo con `get_field('<página>_<sección>')` y los helpers de `wp-helper`; no deja el texto fijo ni textos de respaldo en el código. Las opciones del sitio se leen con `get_field('opciones_<área>', 'option')`.
+- Una plantilla conectada lee su grupo con `get_field('<página>_<sección>')` y los helpers de `wp-helper`; no deja el texto fijo ni textos de respaldo en el código. Un textarea es un solo campo aunque tenga varias líneas (el cliente pasa de línea con Enter) y se imprime con el helper de texto de `wp-helper`, que muestra los saltos y los colores; nunca un campo por línea. Las opciones del sitio se leen con `get_field('opciones_<área>', 'option')`.
 - El puntero del mouse, la precarga y las animaciones no son campos: se quedan como JS.
 - La lógica de los listados (consultas, filtros, buscador, paginación) es de `wp-query`, y WooCommerce de otra skill.
 <!-- wp-acf:end -->

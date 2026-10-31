@@ -30,8 +30,7 @@
 
 | Campo | Tipo | Descripción | Valor actual | Requerido |
 |---|---|---|---|---|
-| `faq_hero_titulo_linea_1` | text | Primera línea del título, en color de acento. Es el `h1` de la página. | PREGUNTAS | sí |
-| `faq_hero_titulo_linea_2` | text | Segunda línea del título. | FRECUENTES. | no |
+| `faq_hero_titulo` | textarea | Título de la página; es el `h1`. Cada línea va en una línea (Enter) y la que va en color de acento se encierra entre asteriscos. Usa Enter para pasar a otra línea. | *PREGUNTAS*<br>FRECUENTES. | sí |
 | `faq_hero_nota` | text | Frase corta junto al título. | Atención presencial y virtual para cada etapa de la vida. | no |
 | `faq_hero_etiqueta` | text | Texto pequeño sobre la bajada. | AYUDA | no |
 | `faq_hero_bajada` | textarea | Texto de introducción bajo el título. | Resolvemos las dudas más comunes sobre nuestros servicios, el proceso de atención y cómo empezar. Si no encuentras lo que buscas, escríbenos. | no |
@@ -75,7 +74,7 @@
 - **Destino:** `template-parts/pages/faq/cta.php`, `template-parts/components/cta.php`
 - **Grupo:** `faq_cta`
 - **Skill:** ninguna
-- **Comportamiento:** usa el componente `cta` (video de fondo decorativo, sello, título, texto y botón). El botón abre WhatsApp a `opciones_contacto_telefono_paciente` con el mensaje del campo, en pestaña nueva. La sección solo pasa sus `$args` al componente.
+- **Comportamiento:** usa el componente `cta` (fondo de video decorativo o imagen, sello, título, texto y botón). El botón abre WhatsApp a `opciones_contacto_telefono_paciente` con el mensaje del campo, en pestaña nueva. La sección solo pasa sus `$args` al componente.
 - **Estado:** aplicado
 
 **Campos ACF**
@@ -86,8 +85,7 @@
 | `faq_cta_texto` | textarea | Texto bajo el título. | Escríbenos por WhatsApp y te orientamos en el momento. | no |
 | `faq_cta_boton_texto` | text | Texto del botón de WhatsApp. | Escríbenos por WhatsApp | sí |
 | `faq_cta_boton_mensaje` | text | Mensaje que se escribe solo al abrir WhatsApp. | Hola, tengo una consulta sobre la atención en Lumenti. | no |
-| `faq_cta_video` | file | Video de fondo en MP4, sin sonido. Vacío usa el mismo de la portada. | — | no |
-| `faq_cta_poster` | image | Imagen que se ve mientras carga el video. | — | no |
+| `faq_cta_video_o_imagen` | file | Fondo del cierre: un video MP4 sin sonido o una imagen (JPG, PNG o WebP). Vacío usa el mismo video de la portada. Con una imagen no hay reproducción. | — | no |
 
 **Criterios de aceptación**
 

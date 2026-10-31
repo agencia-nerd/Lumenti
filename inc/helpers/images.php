@@ -3,7 +3,7 @@ defined('ABSPATH') || exit;
 
 /*
  * Helpers de imágenes (skill wp-helper).
- * Versión del motor: 1.1.0
+ * Versión del motor: 1.3.0
  *
  * Genérico: no se edita por proyecto. Acepta lo que entregue un campo de imagen de ACF (array, ID,
  * URL), un adjunto (WP_Post) o un valor vacío, y nunca rompe la vista:
@@ -76,13 +76,15 @@ function lumenti_image_data($img, string $size = 'full'): ?array
 }
 
 // <img> escapado y listo para imprimir, o '' si no hay imagen. alt vacío = decorativa.
-// $args: size, class, alt, loading (lazy|eager), fetchpriority (high|low|auto), sizes, fallback (URL).
+// $args: size, class, alt, alt_fallback, loading (lazy|eager), fetchpriority (high|low|auto), sizes, fallback (URL).
+// Orden del alt: 'alt' explícito (aunque sea '') > alt de la imagen > 'alt_fallback' > ''.
 function lumenti_image($img, array $args = []): string
 {
     $args += [
         'size' => 'full',
         'class' => '',
         'alt' => null,
+        'alt_fallback' => '',
         'loading' => 'lazy',
         'fetchpriority' => '',
         'sizes' => '',
@@ -99,6 +101,9 @@ function lumenti_image($img, array $args = []): string
     }
 
     $alt = $args['alt'] !== null ? (string) $args['alt'] : $data['alt'];
+    if ($args['alt'] === null && $alt === '') {
+        $alt = trim((string) $args['alt_fallback']);
+    }
     $loading = $args['loading'] === 'eager' ? 'eager' : 'lazy';
     $priority = in_array($args['fetchpriority'], ['high', 'low', 'auto'], true) ? $args['fetchpriority'] : '';
 

@@ -3,7 +3,7 @@ defined('ABSPATH') || exit;
 
 /*
  * Inicio · cta (specs/home.md → cta, grupo ACF home_cta). Solo pasa sus $args a template-parts/components/cta.php.
- * Contenido: get_field('home_cta'); el video es un campo file (vacío: sin video).
+ * Contenido: get_field('home_cta'); el fondo es un campo file que acepta video o imagen (vacío: sin fondo).
  */
 
 $lumenti_cta = get_field('home_cta') ?: [];
@@ -17,7 +17,6 @@ get_template_part('template-parts/components/cta', null, [
         'whatsapp' => 'paciente',
         'mensaje' => (string) ($lumenti_cta['boton_mensaje'] ?? ''),
     ] : [],
-    'video' => $lumenti_cta['video'] ?? '',
-    'poster' => $lumenti_cta['poster'] ?? '',
+    'video' => $lumenti_cta['video_o_imagen'] ?? '',
     'id' => 'lm-cta-title',
 ]);

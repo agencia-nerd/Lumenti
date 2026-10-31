@@ -1,5 +1,7 @@
 // "Ver más": el botón [data-lm-more-btn] (aria-controls → lista [data-lm-more]) muestra u oculta el resto de ítems.
 // La lista recibe .is-expanded; el texto del botón alterna con data-lm-more-less (por defecto "Ver menos").
+// Al plegar, la página vuelve al inicio de la sección del botón.
+import { scrollToElement } from './utils.js';
 
 /** Primer nodo de texto con contenido del botón (el ícono va después). */
 export function labelNode(btn) {
@@ -20,6 +22,7 @@ export function verMas() {
             btn.setAttribute('aria-expanded', on ? 'true' : 'false');
             list.classList.toggle('is-expanded', on);
             if (label) label.nodeValue = on ? less : more;
+            if (!on) scrollToElement(btn.closest('section'), { extra: 0 });
         });
     });
 }

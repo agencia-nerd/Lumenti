@@ -12,8 +12,7 @@ defined('ABSPATH') || exit;
  *               o ['texto', 'url']. Por defecto primary, ícono de WhatsApp y clase lm-cta__btn.
  *   newsletter  (bool)  en lugar del botón, el form de template-parts/forms/newsletter.php (wp-form).
  *   form        (array)  $args del form del newsletter.
- *   video       (campo file de ACF | ID | ruta del tema)  por defecto assets/video/cta-mar-v4.mp4 (las páginas aún no conectadas).
- *   poster      ('assets/img/x.webp' | imagen ACF | ID)  imagen fija del video (se ve con movimiento reducido).
+ *   video       (campo file de ACF | ID | ruta del tema)  video MP4 o una imagen (jpg, png, webp…); por defecto assets/video/cta-mar-v4.mp4 (las páginas aún no conectadas).
  *   variante    ('' | condicion)  condicion = fondo partido arena/verde (lm-cta--condicion).
  *   id          (string)  id del título. Por defecto lm-cta-title.
  *   nivel       (h2 | h3)  por defecto h2.
@@ -37,18 +36,15 @@ if (is_array($lumenti_video)) {
     $lumenti_video = get_theme_file_uri('/' . ltrim((string) $lumenti_video, '/'));
 }
 $lumenti_video = (string) $lumenti_video;
-$lumenti_poster = $args['poster'] ?? '';
-if (is_string($lumenti_poster) && $lumenti_poster !== '' && !ctype_digit($lumenti_poster)) {
-    $lumenti_poster = preg_match('#^(https?:)?//#i', $lumenti_poster) ? $lumenti_poster : get_theme_file_uri('/' . ltrim($lumenti_poster, '/'));
-} else {
-    $lumenti_poster = ($lumenti_data = lumenti_image_data($lumenti_poster, 'large')) ? $lumenti_data['url'] : '';
-}
+$lumenti_es_imagen = (bool) preg_match('/\.(jpe?g|png|webp|avif|gif)(\?.*)?$/i', $lumenti_video);
 $lumenti_form = locate_template('template-parts/forms/newsletter.php') !== '';
 ?>
 <section aria-labelledby="<?= esc_attr($lumenti_id) ?>" class="<?= esc_attr($lumenti_clase) ?>" data-lm-cta data-lm-section="cta-final">
     <div class="lm-cta__box">
-        <?php if ($lumenti_video !== '') : ?>
-            <video src="<?= esc_url($lumenti_video) ?>"<?php if ($lumenti_poster !== '') : ?> poster="<?= esc_url($lumenti_poster) ?>"<?php endif; ?> loop preload="metadata" aria-hidden="true" muted playsinline class="lm-cta__video"></video>
+        <?php if ($lumenti_video !== '' && $lumenti_es_imagen) : ?>
+            <img src="<?= esc_url($lumenti_video) ?>" alt="" aria-hidden="true" loading="lazy" decoding="async" class="lm-cta__video">
+        <?php elseif ($lumenti_video !== '') : ?>
+            <video src="<?= esc_url($lumenti_video) ?>" loop preload="metadata" aria-hidden="true" muted playsinline class="lm-cta__video"></video>
         <?php endif; ?>
         <span aria-hidden="true" class="lm-cta__overlay"></span>
         <span aria-hidden="true" class="lm-cta__badge">
