@@ -36,11 +36,9 @@
 
 | Campo | Tipo | Descripción | Valor actual | Requerido |
 |---|---|---|---|---|
-| `home_hero_slides` | repeater | Slides del hero, en orden (2 en el diseño). El título del primero es el `h1` de la página | — | sí |
+| `home_hero_slides` | repeater | Slides del hero, en orden. Máximo: 2. El título del primero es el `h1` de la página | — | sí |
 | `home_hero_slides.pestana` | text | Nombre de la pestaña del slide; el número se agrega solo. | INTEGRAL | sí |
-| `home_hero_slides.titulo_linea_1` | text | Primera línea del título. | SALUD MENTAL | sí |
-| `home_hero_slides.titulo_linea_2` | text | Segunda línea del título. | INTEGRAL PARA CADA | no |
-| `home_hero_slides.titulo_linea_3` | text | Tercera línea del título, en color de acento. | ETAPA DE LA VIDA | no |
+| `home_hero_slides.titulo` | textarea | Título del slide; cada línea del título va en una línea (Enter). Para dejar una línea en color de acento, enciérrala entre asteriscos: *ETAPA DE LA VIDA*. Usa Enter para pasar a otra línea. | SALUD MENTAL<br>INTEGRAL PARA CADA<br>*ETAPA DE LA VIDA* | sí |
 | `home_hero_slides.bajada` | textarea | Texto bajo el título. | Consultorio especializado en psiquiatría y psicología para niños, adolescentes y adultos, con atención presencial y virtual. | sí |
 | `home_hero_slides.boton_texto` | text | Texto del botón de WhatsApp. | Agenda tu cita | sí |
 | `home_hero_slides.boton_mensaje` | text | Mensaje que se escribe solo al abrir WhatsApp. Vacío abre el chat sin mensaje. | — | no |
@@ -56,6 +54,8 @@
 - [x] El avance automático se pausa con hover o foco en el botón y no corre con `prefers-reduced-motion`
 - [x] Solo el primer slide tiene `h1`; los slides ocultos tienen `aria-hidden="true"`
 - [x] La imagen del primer slide carga con `loading="eager"` y `fetchpriority="high"`
+- [x] El repeater de slides admite como máximo 2 filas (el JSON sale con `max: 2` desde la fila del spec)
+- [x] Si la foto de un slide no trae alt, se usa de respaldo el título del slide (`alt_fallback`)
 
 ## Sección: cifras
 
@@ -88,7 +88,7 @@
 - **Destino:** `template-parts/pages/home/sobre.php`
 - **Grupo:** `home_sobre`
 - **Skill:** wp-helper
-- **Comportamiento:** texto grande con una parte resaltada en otro color (marcadores del helper de texto de `wp-helper`; hoy `<span class="lm-home-sobre__highlight">`). A la derecha, abanico de 3 piezas: foto principal, foto de fondo y card con el logo blanco (`opciones_cabecera_logo_alternativo`); el abanico se abre cuando un tercio de la foto principal está en pantalla (`src/js/modules/fan.js`, gancho `data-lm-fan`) y queda abierto con `prefers-reduced-motion`. Las fotos se recortan con `aspect-ratio` 440/540 y `object-cover`.
+- **Comportamiento:** texto grande con una parte resaltada en otro color (marcadores del helper de texto de `wp-helper`; hoy `<span class="lm-home-sobre__highlight">`). A la derecha, abanico de 3 piezas: la card con el logo blanco (`opciones_cabecera_logo_alternativo`) al centro y detrás, y una foto a cada lado (la secundaria a la izquierda, la principal a la derecha) que salen girando hacia los costados al abrirse; el abanico se abre cuando un tercio de la card del centro está en pantalla (`src/js/modules/fan.js`, gancho `data-lm-fan`) y queda abierto con `prefers-reduced-motion`. Las fotos se recortan con `aspect-ratio` 440/540 y `object-cover`.
 - **Estado:** aplicado
 - **ACF:** conectado
 
@@ -98,14 +98,15 @@
 |---|---|---|---|---|
 | `home_sobre_etiqueta` | text | Texto pequeño sobre el párrafo. | UN EQUIPO CON ENFOQUE INTEGRAL | no |
 | `home_sobre_texto` | textarea | Párrafo principal. Marca entre los marcadores del helper de texto la parte que va en color. | En Lumenti creemos que cada historia merece ser escuchada y comprendida. Por eso, te acompañamos con una atención cercana, personalizada y basada en evidencia, respetando tu proceso y avanzando contigo hacia un mayor bienestar. | sí |
-| `home_sobre_imagen_principal` | image | Foto al frente del abanico. | — | sí |
-| `home_sobre_imagen_secundaria` | image | Foto detrás, inclinada. | — | sí |
+| `home_sobre_imagen_principal` | image | Foto del lado derecho del abanico. | — | sí |
+| `home_sobre_imagen_secundaria` | image | Foto del lado izquierdo del abanico. | — | sí |
 
 **Criterios de aceptación**
 
 - [x] Cumple los criterios comunes de `_shared.md`
 - [x] La parte marcada del texto se muestra en el color de acento, como en el diseño
 - [x] El abanico se abre al hacer scroll y queda abierto con `prefers-reduced-motion`
+- [x] Si una foto no trae alt, se usa de respaldo la etiqueta de la sección más "foto 1 de 2" / "foto 2 de 2"
 
 ## Sección: servicios
 
@@ -113,7 +114,7 @@
 - **Destino:** `template-parts/pages/home/servicios.php`
 - **Grupo:** `home_servicios`
 - **Skill:** wp-helper
-- **Comportamiento:** 4 cards enlazadas en grilla de 2 columnas (1 en móvil), cada una con foto de fondo, ícono en recuadro y título; la descripción se despliega en hover/foco. Las dos últimas cards no llevan el degradado oscuro (`lm-home-servicios__img--wide`). La sección no tiene título visible: `aria-label="Servicios"`; los títulos de card son `h3` sin `h2` previo en el diseño, se pasan a `h2` (mismo tamaño por clase) para no saltar niveles. Alto de card `clamp(420px, 31.25vw, 600px)` (valor suelto del diseño, se conserva).
+- **Comportamiento:** 4 cards enlazadas en grilla tipo bento de 2 columnas (la 1.ª y la 2.ª a todo el ancho, la 3.ª y la 4.ª a mitad cada una; 1 columna en móvil), cada una con foto de fondo, ícono en recuadro y título; la descripción se despliega en hover/foco. Todas las cards llevan el degradado oscuro sobre la foto. La foto no lleva `object-position` propio: se recorta centrada, así una imagen nueva no sale desplazada. La sección no tiene título visible: `aria-label="Servicios"`; los títulos de card son `h3` sin `h2` previo en el diseño, se pasan a `h2` (mismo tamaño por clase) para no saltar niveles. Alto de card `clamp(420px, 31.25vw, 600px)` (valor suelto del diseño, se conserva).
 - **Estado:** aplicado
 - **ACF:** conectado
 
@@ -127,7 +128,6 @@
 | `home_servicios_items.enlace` | link | Página del servicio a la que lleva la card. | — | sí |
 | `home_servicios_items.imagen` | image | Foto de fondo de la card. Se recorta para llenarla. | — | sí |
 | `home_servicios_items.icono` | image | Ícono del recuadro, en SVG blanco. | — | no |
-| `home_servicios_items.sin_degradado` | true_false | Quita el degradado oscuro sobre la foto (las dos últimas cards del diseño) | — | no |
 
 **Criterios de aceptación**
 
@@ -156,6 +156,7 @@
 
 - [x] Cumple los criterios comunes de `_shared.md`
 - [x] En móvil se ven 6 cards y "Ver más" muestra las demás; en escritorio el botón no aparece
+- [x] "Ver menos" pliega la lista y vuelve al inicio de la sección
 - [x] Cada card enlaza a la página de su condición (`single-condicion.php`), no a `condicion.html?c=`
 
 ## Sección: diario
@@ -186,6 +187,8 @@
 - [x] Cumple los criterios comunes de `_shared.md`
 - [x] Hover y foco de teclado en un ítem cambian la imagen del marco; sin JS se ve la primera imagen
 - [x] En móvil se ven 5 ítems y "Ver más" muestra los demás
+- [x] Si la imagen de un ítem no trae alt, se usa de respaldo el título del ítem
+- [x] "Ver menos" pliega la lista y vuelve al inicio de la sección
 
 ## Sección: evaluaciones
 
@@ -212,6 +215,7 @@
 - [x] Cumple los criterios comunes de `_shared.md`
 - [x] El texto se lee sobre el degradado en escritorio y en móvil, sin tapar la foto en el lado derecho
 - [x] El botón abre WhatsApp con el mensaje del campo codificado en la URL
+- [x] Si la foto no trae alt, se usa de respaldo el título de la franja
 
 ## Sección: testimonios
 
@@ -272,7 +276,7 @@
 - **Destino:** `template-parts/pages/home/cta.php`, `template-parts/components/cta.php`
 - **Grupo:** `home_cta`
 - **Skill:** ninguna
-- **Comportamiento:** usa el componente `cta`: caja con video de fondo en bucle, silenciado y decorativo (`aria-hidden`), capa oscura, sello con `icon-cerebro.svg`, título, texto y botón de WhatsApp a `opciones_contacto_telefono_paciente` en pestaña nueva. El video se reproduce solo cuando la caja está en pantalla y no se reproduce con `prefers-reduced-motion` (se ve el póster). La sección de la página solo pasa sus `$args` al componente.
+- **Comportamiento:** usa el componente `cta`: caja con un fondo que puede ser un video en bucle, silenciado y decorativo (`aria-hidden`) o una imagen fija (campo `home_cta_video_o_imagen`; la plantilla lo distingue por la extensión del archivo), capa oscura, sello con `icon-cerebro.svg`, título, texto y botón de WhatsApp a `opciones_contacto_telefono_paciente` en pestaña nueva. El video se reproduce solo cuando la caja está en pantalla (`src/js/modules/cta-video.js`) y se pausa al salir; no se reproduce con `prefers-reduced-motion` ni si el fondo es una imagen. La sección de la página solo pasa sus `$args` al componente.
 - **Estado:** aplicado
 - **ACF:** conectado
 
@@ -284,8 +288,7 @@
 | `home_cta_texto` | textarea | Texto bajo el título. | Encuentra en Lumenti una atención profesional, cercana y pensada para ti. | no |
 | `home_cta_boton_texto` | text | Texto del botón de WhatsApp. | Escríbenos por WhatsApp | sí |
 | `home_cta_boton_mensaje` | text | Mensaje que se escribe solo al abrir WhatsApp. Vacío abre el chat sin mensaje. | — | no |
-| `home_cta_video` | file | Video de fondo en MP4, sin sonido. | — | no |
-| `home_cta_poster` | image | Imagen que se ve mientras carga el video o si no se reproduce. | — | no |
+| `home_cta_video_o_imagen` | file | Fondo del cierre: un video MP4 sin sonido o una imagen (JPG, PNG o WebP). Con una imagen no hay reproducción. | — | no |
 
 **Criterios de aceptación**
 

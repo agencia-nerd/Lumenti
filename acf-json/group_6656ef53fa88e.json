@@ -24,7 +24,7 @@
                     "name": "slides",
                     "aria-label": "",
                     "type": "repeater",
-                    "instructions": "Slides del hero, en orden (2 en el diseño). El título del primero es el `h1` de la página",
+                    "instructions": "Slides del hero, en orden. Máximo: 2. El título del primero es el `h1` de la página",
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -35,7 +35,7 @@
                     "layout": "block",
                     "pagination": 0,
                     "min": 0,
-                    "max": 0,
+                    "max": 2,
                     "collapsed": "",
                     "button_label": "Añadir fila",
                     "rows_per_page": 20,
@@ -62,12 +62,12 @@
                             "append": ""
                         },
                         {
-                            "key": "field_63a00185edac6",
-                            "label": "Título linea 1",
-                            "name": "titulo_linea_1",
+                            "key": "field_d153971a8d4c2",
+                            "label": "Título",
+                            "name": "titulo",
                             "aria-label": "",
-                            "type": "text",
-                            "instructions": "Primera línea del título.",
+                            "type": "textarea",
+                            "instructions": "Título del slide; cada línea del título va en una línea (Enter). Para dejar una línea en color de acento, enciérrala entre asteriscos: *ETAPA DE LA VIDA*. Usa Enter para pasar a otra línea.",
                             "required": 1,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -79,50 +79,8 @@
                             "maxlength": "",
                             "allow_in_bindings": 0,
                             "placeholder": "",
-                            "prepend": "",
-                            "append": ""
-                        },
-                        {
-                            "key": "field_986c903779dd0",
-                            "label": "Título linea 2",
-                            "name": "titulo_linea_2",
-                            "aria-label": "",
-                            "type": "text",
-                            "instructions": "Segunda línea del título.",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "maxlength": "",
-                            "allow_in_bindings": 0,
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": ""
-                        },
-                        {
-                            "key": "field_d8b3092a8d417",
-                            "label": "Título linea 3",
-                            "name": "titulo_linea_3",
-                            "aria-label": "",
-                            "type": "text",
-                            "instructions": "Tercera línea del título, en color de acento.",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "maxlength": "",
-                            "allow_in_bindings": 0,
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": ""
+                            "rows": 4,
+                            "new_lines": ""
                         },
                         {
                             "key": "field_0eb4f96ca4931",
@@ -449,7 +407,7 @@
                     "name": "imagen_principal",
                     "aria-label": "",
                     "type": "image",
-                    "instructions": "Foto al frente del abanico.",
+                    "instructions": "Foto del lado derecho del abanico.",
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -475,7 +433,7 @@
                     "name": "imagen_secundaria",
                     "aria-label": "",
                     "type": "image",
-                    "instructions": "Foto detrás, inclinada.",
+                    "instructions": "Foto del lado izquierdo del abanico.",
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -645,27 +603,6 @@
                             "mime_types": "",
                             "allow_in_bindings": 0,
                             "preview_size": "medium"
-                        },
-                        {
-                            "key": "field_1fda64d0df82a",
-                            "label": "Sin degradado",
-                            "name": "sin_degradado",
-                            "aria-label": "",
-                            "type": "true_false",
-                            "instructions": "Quita el degradado oscuro sobre la foto (las dos últimas cards del diseño)",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "message": "",
-                            "default_value": 0,
-                            "allow_in_bindings": 0,
-                            "ui_on_text": "",
-                            "ui_off_text": "",
-                            "ui": 1
                         }
                     ]
                 }
@@ -1397,12 +1334,12 @@
                     "append": ""
                 },
                 {
-                    "key": "field_326dca61af58d",
-                    "label": "Video",
-                    "name": "video",
+                    "key": "field_7268e91a94ba7",
+                    "label": "Video o imagen",
+                    "name": "video_o_imagen",
                     "aria-label": "",
                     "type": "file",
-                    "instructions": "Video de fondo en MP4, sin sonido.",
+                    "instructions": "Fondo del cierre: un video MP4 sin sonido o una imagen (JPG, PNG o WebP). Con una imagen no hay reproducción.",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -1416,32 +1353,6 @@
                     "max_size": "",
                     "mime_types": "",
                     "allow_in_bindings": 0
-                },
-                {
-                    "key": "field_320c962133740",
-                    "label": "Poster",
-                    "name": "poster",
-                    "aria-label": "",
-                    "type": "image",
-                    "instructions": "Imagen que se ve mientras carga el video o si no se reproduce.",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "return_format": "array",
-                    "library": "all",
-                    "min_width": "",
-                    "min_height": "",
-                    "min_size": "",
-                    "max_width": "",
-                    "max_height": "",
-                    "max_size": "",
-                    "mime_types": "",
-                    "allow_in_bindings": 0,
-                    "preview_size": "medium"
                 }
             ]
         }
@@ -1467,5 +1378,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1793395718
+    "modified": 1793426308
 }

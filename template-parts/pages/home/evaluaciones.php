@@ -16,7 +16,7 @@ if ($lumenti_titulo === '' && $lumenti_texto === '' && $lumenti_boton_texto === 
 }
 ?>
 <div class="lm-home-diario__evaluaciones">
-    <?= lumenti_image($lumenti_evaluaciones['imagen'] ?? null, ['class' => 'lm-home-diario__evaluaciones-img', 'size' => 'large']) ?>
+    <?= lumenti_image($lumenti_evaluaciones['imagen'] ?? null, ['class' => 'lm-home-diario__evaluaciones-img', 'size' => 'large', 'alt_fallback' => $lumenti_titulo]) ?>
     <span class="lm-home-diario__evaluaciones-overlay" aria-hidden="true"></span>
     <div class="lm-home-diario__evaluaciones-inner">
         <div class="lm-home-diario__evaluaciones-content" data-lm-reveal="up">

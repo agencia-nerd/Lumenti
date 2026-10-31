@@ -13,8 +13,8 @@ $lumenti_sello = [
     (string) ($lumenti_hero['sello_palabra_2'] ?? ''),
     (string) ($lumenti_hero['sello_palabra_3'] ?? ''),
 ];
-// Posición de cada palabra sobre el círculo del sello (diseño).
-$lumenti_sello_offsets = ['61.78', '185.35', '308.92'];
+// Posición de cada palabra sobre el círculo del sello (largo del trazado ≈ 371 con letra de 12): reparte las tres palabras con hueco parejo.
+$lumenti_sello_offsets = ['61.78', '183', '297'];
 ?>
 <section class="lm-home-hero" aria-roledescription="carrusel" aria-label="<?= esc_attr__('Destacados', 'lumenti') ?>" data-lm-hero data-lm-section="hero">
     <?php foreach ($lumenti_slides as $lumenti_i => $lumenti_slide) : ?>
@@ -23,18 +23,19 @@ $lumenti_sello_offsets = ['61.78', '185.35', '308.92'];
     <div class="lm-home-hero__content">
         <?php foreach ($lumenti_slides as $lumenti_i => $lumenti_slide) :
             $lumenti_tag = $lumenti_i === 0 ? 'h1' : 'h2';
-            $lumenti_lineas = [
-                [$lumenti_slide['titulo_linea_1'] ?? '', ''],
-                [$lumenti_slide['titulo_linea_2'] ?? '', ' lm-home-hero__title-line--middle'],
-                [$lumenti_slide['titulo_linea_3'] ?? '', ' lm-home-hero__title-line--accent'],
-            ];
+            // Cada línea del título es una línea del textarea; la que va entre asteriscos es la de acento.
+            $lumenti_lineas = array_values(array_filter(array_map('trim', preg_split('/\R/',(string) ($lumenti_slide['titulo'] ?? '')))));
+            $lumenti_ultima = count($lumenti_lineas) - 1;
             $lumenti_bajada = (string) ($lumenti_slide['bajada'] ?? '');
             $lumenti_boton_texto = (string) ($lumenti_slide['boton_texto'] ?? '');
         ?>
             <div class="lm-home-hero__slide <?= $lumenti_i === 0 ? 'is-active' : 'is-hidden' ?>" id="lm-hero-slide-<?= (int) $lumenti_i ?>" role="tabpanel" aria-labelledby="lm-hero-tab-<?= (int) $lumenti_i ?>" aria-hidden="<?= $lumenti_i === 0 ? 'false' : 'true' ?>" data-lm-hero-text="<?= (int) $lumenti_i ?>">
                 <<?= $lumenti_tag ?> class="lm-home-hero__title">
-                    <?php foreach ($lumenti_lineas as [$lumenti_texto, $lumenti_mod]) : if ((string) $lumenti_texto === '') { continue; } ?>
-                        <span class="lm-home-hero__title-mask"><span class="lm-home-hero__title-line<?= esc_attr($lumenti_mod) ?>"><?= esc_html($lumenti_texto) ?></span></span>
+                    <?php foreach ($lumenti_lineas as $lumenti_n => $lumenti_linea) :
+                        $lumenti_acento = (bool) preg_match('/^\*(.+)\*$/u', $lumenti_linea, $lumenti_m);
+                        $lumenti_mod = $lumenti_acento ? ' lm-home-hero__title-line--accent' : ($lumenti_n > 0 && $lumenti_n < $lumenti_ultima ? ' lm-home-hero__title-line--middle' : '');
+                    ?>
+                        <span class="lm-home-hero__title-mask"><span class="lm-home-hero__title-line<?= esc_attr($lumenti_mod) ?>"><?= lumenti_highlight($lumenti_acento ? trim($lumenti_m[1]) : $lumenti_linea) ?></span></span>
                     <?php endforeach; ?>
                 </<?= $lumenti_tag ?>>
                 <?php if ($lumenti_bajada !== '') : ?>
@@ -57,9 +58,13 @@ $lumenti_sello_offsets = ['61.78', '185.35', '308.92'];
     </div>
     <div class="lm-home-hero__media">
         <div class="lm-home-hero__media-stack">
-            <?php foreach ($lumenti_slides as $lumenti_i => $lumenti_slide) : ?>
+            <?php foreach ($lumenti_slides as $lumenti_i => $lumenti_slide) :
+                // Alt de respaldo (solo si la imagen no trae el suyo): el título del slide en una línea y sin asteriscos de color.
+                $lumenti_alt_slide = trim((string) preg_replace('/\s+/', ' ', str_replace('*', '', (string) ($lumenti_slide['titulo'] ?? ''))));
+            ?>
                 <div class="lm-home-hero__media-item <?= $lumenti_i === 0 ? 'is-active' : 'is-hidden' ?>" data-lm-hero-img="<?= (int) $lumenti_i ?>">
                     <?= lumenti_image($lumenti_slide['imagen'] ?? null, [
+                        'alt_fallback' => $lumenti_alt_slide,
                         'class' => 'lm-home-hero__img',
                         'loading' => 'eager',
                         'fetchpriority' => $lumenti_i === 0 ? 'high' : '',
@@ -69,7 +74,7 @@ $lumenti_sello_offsets = ['61.78', '185.35', '308.92'];
             <?php endforeach; ?>
         </div>
         <div class="lm-home-hero__badge" aria-hidden="true">
-            <div class="lm-home-hero__badge-ring"><svg class="lm-home-hero__badge-text" viewBox="0 0 160 160" width="100%" height="100%"><defs><path id="lmRing" d="M80,80 m-59,0 a59,59 0 1,1 118,0 a59,59 0 1,1 -118,0"></path></defs><text fill="#826d4b" font-family="'Abenda', serif" font-size="14" letter-spacing="0.3"><?php foreach ($lumenti_sello as $lumenti_i => $lumenti_palabra) : if ($lumenti_palabra === '') { continue; } ?><textPath href="#lmRing" startOffset="<?= esc_attr($lumenti_sello_offsets[$lumenti_i]) ?>"><?= esc_html($lumenti_palabra) ?></textPath><?php endforeach; ?></text></svg></div>
+            <div class="lm-home-hero__badge-ring"><svg class="lm-home-hero__badge-text" viewBox="0 0 160 160" width="100%" height="100%"><defs><path id="lmRing" d="M80,80 m-59,0 a59,59 0 1,1 118,0 a59,59 0 1,1 -118,0 a59,59 0 1,1 118,0 a59,59 0 1,1 -118,0"></path></defs><text fill="#826d4b" font-family="'Abenda', serif" font-size="12" letter-spacing="0.3"><?php foreach ($lumenti_sello as $lumenti_i => $lumenti_palabra) : if ($lumenti_palabra === '') { continue; } ?><textPath href="#lmRing" startOffset="<?= esc_attr($lumenti_sello_offsets[$lumenti_i]) ?>"><?= esc_html($lumenti_palabra) ?></textPath><?php endforeach; ?></text></svg></div>
             <?= lumenti_theme_image('assets/img/badge-icon.svg', ['class' => 'lm-home-hero__badge-logo', 'alt' => '', 'width' => 64, 'height' => 75, 'loading' => 'eager']) ?>
         </div>
     </div>

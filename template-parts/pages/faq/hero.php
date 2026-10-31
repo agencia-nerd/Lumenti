@@ -7,16 +7,14 @@ defined('ABSPATH') || exit;
  */
 
 $lumenti_hero = [
-    'titulo_linea_1' => 'PREGUNTAS',
-    'titulo_linea_2' => 'FRECUENTES.',
+    'titulo' => "*PREGUNTAS*\nFRECUENTES.",
     'nota' => 'Atención presencial y virtual para cada etapa de la vida.',
     'etiqueta' => 'AYUDA',
     'bajada' => 'Resolvemos las dudas más comunes sobre nuestros servicios, el proceso de atención y cómo empezar. Si no encuentras lo que buscas, escríbenos.',
 ];
 
 get_template_part('template-parts/components/page-hero', null, [
-    'titulo_destacado' => $lumenti_hero['titulo_linea_1'],
-    'titulo' => $lumenti_hero['titulo_linea_2'],
+    'titulo' => $lumenti_hero['titulo'],
     'nota' => $lumenti_hero['nota'],
     'etiqueta' => $lumenti_hero['etiqueta'],
     'bajada' => $lumenti_hero['bajada'],

@@ -198,7 +198,7 @@ Cada componente vive en `template-parts/components/<nombre>.php` y recibe sus da
 
 - **Origen:** `html/partials/cta.html`, `css/components.css` §11 y §20
 - **Destino:** `template-parts/components/cta.php`
-- **Argumentos:** `titulo` (sí), `texto`, `boton` (`$args` de boton: `texto` + `whatsapp`/`mensaje` o `url`; por defecto ícono de WhatsApp), `newsletter` (bool: en lugar del botón muestra `template-parts/forms/newsletter.php` de wp-form), `form` (`$args` del form), `video` (por defecto `assets/video/cta-mar-v4.mp4`), `poster`, `variante` (condicion), `id`, `nivel`
+- **Argumentos:** `titulo` (sí), `texto`, `boton` (`$args` de boton: `texto` + `whatsapp`/`mensaje` o `url`; por defecto ícono de WhatsApp), `newsletter` (bool: en lugar del botón muestra `template-parts/forms/newsletter.php` de wp-form), `form` (`$args` del form), `video` (video MP4 o imagen, se distingue por la extensión; por defecto `assets/video/cta-mar-v4.mp4`), `variante` (condicion), `id`, `nivel`
 - **Se usa en:** home, servicios, especialistas, condición, faq, blog, empresas, informes
 
 ### intro-split

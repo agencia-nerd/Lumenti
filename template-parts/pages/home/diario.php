@@ -29,7 +29,7 @@ $lumenti_flecha = '<svg class="lm-home-diario__option-svg" width="18" height="18
                     }
                     $lumenti_activa = $lumenti_i === 0;
                 ?>
-                    <img class="lm-home-diario__img <?= $lumenti_activa ? 'is-active' : 'is-hidden' ?>" src="<?= esc_url($lumenti_img['url']) ?>" alt="<?= $lumenti_activa ? esc_attr($lumenti_img['alt']) : '' ?>" aria-hidden="<?= $lumenti_activa ? 'false' : 'true' ?>"<?php if ($lumenti_img['width'] && $lumenti_img['height']) : ?> width="<?= (int) $lumenti_img['width'] ?>" height="<?= (int) $lumenti_img['height'] ?>"<?php endif; ?> loading="lazy" decoding="async" data-lm-daily-img="<?= (int) $lumenti_i ?>">
+                    <img class="lm-home-diario__img <?= $lumenti_activa ? 'is-active' : 'is-hidden' ?>" src="<?= esc_url($lumenti_img['url']) ?>" alt="<?= $lumenti_activa ? esc_attr($lumenti_img['alt'] ?: (string) ($lumenti_item['titulo'] ?? '')) : '' ?>" aria-hidden="<?= $lumenti_activa ? 'false' : 'true' ?>"<?php if ($lumenti_img['width'] && $lumenti_img['height']) : ?> width="<?= (int) $lumenti_img['width'] ?>" height="<?= (int) $lumenti_img['height'] ?>"<?php endif; ?> loading="lazy" decoding="async" data-lm-daily-img="<?= (int) $lumenti_i ?>">
                 <?php endforeach; ?>
             </div>
         </div>

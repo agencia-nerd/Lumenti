@@ -3,6 +3,7 @@ import { navbar } from './modules/navbar.js';
 import { reveal, smoothScroll, hashTarget } from './modules/scroll.js';
 import { preloader, heroSlider, countUp, fan, daily } from './modules/home.js';
 import { verMas } from './modules/ver-mas.js';
+import { ctaVideo } from './modules/cta-video.js';
 import { carousel } from './modules/carousel.js';
 import { cardEspecialista } from './modules/card-especialista.js';
 import { specialistsFilter } from './modules/specialists-filter.js';
@@ -27,6 +28,7 @@ const modules = {
     fan,
     daily,
     verMas,
+    ctaVideo,
     carousel,
     cardEspecialista,
     specialistsFilter,

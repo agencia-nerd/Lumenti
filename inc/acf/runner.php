@@ -3,7 +3,7 @@ defined('ABSPATH') || exit;
 
 /*
  * Sincronización de ACF y carga inicial de contenido (skill wp-acf).
- * Versión del motor: 1.3.2
+ * Versión del motor: 1.6.0
  *
  * Genérico: no se edita por proyecto. Los datos del proyecto viven en:
  *   inc/acf/paginas.php   páginas de WordPress (lo genera wp-acf desde los specs)
