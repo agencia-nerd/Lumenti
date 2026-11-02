@@ -150,7 +150,7 @@
 - **Destino:** `template-parts/pages/especialista/actualizacion.php`
 - **Grupo:** ninguno
 - **Skill:** ninguna
-- **Comportamiento:** banner dorado igual en todos los perfiles: imagen `formacion-banner.webp` a la derecha (62 % del ancho; en móvil arriba al 60 % del alto con degradado), título "FORMACIÓN EN CONSTANTE ACTUALIZACIÓN" (`h2`) y el texto "Los especialistas actualizan su formación de forma continua. Esta sección resume los hitos más relevantes." Texto e imagen fijos en la plantilla (imagen en `assets/img/esp/`). Valor suelto: degradado `#8c6a45`.
+- **Comportamiento:** banner dorado igual en todos los perfiles: imagen `formacion-banner.webp` a la derecha (62 % del ancho; en móvil arriba al 60 % del alto con degradado), título "FORMACIÓN EN CONSTANTE ACTUALIZACIÓN" (`h2`) y el texto "Los especialistas actualizan su formación de forma continua. Esta sección resume los hitos más relevantes." Título, texto e imagen se editan una sola vez en la página de opciones "Archivo de especialista": grupo `especialistas_actualizacion` (ver `especialistas.md` → actualizacion). Valor suelto: degradado `#8c6a45`.
 - **Estado:** aplicado
 
 **Campos ACF**

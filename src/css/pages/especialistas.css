@@ -21,6 +21,9 @@
 .lm-specialists__status { margin-top: 20px; min-height: 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; }
 .lm-specialists__active, .lm-specialists__active-list { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .lm-specialists__active[hidden] { display: none; }
+/* Chips y "Limpiar filtros" son enlaces (wp-query): sin JS quitan el filtro recargando. */
+.lm-specialists__active a.lm-filter-chip { text-decoration: none; }
+.lm-specialists__active a.lm-link-button { display: inline-flex; align-items: center; }
 .lm-specialists__active-label, .lm-specialists__count { font-size: var(--lm-fs-small); line-height: var(--lm-lh-small); color: var(--lm-muted); }
 .lm-specialists__count { margin-left: auto; }
 
@@ -170,3 +173,5 @@
   .lm-profile-bar__btn { width: 100%; }
 }
 }
+/* "Ver más" (wp-query, de a 20): centrado bajo la grilla; vacío mientras no haya más especialistas. */
+.lm-specialists__more:has(a) { display: flex; justify-content: center; margin-top: 40px; }
