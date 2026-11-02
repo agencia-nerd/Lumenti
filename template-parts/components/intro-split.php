@@ -61,10 +61,10 @@ foreach ([['back', 503, 832], ['front', 578, 757]] as $lumenti_i => [$lumenti_po
                 'etiqueta' => $args['etiqueta'] ?? '',
             ]); ?>
             <?php foreach ($lumenti_parrafos as $lumenti_p) : ?>
-                <p class="lm-intro-split__p"><?= esc_html($lumenti_p) ?></p>
+                <p class="lm-intro-split__p"><?= lumenti_highlight($lumenti_p) ?></p>
             <?php endforeach; ?>
             <?php if ($lumenti_destacado !== '') : ?>
-                <p class="lm-intro-split__p lm-intro-split__p--strong"><?= esc_html($lumenti_destacado) ?></p>
+                <p class="lm-intro-split__p lm-intro-split__p--strong"><?= lumenti_highlight($lumenti_destacado) ?></p>
             <?php endif; ?>
             <?php if ($lumenti_aviso !== '') : ?>
                 <div class="lm-service-notice" role="note"><span class="lm-service-notice__icon" aria-hidden="true">!</span><p class="lm-service-notice__text"><?= esc_html($lumenti_aviso) ?></p></div>

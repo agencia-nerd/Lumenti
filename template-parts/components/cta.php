@@ -8,7 +8,7 @@ defined('ABSPATH') || exit;
  * $args:
  *   titulo      (string, sí)
  *   texto       (string)  se oculta si está vacío.
- *   boton       (array)  $args de boton: ['texto' => 'Agendar una cita', 'whatsapp' => 'paciente', 'mensaje' => '…']
+ *   boton       (array)  $args de boton: ['texto' => '…', 'whatsapp' => 'paciente', 'mensaje' => '…']
  *               o ['texto', 'url']. Por defecto primary, ícono de WhatsApp y clase lm-cta__btn.
  *   newsletter  (bool)  en lugar del botón, el form de template-parts/forms/newsletter.php (wp-form).
  *   form        (array)  $args del form del newsletter.
@@ -52,7 +52,7 @@ $lumenti_form = locate_template('template-parts/forms/newsletter.php') !== '';
         </span>
         <<?= $lumenti_nivel ?> id="<?= esc_attr($lumenti_id) ?>" class="lm-cta__title" data-lm-reveal="up"><?= esc_html($lumenti_titulo) ?></<?= $lumenti_nivel ?>>
         <?php if ($lumenti_texto !== '') : ?>
-            <p class="lm-cta__text"><?= esc_html($lumenti_texto) ?></p>
+            <p class="lm-cta__text"><?= lumenti_highlight($lumenti_texto) ?></p>
         <?php endif; ?>
         <?php
         if (!empty($args['newsletter'])) {

@@ -8,8 +8,8 @@ defined('ABSPATH') || exit;
  * $args:
  *   titulo            (string, sí)  una línea del h1 por renglón ("\n"). Una línea entera entre asteriscos
  *                                   ('*SALUD MENTAL*') va en verde; una parte marcada dentro de una línea
- *                                   ('*SALUD MENTAL* PARA') va en verde solo esa parte. Sin ningún marcador ni
- *                                   titulo_destacado, la primera línea va en verde.
+ *                                   ('*SALUD MENTAL* PARA') va en verde solo esa parte. Sin asteriscos, nada va
+ *                                   en verde.
  *   titulo_destacado  (string)  primera línea, en verde (Psiquiatría, Psicología, Informes); `titulo` son las siguientes.
  *   nota              (string)  texto corto a la derecha del título.
  *   etiqueta          (string)  eyebrow con punto debajo.
@@ -41,11 +41,7 @@ foreach (preg_split('/\R/', $lumenti_titulo) as $lumenti_linea) {
     $lumenti_acento = (bool) preg_match('/^\*(.+)\*$/u', $lumenti_linea, $lumenti_m);
     $lumenti_lineas[] = [$lumenti_acento ? trim($lumenti_m[1]) : $lumenti_linea, $lumenti_acento];
 }
-// Sin ningún marcador en el título, la primera línea va en verde (diseño). Si hay una parte marcada dentro
-// de una línea ("*SALUD MENTAL* PARA…"), solo esa parte va en verde (lumenti_highlight al imprimir).
-if ($lumenti_lineas && !in_array(true, array_column($lumenti_lineas, 1), true) && strpos($lumenti_titulo, '*') === false) {
-    $lumenti_lineas[0][1] = true;
-}
+// Una parte marcada dentro de una línea ("*SALUD MENTAL* PARA…") va en verde solo esa parte (lumenti_highlight al imprimir).
 
 $lumenti_nota = (string) ($args['nota'] ?? '');
 $lumenti_etiqueta = (string) ($args['etiqueta'] ?? '');

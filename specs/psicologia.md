@@ -29,15 +29,15 @@
 - **Destino:** `pages/template-psicologia.php`, `template-parts/pages/psicologia/hero.php`, `template-parts/components/page-hero.php`, `template-parts/components/breadcrumb.php`
 - **Grupo:** `psicologia_hero`
 - **Skill:** ninguna
-- **Comportamiento:** mismo componente `page-hero` (`variante` `service`) que Psiquiatría, con el mismo fondo decorativo de 5 capas SVG (`psiq-bg-1…5.svg`, fijos del tema) y las mismas animaciones de entrada, apagadas con `prefers-reduced-motion`. Breadcrumb Inicio › Servicios (sin enlace) › Psicología. El `h1` son dos líneas: `titulo_destacado` (verde) y `titulo`. Usa los argumentos nuevos `titulo_destacado` y `nota` de `page-hero`. La nota y la etiqueta se ocultan si están vacías.
+- **Comportamiento:** mismo componente `page-hero` (`variante` `service`) que Psiquiatría, con el mismo fondo decorativo de 5 capas SVG (`psiq-bg-1…5.svg`, fijos del tema) y las mismas animaciones de entrada, apagadas con `prefers-reduced-motion`. Breadcrumb Inicio › Servicios (sin enlace) › Psicología. El `h1` es un solo campo textarea, una línea por renglón (Enter); la línea que va entera entre asteriscos (`*PSICOLOGÍA PARA*`) sale en verde (helper de texto de wp-helper). "Servicios" del breadcrumb es fijo y el último ítem es el título de la página. La nota y la etiqueta se ocultan si están vacías.
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
 | Campo | Tipo | Descripción | Valor actual | Requerido |
 |---|---|---|---|---|
-| `psicologia_hero_titulo_destacado` | text | Primera línea del título principal, en verde. | PSICOLOGÍA PARA | sí |
-| `psicologia_hero_titulo` | text | Segunda línea del título principal. | COMPRENDERTE Y AVANZAR. | sí |
+| `psicologia_hero_titulo` | textarea | Título principal, en dos líneas. Usa Enter para pasar a otra línea. La línea que va entera entre *asteriscos* se muestra en color. | *PSICOLOGÍA PARA*<br>COMPRENDERTE Y AVANZAR. | sí |
 | `psicologia_hero_nota` | text | Frase corta junto al título. | Atención psicológica para diferentes etapas de la vida. | no |
 | `psicologia_hero_etiqueta` | text | Etiqueta con punto sobre la bajada. | NUESTRO ENFOQUE | no |
 | `psicologia_hero_bajada` | textarea | Párrafo de presentación del servicio, bajo el título. | Brindamos psicoterapia y evaluaciones psicológicas desde una mirada cercana, personalizada y basada en evidencia. Buscamos comprender tu historia, tu contexto y aquello que hoy está afectando tu bienestar, para brindarte herramientas que te ayuden a afrontar las dificultades, generar cambios y avanzar. | sí |
@@ -58,6 +58,7 @@
 - **Skill:** wp-helper
 - **Comportamiento:** componente `intro-split` con `.lm-photo-duo`, igual que Psiquiatría. Título con la palabra en verde vía `lumenti_highlight` (marcador propuesto `*`). Segundo párrafo destacado (argumento nuevo `texto_destacado`), oculto si está vacío. Fotos con `lumenti_image()`, `loading="lazy"`, `object-cover` dentro de la caja `aspect-ratio: 349 / 339`.
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
@@ -81,8 +82,9 @@
 - **Destino:** `template-parts/pages/psicologia/servicios.php`
 - **Grupo:** `psicologia_servicios`
 - **Skill:** wp-helper
-- **Comportamiento:** título centrado (`section-title` con centrado: argumento nuevo `centrado` o clase `lm-section-title--center`) y dos tarjetas blancas en 2 columnas (1 en móvil). Cada tarjeta: título `h3`, párrafo, párrafo destacado opcional, lista opcional de 2 columnas (1 en móvil) con punto verde, y botón `boton` (`primary`, `md`, ícono WhatsApp) pegado abajo, que abre WhatsApp con `opciones_contacto_telefono_paciente` y el mensaje de la tarjeta. La tarjeta con `ancla` imprime ese `id` (en el diseño `evaluaciones` en la segunda): al llegar con `#evaluaciones` la página baja compensando la altura del navbar (`scroll-margin-top`) y la tarjeta se resalta 2,2 s con `.is-highlighted` (sombra `0 0 0 2px` brand + `0 18px 48px rgba(46,108,121,.18)`, valor suelto). Párrafo destacado y lista se ocultan si están vacíos. Texto de la lista en 15px/22px (valor suelto).
+- **Comportamiento:** título centrado (`section-title` con centrado: argumento nuevo `centrado` o clase `lm-section-title--center`) y dos tarjetas blancas en 2 columnas (1 en móvil). Cada tarjeta: título `h3`, párrafo, párrafo destacado opcional, lista opcional de 2 columnas (1 en móvil) con punto verde, y botón `boton` (`primary`, `md`, ícono WhatsApp) pegado abajo, que abre WhatsApp con `opciones_contacto_telefono_paciente` y el mensaje de la tarjeta. La tarjeta cuyo título contiene "Evaluación" lleva el `id` fijo `evaluaciones` (no es un campo: lo enlazan el pie y el Home): al llegar con `#evaluaciones` la página baja compensando la altura del navbar (`scroll-margin-top`) y la tarjeta se resalta 2,2 s con `.is-highlighted` (sombra `0 0 0 2px` brand + `0 18px 48px rgba(46,108,121,.18)`, valor suelto). Párrafo destacado y lista se ocultan si están vacíos. Texto de la lista en 15px/22px (valor suelto).
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
@@ -96,7 +98,6 @@
 | `psicologia_servicios_items.lista` | textarea | Lista de tipos del servicio, uno por línea. En el diseño solo la tiene Evaluaciones psicológicas (5 ítems). | Evaluación emocional | no |
 | `psicologia_servicios_items.boton_texto` | text | Texto del botón de WhatsApp de la tarjeta. | Agendar psicoterapia | sí |
 | `psicologia_servicios_items.mensaje_whatsapp` | text | Mensaje que se escribe solo al abrir WhatsApp desde la tarjeta. | Hola, quisiera agendar una cita de psicoterapia. | sí |
-| `psicologia_servicios_items.ancla` | text | Identificador para enlazar directo a la tarjeta, sin `#` ni espacios. Evaluaciones psicológicas usa `evaluaciones`: lo enlazan el pie y el Home, cambiarlo rompe esos enlaces | — | no |
 
 **Criterios de aceptación**
 
@@ -113,8 +114,9 @@
 - **Destino:** `pages/template-psicologia.php`, `template-parts/pages/psicologia/especialistas.php`, `template-parts/components/specialists-carousel.php`, `template-parts/components/especialista-card.php`, `template-parts/components/enlace-flecha.php`
 - **Grupo:** `psicologia_especialistas`
 - **Skill:** wp-helper
-- **Comportamiento:** mismo componente `specialists-carousel` que Psiquiatría, con `filtro` en `false` (sin pills) y 6 cards de muestra fijas (José Muñoz, Allison García, Valeria Torres, Dora Pflucker, Valentina Gordillo, Anthony Román); sin consulta en esta etapa. Flechas Anterior/Siguiente, pista con teclado, popover "+N" y "Agenda tu cita" a WhatsApp con "Hola, quisiera agendar una cita con {nombre}.". "Ver todos" pasa por `lumenti_link_attrs()`. Bajada y enlace se ocultan si están vacíos.
+- **Comportamiento:** mismo componente `specialists-carousel` que Psiquiatría, con `filtro` en `false` (sin pills) y las cards de los especialistas de tipo psicólogos, en orden (`lumenti_especialistas_cards('psicologos')`). Flechas Anterior/Siguiente, pista con teclado, popover "+N" y "Agenda tu cita" a WhatsApp con "Hola, quisiera agendar una cita con {nombre}.". "Ver todos" es fijo en la plantilla: lleva al listado filtrado (`?tipo=psicologos`). La bajada se oculta si está vacía.
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
@@ -122,7 +124,8 @@
 |---|---|---|---|---|
 | `psicologia_especialistas_titulo` | text | Título del carrusel. Encierra entre asteriscos la parte en verde. | CONOCE A LOS *ESPECIALISTAS* | sí |
 | `psicologia_especialistas_bajada` | text | Frase bajo el título. | Psicólogos clínicos con enfoque humano y basado en evidencia. | no |
-| `psicologia_especialistas_enlace` | link | Enlace "Ver todos" a la página de especialistas filtrada por psicólogos (en el diseño `?tipo=psicologos`) | — | no |
+
+- **Campo fuera de wp-acf:** `psicologia_especialistas_seleccion` (relationship, "Especialistas a mostrar"): especialistas del carrusel elegidos y ordenados a mano, solo del tipo psicologos (incluye a quien tiene los dos tipos). Vacío: todos los psicólogos, por su orden. wp-acf todavía no genera relationship: lo registra `inc/campos-extra.php` como subcampo local del grupo `psicologia_especialistas` (no está en la tabla para que `generate.mjs` no lo pida). Cuando la skill lo soporte, se agrega a la tabla con el mismo nombre, se regenera y se borra de `inc/campos-extra.php`.
 
 **Criterios de aceptación**
 
@@ -140,6 +143,7 @@
 - **Skill:** ninguna
 - **Comportamiento:** componente `cta` (video, insignia y overlay propios del componente). El botón abre WhatsApp con `opciones_contacto_telefono_paciente` y el mensaje del campo, con ícono de WhatsApp. El texto se oculta si está vacío.
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 

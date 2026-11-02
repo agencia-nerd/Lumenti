@@ -15,9 +15,11 @@ export function cardEspecialista() {
         const label = labelNode(btn);
         const more = label ? label.nodeValue : '';
         // En desktop el clic no deja el foco pegado (el popover se cierra al salir el cursor).
-        btn.addEventListener('mousedown', (e) => { if (!touch) e.preventDefault(); });
+        // En los carruseles la lista siempre se despliega dentro de la card (el popover quedaría recortado por la pista).
+        const inCarousel = !!btn.closest('.lm-specialists-carousel__track');
+        btn.addEventListener('mousedown', (e) => { if (!touch && !inCarousel) e.preventDefault(); });
         btn.addEventListener('click', () => {
-            if (!touch && window.innerWidth >= 768) return;
+            if (!touch && !inCarousel && window.innerWidth >= 768) return;
             const on = !list.classList.contains('is-expanded');
             list.classList.toggle('is-expanded', on);
             btn.setAttribute('aria-expanded', on ? 'true' : 'false');
