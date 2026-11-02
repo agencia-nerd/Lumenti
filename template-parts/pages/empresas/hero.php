@@ -7,17 +7,17 @@ defined('ABSPATH') || exit;
  * y el JS (empresas.js, data-lm-goto) hace el scroll compensado.
  */
 
-$lumenti_hero = [
-    'titulo' => '*SALUD MENTAL*
-PARA ORGANIZACIONES.',
-    'nota' => 'Soluciones adaptadas a la realidad y los objetivos de cada organización.',
-    'etiqueta' => 'EMPRESAS',
-    'bajada' => 'Ayudamos a las organizaciones a promover el bienestar, prevenir riesgos y responder de manera responsable ante los desafíos de salud mental de sus equipos, mediante talleres, programas y atención especializada.',
-];
+$lumenti_hero = get_field('empresas_hero') ?: [];
 
-get_template_part('template-parts/components/page-hero', null, $lumenti_hero + [
+// titulo es un textarea: page-hero arma una línea del h1 por renglón (Enter) y pinta en verde lo que va entre *asteriscos*.
+// La etiqueta y los textos de las acciones son fijos (no son campos).
+get_template_part('template-parts/components/page-hero', null, [
+    'titulo' => (string) ($lumenti_hero['titulo'] ?? ''),
+    'nota' => (string) ($lumenti_hero['nota'] ?? ''),
+    'etiqueta' => __('EMPRESAS', 'lumenti'),
+    'bajada' => (string) ($lumenti_hero['bajada'] ?? ''),
     'variante' => 'service',
-    'breadcrumb' => [['texto' => __('Empresas', 'lumenti')]],
+    'breadcrumb' => [['texto' => get_the_title()]],
     'acciones' => [
         [
             'tipo' => 'boton',
@@ -36,4 +36,3 @@ get_template_part('template-parts/components/page-hero', null, $lumenti_hero + [
         ],
     ],
 ]);
-?>

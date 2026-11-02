@@ -6,20 +6,17 @@ defined('ABSPATH') || exit;
  * Componente intro-split invertido con el dúo de fotos ancho (lm-emp-why).
  */
 
-$lumenti_por_que = [
-    'titulo' => '¿POR QUÉ TRABAJAR CON LUMENTI?',
-    'texto' => 'Contamos con un equipo de psiquiatras y psicólogos con experiencia clínica y formación en diferentes áreas de la salud mental. Diseñamos intervenciones basadas en evidencia y adaptadas al contexto, los objetivos y las características de cada organización.',
-    'texto_destacado' => 'Nuestro enfoque combina prevención, formación y acceso a atención especializada, permitiendo desarrollar soluciones que van desde un taller puntual hasta un programa más amplio de bienestar.',
-    'imagen_fondo' => ['ruta' => 'assets/img/emp-manos.webp', 'ancho' => 639, 'alto' => 832, 'alt' => 'Equipo de trabajo uniendo sus manos al centro'],
-    'imagen_frente' => ['ruta' => 'assets/img/emp-medico.webp', 'ancho' => 569, 'alto' => 749, 'alt' => 'Especialista de Lumenti sentado en su consultorio'],
-];
+$lumenti_por_que = get_field('empresas_por_que') ?: [];
+$lumenti_titulo = (string) ($lumenti_por_que['titulo'] ?? '');
+$lumenti_texto = (string) ($lumenti_por_que['texto'] ?? '');
 
 get_template_part('template-parts/components/intro-split', null, [
-    'titulo' => $lumenti_por_que['titulo'],
+    'titulo' => $lumenti_titulo,
     'id' => 'lm-emp-why',
-    'texto' => [$lumenti_por_que['texto']],
-    'texto_destacado' => $lumenti_por_que['texto_destacado'],
-    'imagenes' => [$lumenti_por_que['imagen_fondo'], $lumenti_por_que['imagen_frente']],
+    'texto' => $lumenti_texto !== '' ? [$lumenti_texto] : [],
+    'texto_destacado' => (string) ($lumenti_por_que['texto_destacado'] ?? ''),
+    'imagenes' => [$lumenti_por_que['imagen_fondo'] ?? null, $lumenti_por_que['imagen_frente'] ?? null],
+    'alt_fallback' => wp_strip_all_tags(str_replace('*', '', $lumenti_titulo)),
     'invertido' => true,
     'ancho' => true,
     'clase' => 'lm-emp-why',

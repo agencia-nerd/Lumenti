@@ -34,7 +34,7 @@ $lumenti_clases = 'lm-section-title'
 <?php if ($lumenti_etiqueta !== '') : ?>
     <p class="lm-eyebrow lm-eyebrow--dot"><?= esc_html($lumenti_etiqueta) ?></p>
 <?php endif; ?>
-<<?= $lumenti_nivel ?> class="<?= esc_attr($lumenti_clases) ?>"<?php if ($lumenti_id !== '') : ?> id="<?= esc_attr($lumenti_id) ?>"<?php endif; ?>><?= nl2br(lumenti_highlight($lumenti_titulo), false) ?></<?= $lumenti_nivel ?>>
+<<?= $lumenti_nivel ?> class="<?= esc_attr($lumenti_clases) ?>"<?php if ($lumenti_id !== '') : ?> id="<?= esc_attr($lumenti_id) ?>"<?php endif; ?>><?= lumenti_highlight($lumenti_titulo) ?></<?= $lumenti_nivel ?>>
 <?php if ($lumenti_texto !== '') : ?>
     <p class="<?= esc_attr(trim('lm-lead ' . (string) ($args['texto_clase'] ?? ''))) ?>"><?= esc_html($lumenti_texto) ?></p>
 <?php endif; ?>

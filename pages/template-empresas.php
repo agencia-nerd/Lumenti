@@ -23,14 +23,16 @@ get_header();
     get_template_part('template-parts/pages/empresas/propuesta');
 
     // Empresas → cta (grupo ACF empresas_cta): WhatsApp corporativo.
+    $lumenti_cta = get_field('empresas_cta') ?: [];
+    $lumenti_boton_texto = (string) ($lumenti_cta['boton_texto'] ?? '');
     get_template_part('template-parts/components/cta', null, [
-        'titulo' => 'CUIDAR A TU EQUIPO TAMBIÉN ES CUIDAR TU ORGANIZACIÓN.',
-        'texto' => 'Diseñamos soluciones de salud mental adaptadas a las necesidades y objetivos de cada empresa.',
-        'boton' => [
-            'texto' => 'Conversemos por WhatsApp',
+        'titulo' => (string) ($lumenti_cta['titulo'] ?? ''),
+        'texto' => (string) ($lumenti_cta['texto'] ?? ''),
+        'boton' => $lumenti_boton_texto !== '' ? [
+            'texto' => $lumenti_boton_texto,
             'whatsapp' => 'corporativo',
-            'mensaje' => 'Hola, quisiera conversar sobre salud mental para mi organización.',
-        ],
+            'mensaje' => (string) ($lumenti_cta['mensaje_whatsapp'] ?? ''),
+        ] : [],
     ]);
     ?>
 </main>

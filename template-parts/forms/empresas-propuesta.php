@@ -145,6 +145,6 @@ $lumenti_input = static function (string $key, string $tag = 'input') use ($lume
 <div class="lm-form-success" id="lm-emp-success" role="status" hidden>
     <span class="lm-form-success__icon" aria-hidden="true"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 256 256" fill="currentColor"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32-11.32Z"/></svg></span>
     <h3 class="lm-form-success__title" tabindex="-1"><?= esc_html($args['exito_titulo'] ?? '') ?></h3>
-    <p class="lm-form-success__text"><?= esc_html($args['exito_texto'] ?? '') ?></p>
+    <p class="lm-form-success__text"><?= lumenti_highlight((string) ($args['exito_texto'] ?? '')) ?></p>
     <button class="lm-btn lm-btn--secondary lm-btn--md" type="button" data-lm-form-reset="empresas"><?= esc_html($args['exito_boton'] ?? '') ?></button>
 </div>
