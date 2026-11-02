@@ -81,8 +81,6 @@
 .lm-profile__panel-label--spaced { margin-top: 16px; }
 .lm-profile__chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .lm-profile__chip { height: auto; min-height: 32px; padding: 6px 12px; white-space: normal; }
-.lm-profile__chip-link { color: inherit; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 3px; transition: text-decoration-color 200ms linear, color 200ms linear; }
-.lm-profile__chip-link:hover { color: var(--lm-teal); text-decoration-color: currentColor; }
 .lm-profile__bullets { display: flex; flex-direction: column; gap: 8px; }
 .lm-profile__bullet { display: flex; align-items: baseline; gap: 10px; font-size: 15px; line-height: 22px; color: var(--lm-ink-2); }
 .lm-profile__bullet::before { content: ""; flex: none; width: 5px; height: 5px; border-radius: 50%; background: var(--lm-teal); transform: translateY(-3px); }

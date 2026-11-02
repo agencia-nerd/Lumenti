@@ -44,6 +44,7 @@
 - **Skill:** wp-helper
 - **Comportamiento:** breadcrumb (componente `breadcrumb`: Inicio › Especialistas) y encabezado propio de la página (`.lm-specialists__header`, no es `page-hero`). El título va en dos líneas con máscara animada; "CUIDAR TU BIENESTAR" va en verde (`lm-specialists__title-accent`): la parte destacada se marca con el helper de texto de wp-helper (aún no instalado en el tema; hoy solo hay `images` y `links`). La bajada se oculta si está vacía.
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
@@ -109,16 +110,14 @@
 - **Destino:** `template-parts/pages/especialistas/vacio.php`
 - **Grupo:** `especialistas_vacio`
 - **Skill:** wp-helper
-- **Comportamiento:** estado "sin resultados" (`role="status"`), oculto con `hidden` mientras haya cards. Ícono de persona, título, texto y dos botones: "Limpiar filtros" (enlace a la página sin parámetros; con JS limpia el formulario) y el botón suave de WhatsApp a `opciones_contacto_telefono_paciente` con el mensaje del campo. Se incluye dentro del contenedor `data-query="resultados"`.
+- **Comportamiento:** estado "sin resultados" (`role="status"`), oculto con `hidden` mientras haya cards. Ícono de persona, título y texto fijos en la plantilla ("NO ENCONTRAMOS ESPECIALISTAS", "Ningún especialista coincide…") y dos botones: "Limpiar filtros" (enlace a la página sin parámetros; con JS limpia el formulario) y el botón suave de WhatsApp ("Te ayudamos a elegir", fijo) a `opciones_contacto_telefono_paciente` con el mensaje del campo. Se incluye dentro del contenedor `data-query="resultados"`.
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
 | Campo | Tipo | Descripción | Valor actual | Requerido |
 |---|---|---|---|---|
-| `especialistas_vacio_titulo` | text | Título que aparece cuando ningún especialista coincide con los filtros. | NO ENCONTRAMOS ESPECIALISTAS | sí |
-| `especialistas_vacio_texto` | textarea | Texto bajo el título del estado sin resultados. | Ningún especialista coincide con todos los filtros elegidos. Prueba quitando alguno o escríbenos y te ayudamos a encontrar al profesional adecuado. | sí |
-| `especialistas_vacio_boton` | text | Texto del botón de WhatsApp del estado sin resultados. | Te ayudamos a elegir | sí |
 | `especialistas_vacio_mensaje` | text | Mensaje que se escribe solo al abrir WhatsApp desde ese botón. | Hola, necesito ayuda para elegir un especialista. | sí |
 
 **Criterios de aceptación**

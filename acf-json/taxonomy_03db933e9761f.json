@@ -1,0 +1,66 @@
+{
+    "key": "taxonomy_03db933e9761f",
+    "title": "Tipos de especialista",
+    "menu_order": 0,
+    "active": true,
+    "taxonomy": "tipo_especialista",
+    "object_type": [
+        "especialista"
+    ],
+    "advanced_configuration": 0,
+    "import_source": "",
+    "import_date": "",
+    "labels": {
+        "singular_name": "Tipo de especialista",
+        "name": "Tipos de especialista",
+        "menu_name": "Tipos de especialista",
+        "search_items": "Buscar tipos de especialista",
+        "all_items": "Todas: tipos de especialista",
+        "edit_item": "Editar tipo de especialista",
+        "view_item": "Ver tipo de especialista",
+        "update_item": "Actualizar tipo de especialista",
+        "add_new_item": "Añadir tipo de especialista",
+        "new_item_name": "Nombre de la nueva tipo de especialista",
+        "not_found": "No se encontró ninguna",
+        "no_terms": "Sin elementos"
+    },
+    "description": "",
+    "capabilities": {
+        "manage_terms": "manage_categories",
+        "edit_terms": "manage_categories",
+        "delete_terms": "manage_categories",
+        "assign_terms": "edit_posts"
+    },
+    "public": true,
+    "publicly_queryable": true,
+    "hierarchical": false,
+    "show_ui": true,
+    "show_in_menu": true,
+    "show_in_nav_menus": true,
+    "show_in_rest": true,
+    "rest_base": "",
+    "rest_namespace": "wp/v2",
+    "rest_controller_class": "WP_REST_Terms_Controller",
+    "show_tagcloud": false,
+    "show_in_quick_edit": true,
+    "show_admin_column": true,
+    "rewrite": {
+        "permalink_rewrite": "taxonomy_key",
+        "slug": "",
+        "with_front": true,
+        "rewrite_hierarchical": false
+    },
+    "query_var": "taxonomy_key",
+    "query_var_name": "",
+    "default_term": {
+        "default_term_enabled": false,
+        "default_term_name": "",
+        "default_term_slug": "",
+        "default_term_description": ""
+    },
+    "sort": null,
+    "meta_box": "default",
+    "meta_box_cb": "",
+    "meta_box_sanitize_cb": "",
+    "modified": 1793640337
+}

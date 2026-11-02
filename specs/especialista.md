@@ -30,6 +30,7 @@
 - **Skill:** wp-helper
 - **Comportamiento:** breadcrumb (Inicio › Especialistas › nombre corto) y cabecera del perfil: foto (imagen destacada, círculo con halo `#cfdfe1`, `fetchpriority="high"`, `loading="eager"`, `alt` "Foto de {nombre corto}"), nombre corto en `h1`, cargo como etiqueta dorada, cargo destacado y colegiatura debajo, y el botón "Agendar por WhatsApp" (`data-lm-profile-cta`) = Acción de `_shared.md`: WhatsApp a `opciones_contacto_telefono_paciente` con "Hola, quisiera agendar una cita con {nombre}." (el diseño antepone "la"/"el" a "Dra."/"Dr."), armado con el helper de enlaces. El cargo destacado se oculta si está vacío. `especialista_perfil_orden` no se ve: ordena el listado y el carrusel de condición. Foto: 340 px de ancho máximo (200 px tablet, 168 px móvil). Valor suelto: halo `#cfdfe1`.
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
@@ -55,8 +56,9 @@
 - **Destino:** `template-parts/pages/especialista/resumen.php`
 - **Grupo:** `especialista_resumen`
 - **Skill:** ninguna
-- **Comportamiento:** columna lateral (`<aside aria-label="Resumen">`, sticky bajo el header desde 1200 px). Panel 1: chips de "Población" (términos de `poblacion`; si hay nota de adultos, el chip "Adultos" la añade entre paréntesis, ej. "Adultos (hasta 22 años)") y de "Qué trata" (términos de `que_trata`; el chip es enlace a la condición cuando existe una `condicion` con ese término en `condicion_especialistas_que_trata`, si no es texto). Panel de enfoques: chips con los enfoques, oculto si no hay (el diseño no lo dibuja porque el ejemplo no tiene; se arma con el mismo `lm-profile__panel` + chips, por confirmar con el diseño). Panel dividido: "Modalidad" (términos de `modalidad`) e "Idiomas" (términos de `idioma`) unidos con " · ".
+- **Comportamiento:** columna lateral (`<aside aria-label="Resumen">`, sticky bajo el header desde 1200 px). Panel 1: chips de "Población" (términos de `poblacion`; si hay nota de adultos, el chip "Adultos" la añade entre paréntesis, ej. "Adultos (hasta 22 años)") y de "Qué trata" (términos de `que_trata`, con su nombre corto, el mismo de las cards; los chips son texto fijo, no enlazan). Panel de enfoques: chips con los enfoques, oculto si no hay (el diseño no lo dibuja porque el ejemplo no tiene; se arma con el mismo `lm-profile__panel` + chips, por confirmar con el diseño). Panel dividido: "Modalidad" (términos de `modalidad`) e "Idiomas" (términos de `idioma`) unidos con " · ".
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
@@ -69,7 +71,7 @@
 **Criterios de aceptación**
 
 - [x] Cumple los criterios comunes de `_shared.md`
-- [x] Los chips de "Qué trata" con página de condición son enlaces y los demás son texto
+- [x] Los chips de "Qué trata" son texto fijo (sin enlace)
 - [x] El panel de enfoques no se imprime si el repetidor está vacío
 - [x] Desde 1200 px la columna queda fija al hacer scroll; debajo pasa arriba del contenido
 
@@ -81,6 +83,7 @@
 - **Skill:** ninguna
 - **Comportamiento:** título fijo "SOBRE MÍ" (`h2`) y la biografía en párrafos con el estilo `lm-lead`. La biografía se imprime con `wp_kses_post`.
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
@@ -101,6 +104,7 @@
 - **Skill:** wp-helper
 - **Comportamiento:** `<figure>` verde con comillas grandes, la frase en `<blockquote>` y el pie "— {nombre corto}" + rol. Con foto (`--photo`) va en dos columnas 47/53 y la foto a la derecha (`object-cover`); sin foto el bloque verde ocupa todo el ancho. Bajo 1024 px la foto pasa debajo del texto (alto mínimo 280 px). Toda la sección se oculta si no hay frase. Valor suelto: comillas `#3b7a86`.
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
@@ -124,6 +128,7 @@
 - **Skill:** ninguna
 - **Comportamiento:** título fijo "FORMACIÓN DESTACADA" (`h2`) con flechas Anterior/Siguiente (`<button>`, se desactivan en los extremos) y un carrusel horizontal con scroll (`tabindex="0"`, flechas del teclado). Cada tarjeta: número de orden con dos cifras ("01", decorativo), ícono `formacion.svg`, título e institución. Degradado a la derecha. En móvil cada tarjeta ocupa el 78 % del ancho. El orden es el del repetidor (el del cliente). La sección se oculta si no hay ítems.
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 

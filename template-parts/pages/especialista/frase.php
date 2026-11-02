@@ -7,23 +7,24 @@ defined('ABSPATH') || exit;
  * sin foto, a todo el ancho. Sin frase no se imprime nada.
  */
 
-$lumenti_frase = [
-    'nombre_corto' => 'Dra. Mariela Linares',
-    'texto' => 'Creo en una psiquiatría que escucha la historia de cada persona con profundidad y respeto. Acompañar no es solo tratar síntomas, sino ayudar a comprender, aceptar y construir una vida con mayor bienestar, sentido y humanidad.',
-    'rol' => 'Médica Psiquiatra · Directora Médica',
-    'foto' => ['ruta' => 'assets/img/esp/mariela-linares-escribiendo.webp', 'ancho' => 1080, 'alto' => 980, 'alt' => 'Dra. Mariela Linares escribiendo'],
-];
-
-if (trim($lumenti_frase['texto']) === '') {
+$lumenti_frase = get_field('especialista_frase') ?: [];
+$lumenti_texto = trim((string) ($lumenti_frase['texto'] ?? ''));
+if ($lumenti_texto === '') {
     return;
 }
-$lumenti_foto = lumenti_theme_image($lumenti_frase['foto'], ['class' => 'lm-profile__quote-img', 'size' => 'large']);
+$lumenti_nombre = trim((string) ((get_field('especialista_perfil') ?: [])['nombre_corto'] ?? ''));
+$lumenti_rol = (string) ($lumenti_frase['rol'] ?? '');
+$lumenti_foto = lumenti_image($lumenti_frase['foto'] ?? null, [
+    'class' => 'lm-profile__quote-img',
+    'size' => 'large',
+    'alt_fallback' => $lumenti_nombre,
+]);
 ?>
 <figure class="lm-profile__quote<?= $lumenti_foto !== '' ? ' lm-profile__quote--photo' : '' ?>">
     <div class="lm-profile__quote-body">
         <span class="lm-profile__quote-mark" aria-hidden="true">“</span>
-        <blockquote class="lm-profile__quote-text"><?= esc_html($lumenti_frase['texto']) ?></blockquote>
-        <figcaption class="lm-profile__quote-caption"><span class="lm-profile__quote-name">— <?= esc_html($lumenti_frase['nombre_corto']) ?></span><?php if ($lumenti_frase['rol'] !== '') : ?><span class="lm-profile__quote-role"><?= esc_html($lumenti_frase['rol']) ?></span><?php endif; ?></figcaption>
+        <blockquote class="lm-profile__quote-text"><?= lumenti_highlight($lumenti_texto) ?></blockquote>
+        <figcaption class="lm-profile__quote-caption"><?php if ($lumenti_nombre !== '') : ?><span class="lm-profile__quote-name">— <?= esc_html($lumenti_nombre) ?></span><?php endif; ?><?php if ($lumenti_rol !== '') : ?><span class="lm-profile__quote-role"><?= esc_html($lumenti_rol) ?></span><?php endif; ?></figcaption>
     </div>
     <?= $lumenti_foto ?>
 </figure>
