@@ -6,6 +6,8 @@ defined('ABSPATH') || exit;
  * - Las dos páginas legales (una plantilla, dos páginas) y la página de entradas del blog.
  * - Especialistas (después de su carga de wp-acf): la foto destacada (assets/img/esp/<id>.webp). La URL y los
  *   slugs de los términos los arma WordPress (con el nombre completo y el nombre del término).
+ * - Términos y condiciones: su documento ('terminos' de inc/acf/seed/politica-de-privacidad.php); Privacidad
+ *   la carga wp-acf.
  * - Mega menú Servicios: la "Descripción" de cada elemento del menú `servicios` (bajada de la card) y la
  *   imagen destacada de cada página de servicio (imagen de la card).
  * Corre una vez por paso (marcador en opciones), después de la carga de wp-acf: nunca pisa lo editado.
@@ -80,7 +82,28 @@ function lumenti_carga_extra(): void
         $hecho['especialistas'] = lumenti_carga_especialistas() ? 1 : 0;
     }
 
+    if (empty($hecho['terminos'])) {
+        $hecho['terminos'] = lumenti_carga_terminos() ? 1 : 0;
+    }
+
     update_option(LUMENTI_CARGA_EXTRA_MARCADOR, $hecho, false);
+}
+
+/*
+ * Términos y condiciones (specs/politica-de-privacidad.md): usa la plantilla y el grupo de Política de privacidad.
+ * wp-acf solo carga Privacidad (su página); aquí 'terminos' de inc/acf/seed/politica-de-privacidad.php va a
+ * /terminos-y-condiciones/ con la función de carga del motor (marca por página y grupo: nunca pisa lo editado).
+ * Devuelve false si aún falta algo (se reintenta en la próxima visita al admin).
+ */
+function lumenti_carga_terminos(): bool
+{
+    $page = get_page_by_path('terminos-y-condiciones');
+    if (!$page || !function_exists('lumenti_acf_seed_fields') || !function_exists('update_field')) {
+        return false;
+    }
+    $seed = require get_theme_file_path('inc/acf/seed/politica-de-privacidad.php');
+    lumenti_acf_seed_fields((array) ($seed['terminos'] ?? []), (int) $page->ID, []);
+    return true;
 }
 
 // Foto destacada de los especialistas que creó la carga de wp-acf, solo si aún no tienen una (no pisa lo editado).
@@ -119,7 +142,7 @@ function lumenti_carga_especialistas(): bool
 add_action('after_switch_theme', 'lumenti_carga_extra', 20);
 add_action('admin_init', function () {
     $hecho = (array) get_option(LUMENTI_CARGA_EXTRA_MARCADOR, []);
-    if (empty($hecho['paginas']) || empty($hecho['servicios']) || empty($hecho['especialistas'])) {
+    if (empty($hecho['paginas']) || empty($hecho['servicios']) || empty($hecho['especialistas']) || empty($hecho['terminos'])) {
         lumenti_carga_extra();
     }
 });

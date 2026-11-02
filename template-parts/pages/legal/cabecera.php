@@ -2,23 +2,13 @@
 defined('ABSPATH') || exit;
 
 /*
- * Legal · cabecera (specs/legal.md → cabecera, grupo ACF legal_cabecera). Breadcrumb, h1 con el título de la página
- * de WordPress y la fecha de actualización. $args['documento'] = privacidad | terminos (lo elige la plantilla).
- * Fechas fijas de cada documento (data/legal-*.json) hasta el paso ACF; la misma se repite al pie del documento.
+ * Legal · cabecera (specs/politica-de-privacidad.md → cabecera). Grupo ACF: politica_de_privacidad_cabecera (cada página guarda el suyo).
+ * Breadcrumb, h1 con el título de la página de WordPress y la fecha de actualización (se repite al pie del documento).
  */
 
-$lumenti_actualizado = [
-    'privacidad' => '01 de junio de 2026',
-    'terminos' => '21 de febrero de 2026',
-];
-$lumenti_titulos = [
-    'privacidad' => __('Política de privacidad', 'lumenti'),
-    'terminos' => __('Términos y condiciones', 'lumenti'),
-];
-
-$lumenti_clave = isset($lumenti_actualizado[$args['documento'] ?? '']) ? $args['documento'] : 'privacidad';
-$lumenti_titulo = get_the_title() ?: $lumenti_titulos[$lumenti_clave];
-$lumenti_fecha = $lumenti_actualizado[$lumenti_clave];
+$lumenti_cabecera = get_field('politica_de_privacidad_cabecera') ?: [];
+$lumenti_fecha = (string) ($lumenti_cabecera['actualizado'] ?? '');
+$lumenti_titulo = get_the_title();
 ?>
 <section class="lm-legal-head" aria-labelledby="lm-legal-title">
     <?php get_template_part('template-parts/components/breadcrumb', null, ['items' => [['texto' => $lumenti_titulo]]]); ?>
