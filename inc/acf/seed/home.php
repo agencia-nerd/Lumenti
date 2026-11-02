@@ -61,7 +61,7 @@ return [
                 [
                     'titulo'        => 'INFORMES Y CERTIFICADOS',
                     'descripcion'   => 'Documentos clínicos elaborados previa evaluación profesional.',
-                    'enlace'        => ['title' => 'INFORMES Y CERTIFICADOS', 'url' => ['_page' => 'informes']],
+                    'enlace'        => ['title' => 'INFORMES Y CERTIFICADOS', 'url' => ['_page' => 'informes-y-certificados']],
                     'imagen'        => ['_file' => 'assets/img/servicio-informes.webp', 'alt' => ''],
                 ],
                 [

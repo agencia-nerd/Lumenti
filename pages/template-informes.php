@@ -2,7 +2,7 @@
 /*
  * Template Name: Informes y certificados
  *
- * Informes y certificados clínicos (specs/informes.md). Grupo ACF: Informes y certificados.
+ * Informes y certificados clínicos (specs/informes-y-certificados.md). Grupo ACF: Informes y certificados.
  * Cada sección prepara sus datos en template-parts/pages/informes/ y llama a su componente.
  */
 defined('ABSPATH') || exit;
