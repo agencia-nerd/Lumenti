@@ -17,7 +17,7 @@ const LUMENTI_SERVICIOS_MEGA = [
     'psiquiatria' => ['descripcion' => 'Evaluación, diagnóstico y tratamiento integral.', 'imagen' => 'assets/img/mm-psiquiatria.webp'],
     'psicologia'  => ['descripcion' => 'Psicoterapia y evaluaciones psicológicas basadas en evidencia.', 'imagen' => 'assets/img/mm-psicologia.webp'],
     'empresas'    => ['descripcion' => 'Talleres y programas de salud mental para organizaciones.', 'imagen' => 'assets/img/mm-empresas.webp'],
-    'informes'    => ['descripcion' => 'Documentos clínicos elaborados previa evaluación profesional.', 'imagen' => 'assets/img/mm-informes.webp'],
+    'informes-y-certificados' => ['descripcion' => 'Documentos clínicos elaborados previa evaluación profesional.', 'imagen' => 'assets/img/mm-informes.webp'],
 ];
 
 // Crea una página si no existe (por slug) y devuelve su ID.
