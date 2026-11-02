@@ -3,7 +3,7 @@
 /**
  * Template Name: Preguntas frecuentes
  *
- * Preguntas frecuentes (specs/faq.md): hero, preguntas (wp-accordion) y CTA.
+ * Preguntas frecuentes (specs/preguntas-frecuentes.md): hero, preguntas (wp-accordion) y CTA.
  */
 
 defined('ABSPATH') || exit;

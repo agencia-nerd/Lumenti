@@ -18,7 +18,7 @@ Antes de las páginas, revisa y aprueba [\_shared.md](_shared.md): tokens, compo
 | Psicología              | [psicologia.md](psicologia.md)       | `pages/template-psicologia.php`  | aplicado |
 | Informes y certificados | [informes-y-certificados.md](informes-y-certificados.md) | `pages/template-informes.php`    | aplicado |
 | Empresas                | [empresas.md](empresas.md)           | `pages/template-empresas.php`    | aplicado |
-| Preguntas frecuentes    | [faq.md](faq.md)                     | `pages/template-faq.php`         | aplicado |
+| Preguntas frecuentes    | [preguntas-frecuentes.md](preguntas-frecuentes.md) | `pages/template-faq.php`         | aplicado |
 | Legal                   | [legal.md](legal.md)                 | `pages/template-legal.php`       | aplicado |
 | Ajustes del sitio       | [opciones.md](opciones.md)           | `header.php`                     | aplicado |
 
