@@ -8,16 +8,8 @@ defined('ABSPATH') || exit;
  * A la derecha título, bajada, WhatsApp corporativo y foto.
  */
 
-$lumenti_propuesta = [
-    'titulo' => 'CUÉNTANOS QUÉ NECESITA *TU ORGANIZACIÓN*',
-    'bajada' => 'Comparte con nosotros el contexto de tu empresa y te contactaremos a la brevedad con una propuesta a medida.',
-    'alternativa' => '¿Prefieres hablar primero?',
-    'whatsapp_texto' => 'Escríbenos por WhatsApp',
-    'mensaje_whatsapp' => 'Hola, quisiera información sobre las soluciones de salud mental para empresas.',
-    'imagen' => ['ruta' => 'assets/img/emp-equipo.webp', 'ancho' => 980, 'alto' => 1041, 'alt' => 'Colaboradoras conversando y sonriendo al aire libre'],
-    'exito_titulo' => '¡GRACIAS! RECIBIMOS TU SOLICITUD',
-    'exito_texto' => 'Nuestro equipo corporativo revisará la información y te contactará a la brevedad con una propuesta a medida.',
-];
+$lumenti_propuesta = get_field('empresas_propuesta') ?: [];
+$lumenti_bajada = (string) ($lumenti_propuesta['bajada'] ?? '');
 
 // $args del form (wp-form). Los `name` son los del README "Formulario de Empresas".
 $lumenti_form = [
@@ -75,8 +67,8 @@ $lumenti_form = [
         'privacidad' => 'Debes aceptar la Política de privacidad para continuar.',
     ],
     'boton' => 'Solicitar propuesta',
-    'exito_titulo' => $lumenti_propuesta['exito_titulo'],
-    'exito_texto' => $lumenti_propuesta['exito_texto'],
+    'exito_titulo' => (string) ($lumenti_propuesta['exito_titulo'] ?? ''),
+    'exito_texto' => (string) ($lumenti_propuesta['exito_texto'] ?? ''),
     'exito_boton' => 'Enviar otra solicitud',
     // Prefijo que empresas.js escribe en `mensaje` con data-lm-prefill.
     'prefill' => 'Nos interesa el taller "%s".',
@@ -90,20 +82,18 @@ $lumenti_form = [
             } ?>
         </div>
         <aside class="lm-emp-proposal__aside">
-            <h2 class="lm-section-title" id="lm-emp-form-title"><?= lumenti_highlight($lumenti_propuesta['titulo']) ?></h2>
-            <?php if ($lumenti_propuesta['bajada'] !== '') : ?>
-                <p class="lm-emp-proposal__lead"><?= esc_html($lumenti_propuesta['bajada']) ?></p>
+            <h2 class="lm-section-title" id="lm-emp-form-title"><?= lumenti_highlight((string) ($lumenti_propuesta['titulo'] ?? '')) ?></h2>
+            <?php if ($lumenti_bajada !== '') : ?>
+                <p class="lm-emp-proposal__lead"><?= lumenti_highlight($lumenti_bajada) ?></p>
             <?php endif; ?>
-            <?php if ($lumenti_propuesta['alternativa'] !== '') : ?>
-                <p class="lm-emp-proposal__alt"><?= esc_html($lumenti_propuesta['alternativa']) ?></p>
-            <?php endif; ?>
+            <p class="lm-emp-proposal__alt"><?= esc_html__('¿Prefieres hablar primero?', 'lumenti') ?></p>
             <?php get_template_part('template-parts/components/enlace-flecha', null, [
-                'texto' => $lumenti_propuesta['whatsapp_texto'],
-                'url' => lumenti_whatsapp_url('corporativo', $lumenti_propuesta['mensaje_whatsapp']),
+                'texto' => __('Escríbenos por WhatsApp', 'lumenti'),
+                'url' => lumenti_whatsapp_url('corporativo', (string) ($lumenti_propuesta['mensaje_whatsapp'] ?? '')),
                 'externo' => true,
                 'clase' => 'lm-emp-proposal__wa',
             ]); ?>
-            <?php $lumenti_img = lumenti_theme_image($lumenti_propuesta['imagen'], ['class' => 'lm-emp-proposal__img', 'size' => 'large']); ?>
+            <?php $lumenti_img = lumenti_theme_image($lumenti_propuesta['imagen'] ?? null, ['class' => 'lm-emp-proposal__img', 'size' => 'large', 'alt_fallback' => str_replace('*', '', (string) ($lumenti_propuesta['titulo'] ?? ''))]); ?>
             <?php if ($lumenti_img !== '') : ?>
                 <div class="lm-emp-proposal__media"><?= $lumenti_img ?></div>
             <?php endif; ?>

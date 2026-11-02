@@ -10,6 +10,7 @@ defined('ABSPATH') || exit;
  *   nivel            (h2 | h3)  por defecto h2.
  *   etiqueta         (string)  eyebrow antes del título.
  *   texto            (string | array)  párrafos: array, o un texto donde cada línea en blanco separa un párrafo.
+ *   alt_fallback     (string)  alt de respaldo de las fotos de ACF sin alt propio (el título de la sección); se le suma "foto N de 2".
  *   texto_destacado  (string)  párrafo oscuro (--strong) después de `texto`; se oculta si está vacío.
  *   aviso            (string)  nota con "!" (.lm-service-notice, role="note"); se oculta si está vacía.
  *   imagenes         (array de 2)  [atrás, adelante]: 'assets/img/x.webp', ['ruta', 'ancho', 'alto', 'alt'],
@@ -30,6 +31,7 @@ $lumenti_parrafos = array_values(array_filter(array_map('trim', array_map('strva
 $lumenti_destacado = trim((string) ($args['texto_destacado'] ?? ''));
 $lumenti_aviso = trim((string) ($args['aviso'] ?? ''));
 $lumenti_imagenes = array_values((array) ($args['imagenes'] ?? []));
+$lumenti_alt_base = trim((string) ($args['alt_fallback'] ?? ''));
 $lumenti_clases = 'lm-intro-split'
     . (!empty($args['invertido']) ? ' lm-intro-split--reverse' : '')
     . (!empty($args['clase']) ? ' ' . $args['clase'] : '');
@@ -37,7 +39,13 @@ $lumenti_clases = 'lm-intro-split'
 // Medidas del diseño (Psiquiatría) para archivos del tema sin 'ancho'/'alto'.
 $lumenti_fotos = [];
 foreach ([['back', 503, 832], ['front', 578, 757]] as $lumenti_i => [$lumenti_pos, $lumenti_w, $lumenti_h]) {
-    $lumenti_img = lumenti_theme_image($lumenti_imagenes[$lumenti_i] ?? '', ['class' => 'lm-photo-duo__img', 'width' => $lumenti_w, 'height' => $lumenti_h, 'size' => 'large']);
+    $lumenti_img = lumenti_theme_image($lumenti_imagenes[$lumenti_i] ?? '', [
+        'class' => 'lm-photo-duo__img',
+        'width' => $lumenti_w,
+        'height' => $lumenti_h,
+        'size' => 'large',
+        'alt_fallback' => $lumenti_alt_base !== '' ? $lumenti_alt_base . ', ' . sprintf(__('foto %d de %d', 'lumenti'), $lumenti_i + 1, 2) : '',
+    ]);
     if ($lumenti_img !== '') {
         $lumenti_fotos[$lumenti_pos] = $lumenti_img;
     }

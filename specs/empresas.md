@@ -25,23 +25,23 @@
 - **Destino:** `template-parts/pages/empresas/hero.php`, `template-parts/components/page-hero.php`
 - **Grupo:** `empresas_hero`
 - **Skill:** wp-helper
-- **Comportamiento:** componente `page-hero` variante `service`: 5 capas SVG decorativas de fondo (archivos del tema, no campos), breadcrumb Inicio / Empresas, `h1` en dos líneas animadas (la primera, "SALUD MENTAL", en color de acento: se marca con el helper de texto resaltado), nota a la derecha, etiqueta, bajada y dos acciones: botón "Solicitar propuesta" (`href="#propuesta"`, `data-lm-goto="formulario"`) y enlace con flecha "Ver soluciones" (`href="#soluciones"`, `data-lm-goto="soluciones"`). Los textos de los botones son fijos porque llevan a anclas de la misma página. `page-hero` necesita dos argumentos más que no están en `_shared.md`: `nota` y `acciones`.
+- **Comportamiento:** componente `page-hero` variante `service`: 5 capas SVG decorativas de fondo (archivos del tema, no campos), breadcrumb Inicio / Empresas, `h1` en dos líneas animadas (la primera, "SALUD MENTAL", en color de acento: se marca con el helper de texto resaltado), nota a la derecha, etiqueta, bajada y dos acciones: botón "Solicitar propuesta" (`href="#propuesta"`, `data-lm-goto="formulario"`) y enlace con flecha "Ver soluciones" (`href="#soluciones"`, `data-lm-goto="soluciones"`). Los textos de los botones y la etiqueta "EMPRESAS" son fijos (no son campos). `page-hero` necesita dos argumentos más que no están en `_shared.md`: `nota` y `acciones`.
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
 | Campo | Tipo | Descripción | Valor actual | Requerido |
 |---|---|---|---|---|
-| `empresas_hero_titulo` | text | Título principal. Lo que va entre *asteriscos* se muestra en color. | SALUD MENTAL PARA ORGANIZACIONES. | sí |
+| `empresas_hero_titulo` | textarea | Título principal, en dos líneas. Usa Enter para pasar a otra línea. La línea que va entera entre *asteriscos* se muestra en color. | *SALUD MENTAL*<br>PARA ORGANIZACIONES. | sí |
 | `empresas_hero_nota` | text | Frase corta junto al título. | Soluciones adaptadas a la realidad y los objetivos de cada organización. | no |
-| `empresas_hero_etiqueta` | text | Texto pequeño sobre la bajada. | EMPRESAS | no |
 | `empresas_hero_bajada` | textarea | Texto de presentación. | Ayudamos a las organizaciones a promover el bienestar, prevenir riesgos y responder de manera responsable ante los desafíos de salud mental de sus equipos, mediante talleres, programas y atención especializada. | sí |
 
 **Criterios de aceptación**
 
 - [x] Cumple los criterios comunes de `_shared.md`
 - [x] "Solicitar propuesta" y "Ver soluciones" son enlaces a anclas que funcionan sin JS
-- [x] La nota, la etiqueta y la bajada se ocultan si el campo está vacío
+- [x] La nota y la bajada se ocultan si el campo está vacío
 
 ## Sección: desafios
 
@@ -49,14 +49,15 @@
 - **Destino:** `template-parts/pages/empresas/desafios.php`
 - **Grupo:** `empresas_desafios`
 - **Skill:** wp-helper
-- **Comportamiento:** título (`h2`, segunda línea en color de acento) y bajada; lista de 5 desafíos con ícono en círculo, título `h3` y texto. El ícono es decorativo (`alt=""`) y se ve cuadrado (1:1) dentro del círculo; al pasar el mouse el anillo crece (solo con puntero fino, sin animación con `prefers-reduced-motion`). El salto de línea del título viene del diseño: se resuelve con CSS, sin `<br>`.
+- **Comportamiento:** título (`h2`, segunda línea en color de acento) y bajada; lista de 5 desafíos con ícono en círculo, título `h3` y texto. El ícono es decorativo (`alt=""`) y se ve cuadrado (1:1) dentro del círculo; al pasar el mouse el anillo crece (solo con puntero fino, sin animación con `prefers-reduced-motion`). El salto de línea del título es parte del contenido (textarea, Enter en el admin).
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
 | Campo | Tipo | Descripción | Valor actual | Requerido |
 |---|---|---|---|---|
-| `empresas_desafios_titulo` | text | Título de la sección. Lo que va entre *asteriscos* se muestra en color. | DESAFÍOS QUE IMPACTAN EN EL BIENESTAR DE LOS EQUIPOS | sí |
+| `empresas_desafios_titulo` | textarea | Título de la sección, en dos líneas. Usa Enter para pasar a otra línea. Lo que va entre *asteriscos* se muestra en color. | DESAFÍOS QUE IMPACTAN EN EL<br>*BIENESTAR DE LOS EQUIPOS* | sí |
 | `empresas_desafios_bajada` | textarea | Texto junto al título. | Reconocer estos desafíos permite construir respuestas preventivas y entornos de trabajo más saludables. | no |
 | `empresas_desafios_items` | repeater | Desafíos (5 en el diseño). | ESTRÉS LABORAL | sí |
 | `empresas_desafios_items.icono` | image | Ícono del desafío. | — | sí |
@@ -67,7 +68,7 @@
 
 - [x] Cumple los criterios comunes de `_shared.md`
 - [x] Los 5 desafíos son un `<ul>` y cada título es `h3`
-- [x] Sin `<br>` en el título
+- [x] El título es un solo textarea; su salto de línea sale del contenido
 
 ## Sección: soluciones
 
@@ -77,6 +78,7 @@
 - **Skill:** wp-helper
 - **Comportamiento:** `id="soluciones"` y `data-lm-target="soluciones"`. Título (`h2`, "TU ORGANIZACIÓN" en acento) y bajada, fijos a la izquierda (sticky en escritorio); 3 cards alternadas (la segunda invertida, `--reverse`) con imagen, título `h3`, texto y botón. El botón de cada card va a los talleres (`href="#talleres"`, `data-lm-goto="talleres"`) o al formulario (`href="#propuesta"`, `data-lm-goto="formulario"`) con la opción de `busca[]` que marca (`data-lm-preselect`: `prevencion`, `atencion`). La imagen se recorta con `object-cover` (altura mínima de 308 px en escritorio, 220 px en móvil). Las tarjetas se imprimen en el orden del repetidor; la alternancia es por posición.
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
@@ -106,6 +108,7 @@
 - **Skill:** wp-helper
 - **Comportamiento:** `data-lm-steps`. En escritorio y tablet la sección mide 340vh y su contenido queda fijo (sticky): el paso activo (`is-active`) y su número grande (01–04) cambian según el avance del scroll; los pasos no activos llevan `aria-hidden="true"`. Bajo 768 px los 4 pasos se ven apilados y todos visibles (altura automática). Con `prefers-reduced-motion` sin transiciones. El número de cada paso sale de su posición (01, 02…), y cada `h3` lleva oculto "Paso 01: ". Debajo, "¿Empezamos?" con el enlace con flecha "Solicitar propuesta" (`href="#propuesta"`, `data-lm-goto="formulario"`). Los anillos decorativos usan colores sueltos `#e7e4dd` y `#ebe8e2`. JS: `src/js/modules/empresas.js` (`empresasSteps`).
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
@@ -134,6 +137,7 @@
 - **Skill:** wp-helper
 - **Comportamiento:** componente `intro-split` con `invertido: true` y `ancho: true` (dúo de fotos `--wide`): título `h2`, un párrafo y un párrafo destacado (`--strong`); a la derecha dos fotos superpuestas, la de atrás vertical (≈3:4) y la de adelante vertical (≈3:4) más chica, recortadas con `object-cover`. En móvil las fotos van primero. `intro-split` recibe los dos párrafos en `texto` (array o dos argumentos: decidir en `_shared.md`).
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
@@ -157,17 +161,17 @@
 - **Destino:** `template-parts/pages/empresas/talleres.php`
 - **Grupo:** `empresas_talleres`
 - **Skill:** wp-helper
-- **Comportamiento:** `id="talleres"` y `data-lm-target="talleres"`. Título (`h2`, "Y CAPACITACIONES" en acento) y bajada; 3 cards de taller (de `data/talleres.json`) con título `h3` numerado por posición ("01. "), descripción (vacía en el diseño: el párrafo se oculta si está vacía), "Temas sugeridos:" con la lista de temas y botón "Solicitar este taller" (`href="#propuesta"`, `data-lm-goto="formulario"`, `data-lm-preselect="taller"`, `data-lm-prefill="<nombre del taller>"`). El salto de línea del título se resuelve con CSS, sin `<br>`.
+- **Comportamiento:** `id="talleres"` y `data-lm-target="talleres"`. Título (`h2`, "Y CAPACITACIONES" en acento) y bajada; 3 cards de taller (de `data/talleres.json`) con título `h3` numerado por posición ("01. "), descripción (vacía en el diseño: el párrafo se oculta si está vacía), "Temas sugeridos:" con la lista de temas y botón "Solicitar este taller" (texto fijo, no es campo; `href="#propuesta"`, `data-lm-goto="formulario"`, `data-lm-preselect="taller"`, `data-lm-prefill="<nombre del taller>"`). El salto de línea del título es parte del contenido (textarea, Enter en el admin).
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
 | Campo | Tipo | Descripción | Valor actual | Requerido |
 |---|---|---|---|---|
-| `empresas_talleres_titulo` | text | Título de la sección. Lo que va entre *asteriscos* se muestra en color. | EXPLORA NUESTROS TALLERES Y CAPACITACIONES | sí |
+| `empresas_talleres_titulo` | textarea | Título de la sección, en dos líneas. Usa Enter para pasar a otra línea. Lo que va entre *asteriscos* se muestra en color. | EXPLORA NUESTROS<br>TALLERES *Y CAPACITACIONES* | sí |
 | `empresas_talleres_bajada` | textarea | Texto bajo el título. | Formamos a colaboradores, líderes y organizaciones con herramientas prácticas y actualizadas para cuidar la salud mental en el entorno laboral. Cada taller se adapta a la realidad y objetivos de tu equipo. | no |
 | `empresas_talleres_temas_etiqueta` | text | Texto antes de la lista de temas de cada taller. | Temas sugeridos: | no |
-| `empresas_talleres_boton_texto` | text | Texto del botón de cada taller. | Solicitar este taller | sí |
 | `empresas_talleres_items` | repeater | Talleres (3 en el diseño), en orden. | SALUD MENTAL Y BIENESTAR EMOCIONAL | sí |
 | `empresas_talleres_items.nombre` | text | Nombre del taller; también se escribe en el mensaje del formulario. | SALUD MENTAL Y BIENESTAR EMOCIONAL | sí |
 | `empresas_talleres_items.descripcion` | textarea | Descripción del taller. | — | no |
@@ -186,8 +190,9 @@
 - **Destino:** `template-parts/pages/empresas/propuesta.php`, `template-parts/forms/empresas-propuesta.php`, `inc/forms/empresas.php`
 - **Grupo:** `empresas_propuesta`
 - **Skill:** wp-form
-- **Comportamiento:** `id="propuesta"`. Dos columnas: a la izquierda el form (contenedor `data-lm-target="formulario"`), a la derecha (sticky en escritorio) título `h2`, bajada, "¿Prefieres hablar primero?", enlace con flecha a WhatsApp corporativo (`opciones_contacto_telefono_corporativo` + mensaje, pestaña nueva con el helper de enlaces) y foto (980:1041, `object-cover`). En móvil el texto va arriba. **Form (wp-form)**, mismos `name` del README "Formulario de Empresas": fieldset "TUS DATOS": `nombre` ("Nombre y apellido", obligatorio, sin números), `empresa` ("Empresa / Organización", obligatorio), `cargo` ("Cargo o área", obligatorio, sin números), `whatsapp` ("WhatsApp de contacto", prefijo +51, obligatorio, 9 dígitos que empiezan en 9, ayuda "Celular de 9 dígitos, sin el +51."), `correo` ("Correo corporativo", obligatorio, formato de correo); fieldset "¿QUÉ NECESITAS?": `busca[]` ("¿Qué estás buscando? (puedes elegir varias)", al menos una: `taller` Taller o charla para colaboradores · `prevencion` Programa de prevención en salud mental · `atencion` Atención psicológica o psiquiátrica para colaboradores · `inhouse` Consultas in house · `convenio` Convenio corporativo · `orientacion` No estoy seguro, necesito orientación), `colaboradores` (select obligatorio: Menos de 50 · 50 a 100 · 101 a 300 · Más de 300 · Aún por definir); fieldset "CUÉNTANOS MÁS": `mensaje` (opcional, ayuda "Cuéntanos qué necesita tu equipo y diseñaremos una propuesta a medida."); `privacidad` (obligatoria, enlace a la Política de privacidad); honeypot `website`. Errores del diseño: "Completa este campo.", "Usa solo letras.", "Ingresa un celular de 9 dígitos.", "Ingresa un correo válido (ej. nombre@empresa.com).", "Elige al menos una opción.", "Selecciona una opción.", "Debes aceptar la Política de privacidad para continuar."; se validan al salir del campo y al enviar, y el foco va al primer error. Mientras escribe, `nombre` y `cargo` borran números y `whatsapp` solo deja 9 dígitos. Botón "Solicitar propuesta" con spinner y `aria-busy`; al enviar se oculta el form y aparece el éxito (foco en su título) con "Enviar otra solicitud", que limpia y vuelve a mostrar el form. Destinatario: por definir (README). **Preselección:** todo enlace con `data-lm-goto="formulario"` en la página hace scroll compensado al form y enfoca el primer campo; si tiene `data-lm-preselect` marca esa opción de `busca[]`; si tiene `data-lm-prefill` agrega al inicio de `mensaje` "Nos interesa el taller "<nombre>"." (una sola vez). `data-lm-goto="soluciones"`/`"talleres"` solo hace scroll. Sin JS los enlaces van a su ancla. Ese JS vive en `src/js/modules/empresas.js` (`empresasLinks`), aparte del de wp-form.
+- **Comportamiento:** `id="propuesta"`. Dos columnas: a la izquierda el form (contenedor `data-lm-target="formulario"`), a la derecha (sticky en escritorio) título `h2`, bajada, "¿Prefieres hablar primero?" y el enlace con flecha "Escríbenos por WhatsApp" (los dos textos fijos, no son campos) al WhatsApp corporativo (`opciones_contacto_telefono_corporativo` + mensaje, pestaña nueva con el helper de enlaces) y foto (980:1041, `object-cover`). En móvil el texto va arriba. **Form (wp-form)**, mismos `name` del README "Formulario de Empresas": fieldset "TUS DATOS": `nombre` ("Nombre y apellido", obligatorio, sin números), `empresa` ("Empresa / Organización", obligatorio), `cargo` ("Cargo o área", obligatorio, sin números), `whatsapp` ("WhatsApp de contacto", prefijo +51, obligatorio, 9 dígitos que empiezan en 9, ayuda "Celular de 9 dígitos, sin el +51."), `correo` ("Correo corporativo", obligatorio, formato de correo); fieldset "¿QUÉ NECESITAS?": `busca[]` ("¿Qué estás buscando? (puedes elegir varias)", al menos una: `taller` Taller o charla para colaboradores · `prevencion` Programa de prevención en salud mental · `atencion` Atención psicológica o psiquiátrica para colaboradores · `inhouse` Consultas in house · `convenio` Convenio corporativo · `orientacion` No estoy seguro, necesito orientación), `colaboradores` (select obligatorio: Menos de 50 · 50 a 100 · 101 a 300 · Más de 300 · Aún por definir); fieldset "CUÉNTANOS MÁS": `mensaje` (opcional, ayuda "Cuéntanos qué necesita tu equipo y diseñaremos una propuesta a medida."); `privacidad` (obligatoria, enlace a la Política de privacidad); honeypot `website`. Errores del diseño: "Completa este campo.", "Usa solo letras.", "Ingresa un celular de 9 dígitos.", "Ingresa un correo válido (ej. nombre@empresa.com).", "Elige al menos una opción.", "Selecciona una opción.", "Debes aceptar la Política de privacidad para continuar."; se validan al salir del campo y al enviar, y el foco va al primer error. Mientras escribe, `nombre` y `cargo` borran números y `whatsapp` solo deja 9 dígitos. Botón "Solicitar propuesta" con spinner y `aria-busy`; al enviar se oculta el form y aparece el éxito (foco en su título) con "Enviar otra solicitud", que limpia y vuelve a mostrar el form. Destinatario: por definir (README). **Preselección:** todo enlace con `data-lm-goto="formulario"` en la página hace scroll compensado al form y enfoca el primer campo; si tiene `data-lm-preselect` marca esa opción de `busca[]`; si tiene `data-lm-prefill` agrega al inicio de `mensaje` "Nos interesa el taller "<nombre>"." (una sola vez). `data-lm-goto="soluciones"`/`"talleres"` solo hace scroll. Sin JS los enlaces van a su ancla. Ese JS vive en `src/js/modules/empresas.js` (`empresasLinks`), aparte del de wp-form.
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
@@ -195,8 +200,6 @@
 |---|---|---|---|---|
 | `empresas_propuesta_titulo` | text | Título junto al formulario. Lo que va entre *asteriscos* se muestra en color. | CUÉNTANOS QUÉ NECESITA TU ORGANIZACIÓN | sí |
 | `empresas_propuesta_bajada` | textarea | Texto bajo el título. | Comparte con nosotros el contexto de tu empresa y te contactaremos a la brevedad con una propuesta a medida. | no |
-| `empresas_propuesta_alternativa` | text | Frase antes del enlace a WhatsApp. | ¿Prefieres hablar primero? | no |
-| `empresas_propuesta_whatsapp_texto` | text | Texto del enlace a WhatsApp. | Escríbenos por WhatsApp | sí |
 | `empresas_propuesta_mensaje_whatsapp` | text | Mensaje que se escribe solo al abrir WhatsApp. | Hola, quisiera información sobre las soluciones de salud mental para empresas. | sí |
 | `empresas_propuesta_imagen` | image | Foto bajo el texto. | — | no |
 | `empresas_propuesta_exito_titulo` | text | Título del mensaje después de enviar. | ¡GRACIAS! RECIBIMOS TU SOLICITUD | sí |
@@ -217,6 +220,7 @@
 - **Skill:** wp-helper
 - **Comportamiento:** componente `cta` (video de fondo, ícono, título, texto y botón) con el botón a `https://wa.me/<opciones_contacto_telefono_corporativo>?text=<mensaje>` en pestaña nueva con el helper de enlaces.
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 

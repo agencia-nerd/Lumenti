@@ -9,7 +9,8 @@ defined('ABSPATH') || exit;
  *   echo lumenti_theme_image($campo_acf, ['class' => 'x', 'loading' => 'eager']);   // array, ID o URL → lumenti_image()
  *
  * $attrs: class, alt (null = el de la imagen), width, height (para archivos del tema), loading (lazy|eager),
- * fetchpriority (high|low|auto), size (para ACF). Devuelve el <img> escapado o ''.
+ * fetchpriority (high|low|auto), size (para ACF), alt_fallback (para ACF: alt de respaldo si la imagen no trae el suyo).
+ * Devuelve el <img> escapado o ''.
  */
 
 function lumenti_theme_image($image, array $attrs = []): string
@@ -22,6 +23,7 @@ function lumenti_theme_image($image, array $attrs = []): string
         'loading' => 'lazy',
         'fetchpriority' => '',
         'size' => 'full',
+        'alt_fallback' => '',
     ];
 
     // Archivo del tema: 'assets/img/x.webp' o ['ruta' => 'assets/img/x.webp', 'ancho', 'alto', 'alt'].
@@ -44,6 +46,7 @@ function lumenti_theme_image($image, array $attrs = []): string
             'size' => (string) $attrs['size'],
             'class' => (string) $attrs['class'],
             'alt' => $attrs['alt'],
+            'alt_fallback' => (string) $attrs['alt_fallback'],
             'loading' => (string) $attrs['loading'],
             'fetchpriority' => (string) $attrs['fetchpriority'],
         ]);
