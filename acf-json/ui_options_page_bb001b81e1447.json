@@ -1,0 +1,26 @@
+{
+    "key": "ui_options_page_bb001b81e1447",
+    "title": "Archivo de especialista",
+    "active": true,
+    "menu_order": 0,
+    "page_title": "Archivo de especialista",
+    "menu_slug": "archivo-de-especialista",
+    "parent_slug": "",
+    "advanced_configuration": false,
+    "icon_url": "",
+    "menu_title": "Archivo de especialista",
+    "position": "",
+    "redirect": false,
+    "description": "",
+    "menu_icon": {
+        "type": "dashicons",
+        "value": "dashicons-admin-generic"
+    },
+    "update_button": "Guardar cambios",
+    "updated_message": "Cambios guardados",
+    "capability": "edit_posts",
+    "data_storage": "options",
+    "post_id": "",
+    "autoload": false,
+    "modified": 1793640337
+}

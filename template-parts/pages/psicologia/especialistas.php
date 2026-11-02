@@ -21,7 +21,7 @@ $lumenti_especialistas = [
     'items' => [
         [
             'nombre' => 'José Muñoz',
-            'url' => home_url('/especialistas/jose-munoz/'),
+            'url' => lumenti_especialista_url('jose-munoz'),
             'cargo' => 'Psicólogo',
             'foto' => 'assets/img/esp/jose-munoz.webp',
             'tipo' => 'psicologo',
@@ -50,7 +50,7 @@ $lumenti_especialistas = [
         ],
         [
             'nombre' => 'Allison García',
-            'url' => home_url('/especialistas/allison-garcia/'),
+            'url' => lumenti_especialista_url('allison-garcia'),
             'cargo' => 'Psicóloga',
             'foto' => 'assets/img/esp/allison-garcia.webp',
             'tipo' => 'psicologo',
@@ -80,7 +80,7 @@ $lumenti_especialistas = [
         ],
         [
             'nombre' => 'Valeria Torres',
-            'url' => home_url('/especialistas/valeria-torres/'),
+            'url' => lumenti_especialista_url('valeria-torres'),
             'cargo' => 'Psicóloga',
             'foto' => 'assets/img/esp/valeria-torres.webp',
             'tipo' => 'psicologo',
@@ -105,7 +105,7 @@ $lumenti_especialistas = [
         ],
         [
             'nombre' => 'Dora Pflucker',
-            'url' => home_url('/especialistas/dora-pflucker/'),
+            'url' => lumenti_especialista_url('dora-pflucker'),
             'cargo' => 'Psicóloga clínica',
             'foto' => 'assets/img/esp/dora-pflucker.webp',
             'tipo' => 'psicologo',
@@ -130,7 +130,7 @@ $lumenti_especialistas = [
         ],
         [
             'nombre' => 'Valentina Gordillo',
-            'url' => home_url('/especialistas/valentina-gordillo/'),
+            'url' => lumenti_especialista_url('valentina-gordillo'),
             'cargo' => 'Psicóloga',
             'foto' => 'assets/img/esp/valentina-gordillo.webp',
             'tipo' => 'psicologo',
@@ -153,7 +153,7 @@ $lumenti_especialistas = [
         ],
         [
             'nombre' => 'Anthony Román',
-            'url' => home_url('/especialistas/anthony-roman/'),
+            'url' => lumenti_especialista_url('anthony-roman'),
             'cargo' => 'Psicólogo',
             'foto' => 'assets/img/esp/anthony-roman.webp',
             'tipo' => 'psicologo',

@@ -4,6 +4,8 @@ defined('ABSPATH') || exit;
 /*
  * Carga inicial propia de Lumenti, lo que el motor de wp-acf (inc/acf/runner.php) no cubre:
  * - Las dos páginas legales (una plantilla, dos páginas) y la página de entradas del blog.
+ * - Especialistas (después de su carga de wp-acf): la foto destacada (assets/img/esp/<id>.webp). La URL y los
+ *   slugs de los términos los arma WordPress (con el nombre completo y el nombre del término).
  * - Mega menú Servicios: la "Descripción" de cada elemento del menú `servicios` (bajada de la card) y la
  *   imagen destacada de cada página de servicio (imagen de la card).
  * Corre una vez por paso (marcador en opciones), después de la carga de wp-acf: nunca pisa lo editado.
@@ -74,13 +76,50 @@ function lumenti_carga_extra(): void
         $hecho['servicios'] = 1;
     }
 
+    if (empty($hecho['especialistas'])) {
+        $hecho['especialistas'] = lumenti_carga_especialistas() ? 1 : 0;
+    }
+
     update_option(LUMENTI_CARGA_EXTRA_MARCADOR, $hecho, false);
+}
+
+// Foto destacada de los especialistas que creó la carga de wp-acf, solo si aún no tienen una (no pisa lo editado).
+// Devuelve false si aún no están (se reintenta en la próxima visita al admin).
+function lumenti_carga_especialistas(): bool
+{
+    if (!post_type_exists('especialista') || !function_exists('lumenti_acf_attachment')) {
+        return false;
+    }
+    $posts = get_posts([
+        'post_type'      => 'especialista',
+        'post_status'    => 'any',
+        'posts_per_page' => -1,
+        'meta_key'       => '_lumenti_seed_id',
+    ]);
+    if (!$posts) {
+        return false;
+    }
+
+    foreach ($posts as $post) {
+        $id = sanitize_title((string) get_post_meta($post->ID, '_lumenti_seed_id', true));
+        if ($id === '') {
+            continue;
+        }
+        if (!has_post_thumbnail($post)) {
+            $foto = lumenti_acf_attachment('assets/img/esp/' . $id . '.webp');
+            if ($foto) {
+                set_post_thumbnail($post, $foto);
+            }
+        }
+    }
+
+    return true;
 }
 // Después de la carga de wp-acf al activar el tema (prioridad 10) y, si quedó algo pendiente, en el admin.
 add_action('after_switch_theme', 'lumenti_carga_extra', 20);
 add_action('admin_init', function () {
     $hecho = (array) get_option(LUMENTI_CARGA_EXTRA_MARCADOR, []);
-    if (empty($hecho['paginas']) || empty($hecho['servicios'])) {
+    if (empty($hecho['paginas']) || empty($hecho['servicios']) || empty($hecho['especialistas'])) {
         lumenti_carga_extra();
     }
 });

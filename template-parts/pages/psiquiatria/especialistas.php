@@ -21,7 +21,7 @@ $lumenti_especialistas = [
     'items' => [
         [
             'nombre' => 'Dra. Mariela Linares',
-            'url' => home_url('/especialistas/mariela-linares/'),
+            'url' => lumenti_especialista_url('mariela-linares'),
             'cargo' => 'Médica psiquiatra',
             'cargo_destacado' => 'Directora médica de Lumenti',
             'foto' => 'assets/img/esp/mariela-linares.webp',
@@ -48,7 +48,7 @@ $lumenti_especialistas = [
         ],
         [
             'nombre' => 'Dra. Francesca Valdivia',
-            'url' => home_url('/especialistas/francesca-valdivia/'),
+            'url' => lumenti_especialista_url('francesca-valdivia'),
             'cargo' => 'Médica psiquiatra',
             'foto' => 'assets/img/esp/francesca-valdivia.webp',
             'tipo' => 'psiquiatra',
@@ -77,7 +77,7 @@ $lumenti_especialistas = [
         ],
         [
             'nombre' => 'Dr. Fabrizio Martínez',
-            'url' => home_url('/especialistas/fabrizio-martinez/'),
+            'url' => lumenti_especialista_url('fabrizio-martinez'),
             'cargo' => 'Médico psiquiatra',
             'foto' => 'assets/img/esp/fabrizio-martinez.webp',
             'tipo' => 'psiquiatra',
@@ -106,7 +106,7 @@ $lumenti_especialistas = [
         ],
         [
             'nombre' => 'Dra. Francesca Demarini',
-            'url' => home_url('/especialistas/francesca-demarini/'),
+            'url' => lumenti_especialista_url('francesca-demarini'),
             'cargo' => 'Médica psiquiatra',
             'foto' => 'assets/img/esp/francesca-demarini.webp',
             'tipo' => 'psiquiatra',
@@ -133,7 +133,7 @@ $lumenti_especialistas = [
         ],
         [
             'nombre' => 'Dr. Derek Tantaleán',
-            'url' => home_url('/especialistas/derek-tantalean/'),
+            'url' => lumenti_especialista_url('derek-tantalean'),
             'cargo' => 'Médico psiquiatra',
             'foto' => 'assets/img/esp/derek-tantalean.webp',
             'tipo' => 'psiquiatra',
@@ -162,7 +162,7 @@ $lumenti_especialistas = [
         ],
         [
             'nombre' => 'Dra. Claudia Campos',
-            'url' => home_url('/especialistas/claudia-campos/'),
+            'url' => lumenti_especialista_url('claudia-campos'),
             'cargo' => 'Médica psiquiatra',
             'foto' => 'assets/img/esp/claudia-campos.webp',
             'tipo' => 'psiquiatra',
@@ -185,7 +185,7 @@ $lumenti_especialistas = [
         ],
         [
             'nombre' => 'Dra. Fiorella Ruiz',
-            'url' => home_url('/especialistas/fiorella-ruiz/'),
+            'url' => lumenti_especialista_url('fiorella-ruiz'),
             'cargo' => 'Médica psiquiatra',
             'foto' => 'assets/img/esp/fiorella-ruiz.webp',
             'tipo' => 'psiquiatra',
