@@ -28,15 +28,15 @@
 - **Destino:** `pages/template-psiquiatria.php`, `template-parts/pages/psiquiatria/hero.php`, `template-parts/components/page-hero.php`, `template-parts/components/breadcrumb.php`
 - **Grupo:** `psiquiatria_hero`
 - **Skill:** ninguna
-- **Comportamiento:** componente `page-hero` con `variante` `service` (mismo marcado en Psicología e Informes). Fondo de 5 capas SVG decorativas (`psiq-bg-1…5.svg`, archivos fijos del tema en `assets/img/`, `alt=""` y `aria-hidden`) con entrada escalonada y deriva lenta; título, nota y bajada suben con `lmRise`. Todas las animaciones se apagan con `prefers-reduced-motion`. Breadcrumb Inicio › Servicios › Psiquiatría: "Servicios" no tiene enlace en el diseño (es un `span`) y el último ítem es el título de la página con `aria-current="page"`. El `h1` son dos líneas: `titulo_destacado` (verde) y `titulo`. Necesita en `page-hero` los argumentos nuevos `titulo_destacado` y `nota` (no están en `_shared.md`). La nota y la etiqueta se ocultan si el campo está vacío.
+- **Comportamiento:** componente `page-hero` con `variante` `service` (mismo marcado en Psicología e Informes). Fondo de 5 capas SVG decorativas (`psiq-bg-1…5.svg`, archivos fijos del tema en `assets/img/`, `alt=""` y `aria-hidden`) con entrada escalonada y deriva lenta; título, nota y bajada suben con `lmRise`. Todas las animaciones se apagan con `prefers-reduced-motion`. Breadcrumb Inicio › Servicios › Psiquiatría: "Servicios" no tiene enlace en el diseño (es un `span`) y el último ítem es el título de la página con `aria-current="page"`. El `h1` es un solo campo textarea, una línea por renglón (Enter); la línea que va entera entre asteriscos (`*PSIQUIATRÍA QUE*`) sale en verde (helper de texto de wp-helper). "Servicios" del breadcrumb es fijo y el último ítem es el título de la página. La nota y la etiqueta se ocultan si el campo está vacío.
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
 | Campo | Tipo | Descripción | Valor actual | Requerido |
 |---|---|---|---|---|
-| `psiquiatria_hero_titulo_destacado` | text | Primera línea del título principal, en verde. | PSIQUIATRÍA QUE | sí |
-| `psiquiatria_hero_titulo` | text | Segunda línea del título principal. | COMPRENDE TU HISTORIA | sí |
+| `psiquiatria_hero_titulo` | textarea | Título principal, en dos líneas. Usa Enter para pasar a otra línea. La línea que va entera entre *asteriscos* se muestra en color. | *PSIQUIATRÍA QUE*<br>COMPRENDE TU HISTORIA | sí |
 | `psiquiatria_hero_nota` | text | Frase corta junto al título. | Atención presencial y virtual para diferentes etapas de la vida. | no |
 | `psiquiatria_hero_etiqueta` | text | Etiqueta con punto sobre la bajada. | NUESTRO ENFOQUE | no |
 | `psiquiatria_hero_bajada` | textarea | Párrafo de presentación del servicio, bajo el título. | Brindamos una evaluación clínica integral para comprender no solo tus síntomas, sino también tu historia, tu contexto y cómo lo que estás viviendo impacta en tu día a día. A partir de ello, construimos contigo un plan de tratamiento personalizado y basado en evidencia. | sí |
@@ -57,6 +57,7 @@
 - **Skill:** wp-helper
 - **Comportamiento:** componente `intro-split` (texto a la izquierda, `.lm-photo-duo` a la derecha; en móvil se apilan). El título usa `section-title` con la palabra marcada en `--color-brand` mediante el helper de texto de dos colores de wp-helper (`lumenti_highlight`, marcador propuesto `*` → clase `lm-section-title__accent`; el helper aún no está instalado). El segundo párrafo va en peso 500 y `--color-ink-2` (`lm-intro-split__p--strong`): necesita el argumento nuevo `texto_destacado` en `intro-split`. Las dos fotos pasan por `lumenti_image()` con `loading="lazy"`; la caja mantiene `aspect-ratio: 349 / 339` y cada foto se recorta con `object-cover`. El párrafo destacado se oculta si está vacío.
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
@@ -83,6 +84,7 @@
 - **Skill:** ninguna
 - **Comportamiento:** tarjeta blanca centrada con título y texto, rodeada de 4 globos (chips) en posiciones fijas `--a` a `--d` y dos fichas giradas decorativas (corazón SVG y manos con `mask` de `assets/icons/manos.svg`, `aria-hidden`). Las posiciones están pensadas para 4 globos: si hay otro número, los que pasen del cuarto no tienen lugar asignado (recomendación de 4 en el campo). Valores sueltos del diseño que se mantienen: sombra del globo `0 8px 24px rgba(28,44,58,.06)`, texto del globo 15px, ficha de 128 × 128 px con radio 24px, tarjeta de máximo 760px, globo con radio `999px` y fondo blanco (`--lm-r-pill`/`--lm-white`, no están en la tabla de tokens).
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
@@ -105,8 +107,9 @@
 - **Destino:** `pages/template-psiquiatria.php`, `template-parts/pages/psiquiatria/especialistas.php`, `template-parts/components/specialists-carousel.php`, `template-parts/components/especialista-card.php`, `template-parts/components/enlace-flecha.php`
 - **Grupo:** `psiquiatria_especialistas`
 - **Skill:** wp-helper
-- **Comportamiento:** componente `specialists-carousel` con `filtro` en `false` (sin pills). Muestra 7 cards de muestra fijas (Dra. Mariela Linares, Dra. Francesca Valdivia, Dr. Fabrizio Martínez, Dra. Francesca Demarini, Dr. Derek Tantaleán, Dra. Claudia Campos, Dra. Fiorella Ruiz) con `especialista-card`; no hay consulta en esta etapa (la consulta de psiquiatras por `orden` es un paso posterior). Pista con desplazamiento horizontal (`tabindex="0"`), flechas Anterior/Siguiente (la de atrás oculta al inicio) y degradado al borde. Cada card: "Ver perfil" a la ficha del especialista y "Agenda tu cita" a WhatsApp (`opciones_contacto_telefono_paciente`, "Hola, quisiera agendar una cita con {nombre}."), popover "+N" de lo que atiende. El título usa el marcador de `lumenti_highlight`; "Ver todos" es un campo link que pasa por `lumenti_link_attrs()` con la flecha como hijo. Necesita en `specialists-carousel` los argumentos nuevos `texto` (bajada) y `enlace` (Ver todos). La bajada y el enlace se ocultan si están vacíos.
+- **Comportamiento:** componente `specialists-carousel` con `filtro` en `false` (sin pills). Las cards son los especialistas de tipo psiquiatras, en orden (`lumenti_especialistas_cards('psiquiatras')`), con `especialista-card`. Pista con desplazamiento horizontal (`tabindex="0"`), flechas Anterior/Siguiente (la de atrás oculta al inicio) y degradado al borde. Cada card: "Ver perfil" a la ficha del especialista y "Agenda tu cita" a WhatsApp (`opciones_contacto_telefono_paciente`, "Hola, quisiera agendar una cita con {nombre}."), popover "+N" de lo que atiende. El título usa el marcador de `lumenti_highlight`; "Ver todos" es fijo en la plantilla: lleva al listado filtrado (`?tipo=psiquiatras`), con la flecha. Necesita en `specialists-carousel` los argumentos nuevos `texto` (bajada) y `enlace` (Ver todos). La bajada se oculta si está vacía.
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
@@ -114,7 +117,8 @@
 |---|---|---|---|---|
 | `psiquiatria_especialistas_titulo` | text | Título del carrusel. Encierra entre asteriscos la parte en verde. | CONOCE A LOS *ESPECIALISTAS* | sí |
 | `psiquiatria_especialistas_bajada` | text | Frase bajo el título. | Médicos psiquiatras con enfoque humano y basado en evidencia. | no |
-| `psiquiatria_especialistas_enlace` | link | Enlace "Ver todos" a la página de especialistas filtrada por psiquiatras (en el diseño `?tipo=psiquiatras`) | — | no |
+
+- **Campo fuera de wp-acf:** `psiquiatria_especialistas_seleccion` (relationship, "Especialistas a mostrar"): especialistas del carrusel elegidos y ordenados a mano, solo del tipo psiquiatras (incluye a quien tiene los dos tipos). Vacío: todos los psiquiatras, por su orden. wp-acf todavía no genera relationship: lo registra `inc/campos-extra.php` como subcampo local del grupo `psiquiatria_especialistas` (no está en la tabla para que `generate.mjs` no lo pida). Cuando la skill lo soporte, se agrega a la tabla con el mismo nombre, se regenera y se borra de `inc/campos-extra.php`.
 
 **Criterios de aceptación**
 
@@ -133,6 +137,7 @@
 - **Skill:** ninguna
 - **Comportamiento:** componente `cta` (mismo video `cta-mar-v4.mp4`, insignia del cerebro y overlay del resto del sitio: son del componente, no campos). El botón abre WhatsApp con `opciones_contacto_telefono_paciente` y el mensaje del campo, en pestaña nueva con `rel="noopener"`; ícono de WhatsApp. El título entra con `data-lm-reveal="up"`. El texto se oculta si está vacío.
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 

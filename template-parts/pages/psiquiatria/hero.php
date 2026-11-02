@@ -3,20 +3,20 @@ defined('ABSPATH') || exit;
 
 /*
  * Psiquiatría · hero (specs/psiquiatria.md → hero). Grupo ACF: psiquiatria_hero.
- * Prepara los datos y llama al componente page-hero (variante service) con su breadcrumb.
+ * Componente page-hero (variante service). titulo es un textarea: una línea del h1 por renglón (Enter); sin
+ * *asteriscos*, la primera línea va en verde. Breadcrumb: "Servicios" (fijo, sin enlace) y el título de la página.
  */
 
-$lumenti_hero = [
-    'titulo_destacado' => 'PSIQUIATRÍA QUE',
-    'titulo' => 'COMPRENDE TU HISTORIA',
-    'nota' => 'Atención presencial y virtual para diferentes etapas de la vida.',
-    'etiqueta' => 'NUESTRO ENFOQUE',
-    'bajada' => 'Brindamos una evaluación clínica integral para comprender no solo tus síntomas, sino también tu historia, tu contexto y cómo lo que estás viviendo impacta en tu día a día. A partir de ello, construimos contigo un plan de tratamiento personalizado y basado en evidencia.',
+$lumenti_hero = get_field('psiquiatria_hero') ?: [];
+
+get_template_part('template-parts/components/page-hero', null, [
+    'titulo' => (string) ($lumenti_hero['titulo'] ?? ''),
+    'nota' => (string) ($lumenti_hero['nota'] ?? ''),
+    'etiqueta' => (string) ($lumenti_hero['etiqueta'] ?? ''),
+    'bajada' => (string) ($lumenti_hero['bajada'] ?? ''),
     'variante' => 'service',
     'breadcrumb' => [
-        ['texto' => 'Servicios'],
-        ['texto' => 'Psiquiatría'],
+        ['texto' => __('Servicios', 'lumenti')],
+        ['texto' => get_the_title()],
     ],
-];
-
-get_template_part('template-parts/components/page-hero', null, $lumenti_hero);
+]);

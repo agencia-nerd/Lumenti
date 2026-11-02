@@ -238,11 +238,20 @@ function lumenti_especialista_card_args($post = null): array
     ];
 }
 
-// Cards de los carruseles (Psiquiatría, Psicología): especialistas de un tipo ('psiquiatras', 'psicologos'), en orden.
-function lumenti_especialistas_cards(string $tipo = ''): array
+/*
+ * Cards de los carruseles (Psiquiatría, Psicología). $seleccion: IDs elegidos a mano en el campo "Especialistas a
+ * mostrar" (inc/campos-extra.php), en ese orden; solo los publicados. Sin selección: todos los especialistas de un
+ * tipo ('psiquiatras', 'psicologos'), en su orden.
+ */
+function lumenti_especialistas_cards(string $tipo = '', array $seleccion = []): array
 {
     if (!post_type_exists('especialista')) {
         return [];
+    }
+    $seleccion = array_values(array_filter(array_map('intval', $seleccion)));
+    if ($seleccion) {
+        $posts = array_filter(array_map('get_post', $seleccion), static fn($p) => $p && $p->post_type === 'especialista' && $p->post_status === 'publish');
+        return array_values(array_filter(array_map('lumenti_especialista_card_args', $posts)));
     }
     $args = ['post_type' => 'especialista', 'posts_per_page' => -1, 'no_found_rows' => true];
     if ($tipo !== '') {

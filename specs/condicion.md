@@ -35,7 +35,7 @@
 | Campo | Tipo | Descripción | Valor actual | Requerido |
 |---|---|---|---|---|
 | `condicion_hero_etiqueta` | text | Texto pequeño con punto sobre la bajada, normalmente el nombre de la condición. | DEPRESIÓN | sí |
-| `condicion_hero_titulo` | textarea | Título principal, una línea por renglón (2 o 3). La primera línea va en verde. | LA DEPRESIÓN TIENE TRATAMIENTO | sí |
+| `condicion_hero_titulo` | textarea | Título principal, una línea por renglón (2 o 3). Usa Enter para pasar a otra línea. La línea que va entera entre *asteriscos* se muestra en color. | *LA DEPRESIÓN*<br>TIENE TRATAMIENTO | sí |
 | `condicion_hero_nota` | text | Frase corta junto al título. | Atención presencial y virtual para cada etapa de la vida. | no |
 | `condicion_hero_bajada` | textarea | Párrafo que explica la condición, bajo el título. | La depresión puede afectar el ánimo, la energía, el sueño, la concentración y la capacidad de disfrutar las actividades cotidianas. No es falta de voluntad ni una tristeza pasajera: con una evaluación adecuada y un tratamiento personalizado, es posible reducir los síntomas y recuperar el bienestar. | sí |
 

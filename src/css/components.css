@@ -442,14 +442,18 @@
 .lm-specialists-carousel__pill:hover { color: var(--lm-ink-2); }
 .lm-specialists-carousel__pill[aria-selected="true"], .lm-specialists-carousel__pill[aria-pressed="true"] { background: var(--lm-teal); color: var(--lm-white); }
 .lm-specialists-carousel__carousel { position: relative; max-width: var(--lm-max); margin: 48px auto 0; }
-.lm-specialists-carousel__track { margin-right: calc(-1 * var(--lm-side)); padding-right: var(--lm-side); display: grid; grid-auto-flow: column; grid-auto-columns: clamp(460px, 34.375vw, 660px); gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.lm-specialists-carousel__track { margin-right: calc(-1 * var(--lm-side)); padding-right: var(--lm-side); display: grid; grid-auto-flow: column; grid-auto-columns: clamp(460px, 34.375vw, 660px); gap: 16px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; }
 .lm-specialists-carousel__track::-webkit-scrollbar { display: none; }
 .lm-specialists-carousel__item { display: flex; scroll-snap-align: start; }
 .lm-specialists-carousel__item[hidden] { display: none; }
 .lm-specialists-carousel__item.is-entering { animation: lmCardIn 600ms var(--lm-ease) both; animation-delay: calc(var(--lm-i, 0) * 70ms); }
 .lm-specialists-carousel__fade { position: absolute; top: 0; bottom: 0; right: calc(-1 * var(--lm-side)); width: clamp(160px, 14vw, 280px); background: linear-gradient(90deg, rgba(245,243,238,0), var(--lm-sand) 85%); pointer-events: none; }
-.lm-specialists-carousel__arrow { position: absolute; z-index: 2; top: 50%; width: 52px; height: 52px; margin-top: -26px; display: grid; place-items: center; border: 0; border-radius: 50%; background: var(--lm-teal); color: var(--lm-white); cursor: pointer; transition: background-color 250ms linear; }
+.lm-specialists-carousel__arrow { position: absolute; z-index: 4; top: 50%; width: 52px; height: 52px; margin-top: -26px; display: grid; place-items: center; border: 0; border-radius: 50%; background: var(--lm-teal); color: var(--lm-white); cursor: pointer; transition: background-color 250ms linear; }
 .lm-specialists-carousel__arrow:hover { background: var(--lm-teal-dark); }
+/* En el carrusel, "+N" despliega la lista dentro de la card (como en móvil): un popover flotante sobresaldría de la
+   pista, que recorta lo que sale de ella (overflow) y mostraba un scroll vertical propio. card-especialista.js. */
+.lm-specialists-carousel__track .lm-card-especialista__tip { display: none; }
+.lm-specialists-carousel__track .lm-card-especialista__more { cursor: pointer; }
 .lm-specialists-carousel__arrow[hidden] { display: none; }
 .lm-specialists-carousel__arrow--prev { left: -24px; }
 .lm-specialists-carousel__arrow--next { right: calc(-26px + 0.5 * var(--lm-side)); }

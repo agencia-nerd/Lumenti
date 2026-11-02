@@ -10,7 +10,7 @@ defined('ABSPATH') || exit;
 
 $lumenti_hero = [
     'etiqueta' => 'DEPRESIÓN',
-    'titulo' => 'LA DEPRESIÓN
+    'titulo' => '*LA DEPRESIÓN*
 TIENE TRATAMIENTO',
     'nota' => 'Atención presencial y virtual para cada etapa de la vida.',
     'bajada' => 'La depresión puede afectar el ánimo, la energía, el sueño, la concentración y la capacidad de disfrutar las actividades cotidianas. No es falta de voluntad ni una tristeza pasajera: con una evaluación adecuada y un tratamiento personalizado, es posible reducir los síntomas y recuperar el bienestar.',
