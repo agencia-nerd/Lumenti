@@ -76,7 +76,7 @@ return [
                 ['titulo' => 'Especialistas', 'url' => '/especialistas/'],
                 ['titulo' => 'Qué tratamos', 'url' => '/#que-tratamos'],
                 ['titulo' => 'Blog', 'url' => '/blog/'],
-                ['titulo' => 'Preguntas frecuentes', 'pagina' => 'faq'],
+                ['titulo' => 'Preguntas frecuentes', 'pagina' => 'preguntas-frecuentes'],
             ],
         ],
         'legal' => [
