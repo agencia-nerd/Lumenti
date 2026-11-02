@@ -2,7 +2,7 @@
 /*
  * Listado de especialistas (specs/especialistas.md). Archivo del tipo de contenido `especialista` (/especialistas/).
  * Grupo ACF: Especialistas (página de opciones: archivo de especialista).
- * Filtros en el navegador: src/js/modules/specialists-filter.js ([data-lm-specialists]).
+ * Listado y filtros: wp-query (inc/query/especialista.php y src/js/modules/query.js, sin recargar).
  */
 defined('ABSPATH') || exit;
 

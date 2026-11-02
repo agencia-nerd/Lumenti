@@ -1,10 +1,10 @@
 {
-  "nota": "Hoja \"Subgrupos\". El buscador de Especialistas compara el texto (sin tildes, en minúsculas) con estas palabras y filtra por claves_que_trata. La columna de neurodivergencia se conserva solo como sinónimos: la categoría se eliminó del sitio.",
+  "nota": "El buscador de Especialistas compara el texto (sin tildes, en minúsculas) con el grupo y sus palabras; si coincide, busca a los especialistas que tratan las condiciones de que_trata (nombre del término de la taxonomía que_trata).",
   "grupos": [
     {
       "grupo": "ANSIEDAD",
-      "claves_que_trata": [
-        "ans"
+      "que_trata": [
+        "Trastornos de ansiedad"
       ],
       "palabras": [
         "Trastornos de ansiedad",
@@ -30,8 +30,8 @@
     },
     {
       "grupo": "DEPRESION",
-      "claves_que_trata": [
-        "dep"
+      "que_trata": [
+        "Depresión"
       ],
       "palabras": [
         "Tristeza",
@@ -63,8 +63,8 @@
     },
     {
       "grupo": "TDAH",
-      "claves_que_trata": [
-        "tdah"
+      "que_trata": [
+        "TDAH"
       ],
       "palabras": [
         "Trastorno de atención e hiperactividad",
@@ -88,8 +88,8 @@
     },
     {
       "grupo": "TOC",
-      "claves_que_trata": [
-        "toc"
+      "que_trata": [
+        "TOC"
       ],
       "palabras": [
         "Trastorno obsesivo compulsivo",
@@ -113,9 +113,9 @@
     },
     {
       "grupo": "TRASTORNOS DE PERSONALIDAD",
-      "claves_que_trata": [
-        "tlp",
-        "otp"
+      "que_trata": [
+        "TLP",
+        "Otros trastornos de la personalidad"
       ],
       "palabras": [
         "Trastorno límite de la personalidad",
@@ -134,10 +134,10 @@
     },
     {
       "grupo": "ATENCIÓN A PERSONAS NEURODIVERGENTES",
-      "claves_que_trata": [
-        "autismo",
-        "tdah",
-        "apr"
+      "que_trata": [
+        "Autismo (TEA)",
+        "TDAH",
+        "Dificultades de aprendizaje"
       ],
       "palabras": [
         "TEA",
@@ -158,8 +158,8 @@
     },
     {
       "grupo": "ADICCIONES",
-      "claves_que_trata": [
-        "adic"
+      "que_trata": [
+        "Adicciones"
       ],
       "palabras": [
         "Consumo de cocaína, alcohol, marihuana, pasta básica, anfetaminas, éxtasis, ketamina u otras sustancias psicoactivas",

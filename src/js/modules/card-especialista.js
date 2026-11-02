@@ -7,6 +7,9 @@ export function cardEspecialista() {
     if (!btns.length) return;
     const touch = !window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     btns.forEach((btn) => {
+        // Se vuelve a llamar cuando wp-query cambia las cards: solo se preparan las nuevas.
+        if (btn.dataset.lmBound) return;
+        btn.dataset.lmBound = '1';
         const list = btn.closest('[data-lm-chips], .lm-card-especialista__chips');
         if (!list) return;
         const label = labelNode(btn);
