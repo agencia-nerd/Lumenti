@@ -2,18 +2,20 @@
 defined('ABSPATH') || exit;
 
 /*
- * Informes y certificados · cta (specs/informes.md → cta). Grupo ACF: informes_cta.
- * Prepara los datos y llama al componente cta: botón de WhatsApp (número de paciente) con el mensaje de la página.
+ * Informes y certificados · cta (specs/informes-y-certificados.md → cta). Grupo ACF: informes_y_certificados_cta.
+ * Componente cta (el video, la insignia y la capa son del componente): botón de WhatsApp (número de paciente)
+ * con el mensaje del campo.
  */
 
-$lumenti_cta = [
-    'titulo' => '¿NECESITAS UN CERTIFICADO O INFORME CLÍNICO?',
-    'texto' => 'Cuéntanos para qué entidad o finalidad lo necesitas y te orientaremos sobre el documento, la evaluación y los requisitos correspondientes.',
-    'boton' => [
-        'texto' => 'Escríbenos por WhatsApp',
-        'whatsapp' => 'paciente',
-        'mensaje' => 'Hola, quisiera información sobre informes y certificados.',
-    ],
-];
+$lumenti_cta = get_field('informes_y_certificados_cta') ?: [];
+$lumenti_boton_texto = (string) ($lumenti_cta['boton_texto'] ?? '');
 
-get_template_part('template-parts/components/cta', null, $lumenti_cta);
+get_template_part('template-parts/components/cta', null, [
+    'titulo' => (string) ($lumenti_cta['titulo'] ?? ''),
+    'texto' => (string) ($lumenti_cta['texto'] ?? ''),
+    'boton' => $lumenti_boton_texto !== '' ? [
+        'texto' => $lumenti_boton_texto,
+        'whatsapp' => 'paciente',
+        'mensaje' => (string) ($lumenti_cta['mensaje_whatsapp'] ?? ''),
+    ] : [],
+]);

@@ -30,7 +30,7 @@ return [
                 ['titulo' => 'Psiquiatría', 'pagina' => 'psiquiatria'],
                 ['titulo' => 'Psicología', 'pagina' => 'psicologia'],
                 ['titulo' => 'Empresas', 'pagina' => 'empresas'],
-                ['titulo' => 'Informes y certificados', 'pagina' => 'informes'],
+                ['titulo' => 'Informes y certificados', 'pagina' => 'informes-y-certificados'],
             ],
         ],
         'tratamos' => [
@@ -65,7 +65,7 @@ return [
             'items'  => [
                 ['titulo' => 'Psiquiatría', 'pagina' => 'psiquiatria'],
                 ['titulo' => 'Psicología', 'pagina' => 'psicologia'],
-                ['titulo' => 'Informes y certificados', 'pagina' => 'informes'],
+                ['titulo' => 'Informes y certificados', 'pagina' => 'informes-y-certificados'],
                 ['titulo' => 'Empresas', 'pagina' => 'empresas'],
                 ['titulo' => 'Evaluaciones psicológicas', 'url' => '/psicologia/#evaluaciones'],
             ],

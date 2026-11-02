@@ -67,7 +67,7 @@ foreach ([['back', 503, 832], ['front', 578, 757]] as $lumenti_i => [$lumenti_po
                 <p class="lm-intro-split__p lm-intro-split__p--strong"><?= lumenti_highlight($lumenti_destacado) ?></p>
             <?php endif; ?>
             <?php if ($lumenti_aviso !== '') : ?>
-                <div class="lm-service-notice" role="note"><span class="lm-service-notice__icon" aria-hidden="true">!</span><p class="lm-service-notice__text"><?= esc_html($lumenti_aviso) ?></p></div>
+                <div class="lm-service-notice" role="note"><span class="lm-service-notice__icon" aria-hidden="true">!</span><p class="lm-service-notice__text"><?= lumenti_highlight($lumenti_aviso) ?></p></div>
             <?php endif; ?>
         </div>
         <?php if ($lumenti_fotos) : ?>
