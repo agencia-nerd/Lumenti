@@ -10,14 +10,16 @@ defined('ABSPATH') || exit;
 $lumenti_cab = get_field('opciones_cabecera', 'option') ?: [];
 $lumenti_redes = get_field('opciones_redes', 'option') ?: [];
 
+// WhatsApp de la cabecera, los mega menús y la card de "Qué tratamos": número y mensaje de paciente
+// (Ajustes del sitio → Contacto). El texto del botón es fijo.
 $lumenti_wa = [
-    'url' => lumenti_whatsapp_url('paciente', (string) ($lumenti_cab['mensaje_whatsapp'] ?? '')),
-    'title' => (string) ($lumenti_cab['boton_texto'] ?? ''),
+    'url' => lumenti_whatsapp_url('paciente', lumenti_whatsapp_message('paciente')),
+    'title' => __('WhatsApp', 'lumenti'),
     'target' => '_blank',
 ];
-// El botón flotante usa el número de la página (Empresas: corporativo; su mensaje pasa a ACF con Empresas).
+// El botón flotante usa el contexto de la página: en Empresas, número y mensaje corporativos.
 $lumenti_wa_fab = lumenti_whatsapp_context() === 'corporativo'
-    ? lumenti_whatsapp_url('corporativo', 'Hola, quisiera información sobre las soluciones de salud mental para empresas.')
+    ? lumenti_whatsapp_url('corporativo', lumenti_whatsapp_message('corporativo'))
     : $lumenti_wa['url'];
 
 $lumenti_principal = lumenti_menu_tree('principal');
@@ -61,7 +63,7 @@ $lumenti_mega_pie = static function () use ($lumenti_ayuda_texto, $lumenti_ayuda
     <?php
 };
 
-// Botón de la cabecera y del menú móvil (opciones_cabecera_boton_texto).
+// Botón de la cabecera y del menú móvil (texto fijo "WhatsApp").
 $lumenti_wa_boton = static function (string $clase) use ($lumenti_wa, $lumenti_nueva) {
     if ($lumenti_wa['url'] === '' || $lumenti_wa['title'] === '') {
         return;

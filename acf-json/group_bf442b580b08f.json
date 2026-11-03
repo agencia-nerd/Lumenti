@@ -45,48 +45,6 @@
                     "preview_size": "medium"
                 },
                 {
-                    "key": "field_e00116cf5eefa",
-                    "label": "Botón texto",
-                    "name": "boton_texto",
-                    "aria-label": "",
-                    "type": "text",
-                    "instructions": "Texto del botón de WhatsApp de la cabecera y del menú móvil.",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "maxlength": "",
-                    "allow_in_bindings": 0,
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": ""
-                },
-                {
-                    "key": "field_783d6cb2e49a7",
-                    "label": "Mensaje whatsapp",
-                    "name": "mensaje_whatsapp",
-                    "aria-label": "",
-                    "type": "text",
-                    "instructions": "Mensaje que se escribe solo al abrir WhatsApp desde la cabecera, los mega menús y el botón flotante.",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "maxlength": "",
-                    "allow_in_bindings": 0,
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": ""
-                },
-                {
                     "key": "field_55f436af5ed1a",
                     "label": "Ayuda texto",
                     "name": "ayuda_texto",
@@ -215,12 +173,54 @@
                     "append": ""
                 },
                 {
+                    "key": "field_ba78702fd7446",
+                    "label": "Mensaje paciente",
+                    "name": "mensaje_paciente",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Mensaje que se escribe solo al abrir WhatsApp desde la cabecera, los menús y el botón flotante.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
                     "key": "field_e55db8cc58fc9",
                     "label": "Teléfono corporativo",
                     "name": "telefono_corporativo",
                     "aria-label": "",
                     "type": "text",
                     "instructions": "Teléfono y WhatsApp de atención corporativa, con código de país. Lo usan el pie y los botones de WhatsApp de Empresas.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_1533d611790eb",
+                    "label": "Mensaje corporativo",
+                    "name": "mensaje_corporativo",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Mensaje del botón flotante de WhatsApp en la página de Empresas.",
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -497,5 +497,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1793395718
+    "modified": 1793728290
 }

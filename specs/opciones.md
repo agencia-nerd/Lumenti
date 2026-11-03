@@ -23,7 +23,7 @@
 - **Destino:** `header.php`, `template-parts/components/mm-card.php`
 - **Grupo:** `opciones_cabecera`
 - **Skill:** wp-helper
-- **Comportamiento:** header sticky que cambia a tono oscuro sobre secciones `[data-lm-nav-tone="dark"]` (muestra el logo alternativo); mega menús por hover y teclado; menú móvil a pantalla completa bajo 1200 px; botón flotante de WhatsApp bajo 1200 px. El número del botón sale de `opciones_contacto_telefono_paciente` (o del corporativo con `data-lm-wa-context="empresas"`). El logo principal viene de Identidad del sitio; los enlaces de los menús, de las ubicaciones `principal`, `servicios` y `tratamos`.
+- **Comportamiento:** header sticky que cambia a tono oscuro sobre secciones `[data-lm-nav-tone="dark"]` (muestra el logo alternativo); mega menús por hover y teclado; menú móvil a pantalla completa bajo 1200 px; botón flotante de WhatsApp bajo 1200 px. El número y el mensaje de WhatsApp salen de la sección contacto: `opciones_contacto_telefono_paciente` y `opciones_contacto_mensaje_paciente` para el botón "WhatsApp", el pie de los mega menús, la card de "Qué tratamos" y el botón flotante; en Empresas el botón flotante usa `opciones_contacto_telefono_corporativo` y `opciones_contacto_mensaje_corporativo`. El texto "WhatsApp" del botón es fijo (decisión del 2026-11-03). El logo principal viene de Identidad del sitio; los enlaces de los menús, de las ubicaciones `principal`, `servicios` y `tratamos`.
 - **Estado:** aplicado
 - **ACF:** conectado
 
@@ -32,8 +32,6 @@
 | Campo | Tipo | Descripción | Valor actual | Requerido |
 |---|---|---|---|---|
 | `opciones_cabecera_logo_alternativo` | image | Versión blanca del logo. Se usa en la cabecera sobre fondos oscuros y en el pie. | — | sí |
-| `opciones_cabecera_boton_texto` | text | Texto del botón de WhatsApp de la cabecera y del menú móvil. | WhatsApp | sí |
-| `opciones_cabecera_mensaje_whatsapp` | text | Mensaje que se escribe solo al abrir WhatsApp desde la cabecera, los mega menús y el botón flotante. | Hola, quisiera agendar una cita. | sí |
 | `opciones_cabecera_ayuda_texto` | text | Texto al pie de los mega menús, antes del enlace de contacto. | ¿No sabes cuál elegir? | no |
 | `opciones_cabecera_ayuda_enlace` | text | Texto del enlace al pie de los mega menús (abre WhatsApp). | Contáctanos | no |
 | `opciones_cabecera_tratamos_titulo` | text | Título de la card con imagen del mega menú "Qué tratamos". | ¿NO SABES QUÉ CONDICIÓN TE AFECTA? | no |
@@ -61,7 +59,9 @@
 | Campo | Tipo | Descripción | Valor actual | Requerido |
 |---|---|---|---|---|
 | `opciones_contacto_telefono_paciente` | text | Teléfono y WhatsApp de atención al paciente, con código de país. Lo usan el pie y los botones de WhatsApp de todo el sitio. | +51 939 033 999 | sí |
+| `opciones_contacto_mensaje_paciente` | text | Mensaje que se escribe solo al abrir WhatsApp desde la cabecera, los menús y el botón flotante. | Hola, quisiera agendar una cita. | sí |
 | `opciones_contacto_telefono_corporativo` | text | Teléfono y WhatsApp de atención corporativa, con código de país. Lo usan el pie y los botones de WhatsApp de Empresas. | +51 942 901 535 | sí |
+| `opciones_contacto_mensaje_corporativo` | text | Mensaje del botón flotante de WhatsApp en la página de Empresas. | Hola, quisiera información sobre las soluciones de salud mental para empresas. | sí |
 | `opciones_contacto_correo` | email | Correo de contacto del pie | contacto@lumentisaludmental.com | sí |
 | `opciones_contacto_direccion` | text | Dirección del consultorio. Abre Google Maps. | C. Los Antares 320, Santiago de Surco 15038 | sí |
 
