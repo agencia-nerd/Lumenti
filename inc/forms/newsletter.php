@@ -12,7 +12,7 @@ add_filter('lumenti_forms', function ($forms) {
         'subject'  => 'Nueva suscripción al newsletter desde la web',
         'to'       => lumenti_form_recipients('newsletter'),
         'reply_to' => 'email',
-        'store'    => 'none',
+        'store'    => 'all', // Envíos guardados: admin → Envíos. Un correo ya suscrito se rechaza (inc/forms-envios.php).
         'redirect' => '',
         'success'  => '¡Listo! Te suscribiste. Pronto recibirás nuestros artículos en tu correo.',
 
