@@ -4,29 +4,83 @@ import { prefersReducedMotion } from './utils.js';
 const html = document.documentElement;
 const PRE_KEY = 'lmPreSeen';
 
-// Preloader: una vez por sesión. Mientras está activo, el hero espera (html sin .lm-go).
-// Corre en todas las páginas: sin preloader solo libera el hero (.lm-go).
+// Preloader (una vez por sesión), como en el diseño: aparece el cerebro, se desplaza, entra la palabra, el círculo
+// verde cubre la pantalla y un anillo se abre desde el centro dejando ver el hero. Mientras dura, el hero espera
+// (html sin .lm-go). Corre en todas las páginas: sin preloader solo libera el hero (.lm-go).
+const EASE_OUT = 'cubic-bezier(.2,.8,.2,1)';
+const EASE_IO = 'cubic-bezier(.65,0,.35,1)';
+
+const animate = (el, frames, opts) => el.animate(frames, { fill: 'forwards', easing: EASE_OUT, ...opts });
+
+// Apertura: una máscara radial deja un agujero que crece desde el centro y un anillo verde marca su borde.
+function openPreloader(pre, finish) {
+    const brain = pre.querySelector('[data-lm-pre-brain]');
+    const ring = pre.querySelector('[data-lm-pre-ring]');
+    const W = window.innerWidth;
+    const H = window.innerHeight;
+    const cx = W / 2;
+    const cy = H / 2;
+    const r0 = brain.getBoundingClientRect().width / 2;
+    const r1 = Math.hypot(cx, cy) + 4;
+    const t0 = performance.now();
+    const DUR = 850;
+    const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+    html.classList.add('lm-go');
+    ring.style.opacity = '1';
+    const step = (now) => {
+        const t = Math.min(1, (now - t0) / DUR);
+        const r = r0 + (r1 - r0) * ease(t);
+        const mask = `radial-gradient(circle at ${cx}px ${cy}px, transparent ${r.toFixed(1)}px, #000 ${(r + 1).toFixed(1)}px)`;
+        pre.style.webkitMaskImage = mask;
+        pre.style.maskImage = mask;
+        ring.style.width = ring.style.height = `${(2 * r).toFixed(1)}px`;
+        ring.style.transform = `translate(${(cx - r).toFixed(1)}px,${(cy - r).toFixed(1)}px)`;
+        ring.style.opacity = String(1 - Math.max(0, (t - 0.55) / 0.45));
+        if (t < 1) requestAnimationFrame(step);
+        else finish();
+    };
+    step(t0);
+}
+
 export function preloader() {
     const pre = document.querySelector('[data-lm-preloader]');
     let seen = false;
     try { seen = sessionStorage.getItem(PRE_KEY) === '1'; } catch { /* sin storage */ }
-    if (!pre || seen || prefersReducedMotion()) {
+    if (!pre || seen || prefersReducedMotion() || !pre.animate) {
         pre?.remove();
         html.classList.add('lm-go');
         return;
     }
-    html.classList.add('lm-pre-on');
+    try { sessionStorage.setItem(PRE_KEY, '1'); } catch { /* sin storage */ }
     pre.hidden = false;
-    setTimeout(() => pre.classList.add('is-ready'), 60);
-    setTimeout(() => {
-        pre.classList.add('is-leaving');
-        html.classList.add('lm-go');
-    }, 1900);
-    setTimeout(() => {
-        pre.remove();
+    html.classList.add('lm-pre-on');
+    const brain = pre.querySelector('[data-lm-pre-brain]');
+    const word = pre.querySelector('[data-lm-pre-word]');
+    const row = pre.querySelector('[data-lm-pre-row]');
+    const green = pre.querySelector('[data-lm-pre-fill]');
+    // El cerebro empieza centrado en la pantalla (desplazado hacia la derecha del lugar que ocupa en el logo).
+    const rb = row.getBoundingClientRect();
+    const bb = brain.getBoundingClientRect();
+    const off = (rb.left + rb.width / 2) - (bb.left + bb.width / 2);
+    let done = false;
+    const finish = () => {
+        if (done) return;
+        done = true;
         html.classList.remove('lm-pre-on');
-        try { sessionStorage.setItem(PRE_KEY, '1'); } catch { /* sin storage */ }
-    }, 2700);
+        html.classList.add('lm-go');
+        pre.remove();
+    };
+    animate(brain, [{ opacity: 0, transform: `translateX(${off}px) scale(.86)` }, { opacity: 1, transform: `translateX(${off}px) scale(1)` }], { duration: 500, delay: 40 });
+    animate(brain, [{ transform: `translateX(${off}px)` }, { transform: 'none' }], { duration: 650, delay: 550, easing: EASE_IO });
+    animate(word, [{ clipPath: 'inset(0 100% 0 0)', transform: 'translateX(-10px)' }, { clipPath: 'inset(0 0% 0 0)', transform: 'none' }], { duration: 550, delay: 1150 });
+    const t = 1850;
+    animate(green, [{ transform: 'translate(-50%, -50%) scale(0)' }, { transform: 'translate(-50%, -50%) scale(1)' }], { duration: 700, delay: t, easing: EASE_IO });
+    [brain, word].forEach((el) => {
+        animate(el, [{ backgroundColor: getComputedStyle(el).backgroundColor }, { backgroundColor: '#ffffff' }], { duration: 360, delay: t + 220, easing: 'linear' });
+    });
+    setTimeout(() => html.classList.add('lm-go'), t - 250);
+    setTimeout(() => openPreloader(pre, finish), t + 1150);
+    setTimeout(finish, t + 1150 + 1500); // red de seguridad
 }
 
 // Hero: slides con pestañas, autoavance cada 6 s, pausa con hover/foco en el CTA. Arranca con .lm-go.

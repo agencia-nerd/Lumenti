@@ -10,10 +10,14 @@ defined('ABSPATH') || exit;
 get_header();
 ?>
 
-<?php // Preloader: una vez por sesión (src/js/modules/home.js → preloader). Sin JS queda oculto (hidden). ?>
+<?php // Preloader: una vez por sesión (src/js/modules/home.js → preloader). Sin JS queda oculto (hidden). Todo decorativo. ?>
 <div class="lm-preloader" hidden aria-hidden="true" data-lm-preloader>
-    <?= lumenti_theme_image('assets/img/logo.svg', ['class' => 'lm-preloader__logo', 'alt' => '', 'width' => 260, 'height' => 42, 'loading' => 'eager']) ?>
-    <span class="lm-preloader__dot"></span>
+    <span class="lm-preloader__fill" data-lm-pre-fill></span>
+    <div class="lm-preloader__logo" data-lm-pre-row>
+        <span class="lm-preloader__brain" data-lm-pre-brain></span>
+        <span class="lm-preloader__word" data-lm-pre-word></span>
+    </div>
+    <span class="lm-preloader__ring" data-lm-pre-ring></span>
 </div>
 
 <main id="main-content" class="lm-home">
