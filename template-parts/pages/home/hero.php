@@ -29,7 +29,8 @@ $lumenti_sello_offsets = ['61.78', '183', '297'];
             $lumenti_bajada = (string) ($lumenti_slide['bajada'] ?? '');
             $lumenti_boton_texto = (string) ($lumenti_slide['boton_texto'] ?? '');
         ?>
-            <div class="lm-home-hero__slide <?= $lumenti_i === 0 ? 'is-active' : 'is-hidden' ?>" id="lm-hero-slide-<?= (int) $lumenti_i ?>" role="tabpanel" aria-labelledby="lm-hero-tab-<?= (int) $lumenti_i ?>" aria-hidden="<?= $lumenti_i === 0 ? 'false' : 'true' ?>" data-lm-hero-text="<?= (int) $lumenti_i ?>">
+            <?php // Los slides ocultos llevan inert: su botón no recibe foco (home.js lo alterna al cambiar de slide). ?>
+            <div class="lm-home-hero__slide <?= $lumenti_i === 0 ? 'is-active' : 'is-hidden' ?>" id="lm-hero-slide-<?= (int) $lumenti_i ?>" role="tabpanel" aria-labelledby="lm-hero-tab-<?= (int) $lumenti_i ?>" aria-hidden="<?= $lumenti_i === 0 ? 'false' : 'true' ?>"<?= $lumenti_i === 0 ? '' : ' inert' ?> data-lm-hero-text="<?= (int) $lumenti_i ?>">
                 <<?= $lumenti_tag ?> class="lm-home-hero__title">
                     <?php foreach ($lumenti_lineas as $lumenti_n => $lumenti_linea) :
                         $lumenti_acento = (bool) preg_match('/^\*(.+)\*$/u', $lumenti_linea, $lumenti_m);
@@ -49,7 +50,6 @@ $lumenti_sello_offsets = ['61.78', '183', '297'];
                             'mensaje' => (string) ($lumenti_slide['boton_mensaje'] ?? ''),
                             'icono' => 'flecha',
                             'clase' => 'lm-home-hero__cta',
-                            'atributos' => ['data-lm-hero-pause' => ''],
                         ]); ?>
                     </div>
                 <?php endif; ?>
@@ -66,7 +66,7 @@ $lumenti_sello_offsets = ['61.78', '183', '297'];
                     <?= lumenti_image($lumenti_slide['imagen'] ?? null, [
                         'alt_fallback' => $lumenti_alt_slide,
                         'class' => 'lm-home-hero__img',
-                        'loading' => 'eager',
+                        'loading' => $lumenti_i === 0 ? 'eager' : 'lazy',
                         'fetchpriority' => $lumenti_i === 0 ? 'high' : '',
                         'size' => 'large',
                     ]) ?>
@@ -78,12 +78,21 @@ $lumenti_sello_offsets = ['61.78', '183', '297'];
             <?= lumenti_theme_image('assets/img/badge-icon.svg', ['class' => 'lm-home-hero__badge-logo', 'alt' => '', 'width' => 64, 'height' => 75, 'loading' => 'eager']) ?>
         </div>
     </div>
-    <div class="lm-home-hero__tabs" role="tablist" aria-label="<?= esc_attr__('Áreas', 'lumenti') ?>">
-        <?php foreach ($lumenti_slides as $lumenti_i => $lumenti_slide) : ?>
-            <button class="lm-home-hero__tab" type="button" role="tab" id="lm-hero-tab-<?= (int) $lumenti_i ?>" aria-selected="<?= $lumenti_i === 0 ? 'true' : 'false' ?>" aria-controls="lm-hero-slide-<?= (int) $lumenti_i ?>" tabindex="<?= $lumenti_i === 0 ? '0' : '-1' ?>" data-lm-hero-tab="<?= (int) $lumenti_i ?>">
-                <span><?= esc_html(sprintf('%02d. %s', $lumenti_i + 1, (string) ($lumenti_slide['pestana'] ?? ''))) ?></span>
-                <span class="lm-home-hero__tab-track"><span class="lm-home-hero__tab-fill" data-lm-hero-fill></span></span>
+    <div class="lm-home-hero__tabs">
+        <div class="lm-home-hero__tablist" role="tablist" aria-label="<?= esc_attr__('Áreas', 'lumenti') ?>">
+            <?php foreach ($lumenti_slides as $lumenti_i => $lumenti_slide) : ?>
+                <button class="lm-home-hero__tab" type="button" role="tab" id="lm-hero-tab-<?= (int) $lumenti_i ?>" aria-selected="<?= $lumenti_i === 0 ? 'true' : 'false' ?>" aria-controls="lm-hero-slide-<?= (int) $lumenti_i ?>" tabindex="<?= $lumenti_i === 0 ? '0' : '-1' ?>" data-lm-hero-tab="<?= (int) $lumenti_i ?>">
+                    <span><?= esc_html(sprintf('%02d. %s', $lumenti_i + 1, (string) ($lumenti_slide['pestana'] ?? ''))) ?></span>
+                    <span class="lm-home-hero__tab-track"><span class="lm-home-hero__tab-fill" data-lm-hero-fill></span></span>
+                </button>
+            <?php endforeach; ?>
+        </div>
+        <?php // Pausa del avance automático (WCAG 2.2.2). Oculto sin JS o con movimiento reducido: ahí no hay avance automático. ?>
+        <?php if (count($lumenti_slides) > 1) : ?>
+            <button class="lm-home-hero__pause" type="button" aria-pressed="false" aria-label="<?= esc_attr__('Pausar la presentación', 'lumenti') ?>" hidden data-lm-hero-toggle>
+                <svg class="lm-home-hero__pause-icon lm-home-hero__pause-icon--pause" aria-hidden="true" width="16" height="16" viewBox="0 0 256 256" fill="currentColor"><path d="M216,48V208a16,16,0,0,1-16,16H164a16,16,0,0,1-16-16V48a16,16,0,0,1,16-16h36A16,16,0,0,1,216,48ZM92,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16H92a16,16,0,0,0,16-16V48A16,16,0,0,0,92,32Z"/></svg>
+                <svg class="lm-home-hero__pause-icon lm-home-hero__pause-icon--play" aria-hidden="true" width="16" height="16" viewBox="0 0 256 256" fill="currentColor"><path d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"/></svg>
             </button>
-        <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 </section>

@@ -177,7 +177,8 @@ $lumenti_wa_boton = static function (string $clase) use ($lumenti_wa, $lumenti_n
                         <a<?= lumenti_link_attrs(lumenti_menu_link($lumenti_item), ['class' => 'lm-mobile-menu__link' . ($lumenti_i === $lumenti_ultimo ? ' lm-mobile-menu__link--last' : '')]) ?><?= $lumenti_item['actual'] ? ' aria-current="page"' : '' ?>><?= esc_html($lumenti_item['titulo']) ?></a>
                     <?php else : ?>
                         <button class="lm-mobile-menu__toggle" type="button" aria-expanded="false" aria-controls="lm-msub-<?= esc_attr($lumenti_m) ?>" data-lm-sub-toggle><?= esc_html($lumenti_item['titulo']) ?><?= $lumenti_caret_m // phpcs:ignore -- SVG fijo ?></button>
-                        <div class="lm-mobile-menu__sub" id="lm-msub-<?= esc_attr($lumenti_m) ?>">
+                        <?php // Cerrado: inert (sus enlaces no reciben foco). navbar.js lo alterna al abrir. ?>
+                        <div class="lm-mobile-menu__sub" id="lm-msub-<?= esc_attr($lumenti_m) ?>" inert>
                             <div class="lm-mobile-menu__sub-inner">
                                 <?php if ($lumenti_m === 'servicios') : ?>
                                     <div class="lm-mobile-menu__sub-list">

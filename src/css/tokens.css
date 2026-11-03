@@ -34,6 +34,7 @@
   --lm-line: var(--color-line);
   --lm-line-2: var(--color-line-2);
   --lm-nav: var(--color-nav);
+  --lm-field-line: #868b91; /* borde de campos: 3.4:1 sobre blanco, 3.1:1 sobre arena (WCAG 1.4.11) */
   --lm-white: var(--color-white);
   --lm-tag: var(--color-tag);
   --lm-dark: var(--color-dark);

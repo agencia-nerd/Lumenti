@@ -53,17 +53,13 @@ export function empresasSteps() {
     const set = (i) => {
         if (i === cur) return;
         cur = i;
-        items.forEach((el, k) => {
-            el.classList.toggle('is-active', k === i);
-            el.setAttribute('aria-hidden', k === i || mq.matches ? 'false' : 'true');
-        });
+        // Solo cambia lo visual (opacidad): los 4 pasos siguen en el árbol de accesibilidad, porque el lector de
+        // pantalla recorre la lista sin hacer scroll.
+        items.forEach((el, k) => el.classList.toggle('is-active', k === i));
         nums.forEach((el, k) => el.classList.toggle('is-active', k === i));
     };
     const onScroll = () => {
-        if (mq.matches) {
-            items.forEach((el) => el.setAttribute('aria-hidden', 'false'));
-            return;
-        }
+        if (mq.matches) return;
         const r = root.getBoundingClientRect();
         const total = root.offsetHeight - window.innerHeight;
         const p = total > 0 ? Math.min(0.999, Math.max(0, -r.top / total)) : 0;

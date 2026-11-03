@@ -83,7 +83,10 @@ export function preloader() {
     setTimeout(finish, t + 1150 + 1500); // red de seguridad
 }
 
-// Hero: slides con pestañas, autoavance cada 6 s, pausa con hover/foco en el CTA. Arranca con .lm-go.
+// Hero: slides con pestañas y autoavance cada 6 s. Arranca con .lm-go.
+// Pausa (WCAG 2.2.2): el botón [data-lm-hero-toggle] detiene o reanuda el avance; el hover sobre el hero lo pausa
+// mientras dura y el foco de teclado dentro del hero lo detiene hasta que se pulse reanudar (patrón WAI-ARIA).
+// Con movimiento reducido no hay avance automático y el botón queda oculto.
 export function heroSlider() {
     const hero = document.querySelector('[data-lm-hero]');
     if (!hero) return;
@@ -94,6 +97,7 @@ export function heroSlider() {
     const imgs = q('[data-lm-hero-img]');
     const nums = q('[data-lm-hero-num]');
     const tabs = q('[data-lm-hero-tab]');
+    const toggle = hero.querySelector('[data-lm-hero-toggle]');
     if (!texts.length) return;
     const ken = texts.map(() => 0);
     let cur = 0;
@@ -101,19 +105,29 @@ export function heroSlider() {
     let left = DUR;
     let timer = 0;
     let paused = false;
+    let stopped = false; // detenido por el usuario (botón o foco)
+    let hovered = false; // pausa temporal mientras el mouse está sobre el hero
 
     const phase = (list, i, prev) => {
         list.forEach((el, k) => {
             el.classList.remove('is-active', 'is-in', 'is-out', 'is-hidden');
             el.classList.add(k === i ? (prev == null ? 'is-active' : 'is-in') : (k === prev ? 'is-out' : 'is-hidden'));
-            if (el.hasAttribute('data-lm-hero-text')) el.setAttribute('aria-hidden', k === i ? 'false' : 'true');
+            if (el.hasAttribute('data-lm-hero-text')) {
+                el.setAttribute('aria-hidden', k === i ? 'false' : 'true');
+                // Fuera del slide visible nada recibe foco (el botón del slide oculto seguía en el orden de Tab).
+                el.inert = k !== i;
+            }
         });
     };
     const schedule = () => {
         clearTimeout(timer);
+        timer = 0;
         if (paused || reduce) return;
         t0 = Date.now();
-        timer = setTimeout(() => show((cur + 1) % texts.length), left);
+        timer = setTimeout(() => {
+            timer = 0;
+            show((cur + 1) % texts.length);
+        }, left);
     };
     const restart = () => {
         tabs.forEach((t, k) => {
@@ -142,12 +156,19 @@ export function heroSlider() {
         });
         restart();
     }
-    const pause = (on) => {
+    // Recalcula la pausa: guarda el tiempo que le quedaba al slide y lo retoma al reanudar.
+    const sync = () => {
+        const on = stopped || hovered;
+        if (toggle) toggle.setAttribute('aria-pressed', stopped ? 'true' : 'false');
+        if (on === paused) return;
         paused = on;
         hero.classList.toggle('is-paused', on);
         if (on) {
-            clearTimeout(timer);
-            left = Math.max(0, left - (Date.now() - t0));
+            if (timer) {
+                clearTimeout(timer);
+                timer = 0;
+                left = Math.max(0, left - (Date.now() - t0));
+            }
         } else schedule();
     };
 
@@ -162,12 +183,33 @@ export function heroSlider() {
         });
         t.tabIndex = k === 0 ? 0 : -1;
     });
-    q('[data-lm-hero-pause]').forEach((a) => {
-        a.addEventListener('mouseenter', () => pause(true));
-        a.addEventListener('mouseleave', () => pause(false));
-        a.addEventListener('focus', () => pause(true));
-        a.addEventListener('blur', () => pause(false));
-    });
+    if (!reduce && texts.length > 1) {
+        if (toggle) {
+            toggle.hidden = false;
+            toggle.addEventListener('click', () => {
+                stopped = !stopped;
+                sync();
+            });
+        }
+        // Hover en cualquier parte del hero (solo mouse). Sobre el botón no cuenta: al pulsar "reanudar" con el
+        // mouse encima, el avance tiene que arrancar en el momento.
+        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            hero.addEventListener('mouseover', (e) => {
+                hovered = !(toggle && toggle.contains(e.target));
+                sync();
+            });
+            hero.addEventListener('mouseleave', () => {
+                hovered = false;
+                sync();
+            });
+        }
+        // Foco dentro del hero (pestañas, CTA): se detiene hasta que se pulse reanudar.
+        hero.addEventListener('focusin', (e) => {
+            if (toggle && toggle.contains(e.target)) return;
+            stopped = true;
+            sync();
+        });
+    }
 
     if (html.classList.contains('lm-go')) restart();
     else {
