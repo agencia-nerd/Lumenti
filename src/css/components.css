@@ -635,7 +635,9 @@
 .lm-pills { display: flex; flex-wrap: wrap; gap: 6px; }
 .lm-pills__btn { height: 44px; padding: 0 16px; border: 1px solid #e2dfd7; border-radius: 4px; background: var(--lm-white); color: var(--lm-ink-2); font-size: 15px; line-height: 20px; white-space: nowrap; cursor: pointer; transition: background-color 250ms linear, color 200ms linear, border-color 250ms linear; }
 .lm-pills__btn:hover { border-color: var(--lm-teal); }
-.lm-pills__btn[aria-pressed="true"] { background: var(--lm-teal); border-color: var(--lm-teal); color: var(--lm-white); }
+.lm-pills__btn[aria-pressed="true"], .lm-pills__btn[aria-current="true"] { background: var(--lm-teal); border-color: var(--lm-teal); color: var(--lm-white); }
+/* Pill como enlace (Blog: cada categoría es una URL de wp-query). */
+a.lm-pills__btn { display: inline-flex; align-items: center; text-decoration: none; }
 @media (max-width: 767px) { .lm-pills { flex-wrap: nowrap; overflow-x: auto; margin: 0 calc(-1 * var(--lm-side)); padding: 0 var(--lm-side); scrollbar-width: none; } .lm-pills::-webkit-scrollbar { display: none; } }
 
 /* ---------- Newsletter dentro del CTA (.lm-cta__form) ---------- */

@@ -23,11 +23,13 @@ get_header();
         </section>
     </div>
     <?php
-    // Blog → cta (grupo ACF blog_cta). El form del newsletter es de wp-form: template-parts/forms/newsletter.php.
+    // Blog → cta (grupo ACF blog_cta, página de opciones Archivo de post). El form del newsletter es de wp-form:
+    // template-parts/forms/newsletter.php; sus textos de interfaz (etiquetas, errores) quedan fijos aquí.
+    $lumenti_cta = get_field('blog_cta', 'option') ?: [];
     get_template_part('template-parts/components/cta', null, [
         'id' => 'lm-cta-blog',
-        'titulo' => 'MANTENTE AL DÍA CON NUESTRO CONTENIDO.',
-        'texto' => 'Artículos sobre salud mental escritos por nuestros especialistas. Novedades, recursos y contenido educativo, directo a tu correo y sin spam.',
+        'titulo' => (string) ($lumenti_cta['titulo'] ?? ''),
+        'texto' => (string) ($lumenti_cta['texto'] ?? ''),
         'newsletter' => true,
         'form' => [
             'email_label' => 'Correo electrónico',
@@ -37,8 +39,8 @@ get_header();
             'privacidad_enlace_texto' => 'Política de privacidad',
             'privacidad_url' => home_url('/politica-de-privacidad/'),
             'privacidad_error' => 'Debes aceptar la Política de privacidad.',
-            'boton' => 'Suscribirme',
-            'exito' => '¡Listo! Te suscribiste. Pronto recibirás nuestros artículos en tu correo.',
+            'boton' => (string) ($lumenti_cta['boton_texto'] ?? ''),
+            'exito' => (string) ($lumenti_cta['exito'] ?? ''),
             'honeypot_label' => 'No completar',
         ],
     ]);

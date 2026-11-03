@@ -68,6 +68,11 @@
 @import "./pages/blog.css";
 @import "./pages/pages.css";
 
+/* WordPress imprime `:where(figure){margin:0 0 1em}` (estilos de bloques) fuera de las capas, así que le ganaba a
+   cualquier margen del tema (las hojas del diseño van en @layer). `revert-layer` devuelve a cada figure el margen
+   de su capa (base.css o el de su componente, ej. la foto del artículo). Va fuera de capa a propósito. */
+figure { margin: revert-layer; }
+
 /* Parte de un texto en otro color: `*texto*` con lumenti_highlight() (inc/helpers/text-styles.php). */
 @layer components {
   .lm-accent { color: var(--lm-teal); }

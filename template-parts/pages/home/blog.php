@@ -3,7 +3,8 @@ defined('ABSPATH') || exit;
 
 /*
  * Inicio · blog (specs/home.md → blog, grupo ACF home_blog). 4 artículos con template-parts/components/blog-card.php
- * (variante compacta). Textos: get_field('home_blog'). Cards de muestra en inc/muestras/home-blog.php hasta conectar Blog.
+ * (variante compacta). Textos: get_field('home_blog'). Artículos: los elegidos en "Artículos a mostrar"
+ * (home_blog_seleccion, inc/campos-extra.php), en ese orden; vacío, los 4 más recientes (lumenti_blog_inicio).
  */
 
 $lumenti_blog = get_field('home_blog') ?: [];
@@ -11,7 +12,7 @@ $lumenti_titulo = (string) ($lumenti_blog['titulo'] ?? '');
 $lumenti_bajada = (string) ($lumenti_blog['bajada'] ?? '');
 $lumenti_boton = lumenti_link_data($lumenti_blog['boton'] ?? null);
 $lumenti_boton_attrs = $lumenti_boton && $lumenti_boton['title'] !== '' ? lumenti_link_attrs($lumenti_blog['boton'], ['class' => 'lm-btn lm-btn--secondary lm-home-blog__all']) : '';
-$lumenti_articulos = require get_theme_file_path('inc/muestras/home-blog.php');
+$lumenti_articulos = lumenti_blog_inicio((array) ($lumenti_blog['seleccion'] ?? []));
 ?>
 <section class="lm-home-blog"<?php if ($lumenti_titulo !== '') : ?> aria-labelledby="lm-blog"<?php endif; ?> data-lm-section="blog">
     <div class="lm-home-blog__header">

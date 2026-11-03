@@ -2,15 +2,18 @@
 defined('ABSPATH') || exit;
 
 /*
- * Campos ACF que wp-acf todavía no genera (tipo relationship). Código propio del proyecto: no toca la skill ni
+ * Campos ACF que wp-acf todavía no genera (relationship, post_object, taxonomy). Código propio del proyecto: no toca la skill ni
  * el JSON generado. Cada campo se suma como subcampo local al grupo de la sección que ya viene de acf-json/
  * (ACF carga ese JSON como campos locales en acf/include_fields, prioridad 10; este archivo corre después).
- * Si una versión futura de wp-acf genera relationship, el campo pasa al spec, se genera y se borra de aquí
- * (mismo nombre: los valores guardados se conservan). Anotado en specs/psiquiatria.md y specs/psicologia.md.
+ * Si una versión futura de wp-acf genera ese tipo, el campo pasa al spec, se genera y se borra de aquí
+ * (mismo nombre: los valores guardados se conservan). Cada uno está anotado en su spec como "Campo fuera de wp-acf".
  *
  * - psiquiatria_especialistas_seleccion / psicologia_especialistas_seleccion: especialistas del carrusel,
  *   elegidos y ordenados a mano. Vacío: todos los del tipo de la página, por su orden (lumenti_especialistas_cards).
  * - condicion_especialistas_que_trata (taxonomy): el término de que_trata de cada condición (specs/condicion.md).
+ * - blog_destacado_articulo (post_object): el artículo destacado del blog (specs/blog.md).
+ * - home_blog_seleccion (relationship): los artículos del Inicio, elegidos y ordenados a mano; vacío, los 4 más
+ *   recientes (specs/home.md).
  */
 
 const LUMENTI_CAMPOS_SELECCION = [
@@ -67,6 +70,47 @@ add_action('acf/include_fields', function () {
             'multiple'      => 0,
             'parent'        => $padre['key'],
             'menu_order'    => 0,
+        ]);
+    }
+
+    // Blog: el artículo destacado arriba del listado (grupo blog_destacado de "Archivo de post").
+    $padre = $locales->get('blog_destacado');
+    if ($padre && ($padre['type'] ?? '') === 'group') {
+        acf_add_local_field([
+            'key'           => 'field_lumenti_blog_destacado_articulo',
+            'label'         => 'Artículo destacado',
+            'name'          => 'articulo',
+            'type'          => 'post_object',
+            'instructions'  => 'Se muestra arriba del blog. Vacío: no hay destacado.',
+            'required'      => 0,
+            'post_type'     => ['post'],
+            'post_status'   => ['publish'],
+            'allow_null'    => 1,
+            'multiple'      => 0,
+            'ui'            => 1,
+            'return_format' => 'id',
+            'parent'        => $padre['key'],
+            'menu_order'    => -1,
+        ]);
+    }
+
+    // Inicio: los artículos de la sección "Nuestros artículos".
+    $padre = $locales->get('home_blog');
+    if ($padre && ($padre['type'] ?? '') === 'group') {
+        acf_add_local_field([
+            'key'           => 'field_lumenti_home_blog_seleccion',
+            'label'         => 'Artículos a mostrar',
+            'name'          => 'seleccion',
+            'type'          => 'relationship',
+            'instructions'  => 'Elige y ordena hasta 4 artículos (arrastra para ordenar). Vacío: salen los 4 más recientes.',
+            'required'      => 0,
+            'post_type'     => ['post'],
+            'post_status'   => ['publish'],
+            'filters'       => ['search', 'taxonomy'],
+            'max'           => 4,
+            'return_format' => 'id',
+            'parent'        => $padre['key'],
+            'menu_order'    => 100,
         ]);
     }
 }, 20);
