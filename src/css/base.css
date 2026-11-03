@@ -39,6 +39,8 @@ html.lm-menu-open { overflow: hidden; }
 .lm-js [data-lm-reveal] { clip-path: inset(0 0 100% 0); transform: translateY(48px); transition: clip-path 900ms var(--lm-ease), transform 900ms var(--lm-ease); transition-delay: var(--lm-reveal-delay, 0ms); }
 .lm-js [data-lm-reveal="img"] { transform: none; }
 .lm-js [data-lm-reveal].is-revealed { clip-path: inset(0 0 0 0); transform: none; }
+/* Terminada la animación, sin recorte: lo que sale de la caja (cards del abanico, sombras) se ve entero. */
+.lm-js [data-lm-reveal].is-done { clip-path: none; }
 
 /* 8. Accesibilidad: movimiento reducido (los !important son intencionales: anulan cualquier animación) */
 @media (prefers-reduced-motion: reduce) {
