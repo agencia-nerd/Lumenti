@@ -1,7 +1,7 @@
 // Entrada de JS del tema: cada módulo se inicializa solo si su componente existe en la página.
 import { navbar } from './modules/navbar.js';
 import { reveal, smoothScroll, hashTarget } from './modules/scroll.js';
-import { preloader, heroSlider, countUp, fan, daily } from './modules/home.js';
+import { preloader, heroSlider, countUp, fan, serviceCursor, daily } from './modules/home.js';
 import { verMas } from './modules/ver-mas.js';
 import { ctaVideo } from './modules/cta-video.js';
 import { carousel } from './modules/carousel.js';
@@ -26,6 +26,7 @@ const modules = {
     heroSlider,
     countUp,
     fan,
+    serviceCursor,
     daily,
     verMas,
     ctaVideo,

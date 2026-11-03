@@ -5,7 +5,9 @@ defined('ABSPATH') || exit;
  * Inicio · servicios (specs/home.md → servicios, grupo ACF home_servicios). 4 cards enlazadas; la descripción se
  * despliega con hover o foco (CSS). Títulos h2 (en el diseño h3 sin h2 previo). Todas las cards llevan la capa oscura.
  * Cuerpo y descripción van en <div> (en el diseño <span> con <h3>/<p> dentro: HTML inválido; ya son bloques por CSS).
- * Contenido: get_field('home_servicios'). Sin `icono` el recuadro lleva la flecha del tema.
+ * Contenido: get_field('home_servicios'). El recuadro con la flecha es fijo y solo se ve en pantallas táctiles.
+ * Con mouse, el puntero sobre las cards es el círculo "SABER MÁS" (data-lm-cursor, src/js/modules/home.js →
+ * serviceCursor): texto fijo, decorativo (aria-hidden), fuera de las cards porque sigue al mouse (position: fixed).
  */
 
 $lumenti_grupo = get_field('home_servicios') ?: [];
@@ -15,7 +17,7 @@ if (!$lumenti_servicios) {
 }
 $lumenti_icono = '<svg class="lm-home-servicios__icon" width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg>';
 ?>
-<section class="lm-home-servicios" aria-label="<?= esc_attr__('Servicios', 'lumenti') ?>" data-lm-section="servicios">
+<section class="lm-home-servicios" aria-label="<?= esc_attr__('Servicios', 'lumenti') ?>" data-lm-section="servicios" data-lm-cursor-zone>
     <?php foreach ($lumenti_servicios as $lumenti_i => $lumenti_s) :
         $lumenti_attrs = lumenti_link_attrs($lumenti_s['enlace'] ?? null, ['class' => 'lm-home-servicios__card']);
         $lumenti_titulo = (string) ($lumenti_s['titulo'] ?? '');
@@ -23,13 +25,12 @@ $lumenti_icono = '<svg class="lm-home-servicios__icon" width="20" height="20" vi
             continue;
         }
         $lumenti_descripcion = (string) ($lumenti_s['descripcion'] ?? '');
-        $lumenti_icono_img = lumenti_image($lumenti_s['icono'] ?? null, ['class' => 'lm-home-servicios__icon', 'alt' => '']);
         $lumenti_clase_img = 'lm-home-servicios__img';
     ?>
         <a<?= $lumenti_attrs ?>>
             <?= lumenti_image($lumenti_s['imagen'] ?? null, ['class' => $lumenti_clase_img, 'alt' => '', 'size' => 'large']) ?>
             <span class="lm-home-servicios__overlay" aria-hidden="true"></span>
-            <span class="lm-home-servicios__icon-tile" aria-hidden="true"><?= $lumenti_icono_img !== '' ? $lumenti_icono_img : $lumenti_icono // SVG fijo del tema. ?></span>
+            <span class="lm-home-servicios__icon-tile" aria-hidden="true"><?= $lumenti_icono // SVG fijo del tema. ?></span>
             <div class="lm-home-servicios__body">
                 <h2 class="lm-home-servicios__title"><?= esc_html($lumenti_titulo) ?></h2>
                 <?php if ($lumenti_descripcion !== '') : ?>
@@ -39,3 +40,4 @@ $lumenti_icono = '<svg class="lm-home-servicios__icon" width="20" height="20" vi
         </a>
     <?php endforeach; ?>
 </section>
+<div class="lm-cursor" data-lm-cursor aria-hidden="true"><div class="lm-cursor__disc"><span class="lm-cursor__label"><?= esc_html__('SABER MÁS', 'lumenti') ?></span><span class="lm-cursor__orbit"><span class="lm-cursor__dot"></span></span></div></div>

@@ -345,7 +345,7 @@
   display: block;
   height: clamp(420px, 31.25vw, 600px);
   overflow: hidden;
-  cursor: none;
+  cursor: pointer; /* con el cursor "SABER MÁS" activo (.has-cursor) pasa a none */
   color: var(--lm-white);
   --lmH: 0;
 }
@@ -1379,4 +1379,19 @@ html:not(.lm-go) .lm-home-hero, html:not(.lm-go) .lm-home-hero * { animation-pla
 @media (max-width: 1023px) { .lm-preloader__logo { --lm-pre-w: 300px; } }
 @media (max-width: 767px) { .lm-preloader__logo { --lm-pre-w: 220px; } }
 html.lm-pre-on { overflow: hidden; }
+
+/* Servicios: cursor "SABER MÁS" (solo puntero fino, src/js/modules/home.js → serviceCursor) y estado táctil */
+.lm-home-servicios.has-cursor .lm-home-servicios__card { cursor: none; }
+.lm-cursor { position: fixed; left: 0; top: 0; z-index: 50; width: 150px; height: 150px; margin: -75px 0 0 -75px; pointer-events: none; transform: translate3d(-300px, -300px, 0); }
+.lm-cursor__disc { width: 100%; height: 100%; border-radius: 50%; display: grid; place-items: center; background: rgba(20,24,30,0.22); border: 1px solid rgba(255,255,255,0.55); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); transform: scale(0); transition: transform 380ms var(--lm-ease); }
+.lm-cursor.is-visible .lm-cursor__disc { transform: scale(1); }
+.lm-cursor__label { grid-area: 1 / 1; font-family: var(--lm-font-body); font-size: 16px; line-height: 24px; letter-spacing: 0.04em; color: var(--lm-white); white-space: nowrap; }
+.lm-cursor__orbit { grid-area: 1 / 1; align-self: stretch; justify-self: stretch; position: relative; margin: -1px; animation: lmSpin 5s linear infinite; }
+.lm-cursor__dot { position: absolute; left: 50%; top: 0; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: var(--lm-white); }
+/* Táctil: sin hover, se muestran la flecha y las descripciones */
+@media (hover: none), (pointer: coarse) {
+  .lm-home-servicios__card { --lmH: 1; cursor: pointer; }
+  .lm-home-servicios__icon-tile { display: grid; }
+  .lm-home-ayuda__card { --lmH: 1; }
+}
 }
