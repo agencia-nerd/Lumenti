@@ -13,6 +13,7 @@ defined('ABSPATH') || exit;
  * - Blog (después de su carga de wp-acf): los enlaces /blog/<slug>/ y /blog/categoria/<tema>/ (inc/blog.php), el
  *   slug y la imagen destacada de cada artículo (assets/img/blog/<id>.webp), el artículo destacado del blog y los
  *   4 artículos del Inicio del diseño (campos de inc/campos-extra.php).
+ * - Mensajes de WhatsApp de Ajustes del sitio → Contacto, copiados una vez desde el campo anterior de Cabecera.
  * - Mega menú Servicios: la "Descripción" de cada elemento del menú `servicios` (bajada de la card) y la
  *   imagen destacada de cada página de servicio (imagen de la card).
  * Corre una vez por paso (marcador en opciones), después de la carga de wp-acf: nunca pisa lo editado.
@@ -106,6 +107,10 @@ function lumenti_carga_extra(): void
 
     if (empty($hecho['referencias'])) {
         $hecho['referencias'] = lumenti_carga_referencias() ? 1 : 0;
+    }
+
+    if (empty($hecho['whatsapp'])) {
+        $hecho['whatsapp'] = lumenti_carga_whatsapp() ? 1 : 0;
     }
 
     update_option(LUMENTI_CARGA_EXTRA_MARCADOR, $hecho, false);
@@ -292,12 +297,38 @@ function lumenti_carga_referencias(): bool
     return true;
 }
 
+/*
+ * Mensajes de WhatsApp (2026-11-03): pasaron de Ajustes del sitio → Cabecera (mensaje_whatsapp) a Contacto, uno por
+ * número (mensaje_paciente, mensaje_corporativo). En un sitio ya cargado wp-acf no vuelve a cargar opciones_contacto,
+ * así que aquí se completan una vez: el de paciente con lo que había en el campo viejo y el corporativo con el texto
+ * que antes estaba fijo en header.php. Solo si están vacíos: nunca pisa lo editado.
+ */
+function lumenti_carga_whatsapp(): bool
+{
+    if (!function_exists('update_field') || !function_exists('lumenti_acf_key')) {
+        return false;
+    }
+    $grupo = (array) (get_field('opciones_contacto', 'option') ?: []);
+    $cambios = [];
+    if (trim((string) ($grupo['mensaje_paciente'] ?? '')) === '') {
+        $anterior = trim((string) get_option('options_opciones_cabecera_mensaje_whatsapp', ''));
+        $cambios['mensaje_paciente'] = $anterior !== '' ? $anterior : 'Hola, quisiera agendar una cita.';
+    }
+    if (trim((string) ($grupo['mensaje_corporativo'] ?? '')) === '') {
+        $cambios['mensaje_corporativo'] = 'Hola, quisiera información sobre las soluciones de salud mental para empresas.';
+    }
+    if ($cambios) {
+        update_field(lumenti_acf_key('opciones_contacto'), array_merge($grupo, $cambios), 'option');
+    }
+    return true;
+}
+
 // Después de la carga de wp-acf al activar el tema (prioridad 10) y, si quedó algo pendiente, en el admin.
 add_action('after_switch_theme', 'lumenti_carga_extra', 20);
 add_action('admin_init', function () {
     $hecho = (array) get_option(LUMENTI_CARGA_EXTRA_MARCADOR, []);
     if (empty($hecho['paginas']) || empty($hecho['servicios']) || empty($hecho['especialistas']) || empty($hecho['terminos']) || empty($hecho['condiciones'])
-        || empty($hecho['enlaces']) || empty($hecho['blog']) || empty($hecho['referencias'])) {
+        || empty($hecho['enlaces']) || empty($hecho['blog']) || empty($hecho['referencias']) || empty($hecho['whatsapp'])) {
         lumenti_carga_extra();
     }
 });
