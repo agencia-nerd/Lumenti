@@ -222,6 +222,46 @@ export function fan() {
     }, { threshold: [0, 0.33] }).observe(main);
 }
 
+// Servicios: cursor circular "SABER MÁS" con un punto que gira, que sigue al mouse con un leve retraso.
+// Solo con mouse (puntero fino y hover); en táctil se quita y se ven la flecha y las descripciones (CSS).
+export function serviceCursor() {
+    const zone = document.querySelector('[data-lm-cursor-zone]');
+    const cursor = document.querySelector('[data-lm-cursor]');
+    if (!zone || !cursor || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        cursor?.remove();
+        return;
+    }
+    zone.classList.add('has-cursor');
+    const pos = { x: -300, y: -300, tx: -300, ty: -300, on: false, running: false };
+    const loop = () => {
+        pos.x += (pos.tx - pos.x) * 0.16;
+        pos.y += (pos.ty - pos.y) * 0.16;
+        cursor.style.transform = `translate3d(${pos.x.toFixed(1)}px,${pos.y.toFixed(1)}px,0)`;
+        if (pos.on || Math.abs(pos.tx - pos.x) > 0.3 || Math.abs(pos.ty - pos.y) > 0.3) requestAnimationFrame(loop);
+        else pos.running = false;
+    };
+    zone.addEventListener('mousemove', (e) => {
+        pos.tx = e.clientX;
+        pos.ty = e.clientY;
+        if (!pos.on) {
+            pos.on = true;
+            if (!pos.running) {
+                pos.x = pos.tx;
+                pos.y = pos.ty;
+            }
+            cursor.classList.add('is-visible');
+        }
+        if (!pos.running) {
+            pos.running = true;
+            requestAnimationFrame(loop);
+        }
+    });
+    zone.addEventListener('mouseleave', () => {
+        pos.on = false;
+        cursor.classList.remove('is-visible');
+    });
+}
+
 // Psicología para el día a día: la imagen del marco cambia con hover o foco en cada opción.
 export function daily() {
     const root = document.querySelector('[data-lm-daily]');

@@ -114,7 +114,7 @@
 - **Destino:** `template-parts/pages/home/servicios.php`
 - **Grupo:** `home_servicios`
 - **Skill:** wp-helper
-- **Comportamiento:** 4 cards enlazadas en grilla tipo bento de 2 columnas (la 1.ª y la 2.ª a todo el ancho, la 3.ª y la 4.ª a mitad cada una; 1 columna en móvil), cada una con foto de fondo, ícono en recuadro y título; la descripción se despliega en hover/foco. Todas las cards llevan el degradado oscuro sobre la foto. La foto no lleva `object-position` propio: se recorta centrada, así una imagen nueva no sale desplazada. La sección no tiene título visible: `aria-label="Servicios"`; los títulos de card son `h3` sin `h2` previo en el diseño, se pasan a `h2` (mismo tamaño por clase) para no saltar niveles. Alto de card `clamp(420px, 31.25vw, 600px)` (valor suelto del diseño, se conserva).
+- **Comportamiento:** 4 cards enlazadas en grilla tipo bento de 2 columnas (la 1.ª y la 2.ª a todo el ancho, la 3.ª y la 4.ª a mitad cada una; 1 columna en móvil), cada una con foto de fondo y título; la descripción se despliega en hover/foco. Con mouse, sobre las cards el puntero se cambia por el círculo "SABER MÁS" con un punto que gira (`src/js/modules/home.js → serviceCursor`, texto fijo). En pantallas táctiles (sin hover) no hay cursor: se ven la descripción y un recuadro con la flecha fija del tema (decisión del 2026-11-03: el ícono ya no es campo). Todas las cards llevan el degradado oscuro sobre la foto. La foto no lleva `object-position` propio: se recorta centrada, así una imagen nueva no sale desplazada. La sección no tiene título visible: `aria-label="Servicios"`; los títulos de card son `h3` sin `h2` previo en el diseño, se pasan a `h2` (mismo tamaño por clase) para no saltar niveles. Alto de card `clamp(420px, 31.25vw, 600px)` (valor suelto del diseño, se conserva).
 - **Estado:** aplicado
 - **ACF:** conectado
 
@@ -127,7 +127,6 @@
 | `home_servicios_items.descripcion` | text | Frase que aparece al pasar el cursor. | Evaluación, diagnóstico y tratamiento integral. | no |
 | `home_servicios_items.enlace` | link | Página del servicio a la que lleva la card. | — | sí |
 | `home_servicios_items.imagen` | image | Foto de fondo de la card. Se recorta para llenarla. | — | sí |
-| `home_servicios_items.icono` | image | Ícono del recuadro, en SVG blanco. | — | no |
 
 **Criterios de aceptación**
 
