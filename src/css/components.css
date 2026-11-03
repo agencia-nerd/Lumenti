@@ -131,6 +131,8 @@
 .lm-mobile-menu__sub { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 500ms var(--lm-ease); }
 .lm-mobile-menu__sub.is-open { grid-template-rows: 1fr; }
 .lm-mobile-menu__sub-inner { overflow: hidden; }
+/* Cerrado también invisible para el foco (respaldo de inert): se oculta al terminar de plegarse. */
+.lm-mobile-menu__sub:not(.is-open) .lm-mobile-menu__sub-inner { visibility: hidden; transition: visibility 0s linear 500ms; }
 .lm-mobile-menu__sub-list { display: flex; flex-direction: column; padding: 0 0 12px 16px; }
 .lm-mobile-menu__sub-list--groups { gap: 36px; padding: 12px 0 28px 16px; }
 .lm-mobile-menu__sub-head { margin: 0 0 10px; font-size: 15px; letter-spacing: 0.08em; color: var(--lm-nav-subhead); }
@@ -219,7 +221,8 @@
 .lm-field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
 .lm-field__label { font-size: var(--lm-fs-small); line-height: var(--lm-lh-small); color: var(--lm-body); }
 .lm-field__control { position: relative; display: block; }
-.lm-field__input, .lm-field__select { width: 100%; height: 52px; padding: 0 16px; border: 1px solid var(--lm-line-2); border-radius: var(--lm-r-card); background: var(--lm-white); font-family: var(--lm-font-body); font-size: var(--lm-fs-body); color: var(--lm-ink); outline: none; transition: border-color 200ms linear; }
+/* Borde con 3:1 de contraste (WCAG 1.4.11) y foco con el outline global de base.css (:focus-visible). */
+.lm-field__input, .lm-field__select { width: 100%; height: 52px; padding: 0 16px; border: 1px solid var(--lm-field-line); border-radius: var(--lm-r-card); background: var(--lm-white); font-family: var(--lm-font-body); font-size: var(--lm-fs-body); color: var(--lm-ink); transition: border-color 200ms linear; }
 .lm-field__input:focus, .lm-field__select:focus { border-color: var(--lm-teal); }
 .lm-field__input--search { padding-left: 44px; }
 .lm-field__select { padding-right: 44px; appearance: none; -webkit-appearance: none; cursor: pointer; color: var(--lm-muted); }
@@ -266,10 +269,12 @@
 .lm-card-especialista__chip--extra { display: none; }
 .lm-card-especialista__chips.is-expanded .lm-card-especialista__chip--extra { display: inline-flex; }
 .lm-card-especialista__more-item { display: flex; }
-.lm-card-especialista__more { display: inline-flex; align-items: center; justify-content: center; min-width: 36px; height: 32px; padding: 0 10px; border: 0; border-radius: 4px; background: var(--lm-teal); color: var(--lm-white); font-size: var(--lm-fs-small); line-height: var(--lm-lh-small); cursor: default; }
+.lm-card-especialista__more { display: inline-flex; align-items: center; justify-content: center; min-width: 36px; height: 32px; padding: 0 10px; border: 0; border-radius: 4px; background: var(--lm-teal); color: var(--lm-white); font-size: var(--lm-fs-small); line-height: var(--lm-lh-small); cursor: pointer; }
 .lm-card-especialista__more:hover, .lm-card-especialista__more:focus-visible { background: var(--lm-teal-dark); }
 .lm-card-especialista__tip { position: absolute; z-index: 5; top: calc(100% + 10px); left: 0; width: max-content; max-width: 100%; padding: 16px 18px; border-radius: var(--lm-r-card); background: var(--lm-ink-2); color: var(--lm-white); text-align: left; box-shadow: 0 12px 32px rgba(28,44,58,0.18); opacity: 0; transform: translateY(6px); pointer-events: none; transition: opacity 250ms linear, transform 350ms var(--lm-ease); }
-.lm-card-especialista__more-item:hover .lm-card-especialista__tip, .lm-card-especialista__more:focus-visible + .lm-card-especialista__tip { opacity: 1; transform: none; pointer-events: auto; }
+.lm-card-especialista__more-item:hover .lm-card-especialista__tip, .lm-card-especialista__more:focus-visible + .lm-card-especialista__tip, .lm-card-especialista__more-item.is-open .lm-card-especialista__tip { opacity: 1; transform: none; pointer-events: auto; }
+/* Escape lo cierra aunque el cursor o el foco sigan encima (card-especialista.js, WCAG 1.4.13). */
+.lm-card-especialista__more-item.is-dismissed .lm-card-especialista__tip { opacity: 0; transform: translateY(6px); pointer-events: none; }
 .lm-card-especialista__tip-title { display: block; margin-bottom: 10px; font-size: 12px; line-height: 16px; letter-spacing: 0.1em; color: var(--lm-teal-150); }
 .lm-card-especialista__tip-list { display: flex; flex-direction: column; gap: 6px; }
 .lm-card-especialista__tip-item { display: flex; align-items: baseline; gap: 10px; font-size: var(--lm-fs-small); line-height: var(--lm-lh-small); }
@@ -482,7 +487,14 @@
 .lm-intro-split__p { margin-top: 20px; font-size: var(--lm-fs-body); line-height: 1.8; color: var(--lm-muted); }
 .lm-section-title + .lm-intro-split__p { margin-top: 28px; }
 .lm-intro-split__p--strong { font-weight: 500; color: var(--lm-ink-2); }
-@media (max-width: 767px) { .lm-intro-split { padding: 80px var(--lm-side); } .lm-intro-split__inner { grid-template-columns: minmax(0,1fr); gap: 56px; } }
+@media (max-width: 767px) {
+  .lm-intro-split { padding: 80px var(--lm-side); }
+  .lm-intro-split__inner { grid-template-columns: minmax(0,1fr); gap: 56px; }
+  /* En una columna el texto y las fotos ocupan todo el ancho (sin el tope de escritorio que los dejaba a la izquierda). */
+  /* .lm-intro-split delante: le gana a los topes por página (ej. .lm-emp-why .lm-intro-split__text en empresas.css). */
+  .lm-intro-split .lm-intro-split__inner > .lm-intro-split__text,
+  .lm-intro-split .lm-intro-split__inner > .lm-photo-duo { max-width: none; width: 100%; margin-inline: auto; }
+}
 
 /* ---------- Composición de dos fotos verticales (.lm-photo-duo) — Psiquiatría, Psicología, Informes ---------- */
 .lm-photo-duo { position: relative; width: 100%; max-width: 760px; aspect-ratio: 349 / 339; margin: 0; }
@@ -506,10 +518,10 @@
 /* Campo de formulario (variante de .lm-field) */
 .lm-field--form .lm-field__label { color: var(--lm-ink-2); }
 .lm-field__label-note { color: var(--lm-muted); }
-.lm-field--form .lm-field__input, .lm-field--form .lm-field__select, .lm-field__textarea { border-color: #e4e1da; border-radius: 4px; color: var(--lm-ink-2); }
+.lm-field--form .lm-field__input, .lm-field--form .lm-field__select, .lm-field__textarea { border-color: var(--lm-field-line); border-radius: 4px; color: var(--lm-ink-2); }
 .lm-field__input--prefixed { padding-left: 52px; }
 .lm-field__prefix { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: var(--lm-fs-body); color: var(--lm-body); pointer-events: none; }
-.lm-field__textarea { width: 100%; min-height: 136px; padding: 14px 16px; border: 1px solid #e4e1da; background: var(--lm-white); font-family: var(--lm-font-body); font-size: var(--lm-fs-body); line-height: 1.6; resize: vertical; outline: none; transition: border-color 200ms linear; }
+.lm-field__textarea { width: 100%; min-height: 136px; padding: 14px 16px; border: 1px solid var(--lm-field-line); background: var(--lm-white); font-family: var(--lm-font-body); font-size: var(--lm-fs-body); line-height: 1.6; resize: vertical; transition: border-color 200ms linear; }
 .lm-field__textarea:focus { border-color: var(--lm-teal); }
 .lm-field__hint { font-size: 13px; line-height: 18px; color: var(--lm-muted); }
 .lm-field__error { display: none; align-items: center; gap: 6px; font-size: 13px; line-height: 18px; color: var(--lm-error); }

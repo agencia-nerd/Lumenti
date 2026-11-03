@@ -22,6 +22,14 @@ function syncGroups(form, { grupos = {}, separador = ' | ' }) {
     });
 }
 
+// El motor enfoca el primer campo con aria-invalid. Si es el campo oculto de un grupo, focus() no hace nada
+// y el foco queda en el botón: se lleva a la primera casilla del grupo, junto a su mensaje de error.
+function focusGroupError(form, { grupos = {} }) {
+    const first = form.querySelector('[aria-invalid="true"]');
+    if (!first || !Object.hasOwn(grupos, first.name) || document.activeElement === first) return;
+    form.querySelector(`input[name="${CSS.escape(first.name)}[]"]`)?.focus();
+}
+
 export function formExtras() {
     const forms = document.querySelectorAll('form[data-form]');
     if (!forms.length) return;
@@ -35,6 +43,8 @@ export function formExtras() {
             });
             // empresas.js marca casillas sin disparar "change": se sincroniza justo antes del envío.
             form.addEventListener('reset', () => setTimeout(() => syncGroups(form, extras), 0));
+            // Errores del servidor (422): el motor los marca y después avisa con wp-form:error.
+            form.addEventListener('wp-form:error', () => focusGroupError(form, extras));
         }
 
         const panel = form.dataset.lmSuccessPanel && document.getElementById(form.dataset.lmSuccessPanel);
@@ -54,6 +64,14 @@ export function formExtras() {
             syncGroups(form, parseExtras(form));
         }
     }, true);
+
+    // Fase de burbuja: corre después de la validación del navegador del motor (síncrona, ya marcó los errores).
+    document.addEventListener('submit', (event) => {
+        const form = event.target;
+        if (form instanceof HTMLFormElement && form.matches('form[data-form][data-lm-form-extras]')) {
+            focusGroupError(form, parseExtras(form));
+        }
+    });
 
     // "Enviar otra solicitud": vuelve a mostrar el form.
     document.querySelectorAll('[data-lm-form-reset]').forEach((button) => {

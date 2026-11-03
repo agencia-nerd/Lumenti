@@ -30,15 +30,18 @@ $lumenti_error = static function (string $key) use ($lumenti_id, $lumenti_icono_
 $lumenti_input = static function (string $key, string $tag = 'input') use ($lumenti_id, $lumenti_campos, $lumenti_error) {
     $campo = $lumenti_campos[$key] ?? [];
     $prefijo = $campo['prefijo'] ?? '';
+    $ayuda = (string) ($campo['ayuda'] ?? '');
+    // La ayuda se lee como parte del label (copia sr-only): el motor solo enlaza el error en aria-describedby.
+    // La ayuda visible queda bajo el campo, como en el diseño, oculta para el lector para no leerla dos veces.
     ?>
     <div class="lm-field lm-field--form">
-        <label class="lm-field__label" for="<?= esc_attr(lumenti_field_id($lumenti_id, $key)) ?>"><?= esc_html($campo['label'] ?? '') ?></label>
+        <label class="lm-field__label" for="<?= esc_attr(lumenti_field_id($lumenti_id, $key)) ?>"><?= esc_html($campo['label'] ?? '') ?><?php if ($ayuda !== '') : ?><span class="sr-only">. <?= esc_html($ayuda) ?></span><?php endif; ?></label>
         <span class="lm-field__control">
             <?php if ($prefijo !== '') : ?><span class="lm-field__prefix" aria-hidden="true"><?= esc_html($prefijo) ?></span><?php endif; ?>
             <input class="lm-field__input<?= $prefijo !== '' ? ' lm-field__input--prefixed' : '' ?>" <?php lumenti_field_attrs($lumenti_id, $key); ?>>
         </span>
-        <?php if (!empty($campo['ayuda'])) : ?>
-            <span class="lm-field__hint"><?= esc_html($campo['ayuda']) ?></span>
+        <?php if ($ayuda !== '') : ?>
+            <span class="lm-field__hint" aria-hidden="true"><?= esc_html($ayuda) ?></span>
         <?php endif; ?>
         <?php $lumenti_error($key); ?>
     </div>
@@ -97,12 +100,15 @@ $lumenti_input = static function (string $key, string $tag = 'input') use ($lume
 
     <fieldset class="lm-form__fieldset">
         <legend class="lm-form__legend"><?= esc_html($lumenti_fieldsets['mas'] ?? '') ?></legend>
-        <?php $lumenti_mensaje = $lumenti_campos['mensaje'] ?? []; ?>
+        <?php
+        $lumenti_mensaje = $lumenti_campos['mensaje'] ?? [];
+        $lumenti_mensaje_ayuda = (string) ($lumenti_mensaje['ayuda'] ?? '');
+        ?>
         <div class="lm-field lm-field--form">
-            <label class="lm-field__label" for="<?= esc_attr(lumenti_field_id($lumenti_id, 'mensaje')) ?>"><?= esc_html($lumenti_mensaje['label'] ?? '') ?> <span class="lm-field__label-note"><?= esc_html($lumenti_mensaje['nota'] ?? '') ?></span></label>
+            <label class="lm-field__label" for="<?= esc_attr(lumenti_field_id($lumenti_id, 'mensaje')) ?>"><?= esc_html($lumenti_mensaje['label'] ?? '') ?> <span class="lm-field__label-note"><?= esc_html($lumenti_mensaje['nota'] ?? '') ?></span><?php if ($lumenti_mensaje_ayuda !== '') : ?><span class="sr-only">. <?= esc_html($lumenti_mensaje_ayuda) ?></span><?php endif; ?></label>
             <textarea class="lm-field__textarea" rows="5" <?php lumenti_field_attrs($lumenti_id, 'mensaje'); ?>></textarea>
-            <?php if (!empty($lumenti_mensaje['ayuda'])) : ?>
-                <span class="lm-emp-proposal__help"><?= esc_html($lumenti_mensaje['ayuda']) ?></span>
+            <?php if ($lumenti_mensaje_ayuda !== '') : ?>
+                <span class="lm-emp-proposal__help" aria-hidden="true"><?= esc_html($lumenti_mensaje_ayuda) ?></span>
             <?php endif; ?>
             <?php $lumenti_error('mensaje'); ?>
         </div>

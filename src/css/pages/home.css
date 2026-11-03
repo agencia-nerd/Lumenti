@@ -206,6 +206,37 @@
   transform-origin: left center;
   animation: 4000ms linear 0s 1 normal forwards running lmFill;
 }
+/* Pestañas (role="tablist") y botón de pausa del avance automático, en la misma fila. */
+.lm-home-hero__tablist {
+  flex: 0 1 auto;
+  min-width: 0;
+  display: flex;
+  gap: 8px;
+}
+.lm-home-hero__pause {
+  flex: none;
+  align-self: flex-end;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  margin-left: 8px;
+  padding: 0;
+  border: 1px solid var(--lm-teal-200);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--lm-teal);
+  cursor: pointer;
+  transition: background-color 250ms linear;
+  animation: 900ms cubic-bezier(0.2, 0.8, 0.2, 1) 750ms 1 normal both running lmRise;
+}
+.lm-home-hero__pause[hidden] { display: none; }
+.lm-home-hero__pause-icon--play,
+.lm-home-hero__pause[aria-pressed="true"] .lm-home-hero__pause-icon--pause { display: none; }
+.lm-home-hero__pause[aria-pressed="true"] .lm-home-hero__pause-icon--play { display: block; }
+@media (hover: hover) and (pointer: fine) {
+  .lm-home-hero__pause:hover { background: var(--lm-teal-50); }
+}
 .lm-home-cifras {
   padding: 96px clamp(24px, 5.2vw, 100px) 100px;
   background: #faf9f5;
@@ -1039,6 +1070,9 @@
     width: auto;
     flex: 1 1 0px;
     text-align: center;
+  }
+  .lm-home-hero__tablist {
+    flex: 1 1 auto;
   }
   .lm-home-cifras {
     padding: 72px 40px 80px;

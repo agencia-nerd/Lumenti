@@ -76,7 +76,7 @@ export function navbar() {
     document.addEventListener('keydown', (e) => {
         if (e.key !== 'Tab' || !menu || menu.hidden) return;
         const focusables = [burger, ...menu.querySelectorAll('a[href], button:not([disabled])')]
-            .filter((el) => el.offsetParent !== null || el === burger);
+            .filter((el) => el === burger || (el.offsetParent !== null && !el.closest('[inert]')));
         const first = focusables[0];
         const last = focusables[focusables.length - 1];
         if (e.shiftKey && document.activeElement === first) {
@@ -94,7 +94,10 @@ export function navbar() {
         t.addEventListener('click', () => {
             const on = t.getAttribute('aria-expanded') !== 'true';
             t.setAttribute('aria-expanded', on ? 'true' : 'false');
-            document.getElementById(t.getAttribute('aria-controls'))?.classList.toggle('is-open', on);
+            const sub = document.getElementById(t.getAttribute('aria-controls'));
+            if (!sub) return;
+            sub.classList.toggle('is-open', on);
+            sub.inert = !on; // Cerrado, sus enlaces no reciben foco ni los lee el lector de pantalla.
         });
     });
     window.addEventListener('resize', () => {
