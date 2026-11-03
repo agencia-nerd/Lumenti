@@ -15,7 +15,7 @@ defined('ABSPATH') || exit;
  *                  select:     campo .lm-field con <label> visible y <select>.
  *   activo       (string)  valor elegido. Por defecto el de la URL (?nombre=) o ''.
  *   etiqueta     (string)  nombre accesible del grupo (aria-label) o texto del <label> del select.
- *   etiqueta_id  (string)  id de un texto visible que nombra el grupo (aria-labelledby), ej. "Filtrar por tema".
+ *   etiqueta_id  (string)  id de un texto visible que nombra el grupo (aria-labelledby), ej. el texto que precede a las pills del Blog.
  *   clase        (string)  clases extra del contenedor (select: del <label>).
  */
 

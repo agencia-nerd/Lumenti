@@ -4,7 +4,7 @@ defined('ABSPATH') || exit;
 /*
  * Condiciones: lo propio de Lumenti que el JSON de wp-acf no cubre (specs/condicion.md).
  * - Sin archivo (/condicion/ no lista nada) y sin editor ni imagen destacada: todo el contenido son campos ACF.
- *   La URL de cada una es /condicion/<slug>/ (la clave del tipo).
+ *   La URL de cada una es /condicion/<slug>/ (la clave del tipo), fuera del /blog/ de las entradas (with_front false).
  * - El término de que_trata de la condición (condicion_especialistas_que_trata, campo de inc/campos-extra.php)
  *   une la condición con sus especialistas y con el filtro "atiende" del listado.
  */
@@ -13,6 +13,7 @@ add_filter('register_post_type_args', function (array $args, string $post_type):
     if ($post_type === 'condicion') {
         $args['has_archive'] = false;
         $args['supports'] = ['title'];
+        $args['rewrite'] = array_merge(is_array($args['rewrite'] ?? null) ? $args['rewrite'] : [], ['slug' => 'condicion', 'with_front' => false]);
     }
     return $args;
 }, 10, 2);

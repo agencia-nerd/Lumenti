@@ -31,7 +31,12 @@
 .lm-blog__item { display: flex; }
 .lm-blog__item[hidden] { display: none; }
 .lm-blog__item.is-entering { animation: lmCardIn 480ms var(--lm-ease) both; animation-delay: calc(var(--lm-i, 0) * 50ms); }
-.lm-blog__empty { margin-top: 28px; padding: 56px 24px; border-radius: var(--lm-r-card); background: var(--lm-white); text-align: center; }
+/* Estado vacío (sin resultados al filtrar o buscar): caja blanca centrada con ícono, título, texto y botón. */
+.lm-blog__empty { margin-top: 28px; padding: clamp(48px, 4.1667vw, 80px) 24px; display: flex; flex-direction: column; align-items: center; border-radius: var(--lm-r-card); background: var(--lm-white); text-align: center; animation: lmCardIn 480ms var(--lm-ease) both; }
+.lm-blog__empty-icon { width: 64px; height: 64px; display: grid; place-items: center; border-radius: 50%; background: var(--lm-sand); color: var(--lm-teal); }
+.lm-blog__empty-title { margin-top: 24px; font-family: var(--lm-font-title); font-weight: 400; font-size: clamp(20px, 1.25vw, 24px); line-height: 1.4; letter-spacing: 0.02em; color: var(--lm-ink); }
+.lm-blog__empty-text { margin-top: 12px; max-width: 460px; font-size: 15px; line-height: 1.7; color: var(--lm-muted); }
+.lm-blog__empty-btn { margin-top: 28px; }
 .lm-blog__empty[hidden] { display: none; }
 .lm-blog__pager { margin-top: 56px; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .lm-blog__pager[hidden] { display: none; }
@@ -58,8 +63,12 @@
 .lm-article__list, .lm-article__body > ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
 .lm-article__li, .lm-article__body > ul > li { display: grid; grid-template-columns: 6px minmax(0,1fr); column-gap: 14px; font-size: 17px; line-height: 1.7; color: var(--lm-body); }
 .lm-article__li::before, .lm-article__body > ul > li::before { content: ""; width: 6px; height: 6px; margin-top: 0.72em; border-radius: 50%; background: var(--lm-teal); }
+/* Referencias (campo articulo_contenido_referencias): bloque aparte al final, con su título y una línea arriba. */
+.lm-article__body > .lm-article__refs { margin-top: 56px; padding-top: 28px; border-top: 1px solid #e3dfd7; display: flex; flex-direction: column; gap: 12px; }
+.lm-article__ref-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; }
 .lm-article__ref { font-size: var(--lm-fs-small); line-height: 1.7; color: var(--lm-muted); }
 .lm-article__body > .lm-article__tags { margin-top: 56px; }
+.lm-article__body > .lm-article__refs + .lm-article__tags { margin-top: 32px; }
 .lm-article__tags { display: flex; flex-direction: column; gap: 12px; }
 .lm-article__tags-label { font-size: 13px; line-height: 18px; letter-spacing: 0.06em; color: var(--lm-muted-2); }
 .lm-article__tag-list { display: flex; flex-wrap: wrap; gap: 6px; }

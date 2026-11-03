@@ -2,16 +2,16 @@
 defined('ABSPATH') || exit;
 
 /*
- * Blog → encabezado (specs/blog.md). Grupo ACF: Blog → blog_encabezado.
+ * Blog → encabezado (specs/blog.md). Grupo ACF: Blog → blog_encabezado (página de opciones Archivo de post).
  * Breadcrumb y título del blog. En category.php el título es el nombre de la categoría y la bajada su descripción.
  * Título: una línea del h1 por renglón; una línea entera entre *asteriscos* va en color de acento.
  */
 
+$lumenti_grupo = get_field('blog_encabezado', 'option') ?: [];
 $lumenti_encabezado = [
-    'etiqueta' => 'BLOG',
-    'titulo' => 'RECURSOS Y CONTENIDO
-*EDUCATIVO*',
-    'bajada' => 'Artículos, guías y recursos sobre salud mental escritos por nuestro equipo de especialistas. Contenido basado en evidencia, claro y accesible para todos.',
+    'etiqueta' => __('BLOG', 'lumenti'), // fija (no es campo)
+    'titulo' => (string) ($lumenti_grupo['titulo'] ?? ''),
+    'bajada' => trim((string) ($lumenti_grupo['bajada'] ?? '')),
 ];
 
 $lumenti_breadcrumb = [['texto' => __('Blog', 'lumenti')]];
@@ -21,7 +21,7 @@ if (is_category()) {
     $lumenti_encabezado['titulo'] = mb_strtoupper(single_cat_title('', false), 'UTF-8');
     $lumenti_encabezado['bajada'] = wp_strip_all_tags((string) term_description());
     $lumenti_breadcrumb = [
-        ['texto' => __('Blog', 'lumenti'), 'url' => home_url('/blog/')],
+        ['texto' => __('Blog', 'lumenti'), 'url' => (string) get_permalink((int) get_option('page_for_posts'))],
         ['texto' => $lumenti_term instanceof WP_Term ? $lumenti_term->name : ''],
     ];
 }
@@ -44,6 +44,6 @@ foreach (preg_split('/\R/', trim($lumenti_encabezado['titulo'])) as $lumenti_lin
     <?php endif; ?>
     <h1 class="lm-blog__title"><?php foreach ($lumenti_lineas as [$lumenti_texto, $lumenti_verde]) : ?><span class="lm-blog__title-mask"><span class="lm-blog__title-line<?= $lumenti_verde ? ' lm-blog__title-line--accent' : '' ?>"><?= lumenti_highlight($lumenti_texto) ?></span></span><?php endforeach; ?></h1>
     <?php if ($lumenti_encabezado['bajada'] !== '') : ?>
-        <p class="lm-lead lm-blog__lead"><?= esc_html($lumenti_encabezado['bajada']) ?></p>
+        <p class="lm-lead lm-blog__lead"><?= lumenti_highlight($lumenti_encabezado['bajada']) ?></p>
     <?php endif; ?>
 </header>

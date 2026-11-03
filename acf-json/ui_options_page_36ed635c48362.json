@@ -1,0 +1,26 @@
+{
+    "key": "ui_options_page_36ed635c48362",
+    "title": "Archivo de post",
+    "active": true,
+    "menu_order": 0,
+    "page_title": "Archivo de post",
+    "menu_slug": "archivo-de-post",
+    "parent_slug": "",
+    "advanced_configuration": false,
+    "icon_url": "",
+    "menu_title": "Archivo de post",
+    "position": "",
+    "redirect": false,
+    "description": "",
+    "menu_icon": {
+        "type": "dashicons",
+        "value": "dashicons-admin-generic"
+    },
+    "update_button": "Guardar cambios",
+    "updated_message": "Cambios guardados",
+    "capability": "edit_posts",
+    "data_storage": "options",
+    "post_id": "",
+    "autoload": false,
+    "modified": 1793720111
+}

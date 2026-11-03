@@ -10,6 +10,9 @@ defined('ABSPATH') || exit;
  *   la carga wp-acf.
  * - Condiciones (después de su carga de wp-acf): el slug de cada una (/condicion/<id>/) y su término de que_trata
  *   (campo condicion_especialistas_que_trata de inc/campos-extra.php), desde inc/acf/seed/condicion.php.
+ * - Blog (después de su carga de wp-acf): los enlaces /blog/<slug>/ y /blog/categoria/<tema>/ (inc/blog.php), el
+ *   slug y la imagen destacada de cada artículo (assets/img/blog/<id>.webp), el artículo destacado del blog y los
+ *   4 artículos del Inicio del diseño (campos de inc/campos-extra.php).
  * - Mega menú Servicios: la "Descripción" de cada elemento del menú `servicios` (bajada de la card) y la
  *   imagen destacada de cada página de servicio (imagen de la card).
  * Corre una vez por paso (marcador en opciones), después de la carga de wp-acf: nunca pisa lo editado.
@@ -90,6 +93,19 @@ function lumenti_carga_extra(): void
 
     if (empty($hecho['condiciones'])) {
         $hecho['condiciones'] = lumenti_carga_condiciones() ? 1 : 0;
+    }
+
+    if (empty($hecho['enlaces'])) {
+        lumenti_blog_enlaces();
+        $hecho['enlaces'] = 1;
+    }
+
+    if (empty($hecho['blog'])) {
+        $hecho['blog'] = lumenti_carga_blog() ? 1 : 0;
+    }
+
+    if (empty($hecho['referencias'])) {
+        $hecho['referencias'] = lumenti_carga_referencias() ? 1 : 0;
     }
 
     update_option(LUMENTI_CARGA_EXTRA_MARCADOR, $hecho, false);
@@ -191,11 +207,97 @@ function lumenti_carga_condiciones(): bool
     return $listo;
 }
 
+// Artículos del Inicio en el diseño (home.html), por su id.
+const LUMENTI_BLOG_INICIO = ['antidepresivo-para-toda-la-vida', 'como-se-diagnostica-el-tdah', 'tratamiento-trastorno-limite-de-la-personalidad', 'ansiedad-en-ninos'];
+const LUMENTI_BLOG_DESTACADO = 'tratamiento-trastorno-limite-de-la-personalidad';
+
+/*
+ * Artículos que creó la carga de wp-acf (inc/acf/seed/articulo.php): slug = id (WordPress lo armaría con el título) e
+ * imagen destacada; luego el destacado del blog y los artículos del Inicio, cada uno solo si está vacío.
+ * Devuelve false si aún faltan los artículos (se reintenta en la próxima visita al admin).
+ */
+function lumenti_carga_blog(): bool
+{
+    if (!function_exists('update_field') || !function_exists('lumenti_acf_attachment') || !function_exists('lumenti_acf_key')) {
+        return false;
+    }
+    $seed = require get_theme_file_path('inc/acf/seed/articulo.php');
+    $ids = [];
+
+    foreach ((array) ($seed['items'] ?? []) as $item) {
+        $id = sanitize_title((string) ($item['id'] ?? ''));
+        $posts = $id === '' ? [] : get_posts([
+            'post_type'      => 'post',
+            'post_status'    => 'any',
+            'posts_per_page' => 1,
+            'meta_key'       => '_lumenti_seed_id',
+            'meta_value'     => $id,
+        ]);
+        if (!$posts) {
+            return false;
+        }
+        $post = $posts[0];
+        $ids[$id] = (int) $post->ID;
+
+        if ($post->post_name !== $id && $post->post_name === sanitize_title($post->post_title)) {
+            wp_update_post(['ID' => $post->ID, 'post_name' => $id]);
+        }
+        if (!has_post_thumbnail($post)) {
+            $imagen = lumenti_acf_attachment('assets/img/blog/' . $id . '.webp');
+            if ($imagen) {
+                set_post_thumbnail($post, $imagen);
+            }
+        }
+    }
+
+    // Por el campo grupo (clave del JSON), así se guardan como blog_destacado_articulo / home_blog_seleccion.
+    $destacado = (array) (get_field('blog_destacado', 'option') ?: []);
+    if (empty($destacado['articulo']) && isset($ids[LUMENTI_BLOG_DESTACADO])) {
+        update_field(lumenti_acf_key('blog_destacado'), array_merge($destacado, ['articulo' => $ids[LUMENTI_BLOG_DESTACADO]]), 'option');
+    }
+    $inicio = (int) get_option('page_on_front');
+    $home = $inicio ? (array) (get_field('home_blog', $inicio) ?: []) : [];
+    if ($inicio && empty($home['seleccion'])) {
+        $seleccion = array_values(array_filter(array_map(static fn($i) => $ids[$i] ?? 0, LUMENTI_BLOG_INICIO)));
+        update_field(lumenti_acf_key('home_blog'), array_merge($home, ['seleccion' => $seleccion]), $inicio);
+    }
+
+    return true;
+}
+
+/*
+ * Referencias de los artículos (2026-11-03): antes eran un párrafo con la clase lm-article__ref dentro del contenido;
+ * ahora son el campo articulo_contenido_referencias (lo carga wp-acf desde inc/acf/seed/articulo.php). En las
+ * entradas ya cargadas se quita ese párrafo del contenido para que no salga dos veces; si el campo está vacío, el
+ * texto pasa al campo. Corre una sola vez.
+ */
+function lumenti_carga_referencias(): bool
+{
+    if (!function_exists('update_field') || !function_exists('lumenti_acf_key')) {
+        return false;
+    }
+    $patron = '#\s*<!-- wp:paragraph \{"className":"lm-article__ref"\} -->\s*<p class="lm-article__ref">(.*?)</p>\s*<!-- /wp:paragraph -->#s';
+    $posts = get_posts(['post_type' => 'post', 'post_status' => 'any', 'posts_per_page' => -1, 's' => 'lm-article__ref']);
+    foreach ($posts as $post) {
+        if (!preg_match_all($patron, (string) $post->post_content, $m)) {
+            continue;
+        }
+        $grupo = (array) (get_field('articulo_contenido', $post->ID) ?: []);
+        if (trim((string) ($grupo['referencias'] ?? '')) === '') {
+            $texto = implode("\n", array_map(static fn($t) => html_entity_decode(wp_strip_all_tags($t), ENT_QUOTES | ENT_HTML5, 'UTF-8'), $m[1]));
+            update_field(lumenti_acf_key('articulo_contenido'), array_merge($grupo, ['referencias' => $texto]), $post->ID);
+        }
+        wp_update_post(['ID' => $post->ID, 'post_content' => wp_slash(trim((string) preg_replace($patron, '', (string) $post->post_content)))]);
+    }
+    return true;
+}
+
 // Después de la carga de wp-acf al activar el tema (prioridad 10) y, si quedó algo pendiente, en el admin.
 add_action('after_switch_theme', 'lumenti_carga_extra', 20);
 add_action('admin_init', function () {
     $hecho = (array) get_option(LUMENTI_CARGA_EXTRA_MARCADOR, []);
-    if (empty($hecho['paginas']) || empty($hecho['servicios']) || empty($hecho['especialistas']) || empty($hecho['terminos']) || empty($hecho['condiciones'])) {
+    if (empty($hecho['paginas']) || empty($hecho['servicios']) || empty($hecho['especialistas']) || empty($hecho['terminos']) || empty($hecho['condiciones'])
+        || empty($hecho['enlaces']) || empty($hecho['blog']) || empty($hecho['referencias'])) {
         lumenti_carga_extra();
     }
 });

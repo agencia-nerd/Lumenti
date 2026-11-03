@@ -252,7 +252,7 @@
 - **Destino:** `template-parts/pages/home/blog.php`, `template-parts/components/blog-card.php`
 - **Grupo:** `home_blog`
 - **Skill:** wp-helper
-- **Comportamiento:** título, bajada y botón secundario "Explora nuestro blog" a la página de entradas; debajo 4 artículos con el componente `blog-card` (imagen, categoría, título `h3`, "Leer más"). Por ahora los 4 artículos son fijos en la plantilla (los de `html/home.html`); al conectar, salen de la relación con entradas (título, enlace, imagen destacada y primera categoría de cada una). **Cards de muestra:** hasta conectar Blog, las 4 cards son de muestra (`inc/muestras/home-blog.php`); al conectarlo se decide relación o últimas entradas.
+- **Comportamiento:** título, bajada y botón secundario "Explora nuestro blog" a la página de entradas; debajo 4 artículos con el componente `blog-card` (imagen, categoría, título `h3`, "Leer más"). Los 4 artículos son los elegidos en "Artículos a mostrar", en ese orden; si está vacío, los 4 más recientes (decisión del 2026-11-03). De cada uno: título, enlace, imagen destacada y primera categoría (`lumenti_blog_inicio`, `inc/blog.php`). El contenido inicial elige los 4 de `html/home.html`.
 - **Estado:** aplicado
 - **ACF:** conectado
 
@@ -263,6 +263,8 @@
 | `home_blog_titulo` | text | Título de la sección. | NUESTROS ARTÍCULOS PARA EL BIENESTAR | sí |
 | `home_blog_bajada` | textarea | Texto bajo el título. | Artículos escritos por nuestros especialistas sobre salud mental, tratamientos y bienestar. Contenido claro, basado en evidencia y pensado para ti. | no |
 | `home_blog_boton` | link | Botón al blog: texto y destino | Explora nuestro blog | no |
+
+- **Campo fuera de wp-acf:** `home_blog_seleccion` (relationship de entradas, "Artículos a mostrar", máximo 4): artículos elegidos y ordenados a mano; vacío, los 4 más recientes. wp-acf todavía no genera relationship: lo registra `inc/campos-extra.php` como subcampo local del grupo `home_blog` (no está en la tabla para que `generate.mjs` no lo pida). Cuando la skill lo soporte, se agrega a la tabla con el mismo nombre, se regenera y se borra de `inc/campos-extra.php`.
 
 **Criterios de aceptación**
 
