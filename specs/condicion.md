@@ -27,14 +27,14 @@
 - **Destino:** `template-parts/pages/condicion/hero.php`, `template-parts/components/page-hero.php`, `template-parts/components/breadcrumb.php`
 - **Grupo:** `condicion_hero`
 - **Skill:** ninguna
-- **Comportamiento:** componente `page-hero` con su fondo decorativo de 5 capas SVG (`psiq-bg-1…5.svg`) y breadcrumb Inicio › Qué tratamos (`/#que-tratamos` de la portada) › título de la condición. El título va en 2 o 3 líneas, una por renglón del campo, cada una con máscara animada; la primera en verde (`--accent`). Si una línea no cabe, el módulo reduce el tamaño con `--lm-h1-scale` (`data-lm-fit-title`). A la derecha la nota corta; debajo la etiqueta con punto y la bajada. La nota se oculta si está vacía.
+- **Comportamiento:** componente `page-hero` con su fondo decorativo de 5 capas SVG (`psiq-bg-1…5.svg`) y breadcrumb Inicio › Qué tratamos (`/#que-tratamos` de la portada) › título de la condición. El título va en 2 o 3 líneas, una por renglón del campo, cada una con máscara animada; la primera en verde (`--accent`). Si una línea no cabe, el módulo reduce el tamaño con `--lm-h1-scale` (`data-lm-fit-title`). A la derecha la nota corta; debajo la etiqueta con punto (el título de la condición en mayúsculas, no es campo: decisión del 2026-11-03) y la bajada. La nota se oculta si está vacía.
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
 | Campo | Tipo | Descripción | Valor actual | Requerido |
 |---|---|---|---|---|
-| `condicion_hero_etiqueta` | text | Texto pequeño con punto sobre la bajada, normalmente el nombre de la condición. | DEPRESIÓN | sí |
 | `condicion_hero_titulo` | textarea | Título principal, una línea por renglón (2 o 3). Usa Enter para pasar a otra línea. La línea que va entera entre *asteriscos* se muestra en color. | *LA DEPRESIÓN*<br>TIENE TRATAMIENTO | sí |
 | `condicion_hero_nota` | text | Frase corta junto al título. | Atención presencial y virtual para cada etapa de la vida. | no |
 | `condicion_hero_bajada` | textarea | Párrafo que explica la condición, bajo el título. | La depresión puede afectar el ánimo, la energía, el sueño, la concentración y la capacidad de disfrutar las actividades cotidianas. No es falta de voluntad ni una tristeza pasajera: con una evaluación adecuada y un tratamiento personalizado, es posible reducir los síntomas y recuperar el bienestar. | sí |
@@ -53,6 +53,7 @@
 - **Skill:** wp-helper
 - **Comportamiento:** foto principal a todo el ancho del contenedor, proporción 2392:999 con `object-cover` (4:3 en móvil), `loading="eager"` y `fetchpriority="high"`. El `alt` es el de la imagen en la biblioteca de medios. Leyenda opcional sobre la imagen (`<figcaption>` con título y texto), solo si tiene texto (ej.: Personalidad). Valor suelto: fondo de carga `#d8d2c8`.
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
@@ -76,6 +77,7 @@
 - **Skill:** ninguna
 - **Comportamiento:** título (`h2`) e intro; destacado opcional antes de la lista (caja verde clara centrada, ej. TDAH); lista de señales en grilla, cada una con punto, título y texto; pie opcional después de la lista. Las señales pueden ir en grupos con título (ej. Bipolar: "DURANTE LA MANÍA O HIPOMANÍA"); con un solo grupo sin título se ve como Depresión. wp-accordion: en escritorio todo abierto y el título no parece botón; bajo 768 px cada lista es un acordeón, uno abierto a la vez, el primero abierto. Encabezados: con grupos, el título del grupo es `h3` y el de cada señal `h4` (el diseño repite `h3`). **Decisión 2026-10-30:** sin acordeón; la lista se lee abierta en todos los anchos.
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
@@ -106,6 +108,7 @@
 - **Skill:** ninguna
 - **Comportamiento:** bloque opcional "nota dorada" (`<aside class="lm-cond-note" aria-label="Nota">`): ícono dorado, título opcional y texto, sobre fondo dorado claro. Se imprime solo si el texto tiene contenido, al final de la sección `senales` (ej.: Bipolar, TDAH, TDPM con título). Depresión no lo tiene: en el ejemplo no se imprime. Valores sueltos: fondo `#f3ead9`, texto `#6b5233`.
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
@@ -126,14 +129,15 @@
 - **Destino:** `template-parts/pages/condicion/tipos.php`
 - **Grupo:** `condicion_tipos`
 - **Skill:** ninguna
-- **Comportamiento:** bloque opcional "bloque extra" (`.lm-cond-types`) con tres variantes: `tabla` (lista `<dl>` de dos columnas título/texto: Bipolar, TCA), `tarjetas` (`<ul>` de tarjetas con `h3`: Ansiedad) y `comparativa` (`<dl>` lado a lado, se imprime antes de `senales` con `--before`: Psicosis, Trauma). Título (`h2`), intro opcional y los ítems. Si la variante está vacía no se imprime. Depresión no lo tiene: la plantilla se maqueta con los ejemplos de la vista previa y en Depresión no se muestra.
+- **Comportamiento:** bloque opcional "bloque extra" (`.lm-cond-types`) con tres variantes: `tabla` (lista `<dl>` de dos columnas título/texto: Bipolar, TCA), `tarjetas` (`<ul>` de tarjetas con `h3`: Ansiedad) y `comparativa` (`<dl>` lado a lado, se imprime antes de `senales` con `--before`: Psicosis, Trauma). Título (`h2`), intro opcional y los ítems. Con "Sin bloque" no se imprime. Depresión no lo tiene: la plantilla se maqueta con los ejemplos de la vista previa y en Depresión no se muestra.
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
 | Campo | Tipo | Descripción | Valor actual | Requerido |
 |---|---|---|---|---|
-| `condicion_tipos_variante` | select | Cómo se muestra el bloque de tipos. Opciones: tabla, tarjetas, comparativa. Vacío = sin bloque. La comparativa va antes de las señales | — | no |
+| `condicion_tipos_variante` | select | Formato del bloque: Tabla (filas) o Tarjetas (cajas) van después de las señales; Comparativa (dos columnas) va antes. Opciones: Sin bloque, Tabla, Tarjetas, Comparativa | Sin bloque | no |
 | `condicion_tipos_titulo` | text | Título del bloque (ej. "TRASTORNOS DE ANSIEDAD MÁS FRECUENTES"). | — | no |
 | `condicion_tipos_intro` | textarea | Párrafo bajo el título. Opcional. | — | no |
 | `condicion_tipos_items` | repeater | Tipos o conceptos que se explican (2 a 6 en los ejemplos) | — | no |
@@ -145,7 +149,7 @@
 - [x] Cumple los criterios comunes de `_shared.md`
 - [x] Un solo template part con las tres variantes por modificador (`--tabla`, `--tarjetas`, `--comparativa`)
 - [x] La variante `comparativa` se imprime antes de `senales` y las otras después de `nota`
-- [x] Sin variante no se imprime nada
+- [x] Con "Sin bloque" no se imprime nada
 
 ## Sección: abordaje
 
@@ -155,6 +159,7 @@
 - **Skill:** ninguna
 - **Comportamiento:** sección oscura (`data-lm-nav-tone="dark"`: el header cambia a tono oscuro encima) con título claro (`h2`), intro y una lista ordenada de pasos (título `h3` y texto en párrafos). wp-accordion: en escritorio todo abierto; bajo 768 px acordeón, uno abierto a la vez, el primero abierto. La intro se oculta si está vacía. **Decisión 2026-10-30:** sin acordeón; los pasos se leen abiertos en todos los anchos.
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
@@ -178,14 +183,16 @@
 - **Destino:** `template-parts/pages/condicion/especialistas.php`, `template-parts/components/specialists-carousel.php`, `template-parts/components/especialista-card.php`
 - **Grupo:** `condicion_especialistas`
 - **Skill:** ninguna
-- **Comportamiento:** componente `specialists-carousel` con `filtro: true` y las 13 cards de ejemplo del diseño (arrays fijos con `especialista-card`, nombre en `h3`; sin consulta en esta etapa). Textos fijos: "ESPECIALISTAS QUE PUEDEN AYUDARTE" ("AYUDARTE" en verde) e intro "Un equipo humano listo para acompañarte." Pills Todos / Médicos psiquiatras / Psicólogos que filtran el carrusel en el navegador (sin recargar, no son filtros de wp-query); flechas Anterior/Siguiente (se ocultan en los extremos), scroll con teclado. Enlace "Ver todos los especialistas" al archivo de especialistas con `?atiende=<slug del término>` y, si hay pill elegida, `&tipo=<slug>`. Botón de cada card = Acción de `_shared.md` (WhatsApp con "Hola, quisiera agendar una cita con {nombre}."). Con la consulta (wp-query) se listan los especialistas con el término de `condicion_especialistas_que_trata`, psiquiatras primero y luego por `especialista_perfil_orden`.
+- **Comportamiento:** componente `specialists-carousel` con `filtro: true` y una `especialista-card` (nombre en `h3`) por cada especialista con el término de `condicion_especialistas_que_trata` (`lumenti_condicion_especialistas_cards`, `inc/condiciones.php`); sin término o sin especialistas, la sección no se imprime. Textos fijos: "ESPECIALISTAS QUE PUEDEN AYUDARTE" ("AYUDARTE" en verde) e intro "Un equipo humano listo para acompañarte." Pills Todos / Médicos psiquiatras / Psicólogos que filtran el carrusel en el navegador (sin recargar, no son filtros de wp-query); flechas Anterior/Siguiente (se ocultan en los extremos), scroll con teclado. Enlace "Ver todos los especialistas" al archivo de especialistas con `?atiende=<slug del término>` y, si hay pill elegida, `&tipo=<slug>`. Botón de cada card = Acción de `_shared.md` (WhatsApp con "Hola, quisiera agendar una cita con {nombre}."). Orden: psiquiatras primero y luego por `especialista_perfil_orden` (el mismo del listado).
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 
 | Campo | Tipo | Descripción | Valor actual | Requerido |
 |---|---|---|---|---|
-| `condicion_especialistas_que_trata` | taxonomy | Término de "Qué trata" que corresponde a esta condición. Con él se listan sus especialistas, se arma "Ver todos" y los perfiles enlazan a esta página. Un solo término | — | sí |
+
+- **Campo fuera de wp-acf:** `condicion_especialistas_que_trata` (taxonomy de `que_trata`, un solo término, requerido, "Qué trata"): término que corresponde a esta condición. Con él se listan sus especialistas, se arma "Ver todos" y los perfiles enlazan a esta página. wp-acf todavía no genera taxonomy: lo registra `inc/campos-extra.php` como campo `group` local `condicion_especialistas` del grupo Condición, con el subcampo `que_trata` (no está en una tabla para que `generate.mjs` no lo pida). Cuando la skill lo soporte, se agrega la tabla con el mismo nombre, se regenera y se borra de `inc/campos-extra.php`.
 
 **Criterios de aceptación**
 
@@ -202,6 +209,7 @@
 - **Skill:** wp-helper
 - **Comportamiento:** componente `cta` con la variante `--condicion` (fondo partido arena/verde), el video del mar y la insignia del cerebro (fijos, iguales al resto del sitio). Botón de WhatsApp a `opciones_contacto_telefono_paciente` con el mensaje del campo; si el campo está vacío, la Acción de `_shared.md`: "Hola, quisiera orientación sobre {condicion}.". El enlace pasa por el helper de enlaces (pestaña nueva con `rel` y aviso).
 - **Estado:** aplicado
+- **ACF:** conectado
 
 **Campos ACF**
 

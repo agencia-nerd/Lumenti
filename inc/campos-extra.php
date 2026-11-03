@@ -10,6 +10,7 @@ defined('ABSPATH') || exit;
  *
  * - psiquiatria_especialistas_seleccion / psicologia_especialistas_seleccion: especialistas del carrusel,
  *   elegidos y ordenados a mano. Vacío: todos los del tipo de la página, por su orden (lumenti_especialistas_cards).
+ * - condicion_especialistas_que_trata (taxonomy): el término de que_trata de cada condición (specs/condicion.md).
  */
 
 const LUMENTI_CAMPOS_SELECCION = [
@@ -42,6 +43,30 @@ add_action('acf/include_fields', function () {
             'return_format' => 'id',
             'parent'        => $padre['key'],
             'menu_order'    => 100,
+        ]);
+    }
+
+    // Condición: el término de que_trata que le corresponde (specs/condicion.md → especialistas). El grupo
+    // condicion_especialistas viene vacío del JSON; el campo se guarda como condicion_especialistas_que_trata.
+    $padre = $locales->get('condicion_especialistas');
+    if ($padre && ($padre['type'] ?? '') === 'group') {
+        acf_add_local_field([
+            'key'           => 'field_lumenti_condicion_especialistas_que_trata',
+            'label'         => 'Qué trata',
+            'name'          => 'que_trata',
+            'type'          => 'taxonomy',
+            'instructions'  => 'Condición de esta página. Salen los especialistas que la tienen marcada en su perfil.',
+            'required'      => 1,
+            'taxonomy'      => 'que_trata',
+            'field_type'    => 'select',
+            'allow_null'    => 0,
+            'add_term'      => 0,
+            'save_terms'    => 0,
+            'load_terms'    => 0,
+            'return_format' => 'id',
+            'multiple'      => 0,
+            'parent'        => $padre['key'],
+            'menu_order'    => 0,
         ]);
     }
 }, 20);

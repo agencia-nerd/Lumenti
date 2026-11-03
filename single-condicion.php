@@ -1,7 +1,7 @@
 <?php
 /*
  * Página de una condición (specs/condicion.md). Grupo ACF: Condición (tipo de contenido = condicion).
- * El título es de WordPress; mientras no hay datos cada sección imprime el ejemplo del diseño (Depresión).
+ * El título es de WordPress (breadcrumb y mensaje de WhatsApp); cada sección lee su grupo y, vacía, no se imprime.
  * Bloque "tipos": la variante comparativa va antes de las señales; tabla y tarjetas, después de la nota.
  * JS: src/js/modules/condition-filter.js (ajuste del h1 y pills del carrusel) y el acordeón de wp-accordion.
  */
@@ -11,7 +11,7 @@ $lumenti_slug = (string) get_post_field('post_name');
 
 get_header();
 ?>
-<main id="main-content" class="lm-cond" data-lm-condition="<?= esc_attr($lumenti_slug !== '' ? $lumenti_slug : 'depresion') ?>">
+<main id="main-content" class="lm-cond" data-lm-condition="<?= esc_attr($lumenti_slug) ?>">
     <?php
     get_template_part('template-parts/pages/condicion/hero');
     get_template_part('template-parts/pages/condicion/imagen');
