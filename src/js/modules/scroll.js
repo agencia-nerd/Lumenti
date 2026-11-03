@@ -2,25 +2,34 @@
 import { prefersReducedMotion, scrollToElement, smoothState } from './utils.js';
 
 // [data-lm-reveal="up|img"]; [data-lm-reveal-group] revela a todos juntos. Sin JS el contenido queda visible.
+// El recorte (clip-path) solo dura la animación: al terminar, .is-done lo quita para que lo que sale de la caja
+// (las cards laterales del abanico de testimonios, sombras) no quede cortado. Como en el diseño.
+const REVEAL_MS = 900;
+const done = (el, delay = 0) => {
+    window.setTimeout(() => el.classList.add('is-done'), REVEAL_MS + delay + 80);
+};
+
 export function reveal() {
     const els = [...document.querySelectorAll('[data-lm-reveal]')];
     if (!els.length) return;
     if (prefersReducedMotion() || !('IntersectionObserver' in window)) {
-        els.forEach((el) => el.classList.add('is-revealed'));
+        els.forEach((el) => el.classList.add('is-revealed', 'is-done'));
         return;
     }
     // Lo que ya está en pantalla se muestra sin transición.
     const vh = window.innerHeight;
     els.forEach((el) => {
         if (el.getBoundingClientRect().top < vh * 0.92) {
-            el.classList.add('is-revealed', 'is-instant');
+            el.classList.add('is-revealed', 'is-instant', 'is-done');
             requestAnimationFrame(() => el.classList.remove('is-instant'));
         }
     });
     const io = new IntersectionObserver((entries) => {
         entries.filter((e) => e.isIntersecting).forEach(({ target }, k) => {
-            if (!target.hasAttribute('data-lm-reveal-group')) target.style.setProperty('--lm-reveal-delay', `${k * 110}ms`);
+            const delay = target.hasAttribute('data-lm-reveal-group') ? 0 : k * 110;
+            if (delay) target.style.setProperty('--lm-reveal-delay', `${delay}ms`);
             target.classList.add('is-revealed');
+            done(target, delay);
             io.unobserve(target);
         });
     }, { rootMargin: '0px 0px -8% 0px' });
