@@ -26,7 +26,7 @@ add_filter('lumenti_forms', function ($forms) {
         'subject'  => 'Nueva solicitud de propuesta para empresas desde la web',
         'to'       => lumenti_form_recipients('empresas'),
         'reply_to' => 'correo',
-        'store'    => 'none',
+        'store'    => 'all', // Envíos guardados: admin → Envíos (inc/forms-entries.php).
         'redirect' => '',
         'success'  => 'Nuestro equipo corporativo revisará la información y te contactará a la brevedad con una propuesta a medida.',
 
