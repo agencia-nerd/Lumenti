@@ -7,7 +7,7 @@ Se define una sola vez y vale para todas las páginas.
   - Clases BEM con prefijo `lm-` (las del diseño); los ganchos de JS son atributos `data-lm-*`, nunca clases.
   - JS: cada módulo del diseño (IIFE + `window.Lumenti`) se reescribe como módulo ES en `src/js/modules/` y lo inicializa `src/js/main.js` solo si su componente existe.
   - Imágenes que imprime PHP: `assets/img/` del tema (se sube junto con `dist/`); íconos y fuentes usados por CSS: `src/img/`, `src/fonts/`.
-  - Abenda requiere licencia web (pendiente del cliente); se convierte a woff2 si el cliente la entrega.
+  - Abenda: el cliente entregó la versión web (`src/fonts/Abenda.woff2`).
   - Textos en dos colores: marcador `*asteriscos*` → helper de texto de wp-helper (`lumenti_highlight`, aún no instalado; se instala en la etapa C).
   - Módulos JS compartidos: `ver-mas.js` (`data-lm-more`, home ayuda y diario) y `carousel.js` genérico (testimonios y carrusel de especialistas).
   - Valores sueltos (una sola vez) quedan como valor arbitrario y están listados en el `Comportamiento` de cada sección; no se crean tokens.
