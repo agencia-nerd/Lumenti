@@ -8,6 +8,8 @@ defined('ABSPATH') || exit;
  *   slugs de los términos los arma WordPress (con el nombre completo y el nombre del término).
  * - Términos y condiciones: su documento ('terminos' de inc/acf/seed/politica-de-privacidad.php); Privacidad
  *   la carga wp-acf.
+ * - Condiciones (después de su carga de wp-acf): el slug de cada una (/condicion/<id>/) y su término de que_trata
+ *   (campo condicion_especialistas_que_trata de inc/campos-extra.php), desde inc/acf/seed/condicion.php.
  * - Mega menú Servicios: la "Descripción" de cada elemento del menú `servicios` (bajada de la card) y la
  *   imagen destacada de cada página de servicio (imagen de la card).
  * Corre una vez por paso (marcador en opciones), después de la carga de wp-acf: nunca pisa lo editado.
@@ -86,6 +88,10 @@ function lumenti_carga_extra(): void
         $hecho['terminos'] = lumenti_carga_terminos() ? 1 : 0;
     }
 
+    if (empty($hecho['condiciones'])) {
+        $hecho['condiciones'] = lumenti_carga_condiciones() ? 1 : 0;
+    }
+
     update_option(LUMENTI_CARGA_EXTRA_MARCADOR, $hecho, false);
 }
 
@@ -138,11 +144,58 @@ function lumenti_carga_especialistas(): bool
 
     return true;
 }
+/*
+ * Condiciones que creó la carga de wp-acf: el slug del post es su id ('depresion' → /condicion/depresion/; WordPress
+ * lo armaría con el título) y su término de que_trata es el 'que_trata' del seed. Corre una sola vez y cada
+ * valor solo se pone si está vacío o es el que puso WordPress: no pisa lo editado.
+ * Devuelve false si aún faltan las condiciones o los términos (se reintenta en la próxima visita al admin).
+ */
+function lumenti_carga_condiciones(): bool
+{
+    if (!post_type_exists('condicion') || !function_exists('update_field') || !function_exists('lumenti_acf_key')) {
+        return false;
+    }
+    $seed = require get_theme_file_path('inc/acf/seed/condicion.php');
+    $listo = true;
+
+    foreach ((array) ($seed['items'] ?? []) as $item) {
+        $id = sanitize_title((string) ($item['id'] ?? ''));
+        $posts = $id === '' ? [] : get_posts([
+            'post_type'      => 'condicion',
+            'post_status'    => 'any',
+            'posts_per_page' => 1,
+            'meta_key'       => '_lumenti_seed_id',
+            'meta_value'     => $id,
+        ]);
+        if (!$posts) {
+            $listo = false;
+            continue;
+        }
+        $post = $posts[0];
+
+        if ($post->post_name !== $id && $post->post_name === sanitize_title($post->post_title)) {
+            wp_update_post(['ID' => $post->ID, 'post_name' => $id]);
+        }
+
+        if (!lumenti_condicion_termino($post)) {
+            $term = get_term_by('name', (string) ($item['que_trata'] ?? ''), 'que_trata');
+            if ($term) {
+                // Por el campo grupo (clave del JSON): así se guarda como condicion_especialistas_que_trata.
+                update_field(lumenti_acf_key('condicion_especialistas'), ['que_trata' => (int) $term->term_id], $post->ID);
+            } else {
+                $listo = false;
+            }
+        }
+    }
+
+    return $listo;
+}
+
 // Después de la carga de wp-acf al activar el tema (prioridad 10) y, si quedó algo pendiente, en el admin.
 add_action('after_switch_theme', 'lumenti_carga_extra', 20);
 add_action('admin_init', function () {
     $hecho = (array) get_option(LUMENTI_CARGA_EXTRA_MARCADOR, []);
-    if (empty($hecho['paginas']) || empty($hecho['servicios']) || empty($hecho['especialistas']) || empty($hecho['terminos'])) {
+    if (empty($hecho['paginas']) || empty($hecho['servicios']) || empty($hecho['especialistas']) || empty($hecho['terminos']) || empty($hecho['condiciones'])) {
         lumenti_carga_extra();
     }
 });

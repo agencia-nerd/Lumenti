@@ -52,24 +52,6 @@ function lumenti_especialista_whatsapp(string $nombre): string
     return lumenti_whatsapp_url('paciente', sprintf(__('Hola, quisiera agendar una cita con %s.', 'lumenti'), $articulo . $nombre));
 }
 
-// URL del perfil de un especialista de la carga inicial, por su id ('mariela-linares'): la usan las cards fijas
-// de Condición hasta conectarla. La URL real la arma WordPress con el nombre completo. Sin perfil, el listado.
-function lumenti_especialista_url(string $seed_id): string
-{
-    static $cache = [];
-    if (!isset($cache[$seed_id])) {
-        $ids = post_type_exists('especialista') ? get_posts([
-            'post_type'      => 'especialista',
-            'posts_per_page' => 1,
-            'fields'         => 'ids',
-            'meta_key'       => '_lumenti_seed_id',
-            'meta_value'     => $seed_id,
-        ]) : [];
-        $cache[$seed_id] = $ids ? (string) get_permalink((int) $ids[0]) : (string) get_post_type_archive_link('especialista');
-    }
-    return $cache[$seed_id];
-}
-
 // ---------- Orden ----------
 
 // Posición de cada término de tipo_especialista (el primero creado, Psiquiatras, va primero).

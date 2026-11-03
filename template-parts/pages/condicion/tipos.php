@@ -7,23 +7,17 @@ defined('ABSPATH') || exit;
  *   tabla       <dl> título/texto en dos columnas (Bipolar, TCA)          → después de la nota
  *   tarjetas    <ul> de tarjetas con h3 (Ansiedad)                          → después de la nota
  *   comparativa <dl> lado a lado, modificador --before (Psicosis, Trauma) → antes de las señales
- * Vacío = sin bloque. Depresión no lo tiene: en el ejemplo no se imprime.
+ * Con "Sin bloque" (sin_bloque) o sin ítems no se imprime (Depresión no lo tiene).
  *
  * $args: posicion (antes | despues): single-condicion.php lo llama dos veces; cada llamada imprime el
  *        bloque solo si su variante va en esa posición.
  */
 
-$lumenti_tipos = [
-    'variante' => '',
-    'titulo' => '',
-    'intro' => '',
-    'items' => [
-        // ['titulo' => 'ANOREXIA NERVIOSA', 'texto' => '…'],
-    ],
-];
+$lumenti_tipos = get_field('condicion_tipos') ?: [];
+$lumenti_intro = trim((string) ($lumenti_tipos['intro'] ?? ''));
 
-$lumenti_variante = in_array($lumenti_tipos['variante'], ['tabla', 'tarjetas', 'comparativa'], true) ? $lumenti_tipos['variante'] : '';
-$lumenti_items = array_values(array_filter($lumenti_tipos['items'], static fn($i) => trim((string) ($i['titulo'] ?? '')) !== ''));
+$lumenti_variante = in_array((string) ($lumenti_tipos['variante'] ?? ''), ['tabla', 'tarjetas', 'comparativa'], true) ? (string) $lumenti_tipos['variante'] : '';
+$lumenti_items = array_values(array_filter((array) ($lumenti_tipos['items'] ?? []), static fn($i) => trim((string) ($i['titulo'] ?? '')) !== ''));
 if ($lumenti_variante === '' || !$lumenti_items) {
     return;
 }
@@ -34,10 +28,10 @@ if ($lumenti_antes !== (($args['posicion'] ?? 'despues') === 'antes')) {
 $lumenti_clase = 'lm-cond-types lm-cond-types--' . $lumenti_variante . ($lumenti_antes ? ' lm-cond-types--before' : '');
 ?>
 <section class="<?= esc_attr($lumenti_clase) ?>" aria-labelledby="lm-types-title">
-    <div class="lm-cond-types__header"><h2 class="lm-section-title" id="lm-types-title"><?= esc_html($lumenti_tipos['titulo']) ?></h2><?php if ($lumenti_tipos['intro'] !== '') : ?><p class="lm-lead lm-cond-types__intro"><?= esc_html($lumenti_tipos['intro']) ?></p><?php endif; ?></div>
+    <div class="lm-cond-types__header"><h2 class="lm-section-title" id="lm-types-title"><?= esc_html((string) ($lumenti_tipos['titulo'] ?? '')) ?></h2><?php if ($lumenti_intro !== '') : ?><p class="lm-lead lm-cond-types__intro"><?= lumenti_highlight($lumenti_intro) ?></p><?php endif; ?></div>
     <?php if ($lumenti_variante === 'tarjetas') : ?>
-        <ul class="lm-cond-types__list"><?php foreach ($lumenti_items as $lumenti_item) : ?><li class="lm-cond-types__item"><h3 class="lm-cond-types__item-title"><?= esc_html($lumenti_item['titulo']) ?></h3><p class="lm-cond-types__item-text"><?= esc_html((string) ($lumenti_item['texto'] ?? '')) ?></p></li><?php endforeach; ?></ul>
+        <ul class="lm-cond-types__list"><?php foreach ($lumenti_items as $lumenti_item) : ?><li class="lm-cond-types__item"><h3 class="lm-cond-types__item-title"><?= esc_html($lumenti_item['titulo']) ?></h3><p class="lm-cond-types__item-text"><?= lumenti_highlight((string) ($lumenti_item['texto'] ?? '')) ?></p></li><?php endforeach; ?></ul>
     <?php else : ?>
-        <dl class="lm-cond-types__list"><?php foreach ($lumenti_items as $lumenti_item) : ?><div class="lm-cond-types__item"><dt class="lm-cond-types__item-title"><?= esc_html($lumenti_item['titulo']) ?></dt><dd class="lm-cond-types__item-text"><?= esc_html((string) ($lumenti_item['texto'] ?? '')) ?></dd></div><?php endforeach; ?></dl>
+        <dl class="lm-cond-types__list"><?php foreach ($lumenti_items as $lumenti_item) : ?><div class="lm-cond-types__item"><dt class="lm-cond-types__item-title"><?= esc_html($lumenti_item['titulo']) ?></dt><dd class="lm-cond-types__item-text"><?= lumenti_highlight((string) ($lumenti_item['texto'] ?? '')) ?></dd></div><?php endforeach; ?></dl>
     <?php endif; ?>
 </section>

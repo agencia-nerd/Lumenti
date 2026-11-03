@@ -90,9 +90,10 @@
 
 | Campo | Tipo | Descripción | Valor actual | Requerido |
 |---|---|---|---|---|
-| `blog_destacado_articulo` | post_object | Artículo que se muestra destacado arriba del listado. | ¿EXISTE UN TRATAMIENTO EFECTIVO PARA EL TRASTORNO LÍMITE DE LA PERSONALIDAD? | no |
 | `blog_destacado_etiqueta` | text | Etiqueta sobre la imagen. | Destacado | no |
 | `blog_destacado_boton_texto` | text | Texto del botón. | Leer artículo destacado | sí |
+
+- **Campo fuera de wp-acf:** `blog_destacado_articulo` (post_object, "Artículo destacado"): artículo que se muestra destacado arriba del listado (valor actual: ¿EXISTE UN TRATAMIENTO EFECTIVO PARA EL TRASTORNO LÍMITE DE LA PERSONALIDAD?). wp-acf todavía no genera post_object: lo registra `inc/campos-extra.php` como subcampo local del grupo `blog_destacado` (no está en la tabla para que `generate.mjs` no lo pida). Cuando la skill lo soporte, se agrega a la tabla con el mismo nombre, se regenera y se borra de `inc/campos-extra.php`.
 
 **Criterios de aceptación**
 
