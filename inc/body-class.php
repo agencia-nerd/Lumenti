@@ -6,7 +6,9 @@ function lumenti_body_class(array $classes): array
 {
     $page = '';
 
-    if (is_front_page()) {
+    if (is_404()) {
+        $page = '404';
+    } elseif (is_front_page()) {
         $page = 'home';
     } elseif (is_post_type_archive('especialista')) {
         $page = 'especialistas';

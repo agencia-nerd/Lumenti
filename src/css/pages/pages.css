@@ -69,4 +69,34 @@
 .lm-preview--dark { background: var(--lm-teal); }
 .lm-preview__text { color: var(--lm-white); }
 .lm-preview .lm-h2 { margin-top: var(--lm-eyebrow-gap); }
+
+/* ===== Página no encontrada (404.php) — hero .lm-page-hero--service con acciones .lm-emp-hero__actions ===== */
+.lm-page--404 .lm-emp-hero__actions { gap: 16px; }
+.lm-404 { padding: clamp(96px, 8.3333vw, 160px) var(--lm-side) clamp(120px, 10.4167vw, 200px); }
+.lm-404__inner { max-width: var(--lm-max); margin: 0 auto; display: grid; grid-template-columns: minmax(0,5fr) minmax(0,7fr); gap: clamp(48px, 6.25vw, 120px); align-items: start; }
+.lm-404__head { position: sticky; top: calc(var(--lm-nav-h) + 32px); }
+.lm-404__intro { margin-top: 20px; max-width: 440px; font-size: var(--lm-fs-body); line-height: 1.8; color: var(--lm-muted); }
+.lm-404__search { margin-top: 40px; max-width: 520px; display: flex; align-items: flex-end; gap: 8px; }
+.lm-404__field { flex: 1 1 auto; }
+.lm-404__submit { flex: none; height: 52px; }
+.lm-404__links { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); column-gap: clamp(24px, 2.5vw, 48px); }
+.lm-404__link { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 6px 16px; padding: 28px 0; border-top: 1px solid var(--lm-line); }
+.lm-404__link-title { font-family: var(--lm-font-title); font-weight: 400; font-size: clamp(19px, 1.1458vw, 22px); line-height: 1.4; letter-spacing: 0.02em; color: var(--lm-ink); transition: color 200ms linear; }
+.lm-404__link-text { grid-column: 1; font-size: var(--lm-fs-small); line-height: var(--lm-lh-small); color: var(--lm-muted); }
+.lm-404__link-icon { grid-column: 2; grid-row: 1 / span 2; align-self: center; color: var(--lm-teal); transition: transform 400ms var(--lm-ease); }
+@media (hover: hover) and (pointer: fine) {
+  .lm-404__link:hover .lm-404__link-title { color: var(--lm-teal); }
+  .lm-404__link:hover .lm-404__link-icon { transform: translateX(4px); }
+}
+@media (max-width: 1023px) {
+  .lm-404__inner { grid-template-columns: minmax(0,1fr); }
+  .lm-404__head { position: static; }
+}
+@media (max-width: 767px) {
+  .lm-404 { padding: 72px var(--lm-side) 96px; }
+  .lm-404__inner { gap: 48px; }
+  .lm-404__links { grid-template-columns: minmax(0,1fr); }
+  .lm-404__link { padding: 22px 0; }
+  .lm-page--404 .lm-emp-hero__actions .lm-btn { width: 100%; }
+}
 }

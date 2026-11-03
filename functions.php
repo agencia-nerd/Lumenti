@@ -28,3 +28,4 @@ require_once get_theme_file_path('/inc/campos-extra.php');
 require_once get_theme_file_path('/inc/query/motor.php');
 require_once get_theme_file_path('/inc/query-extras.php');
 require_once get_theme_file_path('/inc/seo.php');
+require_once get_theme_file_path('/inc/pagina-404.php');
