@@ -84,29 +84,25 @@ export function preloader() {
 }
 
 // Hero: slides con pestañas y autoavance cada 6 s. Arranca con .lm-go.
-// Pausa (WCAG 2.2.2): el botón [data-lm-hero-toggle] detiene o reanuda el avance; el hover sobre el hero lo pausa
-// mientras dura y el foco de teclado dentro del hero lo detiene hasta que se pulse reanudar (patrón WAI-ARIA).
+// El tiempo lo marca la barra de la pestaña activa: al terminar de llenarse (animationend) pasa al siguiente
+// slide, así la barra y el cambio nunca se desfasan. Pausa (WCAG 2.2.2): solo el botón [data-lm-hero-toggle]
+// detiene o reanuda el avance; .is-paused congela la barra (y con ella el cambio) y el zoom de la imagen.
 // Con movimiento reducido no hay avance automático y el botón queda oculto.
 export function heroSlider() {
     const hero = document.querySelector('[data-lm-hero]');
     if (!hero) return;
-    const DUR = 6000;
     const reduce = prefersReducedMotion();
     const q = (s) => [...hero.querySelectorAll(s)];
     const texts = q('[data-lm-hero-text]');
     const imgs = q('[data-lm-hero-img]');
     const nums = q('[data-lm-hero-num]');
     const tabs = q('[data-lm-hero-tab]');
+    const fills = tabs.map((t) => t.querySelector('[data-lm-hero-fill]'));
     const toggle = hero.querySelector('[data-lm-hero-toggle]');
     if (!texts.length) return;
+    const auto = !reduce && texts.length > 1;
     const ken = texts.map(() => 0);
     let cur = 0;
-    let t0 = 0;
-    let left = DUR;
-    let timer = 0;
-    let paused = false;
-    let stopped = false; // detenido por el usuario (botón o foco)
-    let hovered = false; // pausa temporal mientras el mouse está sobre el hero
 
     const phase = (list, i, prev) => {
         list.forEach((el, k) => {
@@ -119,26 +115,14 @@ export function heroSlider() {
             }
         });
     };
-    const schedule = () => {
-        clearTimeout(timer);
-        timer = 0;
-        if (paused || reduce) return;
-        t0 = Date.now();
-        timer = setTimeout(() => {
-            timer = 0;
-            show((cur + 1) % texts.length);
-        }, left);
-    };
+    // Vuelve a llenar desde cero la barra de la pestaña activa (y vacía las demás).
     const restart = () => {
-        tabs.forEach((t, k) => {
-            const f = t.querySelector('[data-lm-hero-fill]');
+        fills.forEach((f, k) => {
             if (!f) return;
             f.classList.remove('is-filling');
             void f.offsetWidth;
             if (k === cur) f.classList.add('is-filling');
         });
-        left = DUR;
-        schedule();
     };
     function show(i) {
         if (i === cur) {
@@ -156,22 +140,6 @@ export function heroSlider() {
         });
         restart();
     }
-    // Recalcula la pausa: guarda el tiempo que le quedaba al slide y lo retoma al reanudar.
-    const sync = () => {
-        const on = stopped || hovered;
-        if (toggle) toggle.setAttribute('aria-pressed', stopped ? 'true' : 'false');
-        if (on === paused) return;
-        paused = on;
-        hero.classList.toggle('is-paused', on);
-        if (on) {
-            if (timer) {
-                clearTimeout(timer);
-                timer = 0;
-                left = Math.max(0, left - (Date.now() - t0));
-            }
-        } else schedule();
-    };
-
     tabs.forEach((t, k) => {
         t.addEventListener('click', () => show(k));
         t.addEventListener('keydown', (e) => {
@@ -183,32 +151,21 @@ export function heroSlider() {
         });
         t.tabIndex = k === 0 ? 0 : -1;
     });
-    if (!reduce && texts.length > 1) {
+    if (auto) {
+        fills.forEach((f, k) => {
+            if (!f) return;
+            f.addEventListener('animationend', (e) => {
+                if (e.animationName === 'lmFill' && k === cur) show((cur + 1) % texts.length);
+            });
+        });
         if (toggle) {
             toggle.hidden = false;
             toggle.addEventListener('click', () => {
-                stopped = !stopped;
-                sync();
+                const on = toggle.getAttribute('aria-pressed') !== 'true';
+                toggle.setAttribute('aria-pressed', on ? 'true' : 'false');
+                hero.classList.toggle('is-paused', on);
             });
         }
-        // Hover en cualquier parte del hero (solo mouse). Sobre el botón no cuenta: al pulsar "reanudar" con el
-        // mouse encima, el avance tiene que arrancar en el momento.
-        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-            hero.addEventListener('mouseover', (e) => {
-                hovered = !(toggle && toggle.contains(e.target));
-                sync();
-            });
-            hero.addEventListener('mouseleave', () => {
-                hovered = false;
-                sync();
-            });
-        }
-        // Foco dentro del hero (pestañas, CTA): se detiene hasta que se pulse reanudar.
-        hero.addEventListener('focusin', (e) => {
-            if (toggle && toggle.contains(e.target)) return;
-            stopped = true;
-            sync();
-        });
     }
 
     if (html.classList.contains('lm-go')) restart();
