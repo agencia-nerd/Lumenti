@@ -44,7 +44,7 @@ $lumenti_hay_extra = count($lumenti_condiciones) > $lumenti_visibles;
     </ul>
     <?php if ($lumenti_hay_extra) : ?>
         <div class="lm-home-ayuda__more">
-            <button class="lm-btn lm-btn--secondary lm-home-ayuda__more-btn" type="button" aria-controls="lm-more-help" aria-expanded="false" data-lm-more-btn data-lm-more-less="<?= esc_attr__('Ver menos', 'lumenti') ?>"><?= esc_html__('Ver más', 'lumenti') ?><svg class="lm-btn__arrow" aria-hidden="true" width="18" height="18" viewBox="0 0 256 256" fill="currentColor"><path class="lm-home-ayuda__icon-minus" d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></button>
+            <button class="lm-btn lm-btn--secondary lm-home-ayuda__more-btn" type="button" aria-controls="lm-more-help" aria-expanded="false" data-lm-more-btn data-lm-more-less="<?= esc_attr__('Ver menos', 'lumenti') ?>"><?= esc_html__('Ver más', 'lumenti') ?><svg class="lm-btn__arrow hidden md:block" aria-hidden="true" width="18" height="18" viewBox="0 0 256 256" fill="currentColor"><path class="lm-home-ayuda__icon-minus" d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg></button>
         </div>
     <?php endif; ?>
 </section>

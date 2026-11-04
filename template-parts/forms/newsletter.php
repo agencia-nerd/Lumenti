@@ -24,7 +24,7 @@ $lumenti_partes = $lumenti_enlace !== '' ? explode($lumenti_enlace, $lumenti_tex
     </div>
     <button class="lm-btn lm-btn--primary lm-form__submit" type="submit" data-loading-label="Enviando...">
         <span data-submit-label><?= esc_html($args['boton'] ?? '') ?></span>
-        <svg class="lm-btn__arrow" aria-hidden="true" width="18" height="18" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg>
+        <svg class="lm-btn__arrow hidden md:block" aria-hidden="true" width="18" height="18" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg>
         <span class="lm-form__spinner" aria-hidden="true"></span>
     </button>
     <span class="lm-field__error lm-cta__error-email" <?php lumenti_error_attrs($lumenti_id, 'email'); ?>></span>

@@ -25,7 +25,7 @@ $lumenti_articulos = lumenti_blog_inicio((array) ($lumenti_blog['seleccion'] ?? 
             <?php endif; ?>
         </div>
         <?php if ($lumenti_boton_attrs !== '') : ?>
-            <a<?= $lumenti_boton_attrs ?>><?= esc_html($lumenti_boton['title']) ?><svg class="lm-btn__arrow" aria-hidden="true" width="16" height="16" viewBox="0 0 256 256" fill="currentColor"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg></a>
+            <a<?= $lumenti_boton_attrs ?>><?= esc_html($lumenti_boton['title']) ?><svg class="lm-btn__arrow hidden md:block" aria-hidden="true" width="16" height="16" viewBox="0 0 256 256" fill="currentColor"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg></a>
         <?php endif; ?>
     </div>
     <ul class="lm-home-blog__grid">
