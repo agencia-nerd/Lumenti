@@ -75,8 +75,9 @@
 
   /* Navbar */
   --lm-nav-h: 104px; /* ≥1200: 104 · tablet: 84 · mobile: 76 */
+  --lm-nav-x: clamp(24px, 5.2vw, 100px); /* borde lateral del header y del footer; tablet 40px; mobile 20px */
 }
-@media (max-width: 1199px) { :root { --lm-nav-h: 84px; } }
+@media (max-width: 1199px) { :root { --lm-nav-h: 84px; --lm-nav-x: 40px; } }
 @media (max-width: 1023px) { :root { --lm-side: 40px; --lm-sec-top: 112px; --lm-sec-bottom: 128px; } }
-@media (max-width: 767px)  { :root { --lm-nav-h: 76px; --lm-side: 20px; --lm-sec-top: 80px; --lm-sec-bottom: 96px; } }
+@media (max-width: 767px)  { :root { --lm-nav-h: 76px; --lm-nav-x: 20px; --lm-side: 20px; --lm-sec-top: 80px; --lm-sec-bottom: 96px; } }
 @media (prefers-reduced-motion: reduce) { :root { --lm-dur-fill: 0ms; } }
