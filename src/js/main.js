@@ -12,6 +12,7 @@ import { fitTitle, conditionFilter } from './modules/condition-filter.js';
 import { blogFilter } from './modules/blog-filter.js';
 import { legalToc } from './modules/legal.js';
 import { empresasLinks, empresasSteps } from './modules/empresas.js';
+import { recaptcha } from './modules/recaptcha.js';
 import { formExtras } from './modules/form-extras.js';
 
 document.documentElement.classList.add('lm-js');
@@ -40,6 +41,7 @@ const modules = {
     legalToc,
     empresasLinks,
     empresasSteps,
+    recaptcha,
     formExtras,
 };
 

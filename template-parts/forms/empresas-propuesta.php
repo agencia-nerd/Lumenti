@@ -48,7 +48,7 @@ $lumenti_input = static function (string $key, string $tag = 'input') use ($lume
     <?php
 };
 ?>
-<form class="lm-form" <?php lumenti_form_attrs($lumenti_id); ?><?php lumenti_form_extras_attrs($lumenti_id); ?> data-lm-proposal-form data-lm-success-panel="lm-emp-success">
+<form class="lm-form" <?php lumenti_form_attrs($lumenti_id); ?><?php lumenti_form_extras_attrs($lumenti_id); ?><?php lumenti_recaptcha_attrs($lumenti_id); ?> data-lm-proposal-form data-lm-success-panel="lm-emp-success">
     <noscript>
         <p class="lm-emp-proposal__help">Para enviar este formulario necesitas activar JavaScript. También puedes escribirnos a <a href="mailto:<?= esc_attr(antispambot('contacto@lumentisaludmental.com')) ?>"><?= esc_html(antispambot('contacto@lumentisaludmental.com')) ?></a> o por WhatsApp al +51 942 901 535.</p>
     </noscript>
