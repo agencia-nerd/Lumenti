@@ -42,15 +42,15 @@ function lumenti_especialista_terminos(string $taxonomy, $post = null): array
     return $terms;
 }
 
-// URL de WhatsApp de paciente: "Hola, quisiera agendar una cita con la Dra./el Dr. {nombre}." (Acción de _shared.md).
+// URL de WhatsApp de la central de citas: "Hola, quisiera agendar una cita con la Dra./el Dr. {nombre}." (Acción de _shared.md).
 function lumenti_especialista_whatsapp(string $nombre): string
 {
     $nombre = trim($nombre);
     if ($nombre === '') {
-        return lumenti_whatsapp_url('paciente');
+        return lumenti_whatsapp_url('citas');
     }
     $articulo = preg_match('/^Dra\.?\s/iu', $nombre) ? 'la ' : (preg_match('/^Dr\.?\s/iu', $nombre) ? 'el ' : '');
-    return lumenti_whatsapp_url('paciente', sprintf(__('Hola, quisiera agendar una cita con %s.', 'lumenti'), $articulo . $nombre));
+    return lumenti_whatsapp_url('citas', sprintf(__('Hola, quisiera agendar una cita con %s.', 'lumenti'), $articulo . $nombre));
 }
 
 // ---------- Orden ----------

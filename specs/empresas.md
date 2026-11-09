@@ -11,8 +11,7 @@
 - **Ubicación:** plantilla pages/template-empresas.php
 - **Padre:** ninguno
 - **Notas de página:**
-  - La plantilla imprime `data-lm-wa-context="empresas"` en `<body>` (filtro `body_class` no sirve: es un atributo; usar un hook `lumenti_` en `header.php` o un filtro propio). Con eso `navbar.js` cambia el botón flotante al número corporativo.
-  - Todos los enlaces de WhatsApp de la página usan `opciones_contacto_telefono_corporativo`; "Agenda tu cita" y "Contáctanos" del header siguen con el de paciente.
+  - Los enlaces de WhatsApp de la página (CTA, Propuesta) usan `opciones_contacto_telefono_corporativo`. La cabecera, el menú móvil y el botón flotante usan la central de citas, como en todo el sitio (cambio del 2026-11-09). El pie muestra los tres números con su etiqueta.
   - `h1`: "SALUD MENTAL PARA ORGANIZACIONES." (en el hero). Título SEO del diseño: "Empresas — Lumenti". Sin meta descripción en el diseño.
   - `<body class="lm-page lm-page--empresas">`; CSS: `css/empresas.css` → `src/css/pages/empresas.css`; JS: `js/empresas-form.js` → `src/js/modules/empresas.js` (enlaces con preselección y pasos; el envío del form es de wp-form).
   - Contenido de origen: `data/empresas.json` y `data/talleres.json`.
@@ -234,4 +233,4 @@
 **Criterios de aceptación**
 
 - [x] Cumple los criterios comunes de `_shared.md`
-- [x] El botón usa el WhatsApp corporativo, no el de paciente
+- [x] El botón usa el WhatsApp corporativo, no la central de citas

@@ -3,7 +3,7 @@ defined('ABSPATH') || exit;
 
 /*
  * Condición · cta (specs/condicion.md → cta). Grupo ACF: condicion_cta.
- * Componente cta con la variante condicion (fondo partido arena/verde). Botón de WhatsApp de paciente con
+ * Componente cta con la variante condicion (fondo partido arena/verde). Botón de WhatsApp de la central de citas con
  * el mensaje del campo; si está vacío, la Acción de _shared.md: "Hola, quisiera orientación sobre {condición}.".
  */
 
@@ -19,7 +19,7 @@ get_template_part('template-parts/components/cta', null, [
     'texto' => (string) ($lumenti_cta['texto'] ?? ''),
     'boton' => [
         'texto' => (string) ($lumenti_cta['boton'] ?? ''),
-        'whatsapp' => 'paciente',
+        'whatsapp' => 'citas',
         'mensaje' => $lumenti_mensaje,
     ],
     'variante' => 'condicion',

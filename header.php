@@ -10,17 +10,15 @@ defined('ABSPATH') || exit;
 $lumenti_cab = get_field('opciones_cabecera', 'option') ?: [];
 $lumenti_redes = get_field('opciones_redes', 'option') ?: [];
 
-// WhatsApp de la cabecera, los mega menús y la card de "Qué tratamos": número y mensaje de paciente
-// (Ajustes del sitio → Contacto). El texto del botón es fijo.
+// WhatsApp de la central de citas (Ajustes del sitio → Contacto → telefono_citas y mensaje_citas), igual en todas
+// las páginas: botón "WhatsApp" de la cabecera y del menú móvil, pie de los mega menús, card de "Qué tratamos" y
+// botón flotante. El texto del botón es fijo.
 $lumenti_wa = [
-    'url' => lumenti_whatsapp_url('paciente', lumenti_whatsapp_message('paciente')),
+    'url' => lumenti_whatsapp_url('citas', lumenti_whatsapp_message('citas')),
     'title' => __('WhatsApp', 'lumenti'),
     'target' => '_blank',
 ];
-// El botón flotante usa el contexto de la página: en Empresas, número y mensaje corporativos.
-$lumenti_wa_fab = lumenti_whatsapp_context() === 'corporativo'
-    ? lumenti_whatsapp_url('corporativo', lumenti_whatsapp_message('corporativo'))
-    : $lumenti_wa['url'];
+$lumenti_wa_fab = $lumenti_wa['url'];
 
 $lumenti_principal = lumenti_menu_tree('principal');
 $lumenti_servicios = lumenti_menu_tree('servicios');
@@ -82,7 +80,7 @@ $lumenti_wa_boton = static function (string $clase) use ($lumenti_wa, $lumenti_n
     <?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?><?= lumenti_whatsapp_context() === 'corporativo' ? ' data-lm-wa-context="empresas"' : '' ?>>
+<body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
     <a class="sr-only focus:not-sr-only" href="#main-content"><?php esc_html_e('Saltar al contenido', 'lumenti'); ?></a>
 

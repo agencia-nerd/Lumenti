@@ -75,7 +75,7 @@ Lo que se repite en todas las páginas (cabecera, menú, pie). Aquí solo se dec
 | `legal` | Barra inferior del pie | Política de privacidad, Términos y condiciones, Libro de reclamaciones (externo) |
 
 - Logo principal (`logo.svg`) e ícono del sitio (`favicon.svg`): Identidad del sitio. Logo blanco (`logo-white.svg`, header sobre fondo oscuro y pie): campo `opciones_cabecera_logo_alternativo`.
-- WhatsApp por contexto: todo el sitio usa el número de paciente; la plantilla de Empresas imprime `data-lm-wa-context="empresas"` en `<body>` y usa el corporativo.
+- WhatsApp por contexto: todo el sitio usa la central de citas (`opciones_contacto_telefono_citas`, el WhatsApp principal, atendido por un bot); los botones de la página Empresas usan el corporativo. La cabecera y el botón flotante usan siempre la central de citas. Atención al paciente solo sale en el pie (cambio del 2026-11-09).
 
 ## Tokens
 
@@ -135,7 +135,7 @@ Cada componente vive en `template-parts/components/<nombre>.php` y recibe sus da
 
 - **Origen:** `css/components.css` §1 y §5 (`.lm-btn`, `--primary`, `--secondary`, `--soft`, `--md`)
 - **Destino:** `template-parts/components/boton.php`
-- **Argumentos:** `texto` (sí), `url` (string o link ACF; sí salvo con `whatsapp`), `variante` (primary, secondary o soft; no), `tamano` (md; no), `icono` (flecha o whatsapp; no), `externo` (bool; no), `whatsapp` (paciente, corporativo o true = contexto de la página; no) + `mensaje` (no): arma la URL `wa.me` y abre en pestaña nueva, `clase` (no), `atributos` (data-*/aria-*, ej. `data-lm-goto`; no)
+- **Argumentos:** `texto` (sí), `url` (string o link ACF; sí salvo con `whatsapp`), `variante` (primary, secondary o soft; no), `tamano` (md; no), `icono` (flecha o whatsapp; no), `externo` (bool; no), `whatsapp` (citas, paciente, corporativo o true = contexto de la página; no) + `mensaje` (no): arma la URL `wa.me` y abre en pestaña nueva, `clase` (no), `atributos` (data-*/aria-*, ej. `data-lm-goto`; no)
 - **Se usa en:** todas las páginas
 
 ### enlace-flecha
@@ -177,7 +177,7 @@ Cada componente vive en `template-parts/components/<nombre>.php` y recibe sus da
 
 - **Origen:** `html/partials/card-especialista.html`, `css/components.css` §10
 - **Destino:** `template-parts/components/especialista-card.php`
-- **Argumentos:** `nombre` (sí, se muestra en mayúsculas), `url` (sí), `cargo`, `cargo_destacado`, `foto`, `tipo` (psiquiatra o psicologo), `poblacion` (array), `atiende` (array de textos o de `texto` + `clave` para `data-atiende`), `visibles` (int, por defecto 6; el resto va al popover "+N"), `idiomas` (array), `whatsapp` (mensaje; vacío = "Hola, quisiera agendar una cita con la Dra./el Dr. {nombre}."), `whatsapp_contexto` (paciente o corporativo), `nivel` (h2 en el listado, h3 en carruseles)
+- **Argumentos:** `nombre` (sí, se muestra en mayúsculas), `url` (sí), `cargo`, `cargo_destacado`, `foto`, `tipo` (psiquiatra o psicologo), `poblacion` (array), `atiende` (array de textos o de `texto` + `clave` para `data-atiende`), `visibles` (int, por defecto 6; el resto va al popover "+N"), `idiomas` (array), `whatsapp` (mensaje; vacío = "Hola, quisiera agendar una cita con la Dra./el Dr. {nombre}."), `whatsapp_contexto` (citas o corporativo; por defecto citas), `nivel` (h2 en el listado, h3 en carruseles)
 - **Se usa en:** especialistas, condición, servicios
 
 ### specialists-carousel

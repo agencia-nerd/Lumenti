@@ -46,7 +46,7 @@ $lumenti_sello_offsets = ['61.78', '183', '297'];
                     <div class="lm-home-hero__actions">
                         <?php get_template_part('template-parts/components/boton', null, [
                             'texto' => $lumenti_boton_texto,
-                            'whatsapp' => 'paciente',
+                            'whatsapp' => 'citas',
                             'mensaje' => (string) ($lumenti_slide['boton_mensaje'] ?? ''),
                             'icono' => 'flecha',
                             'clase' => 'lm-home-hero__cta',

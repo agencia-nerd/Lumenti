@@ -3,7 +3,7 @@ defined('ABSPATH') || exit;
 
 /*
  * Inicio · evaluaciones (specs/home.md → evaluaciones, grupo ACF home_evaluaciones). Franja dentro de la sección
- * diario (la incluye diario.php). La capa es un degradado decorativo, no un modal. Botón a WhatsApp de paciente.
+ * diario (la incluye diario.php). La capa es un degradado decorativo, no un modal. Botón a WhatsApp de la central de citas.
  * Contenido: get_field('home_evaluaciones').
  */
 
@@ -29,7 +29,7 @@ if ($lumenti_titulo === '' && $lumenti_texto === '' && $lumenti_boton_texto === 
             <?php if ($lumenti_boton_texto !== '') : ?>
                 <?php get_template_part('template-parts/components/boton', null, [
                     'texto' => $lumenti_boton_texto,
-                    'whatsapp' => 'paciente',
+                    'whatsapp' => 'citas',
                     'mensaje' => (string) ($lumenti_evaluaciones['boton_mensaje'] ?? ''),
                     'icono' => 'flecha',
                     'clase' => 'lm-home-diario__evaluaciones-cta',

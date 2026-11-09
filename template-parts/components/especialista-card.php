@@ -17,7 +17,7 @@ defined('ABSPATH') || exit;
  *   visibles         (int)  chips de "Qué atiende" visibles; el resto va al popover "+N". Por defecto 6.
  *   idiomas          (array de textos)
  *   whatsapp         (string)  mensaje de "Agenda tu cita"; vacío = "Hola, quisiera agendar una cita con la Dra./el Dr. {nombre}."
- *   whatsapp_contexto (paciente | corporativo)  por defecto paciente.
+ *   whatsapp_contexto (citas | corporativo)  por defecto citas (central de citas).
  *   nivel            (h2 | h3)  h2 en el listado, h3 en carruseles. Por defecto h2.
  */
 
@@ -50,7 +50,7 @@ if ($lumenti_mensaje === '') {
     $lumenti_articulo = preg_match('/^Dra\.?\s/i', $lumenti_nombre) ? 'la ' : (preg_match('/^Dr\.?\s/i', $lumenti_nombre) ? 'el ' : '');
     $lumenti_mensaje = sprintf(__('Hola, quisiera agendar una cita con %s.', 'lumenti'), $lumenti_articulo . $lumenti_nombre);
 }
-$lumenti_contexto = ($args['whatsapp_contexto'] ?? '') === 'corporativo' ? 'corporativo' : 'paciente';
+$lumenti_contexto = ($args['whatsapp_contexto'] ?? '') === 'corporativo' ? 'corporativo' : 'citas';
 $lumenti_foto = lumenti_theme_image($args['foto'] ?? '', ['class' => 'lm-card-especialista__photo', 'alt' => '', 'width' => 600, 'height' => 600, 'size' => 'medium_large']);
 ?>
 <article class="lm-card-especialista" data-lm-specialist data-tipo="<?= esc_attr($lumenti_tipo) ?>" data-nombre="<?= esc_attr($lumenti_nombre) ?>" data-poblacion="<?= esc_attr(implode('|', $lumenti_poblacion)) ?>" data-atiende="<?= esc_attr(implode('|', $lumenti_claves)) ?>" data-idiomas="<?= esc_attr(implode('|', $lumenti_idiomas)) ?>">

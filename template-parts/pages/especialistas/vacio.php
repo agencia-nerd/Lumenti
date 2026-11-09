@@ -15,7 +15,7 @@ $lumenti_vacio = get_field('especialistas_vacio', 'option') ?: [];
 
 $lumenti_oculto = $args['oculto'] ?? true;
 $lumenti_wa = lumenti_link_attrs(
-    ['url' => lumenti_whatsapp_url('paciente', (string) ($lumenti_vacio['mensaje'] ?? '')), 'target' => '_blank'],
+    ['url' => lumenti_whatsapp_url('citas', (string) ($lumenti_vacio['mensaje'] ?? '')), 'target' => '_blank'],
     ['class' => 'lm-btn lm-btn--soft lm-btn--md']
 );
 ?>

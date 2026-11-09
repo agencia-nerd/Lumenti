@@ -3,7 +3,7 @@ defined('ABSPATH') || exit;
 
 /*
  * 404 · hero. Componente page-hero (variante service), como Psiquiatría o Preguntas frecuentes.
- * Acciones: volver al inicio y WhatsApp de pacientes.
+ * Acciones: volver al inicio y WhatsApp de la central de citas.
  */
 
 get_template_part('template-parts/components/page-hero', null, [
@@ -27,7 +27,7 @@ get_template_part('template-parts/components/page-hero', null, [
             'texto' => __('Escríbenos por WhatsApp', 'lumenti'),
             'variante' => 'secondary',
             'icono' => 'whatsapp',
-            'whatsapp' => 'paciente',
+            'whatsapp' => 'citas',
         ],
     ],
 ]);

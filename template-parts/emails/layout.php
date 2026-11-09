@@ -21,7 +21,8 @@ $lumenti_pie_nota = (string) ($args['pie_nota'] ?? '');
 $lumenti_contacto = lumenti_email_contacto();
 $lumenti_privacidad = lumenti_email_privacidad_url();
 $lumenti_sans = LUMENTI_EMAIL_SANS;
-$lumenti_tel = lumenti_email_tel($lumenti_contacto['paciente']);
+// Central de citas: abre WhatsApp (la atiende un bot), no una llamada.
+$lumenti_wa = lumenti_whatsapp_url('citas', lumenti_whatsapp_message('citas'));
 $lumenti_pie_estilo = 'margin:0 0 6px;font-family:' . $lumenti_sans . ';font-size:13px;line-height:20px;color:' . $lumenti_c['suave'] . ';';
 $lumenti_pie_enlace = 'color:' . $lumenti_c['suave'] . ';text-decoration:underline;';
 ?>
@@ -98,7 +99,7 @@ $lumenti_pie_enlace = 'color:' . $lumenti_c['suave'] . ';text-decoration:underli
                                     <?php endif; ?>
                                     <p style="<?= esc_attr($lumenti_pie_estilo) ?>">
                                         <?php if ($lumenti_contacto['correo'] !== '') : ?><a href="mailto:<?= esc_attr($lumenti_contacto['correo']) ?>" style="<?= esc_attr($lumenti_pie_enlace) ?>"><?= esc_html($lumenti_contacto['correo']) ?></a><?php endif; ?>
-                                        <?php if ($lumenti_tel !== '') : ?> · <a href="<?= esc_url($lumenti_tel, ['tel']) ?>" style="<?= esc_attr($lumenti_pie_enlace) ?>"><?= esc_html($lumenti_contacto['paciente']) ?></a><?php endif; ?>
+                                        <?php if ($lumenti_wa !== '' && $lumenti_contacto['citas'] !== '') : ?> · <a href="<?= esc_url($lumenti_wa) ?>" target="_blank" style="<?= esc_attr($lumenti_pie_enlace) ?>">WhatsApp <?= esc_html($lumenti_contacto['citas']) ?></a><?php endif; ?>
                                     </p>
                                     <p style="<?= esc_attr($lumenti_pie_estilo) ?>">
                                         <a href="<?= esc_url(home_url('/')) ?>" target="_blank" style="<?= esc_attr($lumenti_pie_enlace) ?>"><?= esc_html(lumenti_email_dominio()) ?></a>

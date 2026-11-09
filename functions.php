@@ -26,6 +26,7 @@ require_once get_theme_file_path('/inc/especialistas.php');
 require_once get_theme_file_path('/inc/condiciones.php');
 require_once get_theme_file_path('/inc/blog.php');
 require_once get_theme_file_path('/inc/campos-extra.php');
+require_once get_theme_file_path('/inc/campos-etiquetas.php');
 require_once get_theme_file_path('/inc/query/motor.php');
 require_once get_theme_file_path('/inc/query-extras.php');
 require_once get_theme_file_path('/inc/seo.php');
