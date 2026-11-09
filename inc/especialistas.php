@@ -18,6 +18,7 @@ add_filter('register_post_type_args', function (array $args, string $post_type):
     if ($post_type === 'especialista') {
         $args['rewrite'] = array_merge((array) ($args['rewrite'] ?? []), ['slug' => 'especialistas', 'with_front' => false]);
         $args['has_archive'] = 'especialistas';
+        $args['menu_icon'] = 'dashicons-businessperson';
     }
     return $args;
 }, 10, 2);
