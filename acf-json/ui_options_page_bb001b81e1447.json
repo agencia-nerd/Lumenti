@@ -5,7 +5,7 @@
     "menu_order": 0,
     "page_title": "Archivo de especialista",
     "menu_slug": "archivo-de-especialista",
-    "parent_slug": "",
+    "parent_slug": "ajustes-del-sitio",
     "advanced_configuration": false,
     "icon_url": "",
     "menu_title": "Archivo de especialista",
@@ -22,5 +22,5 @@
     "data_storage": "options",
     "post_id": "",
     "autoload": false,
-    "modified": 1793640337
+    "modified": 1794183848
 }
