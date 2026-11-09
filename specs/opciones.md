@@ -23,7 +23,7 @@
 - **Destino:** `header.php`, `template-parts/components/mm-card.php`
 - **Grupo:** `opciones_cabecera`
 - **Skill:** wp-helper
-- **Comportamiento:** header sticky que cambia a tono oscuro sobre secciones `[data-lm-nav-tone="dark"]` (muestra el logo alternativo); mega menús por hover y teclado; menú móvil a pantalla completa bajo 1200 px; botón flotante de WhatsApp bajo 1200 px. El número y el mensaje de WhatsApp salen de la sección contacto: `opciones_contacto_telefono_paciente` y `opciones_contacto_mensaje_paciente` para el botón "WhatsApp", el pie de los mega menús, la card de "Qué tratamos" y el botón flotante; en Empresas el botón flotante usa `opciones_contacto_telefono_corporativo` y `opciones_contacto_mensaje_corporativo`. El texto "WhatsApp" del botón es fijo (decisión del 2026-11-03). El logo principal viene de Identidad del sitio; los enlaces de los menús, de las ubicaciones `principal`, `servicios` y `tratamos`.
+- **Comportamiento:** header sticky que cambia a tono oscuro sobre secciones `[data-lm-nav-tone="dark"]` (muestra el logo alternativo); mega menús por hover y teclado; menú móvil a pantalla completa bajo 1200 px; botón flotante de WhatsApp bajo 1200 px. El número y el mensaje de WhatsApp salen de la sección contacto: la central de citas (`opciones_contacto_telefono_citas` y `opciones_contacto_mensaje_citas`, el WhatsApp principal, atendido por un bot) la usan el botón "WhatsApp" de la cabecera, el del menú móvil, el pie de los mega menús, la card de "Qué tratamos" y el botón flotante, igual en todas las páginas, también en Empresas (cambio del 2026-11-09). El texto "WhatsApp" del botón es fijo (decisión del 2026-11-03). El logo principal viene de Identidad del sitio; los enlaces de los menús, de las ubicaciones `principal`, `servicios` y `tratamos`.
 - **Estado:** aplicado
 - **ACF:** conectado
 
@@ -50,25 +50,29 @@
 - **Destino:** `footer.php`
 - **Grupo:** `opciones_contacto`
 - **Skill:** ninguna
-- **Comportamiento:** cada dato es un enlace (`tel:`, `mailto:`, Google Maps en pestaña nueva) con su ícono en recuadro. Cada teléfono es también el número de WhatsApp: los botones de todo el sitio usan el de paciente y los de Empresas el corporativo.
+- **Comportamiento:** cada dato es un enlace (WhatsApp y Google Maps en pestaña nueva, `mailto:`) con su ícono en recuadro. Los teléfonos salen en este orden y con etiqueta fija: "Central de citas:", "Atención al paciente:" y "Empresas:" (cambio del 2026-11-09, se sumó la central de citas). La central de citas es el WhatsApp principal (2026-11-09, lo atiende un bot): cabecera, botón flotante, botones de WhatsApp de todas las páginas y el correo del newsletter. Solo la página Empresas usa el corporativo en sus botones. Atención al paciente solo sale en el pie. En el pie los tres teléfonos abren WhatsApp en una pestaña nueva, cada uno con su mensaje (`mensaje_citas`, `mensaje_paciente`, `mensaje_corporativo`); no hay enlaces `tel:`.
 - **Estado:** aplicado
 - **ACF:** conectado
+
+Las etiquetas de esta sección en el admin ("Central de citas (WhatsApp principal): número", "Empresas: mensaje", "Correo de contacto"…) las pone `inc/campos-etiquetas.php`, porque wp-acf arma la etiqueta desde el nombre.
 
 **Campos ACF**
 
 | Campo | Tipo | Descripción | Valor actual | Requerido |
 |---|---|---|---|---|
-| `opciones_contacto_telefono_paciente` | text | Teléfono y WhatsApp de atención al paciente, con código de país. Lo usan el pie y los botones de WhatsApp de todo el sitio. | +51 939 033 999 | sí |
-| `opciones_contacto_mensaje_paciente` | text | Mensaje que se escribe solo al abrir WhatsApp desde la cabecera, los menús y el botón flotante. | Hola, quisiera agendar una cita. | sí |
-| `opciones_contacto_telefono_corporativo` | text | Teléfono y WhatsApp de atención corporativa, con código de país. Lo usan el pie y los botones de WhatsApp de Empresas. | +51 942 901 535 | sí |
-| `opciones_contacto_mensaje_corporativo` | text | Mensaje del botón flotante de WhatsApp en la página de Empresas. | Hola, quisiera información sobre las soluciones de salud mental para empresas. | sí |
-| `opciones_contacto_correo` | email | Correo de contacto del pie | contacto@lumentisaludmental.com | sí |
-| `opciones_contacto_direccion` | text | Dirección del consultorio. Abre Google Maps. | C. Los Antares 320, Santiago de Surco 15038 | sí |
+| `opciones_contacto_telefono_citas` | text | WhatsApp principal del sitio: menú, botón flotante, botones de las páginas (menos Empresas) y primer número del pie. Con código de país. | +51 960520452 | sí |
+| `opciones_contacto_mensaje_citas` | text | Texto que aparece ya escrito al abrir WhatsApp desde el menú, el botón flotante y el pie. | Hola, quisiera agendar una cita. | sí |
+| `opciones_contacto_telefono_paciente` | text | Segundo número del pie; abre WhatsApp. Con código de país. | +51 939033999 | sí |
+| `opciones_contacto_mensaje_paciente` | text | Texto que aparece ya escrito al abrir ese WhatsApp. | Hola, quisiera agendar una cita. | sí |
+| `opciones_contacto_telefono_corporativo` | text | Número del pie y de los botones de WhatsApp de la página Empresas (en lugar de la central de citas). Con código de país. | +51 942901535 | sí |
+| `opciones_contacto_mensaje_corporativo` | text | Texto que aparece ya escrito al abrir WhatsApp desde el pie. | Hola, quisiera información sobre las soluciones de salud mental para empresas. | sí |
+| `opciones_contacto_correo` | email | Se muestra en el pie. | contacto@lumentisaludmental.com | sí |
+| `opciones_contacto_direccion` | text | Se muestra en el pie y abre Google Maps. | C. Los Antares 320, Santiago de Surco 15038 | sí |
 
 **Criterios de aceptación**
 
 - [x] Cumple los criterios comunes de `_shared.md`
-- [x] Los enlaces `tel:`, `mailto:` y `wa.me` se arman desde los mismos textos
+- [x] Los enlaces `wa.me` y `mailto:` se arman desde los mismos textos
 
 ## Sección: redes
 

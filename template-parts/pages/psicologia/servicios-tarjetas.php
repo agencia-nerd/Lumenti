@@ -53,7 +53,7 @@ if (!$lumenti_items || empty($args['titulo'])) {
                             'variante' => 'primary',
                             'tamano' => 'md',
                             'icono' => 'whatsapp',
-                            'whatsapp' => 'paciente',
+                            'whatsapp' => 'citas',
                             'mensaje' => (string) ($lumenti_item['mensaje_whatsapp'] ?? ''),
                         ]); ?>
                     </div>

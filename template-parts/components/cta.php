@@ -8,7 +8,7 @@ defined('ABSPATH') || exit;
  * $args:
  *   titulo      (string, sí)
  *   texto       (string)  se oculta si está vacío.
- *   boton       (array)  $args de boton: ['texto' => '…', 'whatsapp' => 'paciente', 'mensaje' => '…']
+ *   boton       (array)  $args de boton: ['texto' => '…', 'whatsapp' => 'citas', 'mensaje' => '…']
  *               o ['texto', 'url']. Por defecto primary, ícono de WhatsApp y clase lm-cta__btn.
  *   newsletter  (bool)  en lugar del botón, el form de template-parts/forms/newsletter.php (wp-form).
  *   form        (array)  $args del form del newsletter.

@@ -3,7 +3,7 @@ defined('ABSPATH') || exit;
 
 /*
  * Psicología · servicios (specs/psicologia.md → servicios). Grupo ACF: psicologia_servicios.
- * Título centrado y tarjetas con botón de WhatsApp (número de paciente). Prepara los datos; el marcado está en
+ * Título centrado y tarjetas con botón de WhatsApp (central de citas). Prepara los datos; el marcado está en
  * servicios-tarjetas.php. La tarjeta de evaluaciones lleva el id fijo "evaluaciones" (lo enlazan el pie y el Home,
  * /psicologia/#evaluaciones).
  */

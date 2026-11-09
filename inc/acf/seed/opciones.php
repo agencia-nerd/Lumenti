@@ -18,9 +18,11 @@ return [
             'tratamos_imagen'   => ['_file' => 'assets/img/mm-tratamos.webp', 'alt' => ''],
         ],
         'opciones_contacto' => [
-            'telefono_paciente'    => '+51 939 033 999',
+            'telefono_citas'       => '+51 960520452',
+            'mensaje_citas'        => 'Hola, quisiera agendar una cita.',
+            'telefono_paciente'    => '+51 939033999',
             'mensaje_paciente'     => 'Hola, quisiera agendar una cita.',
-            'telefono_corporativo' => '+51 942 901 535',
+            'telefono_corporativo' => '+51 942901535',
             'mensaje_corporativo'  => 'Hola, quisiera información sobre las soluciones de salud mental para empresas.',
             'correo'               => 'contacto@lumentisaludmental.com',
             'direccion'            => 'C. Los Antares 320, Santiago de Surco 15038',

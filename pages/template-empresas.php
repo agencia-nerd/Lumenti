@@ -4,7 +4,8 @@
  * Template Name: Empresas
  *
  * Soluciones de salud mental para organizaciones. Spec: specs/empresas.md.
- * WhatsApp corporativo en toda la página (header.php pone data-lm-wa-context en <body>).
+ * Los botones de WhatsApp de la página usan el número corporativo; la cabecera y el botón flotante, la central de
+ * citas como en todo el sitio.
  */
 
 defined('ABSPATH') || exit;

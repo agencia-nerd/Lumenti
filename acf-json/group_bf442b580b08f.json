@@ -152,12 +152,54 @@
             "layout": "block",
             "sub_fields": [
                 {
+                    "key": "field_3d0a72e60c995",
+                    "label": "Teléfono citas",
+                    "name": "telefono_citas",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "WhatsApp principal del sitio: menú, botón flotante, botones de las páginas (menos Empresas) y primer número del pie. Con código de país.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_322be285b515e",
+                    "label": "Mensaje citas",
+                    "name": "mensaje_citas",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Texto que aparece ya escrito al abrir WhatsApp desde el menú, el botón flotante y el pie.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
                     "key": "field_0a649b5f185ea",
                     "label": "Teléfono paciente",
                     "name": "telefono_paciente",
                     "aria-label": "",
                     "type": "text",
-                    "instructions": "Teléfono y WhatsApp de atención al paciente, con código de país. Lo usan el pie y los botones de WhatsApp de todo el sitio.",
+                    "instructions": "Segundo número del pie; abre WhatsApp. Con código de país.",
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -178,7 +220,7 @@
                     "name": "mensaje_paciente",
                     "aria-label": "",
                     "type": "text",
-                    "instructions": "Mensaje que se escribe solo al abrir WhatsApp desde la cabecera, los menús y el botón flotante.",
+                    "instructions": "Texto que aparece ya escrito al abrir ese WhatsApp.",
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -199,7 +241,7 @@
                     "name": "telefono_corporativo",
                     "aria-label": "",
                     "type": "text",
-                    "instructions": "Teléfono y WhatsApp de atención corporativa, con código de país. Lo usan el pie y los botones de WhatsApp de Empresas.",
+                    "instructions": "Número del pie y de los botones de WhatsApp de la página Empresas (en lugar de la central de citas). Con código de país.",
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -220,7 +262,7 @@
                     "name": "mensaje_corporativo",
                     "aria-label": "",
                     "type": "text",
-                    "instructions": "Mensaje del botón flotante de WhatsApp en la página de Empresas.",
+                    "instructions": "Texto que aparece ya escrito al abrir WhatsApp desde el pie.",
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -241,7 +283,7 @@
                     "name": "correo",
                     "aria-label": "",
                     "type": "email",
-                    "instructions": "Correo de contacto del pie",
+                    "instructions": "Se muestra en el pie.",
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -261,7 +303,7 @@
                     "name": "direccion",
                     "aria-label": "",
                     "type": "text",
-                    "instructions": "Dirección del consultorio. Abre Google Maps.",
+                    "instructions": "Se muestra en el pie y abre Google Maps.",
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -497,5 +539,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1793728290
+    "modified": 1794245832
 }

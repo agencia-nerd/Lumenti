@@ -113,6 +113,10 @@ function lumenti_carga_extra(): void
         $hecho['whatsapp'] = lumenti_carga_whatsapp() ? 1 : 0;
     }
 
+    if (empty($hecho['citas'])) {
+        $hecho['citas'] = lumenti_carga_telefonos() ? 1 : 0;
+    }
+
     update_option(LUMENTI_CARGA_EXTRA_MARCADOR, $hecho, false);
 }
 
@@ -323,12 +327,43 @@ function lumenti_carga_whatsapp(): bool
     return true;
 }
 
+/*
+ * Teléfonos del pie (2026-11-09): se sumó la central de citas (telefono_citas y su WhatsApp, mensaje_citas) y los
+ * otros dos pasaron a escribirse sin espacios. En un sitio ya cargado wp-acf no vuelve a cargar opciones_contacto:
+ * aquí se completan una vez los campos de la central si están vacíos y se reescriben los otros solo si siguen con el
+ * valor inicial anterior (nunca pisa lo editado). Marcador `citas`.
+ */
+function lumenti_carga_telefonos(): bool
+{
+    if (!function_exists('update_field') || !function_exists('lumenti_acf_key')) {
+        return false;
+    }
+    $grupo = (array) (get_field('opciones_contacto', 'option') ?: []);
+    $cambios = [];
+    if (trim((string) ($grupo['telefono_citas'] ?? '')) === '') {
+        $cambios['telefono_citas'] = '+51 960520452';
+    }
+    if (trim((string) ($grupo['mensaje_citas'] ?? '')) === '') {
+        $cambios['mensaje_citas'] = 'Hola, quisiera agendar una cita.';
+    }
+    if (trim((string) ($grupo['telefono_paciente'] ?? '')) === '+51 939 033 999') {
+        $cambios['telefono_paciente'] = '+51 939033999';
+    }
+    if (trim((string) ($grupo['telefono_corporativo'] ?? '')) === '+51 942 901 535') {
+        $cambios['telefono_corporativo'] = '+51 942901535';
+    }
+    if ($cambios) {
+        update_field(lumenti_acf_key('opciones_contacto'), array_merge($grupo, $cambios), 'option');
+    }
+    return true;
+}
+
 // Después de la carga de wp-acf al activar el tema (prioridad 10) y, si quedó algo pendiente, en el admin.
 add_action('after_switch_theme', 'lumenti_carga_extra', 20);
 add_action('admin_init', function () {
     $hecho = (array) get_option(LUMENTI_CARGA_EXTRA_MARCADOR, []);
     if (empty($hecho['paginas']) || empty($hecho['servicios']) || empty($hecho['especialistas']) || empty($hecho['terminos']) || empty($hecho['condiciones'])
-        || empty($hecho['enlaces']) || empty($hecho['blog']) || empty($hecho['referencias']) || empty($hecho['whatsapp'])) {
+        || empty($hecho['enlaces']) || empty($hecho['blog']) || empty($hecho['referencias']) || empty($hecho['whatsapp']) || empty($hecho['citas'])) {
         lumenti_carga_extra();
     }
 });

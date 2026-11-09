@@ -14,7 +14,7 @@ get_template_part('template-parts/components/cta', null, [
     'texto' => (string) ($lumenti_cta['texto'] ?? ''),
     'boton' => $lumenti_boton_texto !== '' ? [
         'texto' => $lumenti_boton_texto,
-        'whatsapp' => 'paciente',
+        'whatsapp' => 'citas',
         'mensaje' => (string) ($lumenti_cta['boton_mensaje'] ?? ''),
     ] : [],
     'video' => $lumenti_cta['video_o_imagen'] ?? '',

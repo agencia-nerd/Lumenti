@@ -48,7 +48,7 @@ function lumenti_email_contacto(): array
 
     return [
         'correo'      => sanitize_email((string) ($contacto['correo'] ?? '')),
-        'paciente'    => (string) ($contacto['telefono_paciente'] ?? ''),
+        'citas'       => (string) ($contacto['telefono_citas'] ?? ''),
         'corporativo' => (string) ($contacto['telefono_corporativo'] ?? ''),
         'direccion'   => (string) ($contacto['direccion'] ?? ''),
     ];
@@ -100,13 +100,6 @@ function lumenti_email_origen(): array
     return ['url' => $url, 'ruta' => $ruta];
 }
 
-// Teléfono para mostrar → enlace tel: ("+51 942 901 535" → "tel:+51942901535").
-function lumenti_email_tel(string $telefono): string
-{
-    $digitos = preg_replace('/\D+/', '', $telefono);
-
-    return $digitos !== '' ? 'tel:+' . $digitos : '';
-}
 
 /* ---------------------------------------------------------------------------
  * Piezas del diseño (devuelven HTML ya escapado)
@@ -311,7 +304,7 @@ function lumenti_email_texto_pie(array $correo): string
     return implode("\n", array_filter([
         'Lumenti · ' . __('Salud mental', 'lumenti'),
         $c['direccion'] !== '' ? $c['direccion'] . ' · ' . __('También atendemos en línea', 'lumenti') : '',
-        implode(' · ', array_filter([$c['correo'], $c['paciente']])),
+        implode(' · ', array_filter([$c['correo'], $c['citas'] !== '' ? 'WhatsApp ' . $c['citas'] . ' (' . lumenti_whatsapp_url('citas') . ')' : ''])),
         lumenti_email_dominio() . ' (' . home_url('/') . ')',
         $privacidad !== '' ? __('Política de privacidad', 'lumenti') . ': ' . $privacidad : '',
         $correo['pie_nota'],
@@ -603,9 +596,9 @@ function lumenti_email_newsletter_bienvenida(array $d): array
             [['tipo' => 'botones', 'botones' => [[$blog_url, __('Ver todos los artículos', 'lumenti'), 'secundario']]]],
             lumenti_email_bloques_whatsapp(
                 __('Si en algún momento quieres hablar con un especialista, escríbenos por WhatsApp. Te ayudamos a encontrar al profesional adecuado.', 'lumenti'),
-                lumenti_whatsapp_url('paciente', lumenti_whatsapp_message('paciente')),
-                __('Atención al paciente', 'lumenti'),
-                $contacto['paciente']
+                lumenti_whatsapp_url('citas', lumenti_whatsapp_message('citas')),
+                __('Central de citas', 'lumenti'),
+                $contacto['citas']
             ),
             [['tipo' => 'firma', 'saludo' => __('Un saludo,', 'lumenti'), 'firma' => __('Equipo de Lumenti', 'lumenti')]]
         ),

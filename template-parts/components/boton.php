@@ -11,7 +11,7 @@ defined('ABSPATH') || exit;
  *   tamano    ('' | md)  md = 52 px de alto.
  *   icono     ('' | flecha | whatsapp)  ícono decorativo al final.
  *   externo   (bool)  abre en pestaña nueva (rel y aviso los pone lumenti_link_attrs). Con whatsapp, true por defecto.
- *   whatsapp  ('' | paciente | corporativo | true)  arma la URL wa.me; true = contexto de la página.
+ *   whatsapp  ('' | citas | paciente | corporativo | true)  arma la URL wa.me; true = contexto de la página.
  *   mensaje   (string)  texto prellenado de WhatsApp.
  *   clase     (string)  clases extra (ej. lm-cta__btn).
  *   atributos (array)  data-* / aria-* extra, ej. ['data-lm-goto' => 'formulario'].

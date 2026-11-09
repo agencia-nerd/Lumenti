@@ -3,7 +3,7 @@ defined('ABSPATH') || exit;
 
 /*
  * Preguntas frecuentes · cta (specs/preguntas-frecuentes.md → cta). Grupo ACF: preguntas_frecuentes_cta.
- * Componente cta: botón de WhatsApp (número de paciente) con el mensaje del campo. El fondo es un campo file
+ * Componente cta: botón de WhatsApp (central de citas) con el mensaje del campo. El fondo es un campo file
  * (video o imagen); vacío, el video del componente.
  */
 
@@ -15,7 +15,7 @@ get_template_part('template-parts/components/cta', null, [
     'texto' => (string) ($lumenti_cta['texto'] ?? ''),
     'boton' => $lumenti_boton_texto !== '' ? [
         'texto' => $lumenti_boton_texto,
-        'whatsapp' => 'paciente',
+        'whatsapp' => 'citas',
         'mensaje' => (string) ($lumenti_cta['boton_mensaje'] ?? ''),
     ] : [],
     'video' => ($lumenti_cta['video_o_imagen'] ?? null) ?: null,
