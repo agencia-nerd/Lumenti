@@ -118,7 +118,7 @@
 .lm-profile__form-card { position: relative; overflow: hidden; scroll-snap-align: start; display: flex; flex-direction: column; min-height: clamp(210px, 12.5vw, 240px); padding: 28px 28px 30px; border-radius: var(--lm-r-card); background: var(--lm-white); }
 .lm-profile__form-num { position: absolute; right: 14px; bottom: -18px; font-family: var(--lm-font-title); font-size: 112px; line-height: 1; color: var(--lm-teal-50); pointer-events: none; }
 .lm-profile__form-icon { position: relative; width: 29px; height: 31px; }
-.lm-profile__form-title { position: relative; margin-top: auto; padding-top: 28px; font-family: var(--lm-font-title); font-size: 16px; line-height: 1.4; letter-spacing: var(--lm-ls-title); color: var(--lm-ink); }
+.lm-profile__form-title { position: relative; padding-top: 28px; font-family: var(--lm-font-title); font-size: 16px; line-height: 1.4; letter-spacing: var(--lm-ls-title); color: var(--lm-ink); }
 .lm-profile__form-inst { position: relative; margin-top: 8px; font-size: var(--lm-fs-small); line-height: var(--lm-lh-small); color: var(--lm-muted); }
 .lm-profile__track-fade { position: absolute; top: 0; right: 0; bottom: 0; width: 80px; background: linear-gradient(90deg, rgba(245,243,238,0), var(--lm-sand)); pointer-events: none; }
 
