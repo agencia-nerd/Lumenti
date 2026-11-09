@@ -13,6 +13,7 @@ add_filter('register_post_type_args', function (array $args, string $post_type):
     if ($post_type === 'condicion') {
         $args['has_archive'] = false;
         $args['supports'] = ['title'];
+        $args['menu_icon'] = 'dashicons-heart';
         $args['rewrite'] = array_merge(is_array($args['rewrite'] ?? null) ? $args['rewrite'] : [], ['slug' => 'condicion', 'with_front' => false]);
     }
     return $args;
