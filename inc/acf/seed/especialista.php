@@ -40,7 +40,6 @@ return [
                             'registro' => 'RNE 045256',
                         ],
                     ],
-                    'orden'           => 1,
                 ],
                 'especialista_resumen'   => [
                     'nota_adultos' => '',
@@ -110,7 +109,6 @@ return [
                             'registro' => 'RNE 046602',
                         ],
                     ],
-                    'orden'           => 2,
                 ],
                 'especialista_resumen'   => [
                     'nota_adultos' => '',
@@ -172,7 +170,6 @@ return [
                             'registro' => 'RNE 045803',
                         ],
                     ],
-                    'orden'           => 3,
                 ],
                 'especialista_resumen'   => [
                     'nota_adultos' => '',
@@ -234,7 +231,6 @@ return [
                             'registro' => 'RNE 046248',
                         ],
                     ],
-                    'orden'           => 4,
                 ],
                 'especialista_resumen'   => [
                     'nota_adultos' => '',
@@ -303,7 +299,6 @@ return [
                             'registro' => 'RNSE S00760',
                         ],
                     ],
-                    'orden'           => 5,
                 ],
                 'especialista_resumen'   => [
                     'nota_adultos' => '',
@@ -377,7 +372,6 @@ return [
                             'registro' => 'RNE 045613',
                         ],
                     ],
-                    'orden'           => 6,
                 ],
                 'especialista_resumen'   => [
                     'nota_adultos' => '',
@@ -435,7 +429,6 @@ return [
                             'registro' => 'RNE 042393',
                         ],
                     ],
-                    'orden'           => 7,
                 ],
                 'especialista_resumen'   => [
                     'nota_adultos' => '',
@@ -498,7 +491,6 @@ return [
                             'registro' => 'C.Ps.P. 47942',
                         ],
                     ],
-                    'orden'           => 8,
                 ],
                 'especialista_resumen'   => [
                     'nota_adultos' => '',
@@ -595,7 +587,6 @@ return [
                             'registro' => 'C.Ps.P. 75874',
                         ],
                     ],
-                    'orden'           => 9,
                 ],
                 'especialista_resumen'   => [
                     'nota_adultos' => '',
@@ -697,7 +688,6 @@ return [
                             'registro' => 'C.Ps.P. 76692',
                         ],
                     ],
-                    'orden'           => 10,
                 ],
                 'especialista_resumen'   => [
                     'nota_adultos' => '',
@@ -774,7 +764,6 @@ return [
                             'registro' => 'C.Ps.P. 32634',
                         ],
                     ],
-                    'orden'           => 11,
                 ],
                 'especialista_resumen'   => [
                     'nota_adultos' => '',
@@ -861,7 +850,6 @@ return [
                             'registro' => 'C.Ps.P. 75038',
                         ],
                     ],
-                    'orden'           => 12,
                 ],
                 'especialista_resumen'   => [
                     'nota_adultos' => 'hasta 22 años',
@@ -929,7 +917,6 @@ return [
                             'registro' => 'C.Ps.P. 76661',
                         ],
                     ],
-                    'orden'           => 13,
                 ],
                 'especialista_resumen'   => [
                     'nota_adultos' => '',

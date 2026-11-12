@@ -30,7 +30,7 @@ $lumenti_enfoques = array_values(array_filter(array_map(
             <ul class="lm-profile__chips"><?php foreach ($lumenti_poblacion as $lumenti_p) : ?><li class="lm-card-especialista__chip"><?= esc_html($lumenti_p) ?></li><?php endforeach; ?></ul>
         <?php endif; ?>
         <?php if ($lumenti_que_trata) : ?>
-            <p class="lm-profile__panel-label lm-profile__panel-label--spaced">Qué trata</p>
+            <p class="lm-profile__panel-label lm-profile__panel-label--spaced">Principales áreas de atención</p>
             <ul class="lm-profile__chips"><?php foreach ($lumenti_que_trata as $lumenti_t) : ?><li class="lm-card-especialista__chip lm-profile__chip"><?= esc_html($lumenti_t) ?></li><?php endforeach; ?></ul>
         <?php endif; ?>
     </div>

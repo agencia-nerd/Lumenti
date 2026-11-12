@@ -30,7 +30,7 @@ function lumenti_condicion_termino($post = null, ?array $grupo = null): ?WP_Term
 }
 
 // Cards del carrusel de una condición: los especialistas publicados con su término, psiquiatras primero y luego
-// por especialista_perfil_orden (lumenti_especialistas_ordenar, inc/especialistas.php).
+// por el orden de Especialistas > Ordenar (lumenti_especialistas_ordenar, inc/especialistas.php).
 function lumenti_condicion_especialistas_cards(?WP_Term $term): array
 {
     if (!$term || !post_type_exists('especialista')) {
