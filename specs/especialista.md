@@ -28,7 +28,7 @@
 - **Destino:** `template-parts/pages/especialista/perfil.php`, `template-parts/components/breadcrumb.php`
 - **Grupo:** `especialista_perfil`
 - **Skill:** wp-helper
-- **Comportamiento:** breadcrumb (Inicio › Especialistas › nombre corto) y cabecera del perfil: foto (imagen destacada, círculo con halo `#cfdfe1`, `fetchpriority="high"`, `loading="eager"`, `alt` "Foto de {nombre corto}"), nombre corto en `h1`, cargo como etiqueta dorada, cargo destacado y colegiatura debajo, y el botón "Agendar por WhatsApp" (`data-lm-profile-cta`) = Acción de `_shared.md`: WhatsApp a `opciones_contacto_telefono_paciente` con "Hola, quisiera agendar una cita con {nombre}." (el diseño antepone "la"/"el" a "Dra."/"Dr."), armado con el helper de enlaces. El cargo destacado se oculta si está vacío. `especialista_perfil_orden` no se ve: ordena el listado y el carrusel de condición. Foto: 340 px de ancho máximo (200 px tablet, 168 px móvil). Valor suelto: halo `#cfdfe1`.
+- **Comportamiento:** breadcrumb (Inicio › Especialistas › nombre corto) y cabecera del perfil: foto (imagen destacada, círculo con halo `#cfdfe1`, `fetchpriority="high"`, `loading="eager"`, `alt` "Foto de {nombre corto}"), nombre corto en `h1`, cargo como etiqueta dorada, cargo destacado y colegiatura debajo, y el botón "Agendar por WhatsApp" (`data-lm-profile-cta`) = Acción de `_shared.md`: WhatsApp a `opciones_contacto_telefono_paciente` con "Hola, quisiera agendar una cita con {nombre}." (el diseño antepone "la"/"el" a "Dra."/"Dr."), armado con el helper de enlaces. El cargo destacado se oculta si está vacío. El orden del especialista no es un campo: se arrastra en Especialistas > Ordenar (menu_order, inc/especialistas-orden.php) y ordena el listado y los carruseles. Foto: 340 px de ancho máximo (200 px tablet, 168 px móvil). Valor suelto: halo `#cfdfe1`.
 - **Estado:** aplicado
 - **ACF:** conectado
 
@@ -41,7 +41,6 @@
 | `especialista_perfil_cargo_destacado` | text | Cargo adicional en Lumenti, si lo tiene. Se muestra bajo la etiqueta y como segunda etiqueta en las cards. | Directora Médica de Lumenti | no |
 | `especialista_perfil_colegiaturas` | repeater | Números de colegiatura (CMP, RNE, C.Ps.P.), uno por fila. Se muestran en una línea. | — | sí |
 | `especialista_perfil_colegiaturas.registro` | text | Registro con su sigla. Ej.: CMP 080939 | CMP 080939 | sí |
-| `especialista_perfil_orden` | number | Posición del especialista en el listado y en los carruseles (1 = primero). Los psiquiatras van antes que los psicólogos | — | sí |
 
 **Criterios de aceptación**
 

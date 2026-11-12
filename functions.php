@@ -23,6 +23,7 @@ require_once get_theme_file_path('/inc/accordions.php');
 require_once get_theme_file_path('/inc/acf/runner.php');
 require_once get_theme_file_path('/inc/carga-extra.php');
 require_once get_theme_file_path('/inc/especialistas.php');
+require_once get_theme_file_path('/inc/especialistas-orden.php');
 require_once get_theme_file_path('/inc/condiciones.php');
 require_once get_theme_file_path('/inc/blog.php');
 require_once get_theme_file_path('/inc/campos-extra.php');

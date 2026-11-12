@@ -4,7 +4,7 @@ defined('ABSPATH') || exit;
 /*
  * Especialistas · resultados (specs/especialistas.md → resultados). Sin grupo ACF.
  * wp-query: loop de la consulta principal del archivo `especialista`, ya filtrada (inc/query/especialista.php)
- * y ordenada (psiquiatras primero, luego especialista_perfil_orden: inc/especialistas.php).
+ * y ordenada (psiquiatras primero, luego el de Especialistas > Ordenar: inc/especialistas.php).
  * De a 20: "Ver más" (data-query="paginacion") suma los 20 siguientes a la grilla (data-query-items) sin recargar;
  * sin JS abre /especialistas/page/2/. Con 20 o menos no aparece.
  * Cada card es el componente especialista-card (nombre en h2) con los datos del especialista.

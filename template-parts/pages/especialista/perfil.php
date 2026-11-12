@@ -5,7 +5,7 @@ defined('ABSPATH') || exit;
  * Especialista · perfil (specs/especialista.md → perfil). Grupo ACF: especialista_perfil.
  * Breadcrumb y cabecera del perfil: foto (imagen destacada de WordPress), nombre corto en h1, cargo,
  * cargo destacado, colegiaturas y el botón de WhatsApp (data-lm-profile-cta, lo observa la barra fija).
- * especialista_perfil_orden no se ve: ordena el listado y los carruseles.
+ * El orden no es un campo: se arrastra en Especialistas > Ordenar (inc/especialistas-orden.php).
  */
 
 $lumenti_perfil = get_field('especialista_perfil') ?: [];

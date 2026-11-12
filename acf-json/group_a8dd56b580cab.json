@@ -125,29 +125,6 @@
                             "append": ""
                         }
                     ]
-                },
-                {
-                    "key": "field_f7800ce60591b",
-                    "label": "Orden",
-                    "name": "orden",
-                    "aria-label": "",
-                    "type": "number",
-                    "instructions": "Posición del especialista en el listado y en los carruseles (1 = primero). Los psiquiatras van antes que los psicólogos",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "min": "",
-                    "max": "",
-                    "allow_in_bindings": 0,
-                    "placeholder": "",
-                    "step": "",
-                    "prepend": "",
-                    "append": ""
                 }
             ]
         },
@@ -466,5 +443,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1793640337
+    "modified": 1794451254
 }

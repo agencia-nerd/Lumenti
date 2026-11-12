@@ -7,7 +7,8 @@ defined('ABSPATH') || exit;
  * - URLs: listado en /especialistas/ y perfil en /especialistas/<nombre-completo>/ (wp-acf deja la clave del
  *   tipo, /especialista/). Después del primer cambio: Ajustes > Enlaces permanentes > Guardar.
  * - Las taxonomías del especialista no tienen archivo propio: se filtran en el listado por parámetro.
- * - Listado (wp-query): orden (psiquiatras primero, luego especialista_perfil_orden) y buscador ?q= por nombre
+ * - Listado (wp-query): orden (psiquiatras primero, luego el de Especialistas > Ordenar, inc/especialistas-orden.php)
+ *   y buscador ?q= por nombre
  *   o condición, con los sinónimos de assets/data/sinonimos.json.
  * - Helpers del perfil, la barra fija, las cards y los carruseles.
  */
@@ -66,25 +67,30 @@ function lumenti_especialistas_tipo_posicion(): array
     return $posicion;
 }
 
-// Ordena especialistas (carruseles, sin paginar): por tipo (psiquiatras primero), luego especialista_perfil_orden
-// (sin orden, al final) y nombre. Es el mismo orden que el SQL del listado (posts_orderby).
-function lumenti_especialistas_ordenar(array $posts): array
+// Posición del tipo de un especialista (la del primer término creado que tenga; sin tipo, al final).
+function lumenti_especialista_tipo_orden(int $post_id): int
 {
     $posicion = lumenti_especialistas_tipo_posicion();
+    $tipos = wp_get_post_terms($post_id, 'tipo_especialista', ['fields' => 'ids']);
+    $tipo = PHP_INT_MAX;
+    foreach (is_array($tipos) ? $tipos : [] as $id) {
+        $tipo = min($tipo, $posicion[(int) $id] ?? PHP_INT_MAX);
+    }
+    return $tipo;
+}
+
+// Ordena especialistas (carruseles, sin paginar): por tipo (psiquiatras primero), luego el orden de
+// Especialistas > Ordenar (menu_order; 0 = sin orden, al final) y nombre. Es el mismo orden que el SQL del listado.
+function lumenti_especialistas_ordenar(array $posts): array
+{
     $clave = [];
     foreach ($posts as $post) {
         $post = get_post($post);
         if (!$post) {
             continue;
         }
-        $tipos = wp_get_post_terms($post->ID, 'tipo_especialista', ['fields' => 'ids']);
-        $tipo = PHP_INT_MAX;
-        foreach (is_array($tipos) ? $tipos : [] as $id) {
-            $tipo = min($tipo, $posicion[(int) $id] ?? PHP_INT_MAX);
-        }
-        $perfil = function_exists('get_field') ? (array) (get_field('especialista_perfil', $post->ID) ?: []) : [];
-        $orden = isset($perfil['orden']) && $perfil['orden'] !== '' ? (float) $perfil['orden'] : PHP_FLOAT_MAX;
-        $clave[$post->ID] = [$tipo, $orden, mb_strtolower($post->post_title, 'UTF-8')];
+        $orden = (int) $post->menu_order > 0 ? (int) $post->menu_order : PHP_INT_MAX;
+        $clave[$post->ID] = [lumenti_especialista_tipo_orden($post->ID), $orden, mb_strtolower($post->post_title, 'UTF-8')];
     }
     usort($posts, static function ($a, $b) use ($clave) {
         return ($clave[get_post($a)->ID] ?? []) <=> ($clave[get_post($b)->ID] ?? []);
@@ -93,18 +99,23 @@ function lumenti_especialistas_ordenar(array $posts): array
 }
 
 // El listado pagina de a 20 ("Ver más"): el mismo orden va en el SQL para que cada tanda siga a la anterior.
-// Tipo (el primer término creado de tipo_especialista primero), especialista_perfil_orden (sin orden, al final) y título.
-add_filter('posts_orderby', function (string $orderby, WP_Query $query): string {
-    if (is_admin() || !$query->is_main_query() || !$query->is_post_type_archive('especialista')) {
-        return $orderby;
-    }
+// Tipo (el primer término creado de tipo_especialista primero), menu_order (0 = sin orden, al final) y título.
+// También lo usa la lista del admin (inc/especialistas-orden.php).
+function lumenti_especialistas_orderby_sql(): string
+{
     global $wpdb;
     $tipo = "(SELECT MIN(tt.term_id) FROM {$wpdb->term_relationships} tr"
         . " INNER JOIN {$wpdb->term_taxonomy} tt ON tt.term_taxonomy_id = tr.term_taxonomy_id"
         . " WHERE tr.object_id = {$wpdb->posts}.ID AND tt.taxonomy = 'tipo_especialista')";
-    $orden = "(SELECT MIN(CAST(pm.meta_value AS DECIMAL(20,4))) FROM {$wpdb->postmeta} pm"
-        . " WHERE pm.post_id = {$wpdb->posts}.ID AND pm.meta_key = 'especialista_perfil_orden' AND pm.meta_value <> '')";
-    return "{$tipo} IS NULL, {$tipo} ASC, {$orden} IS NULL, {$orden} ASC, {$wpdb->posts}.post_title ASC";
+    $orden = "{$wpdb->posts}.menu_order";
+    return "{$tipo} IS NULL, {$tipo} ASC, {$orden} = 0, {$orden} ASC, {$wpdb->posts}.post_title ASC";
+}
+
+add_filter('posts_orderby', function (string $orderby, WP_Query $query): string {
+    if (is_admin() || !$query->is_main_query() || !$query->is_post_type_archive('especialista')) {
+        return $orderby;
+    }
+    return lumenti_especialistas_orderby_sql();
 }, 10, 2);
 
 // ---------- Buscador ----------
