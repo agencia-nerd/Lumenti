@@ -55,7 +55,8 @@
 - **Destino:** `template-parts/pages/especialista/resumen.php`
 - **Grupo:** `especialista_resumen`
 - **Skill:** ninguna
-- **Comportamiento:** columna lateral (`<aside aria-label="Resumen">`, sticky bajo el header desde 1200 px). Panel 1: chips de "Población" (términos de `poblacion`; si hay nota de adultos, el chip "Adultos" la añade entre paréntesis, ej. "Adultos (hasta 22 años)") y de "Qué trata" (términos de `que_trata`, con su nombre corto, el mismo de las cards; los chips son texto fijo, no enlazan). Panel de enfoques: chips con los enfoques, oculto si no hay (el diseño no lo dibuja porque el ejemplo no tiene; se arma con el mismo `lm-profile__panel` + chips, por confirmar con el diseño). Panel dividido: "Modalidad" (términos de `modalidad`) e "Idiomas" (términos de `idioma`) unidos con " · ".
+- **Diseño:** Figma `zgSzGbTndP94bj3ePQDyUZ`, nodo `1936:11783` (Sidebar — 1).
+- **Comportamiento:** columna lateral (`<aside aria-label="Resumen">`, sticky bajo el header desde 1200 px). Una sola tarjeta (`lm-profile__panel`) con bloques separados por un divisor, en este orden, cada uno oculto si está vacío: "Población" (términos de `poblacion`; si hay nota de adultos, "Adultos" la añade entre paréntesis, ej. "Adultos (hasta 22 años)"), "Modalidad" (`modalidad`), "Idiomas" (`idioma`), como texto unido con " · ". Luego "Enfoques" (repetidor; el Figma no lo dibuja, va tras Idiomas) y "Principales áreas de atención" (términos de `que_trata`, nombre corto, sin enlace), ambos como lista con viñetas: se ven 8; si hay más, el botón "Ver N … más +" (N = los que faltan; "Ver las 4 áreas más", "Ver 1 enfoque más") abre el resto y pasa a "Ver menos −" (`src/js/modules/especialista.js`). Sin JS se ven todos y no hay botón.
 - **Estado:** aplicado
 - **ACF:** conectado
 
@@ -63,15 +64,16 @@
 
 | Campo | Tipo | Descripción | Valor actual | Requerido |
 |---|---|---|---|---|
-| `especialista_resumen_nota_adultos` | text | Aclaración de edad para la población "Adultos", si la tiene. Se muestra junto al chip (ej. "hasta 22 años"). | — | no |
-| `especialista_resumen_enfoques` | repeater | Enfoques terapéuticos del especialista, en el orden en que se muestran como chips. Si no hay, el panel no se muestra | — | no |
+| `especialista_resumen_nota_adultos` | text | Aclaración de edad para la población "Adultos", si la tiene. Se muestra entre paréntesis junto a "Adultos" (ej. "hasta 22 años"). | — | no |
+| `especialista_resumen_enfoques` | repeater | Enfoques terapéuticos del especialista, en el orden en que se muestran como lista (se ven 8 y el resto con "Ver más"). Si no hay, el bloque no se muestra | — | no |
 | `especialista_resumen_enfoques.nombre` | text | Nombre del enfoque. | — | sí |
 
 **Criterios de aceptación**
 
 - [x] Cumple los criterios comunes de `_shared.md`
-- [x] Los chips de "Qué trata" son texto fijo (sin enlace)
-- [x] El panel de enfoques no se imprime si el repetidor está vacío
+- [x] Las áreas de "Qué trata" son texto fijo (sin enlace)
+- [x] El bloque de enfoques no se imprime si el repetidor está vacío
+- [x] Con 8 enfoques o áreas o menos no hay botón; con más se ven 8 y el botón dice cuántos faltan
 - [x] Desde 1200 px la columna queda fija al hacer scroll; debajo pasa arriba del contenido
 
 ## Sección: sobre

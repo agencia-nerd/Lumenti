@@ -1,9 +1,37 @@
-// Perfil de especialista: carrusel "Formación destacada" y barra fija de agenda.
+// Perfil de especialista: listas del resumen con "Ver más", carrusel "Formación destacada" y barra fija de agenda.
 import { prefersReducedMotion } from './utils.js';
+
+// Enfoques y áreas de atención: muestra los primeros data-max y el botón abre/cierra el resto (sin JS se ven todos).
+function moreLists(root) {
+    root.querySelectorAll('[data-lm-side-block]').forEach(moreList);
+}
+
+function moreList(block) {
+    const list = block.querySelector('[data-lm-side-list]');
+    const btn = block.querySelector('[data-lm-side-btn]');
+    if (!list || !btn) return;
+    const max = parseInt(list.dataset.max, 10) || 8;
+    const extra = [...list.children].slice(max);
+    if (!extra.length) return;
+    const text = btn.querySelector('[data-lm-side-text]');
+    const sign = btn.querySelector('[data-lm-side-sign]');
+    const more = text.textContent;
+    const set = (open) => {
+        extra.forEach((li) => (li.hidden = !open));
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        text.textContent = open ? btn.dataset.less : more;
+        if (sign) sign.textContent = open ? '−' : '+';
+    };
+    set(false);
+    btn.hidden = false;
+    btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+}
 
 export function profile() {
     const root = document.querySelector('[data-lm-profile]');
     if (!root) return;
+
+    moreLists(root);
 
     // Carrusel: flechas deshabilitadas en los extremos, flechas del teclado con foco en la lista.
     const track = root.querySelector('[data-lm-track-list]');
