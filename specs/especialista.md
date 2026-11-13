@@ -56,9 +56,18 @@
 - **Grupo:** `especialista_resumen`
 - **Skill:** ninguna
 - **Diseño:** Figma `zgSzGbTndP94bj3ePQDyUZ`, nodo `1936:11783` (Sidebar — 1).
-- **Comportamiento:** columna lateral (`<aside aria-label="Resumen">`, desde 1200 px; no es sticky, baja con la página). Una sola tarjeta (`lm-profile__panel`) con bloques separados por un divisor, en este orden, cada uno oculto si está vacío: "Población" (términos de `poblacion`; si hay nota de adultos, "Adultos" la añade entre paréntesis, ej. "Adultos (hasta 22 años)"), "Modalidad" (`modalidad`), "Idiomas" (`idioma`), como texto unido con " · ". Luego "Enfoques" (repetidor; el Figma no lo dibuja, va tras Idiomas) y "Principales áreas de atención" (términos de `que_trata`, nombre corto, sin enlace), ambos como lista con viñetas: se ven 8; si hay más, el botón "Ver N … más +" (N = los que faltan; "Ver las 4 áreas más", "Ver 1 enfoque más") abre el resto y pasa a "Ver menos −" (`src/js/modules/especialista.js`). Sin JS se ven todos y no hay botón.
+- **Comportamiento:** columna lateral (`<aside aria-label="Resumen">`, desde 1200 px; no es sticky, baja con la página). Una sola tarjeta (`lm-profile__panel`) con bloques separados por un divisor, en este orden, cada uno oculto si está vacío: "Población" (términos de `poblacion`; si hay nota de adultos, "Adultos" la añade entre paréntesis, ej. "Adultos (hasta 22 años)"), "Modalidad" (`modalidad`; primero la presencial con su ubicación, ej. "Presencial (Surco) · Online"), "Idiomas" (`idioma`), como texto unido con " · ". Luego "Enfoques" (repetidor; el Figma no lo dibuja, va tras Idiomas) y "Principales áreas de atención" (términos de `que_trata`, nombre corto, sin enlace), ambos como lista con viñetas: se ven 8; si hay más, el botón "Ver N … más +" (N = los que faltan; "Ver las 4 áreas más", "Ver 1 enfoque más") abre el resto y pasa a "Ver menos −" (`src/js/modules/especialista.js`). Sin JS se ven todos y no hay botón.
 - **Estado:** aplicado
 - **ACF:** conectado
+
+**Orden de los datos (para explicarle al cliente)**
+
+- **Población, Idiomas y Principales áreas de atención:** salen en el orden en que se **crearon** las opciones en el admin (Especialistas → Población / Idiomas / Principales áreas de atención). La que se creó primero sale primero, la siguiente sale segunda, y así sucesivamente. Una opción nueva siempre sale al final.
+  - Ojo: lo que cuenta es cuándo se creó la opción en esa lista, **no** el orden en que se marca en cada especialista. Marcar primero "Inglés" y después "Español" no cambia el orden.
+  - Es el mismo orden en todos los especialistas.
+- **Modalidad:** igual, por orden de creación, con una excepción: la presencial con su ubicación (todo lo que empieza con "Presencial", ej. "Presencial (Surco)") sale siempre primero. Así queda "Presencial (Surco) · Online" aunque "Online" se haya creado antes. Si se crea otra sede, también sale antes que Online, en el orden en que se crearon las sedes.
+- **Enfoques:** es una lista que se llena a mano en cada especialista; sale en el orden de sus filas. Para cambiarlo se arrastran las filas en el admin.
+- Si el cliente necesita otro orden en Población, Idiomas o Áreas, se pide al equipo; no lo puede cambiar desde el admin (para eso tendría que borrar la opción y crearla de nuevo, y se perdería en los especialistas que la tenían marcada).
 
 **Campos ACF**
 

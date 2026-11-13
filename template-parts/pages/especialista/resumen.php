@@ -4,7 +4,7 @@ defined('ABSPATH') || exit;
 /*
  * Especialista · resumen (specs/especialista.md → resumen). Grupo ACF: especialista_resumen.
  * Columna lateral: una tarjeta con Población, Modalidad e Idiomas (taxonomías poblacion, modalidad e
- * idioma) como texto separado por " · ", y Enfoques (repetidor) y Principales áreas de atención
+ * idioma) como texto separado por " · " (en Modalidad, la presencial con su ubicación va antes que Online), y Enfoques (repetidor) y Principales áreas de atención
  * (taxonomía que_trata) como listas con viñetas: se ven 8 y el resto se abre con "Ver N … más"
  * (especialista.js). Cada bloque se oculta si está vacío.
  */
@@ -17,7 +17,10 @@ $lumenti_poblacion = array_map(
     lumenti_especialista_terminos('poblacion')
 );
 $lumenti_que_trata = wp_list_pluck(lumenti_especialista_terminos('que_trata'), 'name');
-$lumenti_modalidad = wp_list_pluck(lumenti_especialista_terminos('modalidad'), 'name');
+// Modalidad: primero la presencial (lleva la ubicación, ej. "Presencial (Surco)") y luego el resto (Online), en su orden.
+$lumenti_modalidad = lumenti_especialista_terminos('modalidad');
+usort($lumenti_modalidad, static fn($a, $b) => (stripos($b->name, 'presencial') === 0) <=> (stripos($a->name, 'presencial') === 0));
+$lumenti_modalidad = wp_list_pluck($lumenti_modalidad, 'name');
 $lumenti_idiomas = wp_list_pluck(lumenti_especialista_terminos('idioma'), 'name');
 $lumenti_enfoques = array_values(array_filter(array_map(
     static fn($fila) => trim((string) ($fila['nombre'] ?? '')),
