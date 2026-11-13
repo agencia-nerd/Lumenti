@@ -16,7 +16,7 @@
   - El contenido del editor no se usa: la biografía es el campo `especialista_sobre_biografia`, como dice `_shared.md`.
   - `h1`: el nombre corto ("DRA. MARIELA LINARES"), impreso desde el campo y pasado a mayúsculas con CSS. Título SEO del diseño: "Dra. Mariela Linares — Lumenti" (nombre corto). Meta descripción: el inicio de la biografía (el diseño la recorta a ~155 caracteres).
   - Los rótulos de la plantilla ("Población", "Qué trata", "Modalidad", "Idiomas", "SOBRE MÍ", "FORMACIÓN DESTACADA", "Agendar por WhatsApp") son iguales en todos los perfiles: texto fijo, no campos.
-  - `<main id="main-content" class="lm-profile" data-lm-profile>` con el adorno `lm-profile__deco`. Las secciones `resumen` (columna lateral, sticky desde 1200 px) y `sobre`, `frase`, `formacion`, `actualizacion` (columna principal) van dentro de `<div class="lm-profile__body">` que arma `single-especialista.php`; bajo 1200 px la lateral pasa arriba.
+  - `<main id="main-content" class="lm-profile" data-lm-profile>` con el adorno `lm-profile__deco`. Las secciones `resumen` (columna lateral desde 1200 px) y `sobre`, `frase`, `formacion`, `actualizacion` (columna principal) van dentro de `<div class="lm-profile__body">` que arma `single-especialista.php`; bajo 1200 px la lateral pasa arriba.
   - CSS: `css/especialistas.css` (parte de perfil) → `src/css/pages/especialistas.css`. JS: `js/especialista.js` → `src/js/modules/especialista.js` (carrusel de formación y barra fija).
   - En el diseño la barra fija queda fuera de `<main>`, después del pie; en el tema va al final de `<main id="main-content">` (es `position: fixed`, no cambia el aspecto).
   - El botón flotante de WhatsApp del header se oculta en esta página (`hidden` en el diseño): la barra fija lo reemplaza.
@@ -56,7 +56,7 @@
 - **Grupo:** `especialista_resumen`
 - **Skill:** ninguna
 - **Diseño:** Figma `zgSzGbTndP94bj3ePQDyUZ`, nodo `1936:11783` (Sidebar — 1).
-- **Comportamiento:** columna lateral (`<aside aria-label="Resumen">`, sticky bajo el header desde 1200 px). Una sola tarjeta (`lm-profile__panel`) con bloques separados por un divisor, en este orden, cada uno oculto si está vacío: "Población" (términos de `poblacion`; si hay nota de adultos, "Adultos" la añade entre paréntesis, ej. "Adultos (hasta 22 años)"), "Modalidad" (`modalidad`), "Idiomas" (`idioma`), como texto unido con " · ". Luego "Enfoques" (repetidor; el Figma no lo dibuja, va tras Idiomas) y "Principales áreas de atención" (términos de `que_trata`, nombre corto, sin enlace), ambos como lista con viñetas: se ven 8; si hay más, el botón "Ver N … más +" (N = los que faltan; "Ver las 4 áreas más", "Ver 1 enfoque más") abre el resto y pasa a "Ver menos −" (`src/js/modules/especialista.js`). Sin JS se ven todos y no hay botón.
+- **Comportamiento:** columna lateral (`<aside aria-label="Resumen">`, desde 1200 px; no es sticky, baja con la página). Una sola tarjeta (`lm-profile__panel`) con bloques separados por un divisor, en este orden, cada uno oculto si está vacío: "Población" (términos de `poblacion`; si hay nota de adultos, "Adultos" la añade entre paréntesis, ej. "Adultos (hasta 22 años)"), "Modalidad" (`modalidad`), "Idiomas" (`idioma`), como texto unido con " · ". Luego "Enfoques" (repetidor; el Figma no lo dibuja, va tras Idiomas) y "Principales áreas de atención" (términos de `que_trata`, nombre corto, sin enlace), ambos como lista con viñetas: se ven 8; si hay más, el botón "Ver N … más +" (N = los que faltan; "Ver las 4 áreas más", "Ver 1 enfoque más") abre el resto y pasa a "Ver menos −" (`src/js/modules/especialista.js`). Sin JS se ven todos y no hay botón.
 - **Estado:** aplicado
 - **ACF:** conectado
 
@@ -74,7 +74,7 @@
 - [x] Las áreas de "Qué trata" son texto fijo (sin enlace)
 - [x] El bloque de enfoques no se imprime si el repetidor está vacío
 - [x] Con 8 enfoques o áreas o menos no hay botón; con más se ven 8 y el botón dice cuántos faltan
-- [x] Desde 1200 px la columna queda fija al hacer scroll; debajo pasa arriba del contenido
+- [x] Desde 1200 px la columna va al lado y baja con la página al hacer scroll (no es sticky); debajo pasa arriba del contenido
 
 ## Sección: sobre
 
