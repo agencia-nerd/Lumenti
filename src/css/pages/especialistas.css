@@ -76,7 +76,7 @@
 .lm-profile__cta { margin-top: 28px; gap: 10px; }
 
 .lm-profile__body { max-width: var(--lm-max); margin: clamp(80px, 7.5vw, 144px) auto 0; display: grid; grid-template-columns: minmax(0,1fr) clamp(340px, 21vw, 400px); grid-template-areas: "main side"; gap: clamp(48px, 7vw, 136px); align-items: start; }
-.lm-profile__side { grid-area: side; position: sticky; top: calc(var(--lm-nav-h) + 24px); }
+.lm-profile__side { grid-area: side; }
 .lm-profile__main { grid-area: main; min-width: 0; display: flex; flex-direction: column; gap: clamp(72px, 5.8333vw, 112px); }
 /* Resumen (Figma 1936:11783): una tarjeta, bloques separados por un divisor neutral/200. */
 .lm-profile__panel { padding: 28px; border-radius: var(--lm-r-card); background: var(--lm-white); display: flex; flex-direction: column; gap: 20px; }
@@ -146,7 +146,6 @@
 
 @media (max-width: 1199px) {
   .lm-profile__body { grid-template-columns: minmax(0,1fr); grid-template-areas: "side" "main"; gap: 56px; margin-top: 64px; }
-  .lm-profile__side { position: static; }
 }
 @media (max-width: 1023px) {
   .lm-profile { padding: 20px var(--lm-side) 112px; }
