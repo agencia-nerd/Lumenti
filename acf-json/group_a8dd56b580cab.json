@@ -150,7 +150,7 @@
                     "name": "nota_adultos",
                     "aria-label": "",
                     "type": "text",
-                    "instructions": "Aclaración de edad para la población \"Adultos\", si la tiene. Se muestra junto al chip (ej. \"hasta 22 años\").",
+                    "instructions": "Aclaración de edad para la población \"Adultos\", si la tiene. Se muestra entre paréntesis junto a \"Adultos\" (ej. \"hasta 22 años\").",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -171,7 +171,7 @@
                     "name": "enfoques",
                     "aria-label": "",
                     "type": "repeater",
-                    "instructions": "Enfoques terapéuticos del especialista, en el orden en que se muestran como chips. Si no hay, el panel no se muestra",
+                    "instructions": "Enfoques terapéuticos del especialista, en el orden en que se muestran como lista (se ven 8 y el resto con \"Ver más\"). Si no hay, el bloque no se muestra",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -443,5 +443,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1794451254
+    "modified": 1794535455
 }

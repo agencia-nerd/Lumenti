@@ -3,9 +3,10 @@ defined('ABSPATH') || exit;
 
 /*
  * Especialista · resumen (specs/especialista.md → resumen). Grupo ACF: especialista_resumen.
- * Columna lateral: Población y Qué trata (taxonomías poblacion y que_trata, nombre corto), enfoques
- * (repetidor, oculto si está vacío), Modalidad e Idiomas (taxonomías modalidad e idioma).
- * Los chips son texto fijo (no enlazan a ninguna página).
+ * Columna lateral: una tarjeta con Población, Modalidad e Idiomas (taxonomías poblacion, modalidad e
+ * idioma) como texto separado por " · ", y Enfoques (repetidor) y Principales áreas de atención
+ * (taxonomía que_trata) como listas con viñetas: se ven 8 y el resto se abre con "Ver N … más"
+ * (especialista.js). Cada bloque se oculta si está vacío.
  */
 
 $lumenti_resumen = get_field('especialista_resumen') ?: [];
@@ -22,32 +23,61 @@ $lumenti_enfoques = array_values(array_filter(array_map(
     static fn($fila) => trim((string) ($fila['nombre'] ?? '')),
     (array) ($lumenti_resumen['enfoques'] ?? [])
 )));
+
+// Bloques de texto unido con " · ".
+$lumenti_bloques = array_filter([
+    __('Población', 'lumenti') => $lumenti_poblacion,
+    __('Modalidad', 'lumenti') => $lumenti_modalidad,
+    __('Idiomas', 'lumenti') => $lumenti_idiomas,
+]);
+
+// Bloques de lista con viñetas: se ven $lumenti_lista_max y el resto se abre con "Ver más" (JS; sin JS se ven todos).
+$lumenti_lista_max = 8;
+$lumenti_listas = array_filter([
+    'enfoques' => [
+        'label' => __('Enfoques', 'lumenti'),
+        'items' => $lumenti_enfoques,
+        /* translators: %d: enfoques que faltan mostrar. */
+        'more' => static fn(int $n) => sprintf(_n('Ver %d enfoque más', 'Ver los %d enfoques más', $n, 'lumenti'), $n),
+    ],
+    'areas' => [
+        'label' => __('Principales áreas de atención', 'lumenti'),
+        'items' => $lumenti_que_trata,
+        /* translators: %d: áreas que faltan mostrar. */
+        'more' => static fn(int $n) => sprintf(_n('Ver %d área más', 'Ver las %d áreas más', $n, 'lumenti'), $n),
+    ],
+], static fn($l) => (bool) $l['items']);
+
+if (!$lumenti_bloques && !$lumenti_listas) {
+    return;
+}
 ?>
 <aside class="lm-profile__side" aria-label="<?= esc_attr__('Resumen', 'lumenti') ?>">
-    <div class="lm-profile__panel">
-        <?php if ($lumenti_poblacion) : ?>
-            <p class="lm-profile__panel-label">Población</p>
-            <ul class="lm-profile__chips"><?php foreach ($lumenti_poblacion as $lumenti_p) : ?><li class="lm-card-especialista__chip"><?= esc_html($lumenti_p) ?></li><?php endforeach; ?></ul>
-        <?php endif; ?>
-        <?php if ($lumenti_que_trata) : ?>
-            <p class="lm-profile__panel-label lm-profile__panel-label--spaced">Principales áreas de atención</p>
-            <ul class="lm-profile__chips"><?php foreach ($lumenti_que_trata as $lumenti_t) : ?><li class="lm-card-especialista__chip lm-profile__chip"><?= esc_html($lumenti_t) ?></li><?php endforeach; ?></ul>
-        <?php endif; ?>
+    <div class="lm-profile__panel lm-profile__panel--resumen">
+        <?php foreach ($lumenti_bloques as $lumenti_label => $lumenti_valores) : ?>
+            <div class="lm-profile__block">
+                <p class="lm-profile__panel-label"><?= esc_html($lumenti_label) ?></p>
+                <p class="lm-profile__fact-value"><?= esc_html(implode(' · ', $lumenti_valores)) ?></p>
+            </div>
+        <?php endforeach; ?>
+        <?php foreach ($lumenti_listas as $lumenti_key => $lumenti_lista) :
+            $lumenti_id = 'lm-' . $lumenti_key;
+            $lumenti_resto = count($lumenti_lista['items']) - $lumenti_lista_max;
+            ?>
+            <div class="lm-profile__block lm-profile__block--list" data-lm-side-block>
+                <p class="lm-profile__panel-label" id="<?= esc_attr($lumenti_id . '-label') ?>"><?= esc_html($lumenti_lista['label']) ?></p>
+                <ul class="lm-profile__bullets" id="<?= esc_attr($lumenti_id) ?>" aria-labelledby="<?= esc_attr($lumenti_id . '-label') ?>" data-lm-side-list data-max="<?= esc_attr((string) $lumenti_lista_max) ?>">
+                    <?php foreach ($lumenti_lista['items'] as $lumenti_item) : ?>
+                        <li class="lm-profile__bullet"><?= esc_html($lumenti_item) ?></li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php if ($lumenti_resto > 0) : ?>
+                    <button type="button" class="lm-profile__more" aria-controls="<?= esc_attr($lumenti_id) ?>" aria-expanded="false" hidden data-lm-side-btn data-less="<?= esc_attr__('Ver menos', 'lumenti') ?>">
+                        <span data-lm-side-text><?= esc_html(($lumenti_lista['more'])($lumenti_resto)) ?></span>
+                        <span class="lm-profile__more-sign" aria-hidden="true" data-lm-side-sign>+</span>
+                    </button>
+                <?php endif; ?>
+            </div>
+        <?php endforeach; ?>
     </div>
-    <?php if ($lumenti_enfoques) : ?>
-        <div class="lm-profile__panel">
-            <p class="lm-profile__panel-label">Enfoques</p>
-            <ul class="lm-profile__chips"><?php foreach ($lumenti_enfoques as $lumenti_e) : ?><li class="lm-card-especialista__chip lm-profile__chip"><?= esc_html($lumenti_e) ?></li><?php endforeach; ?></ul>
-        </div>
-    <?php endif; ?>
-    <?php if ($lumenti_modalidad || $lumenti_idiomas) : ?>
-        <div class="lm-profile__panel lm-profile__panel--split">
-            <?php if ($lumenti_modalidad) : ?>
-                <div class="lm-profile__fact"><p class="lm-profile__panel-label">Modalidad</p><p class="lm-profile__fact-value"><?= esc_html(implode(' · ', $lumenti_modalidad)) ?></p></div>
-            <?php endif; ?>
-            <?php if ($lumenti_idiomas) : ?>
-                <div class="lm-profile__fact"><p class="lm-profile__panel-label">Idiomas</p><p class="lm-profile__fact-value"><?= esc_html(implode(' · ', $lumenti_idiomas)) ?></p></div>
-            <?php endif; ?>
-        </div>
-    <?php endif; ?>
 </aside>
