@@ -29,6 +29,31 @@ add_filter('register_taxonomy_args', function (array $args, string $taxonomy): a
         $args['publicly_queryable'] = false;
         $args['rewrite'] = false;
     }
+    // En el admin, las taxonomías del resumen del perfil llevan el mismo título que en la web (título, singular, en minúscula)
+    // (template-parts/pages/especialista/resumen.php). wp-acf las arma desde la clave ("Ques de trata",
+    // "Poblaciones"): se corrigen aquí, no en acf-json/. Si cambia un título en el resumen, cámbialo aquí también.
+    $lumenti_etiquetas = [
+        'poblacion' => [__('Población', 'lumenti'), __('Población', 'lumenti'), __('población', 'lumenti')],
+        'modalidad' => [__('Modalidad', 'lumenti'), __('Modalidad', 'lumenti'), __('modalidad', 'lumenti')],
+        'idioma'    => [__('Idiomas', 'lumenti'), __('Idioma', 'lumenti'), __('idioma', 'lumenti')],
+        'que_trata' => [__('Principales áreas de atención', 'lumenti'), __('Área de atención', 'lumenti'), __('área de atención', 'lumenti')],
+    ];
+    if (isset($lumenti_etiquetas[$taxonomy])) {
+        [$titulo, $singular, $uno] = $lumenti_etiquetas[$taxonomy];
+        $args['labels'] = array_merge((array) ($args['labels'] ?? []), [
+            'name'          => $titulo,
+            'menu_name'     => $titulo,
+            'all_items'     => $titulo,
+            'singular_name' => $singular,
+            /* translators: %s: un término (población, modalidad, idioma, área de atención). */
+            'search_items'  => sprintf(__('Buscar %s', 'lumenti'), $uno),
+            'edit_item'     => sprintf(__('Editar %s', 'lumenti'), $uno),
+            'view_item'     => sprintf(__('Ver %s', 'lumenti'), $uno),
+            'update_item'   => sprintf(__('Actualizar %s', 'lumenti'), $uno),
+            'add_new_item'  => sprintf(__('Añadir %s', 'lumenti'), $uno),
+            'new_item_name' => __('Nombre', 'lumenti'),
+        ]);
+    }
     return $args;
 }, 10, 2);
 
