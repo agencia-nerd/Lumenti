@@ -13,7 +13,7 @@ $lumenti_cab = get_field('opciones_cabecera', 'option') ?: [];
 $lumenti_datos = array_filter([
     ['icono' => 'calendar-dots', 'url' => lumenti_whatsapp_url('citas', lumenti_whatsapp_message('citas')), 'etiqueta' => __('Central de citas:', 'lumenti'), 'texto' => (string) ($lumenti_contacto['telefono_citas'] ?? ''), 'telefono' => true, 'externo' => true],
     ['icono' => 'chat-circle-dots', 'url' => lumenti_whatsapp_url('paciente', lumenti_whatsapp_message('paciente')), 'etiqueta' => __('Atención al paciente:', 'lumenti'), 'texto' => (string) ($lumenti_contacto['telefono_paciente'] ?? ''), 'telefono' => true, 'externo' => true],
-    ['icono' => 'chat-circle-dots', 'url' => lumenti_whatsapp_url('corporativo', lumenti_whatsapp_message('corporativo')), 'etiqueta' => __('Empresas:', 'lumenti'), 'texto' => (string) ($lumenti_contacto['telefono_corporativo'] ?? ''), 'telefono' => true, 'externo' => true],
+    ['icono' => 'empresas', 'url' => lumenti_whatsapp_url('corporativo', lumenti_whatsapp_message('corporativo')), 'etiqueta' => __('Empresas:', 'lumenti'), 'texto' => (string) ($lumenti_contacto['telefono_corporativo'] ?? ''), 'telefono' => true, 'externo' => true],
     ['icono' => 'envelope-simple', 'url' => 'mailto:' . ($lumenti_contacto['correo'] ?? ''), 'etiqueta' => '', 'texto' => (string) ($lumenti_contacto['correo'] ?? '')],
     ['icono' => 'map-pin', 'url' => 'https://maps.google.com/?q=' . rawurlencode((string) ($lumenti_contacto['direccion'] ?? '')), 'etiqueta' => '', 'texto' => (string) ($lumenti_contacto['direccion'] ?? ''), 'externo' => true],
 ], static fn($dato) => $dato['texto'] !== '');
