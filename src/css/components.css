@@ -122,7 +122,7 @@
 .lm-megamenu__foot { padding: 20px clamp(24px, 5.2vw, 100px); background: #f1f1ef; display: flex; align-items: center; gap: 10px; font-size: 15px; line-height: 22px; color: var(--lm-body); }
 
 /* Menú mobile */
-.lm-mobile-menu { position: absolute; z-index: 1; left: 0; right: 0; top: 100%; height: calc(100dvh - var(--lm-nav-h)); padding: 0 16px calc(24px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; overflow-y: auto; overscroll-behavior: contain; background: var(--lm-nav-bg); animation: lmMenuIn 420ms var(--lm-ease) both; }
+.lm-mobile-menu { position: absolute; z-index: 1; left: 0; right: 0; top: 100%; height: calc(100dvh - var(--lm-nav-h)); padding: 0 16px; display: flex; flex-direction: column; overflow-y: auto; overscroll-behavior: contain; background: var(--lm-nav-bg); animation: lmMenuIn 420ms var(--lm-ease) both; }
 .lm-mobile-menu[hidden] { display: none; }
 .lm-mobile-menu__link, .lm-mobile-menu__toggle { display: flex; align-items: center; justify-content: space-between; min-height: 60px; padding: 0; border: 0; border-top: 1px solid var(--lm-nav-line); background: none; font-size: 19px; color: var(--lm-nav-ink-2); text-align: left; cursor: pointer; }
 .lm-mobile-menu__link[aria-current="page"] { color: var(--lm-nav-ink); font-weight: 500; }
@@ -139,11 +139,16 @@
 .lm-mobile-menu__sub-head { margin: 0 0 10px; font-size: 15px; letter-spacing: 0.08em; color: var(--lm-nav-subhead); }
 .lm-mobile-menu__sub-link { display: flex; align-items: center; min-height: 44px; font-size: 17px; color: var(--lm-nav-sub); }
 .lm-mobile-menu__sub-list--groups .lm-mobile-menu__sub-link { min-height: 48px; }
-.lm-mobile-menu__social { margin-top: auto; padding: 56px 0 4px; display: flex; flex-direction: column; gap: 14px; }
+/* Pie del menú (redes + WhatsApp): fijo abajo como un solo bloque, así el botón nunca tapa las redes.
+   Lo que hace scroll por debajo son los enlaces. El padding inferior vive aquí (no en .lm-mobile-menu)
+   para que el fondo del pie llegue hasta el borde y cubra la zona segura del iPhone. */
+.lm-mobile-menu__foot { position: sticky; bottom: 0; flex-shrink: 0; margin-top: auto; padding: 32px 0 calc(24px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; gap: 20px; background: var(--lm-nav-bg); }
+.lm-mobile-menu__social { display: flex; flex-direction: column; gap: 14px; }
 .lm-mobile-menu__social-title { font-size: 15px; letter-spacing: 0.08em; color: var(--lm-nav-subhead); }
-.lm-mobile-menu__social-list { display: flex; gap: 10px; }
-.lm-mobile-menu__cta { position: sticky; bottom: 0; padding-top: 16px; background: var(--lm-nav-bg); }
+.lm-mobile-menu__social-list { display: flex; flex-wrap: wrap; gap: 10px; }
 .lm-mobile-menu__cta .lm-btn { width: 100%; }
+/* Pantallas bajas (celular en horizontal): el pie fijo ocuparía casi todo, así que hace scroll con el resto. */
+@media (max-height: 520px) { .lm-mobile-menu__foot { position: static; } }
 @keyframes lmMenuIn { from { opacity: 0; clip-path: inset(0 0 100% 0); } to { opacity: 1; clip-path: inset(0 0 0 0); } }
 
 /* Botón flotante de WhatsApp (mobile/tablet) */
@@ -431,6 +436,8 @@
 .lm-page-hero__eyebrow { margin-top: -0.18em; padding-top: 0.18em; font-size: 18px; line-height: 24px; letter-spacing: 0.06em; overflow: hidden; }
 .lm-page-hero__lead { margin-top: -0.18em; padding-top: 0.18em; max-width: 1020px; font-size: clamp(18px, 1.1458vw, 22px); line-height: 1.6; color: var(--lm-ink-2); overflow: hidden; }
 .lm-page-hero__lead-text { display: block; animation: lmRise 950ms var(--lm-ease) 550ms both; }
+/* < 1024: menos aire abajo; la sección siguiente ya trae su padding superior (sumados dejaban un hueco grande). */
+@media (max-width: 1023px) { .lm-page-hero { padding-bottom: 40px; } }
 
 /* ---------- Título de sección interno (.lm-section-title) ---------- */
 .lm-section-title { font-family: var(--lm-font-title); font-weight: 400; font-size: clamp(34px, 2.8646vw, 55px); line-height: 1.2; letter-spacing: -0.01em; color: var(--lm-ink); text-wrap: balance; }
@@ -464,7 +471,7 @@
 .lm-specialists-carousel__arrow--prev { left: -24px; }
 .lm-specialists-carousel__arrow--next { right: calc(-26px + 0.5 * var(--lm-side)); }
 @media (max-width: 767px) {
-  .lm-page-hero { min-height: max(calc(100vh - var(--lm-nav-h)), 560px); padding: 16px var(--lm-side) 96px; }
+  .lm-page-hero { min-height: max(calc(100vh - var(--lm-nav-h)), 560px); padding: 16px var(--lm-side) 24px; }
   .lm-page-hero__top { flex-direction: column; }
   .lm-page-hero__title { font-size: calc(min(46px, 11.8vw) * var(--lm-h1-scale, 1)); }
   .lm-page-hero__note { margin-top: 0; width: auto; }

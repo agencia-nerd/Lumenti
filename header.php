@@ -201,6 +201,8 @@ $lumenti_wa_boton = static function (string $clase) use ($lumenti_wa, $lumenti_n
                     <?php endif; ?>
                 <?php endforeach; ?>
 
+                <?php // Redes + WhatsApp en un solo pie fijo: el botón nunca tapa las redes. ?>
+                <div class="lm-mobile-menu__foot">
                 <?php if ($lumenti_redes_movil) : ?>
                     <div class="lm-mobile-menu__social">
                         <p class="lm-mobile-menu__social-title"><?php esc_html_e('SÍGUENOS', 'lumenti'); ?></p>
@@ -218,6 +220,7 @@ $lumenti_wa_boton = static function (string $clase) use ($lumenti_wa, $lumenti_n
                     </div>
                 <?php endif; ?>
                 <div class="lm-mobile-menu__cta"><?php $lumenti_wa_boton('lm-btn lm-btn--primary'); ?></div>
+                </div>
             </div>
         </nav>
         <?php if ($lumenti_wa_fab !== '') : ?>
