@@ -58,6 +58,7 @@
   --lm-side: clamp(24px, 8.3333vw, 160px); /* desktop; tablet 40px; mobile 20px */
   --lm-sec-top: 160px;
   --lm-sec-bottom: 200px;
+  --lm-sec-k: 1; /* factor del aire vertical de las secciones: escritorio 1, <1024 0.7 (30% menos) */
   --lm-eyebrow-gap: 20px;
 
   /* Radios */
@@ -78,6 +79,6 @@
   --lm-nav-x: clamp(24px, 5.2vw, 100px); /* borde lateral del header y del footer; tablet 40px; mobile 20px */
 }
 @media (max-width: 1199px) { :root { --lm-nav-h: 84px; --lm-nav-x: 40px; } }
-@media (max-width: 1023px) { :root { --lm-side: 40px; --lm-sec-top: 112px; --lm-sec-bottom: 128px; } }
+@media (max-width: 1023px) { :root { --lm-side: 40px; --lm-sec-top: 112px; --lm-sec-bottom: 128px; --lm-sec-k: 0.7; } }
 @media (max-width: 767px)  { :root { --lm-nav-h: 76px; --lm-nav-x: 20px; --lm-side: 20px; --lm-sec-top: 80px; --lm-sec-bottom: 96px; } }
 @media (prefers-reduced-motion: reduce) { :root { --lm-dur-fill: 0ms; } }

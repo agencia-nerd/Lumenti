@@ -446,7 +446,7 @@
 .lm-section-title--center { text-align: center; }
 
 /* ---------- Carrusel de especialistas (.lm-specialists-carousel) — condiciones y servicios; js/condition-filter.js ---------- */
-.lm-specialists-carousel { padding: clamp(120px, 10.4167vw, 200px) var(--lm-side) clamp(150px, 12.5vw, 240px); overflow: hidden; }
+.lm-specialists-carousel { padding: calc(clamp(120px, 10.4167vw, 200px) * var(--lm-sec-k)) var(--lm-side) calc(clamp(150px, 12.5vw, 240px) * var(--lm-sec-k)); overflow: hidden; }
 .lm-specialists-carousel__head { max-width: var(--lm-max); margin: 0 auto; }
 .lm-specialists-carousel__intro { margin-top: 8px; }
 .lm-specialists-carousel__bar { margin-top: 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; }
@@ -478,7 +478,7 @@
   .lm-page-hero__intro { margin-top: 40px; grid-template-columns: minmax(0,1fr); gap: 16px; }
   .lm-page-hero__lead { font-size: 18px; }
   .lm-section-title { font-size: 28px; }
-  .lm-specialists-carousel { padding: 96px var(--lm-side); }
+  .lm-specialists-carousel { padding: calc(96px * var(--lm-sec-k)) var(--lm-side); }
   .lm-specialists-carousel__carousel { margin-top: 32px; }
   .lm-specialists-carousel__track { grid-auto-columns: 86%; gap: 12px; }
   .lm-specialists-carousel__fade { width: 64px; }
@@ -489,14 +489,14 @@
 @media (max-width: 767px) { .lm-page-hero--service .lm-page-hero__title { font-size: 32px; } .lm-page-hero--service .lm-page-hero__note { margin-top: 0; } }
 
 /* ---------- Intro en dos columnas: texto + composición de fotos (servicios) ---------- */
-.lm-intro-split { padding: clamp(120px, 10.4167vw, 200px) var(--lm-side); }
+.lm-intro-split { padding: calc(clamp(120px, 10.4167vw, 200px) * var(--lm-sec-k)) var(--lm-side); }
 .lm-intro-split__inner { max-width: var(--lm-max); margin: 0 auto; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 64px; align-items: center; }
 .lm-intro-split__text { max-width: 600px; }
 .lm-intro-split__p { margin-top: 20px; font-size: var(--lm-fs-body); line-height: 1.8; color: var(--lm-muted); }
 .lm-section-title + .lm-intro-split__p { margin-top: 28px; }
 .lm-intro-split__p--strong { font-weight: 500; color: var(--lm-ink-2); }
 @media (max-width: 767px) {
-  .lm-intro-split { padding: 80px var(--lm-side); }
+  .lm-intro-split { padding: calc(80px * var(--lm-sec-k)) var(--lm-side); }
   .lm-intro-split__inner { grid-template-columns: minmax(0,1fr); gap: 56px; }
   /* En una columna el texto y las fotos ocupan todo el ancho (sin el tope de escritorio que los dejaba a la izquierda). */
   /* .lm-intro-split delante: le gana a los topes por página (ej. .lm-emp-why .lm-intro-split__text en empresas.css). */
