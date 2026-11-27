@@ -6,7 +6,7 @@
 .lm-emp-hero__actions { grid-column: 2; margin-top: 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; }
 
 /* Desafíos */
-.lm-emp-challenges { padding: clamp(120px, 10.4167vw, 200px) var(--lm-side) clamp(80px, 7vw, 136px); }
+.lm-emp-challenges { padding: calc(clamp(120px, 10.4167vw, 200px) * var(--lm-sec-k)) var(--lm-side) calc(clamp(80px, 7vw, 136px) * var(--lm-sec-k)); }
 .lm-emp-challenges__header { max-width: 760px; margin: 0 auto; text-align: center; }
 .lm-emp-challenges__intro { max-width: 500px; margin: 12px auto 0; }
 .lm-emp-challenges__list { max-width: var(--lm-max); margin: clamp(72px, 5.8333vw, 112px) auto 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 72px 40px; }
@@ -20,7 +20,7 @@
 .lm-emp-challenges__text { margin-top: 12px; max-width: 420px; font-size: var(--lm-fs-body); line-height: 1.7; color: var(--lm-muted); }
 
 /* Soluciones */
-.lm-emp-solutions { padding: clamp(80px, 7vw, 136px) var(--lm-side); }
+.lm-emp-solutions { padding: calc(clamp(80px, 7vw, 136px) * var(--lm-sec-k)) var(--lm-side); }
 .lm-emp-solutions__inner { max-width: var(--lm-max); margin: 0 auto; display: grid; grid-template-columns: minmax(0,5fr) minmax(0,9fr); gap: clamp(40px, 3.3vw, 64px); align-items: start; }
 .lm-emp-solutions__intro { position: sticky; top: calc(var(--lm-nav-h) + 48px); max-width: 480px; }
 .lm-emp-solutions__lead { margin-top: 24px; font-size: var(--lm-fs-body); line-height: 1.8; color: var(--lm-body); }
@@ -41,7 +41,7 @@
 /* El scroll por pasos solo existe con JS (empresas.js); sin JS se ven todos los pasos en lista. */
 .lm-js .lm-emp-steps { height: 340vh; }
 .lm-emp-steps__list:not(.lm-js *) { gap: 48px; }
-.lm-emp-steps__sticky { --lm-steps-num: clamp(160px, min(23vw, 34vh), 440px); position: sticky; top: var(--lm-nav-h); min-height: calc(100vh - var(--lm-nav-h)); display: flex; flex-direction: column; padding: clamp(48px, 7vh, 96px) var(--lm-side) clamp(32px, 5vh, 64px); overflow: hidden; }
+.lm-emp-steps__sticky { --lm-steps-num: clamp(160px, min(23vw, 34vh), 440px); position: sticky; top: var(--lm-nav-h); min-height: calc(100vh - var(--lm-nav-h)); display: flex; flex-direction: column; padding: calc(clamp(48px, 7vh, 96px) * var(--lm-sec-k)) var(--lm-side) clamp(32px, 5vh, 64px); overflow: hidden; }
 .lm-emp-steps__ring { position: absolute; border-radius: 50%; pointer-events: none; }
 .lm-emp-steps__ring--outer { right: -9vw; top: -14vh; width: 34vw; aspect-ratio: 1.3 / 1; border: 1px solid #e7e4dd; }
 .lm-emp-steps__ring--inner { right: -12vw; top: -8vh; width: 30vw; aspect-ratio: 1.25 / 1; border: 1px solid #ebe8e2; }
@@ -67,7 +67,7 @@
 .lm-emp-why .lm-intro-split__text { max-width: 560px; }
 
 /* Talleres */
-.lm-emp-workshops { padding: clamp(96px, 8.3333vw, 160px) var(--lm-side) clamp(120px, 10.4167vw, 200px); }
+.lm-emp-workshops { padding: calc(clamp(96px, 8.3333vw, 160px) * var(--lm-sec-k)) var(--lm-side) calc(clamp(120px, 10.4167vw, 200px) * var(--lm-sec-k)); }
 .lm-emp-workshops__header { max-width: var(--lm-max); margin: 0 auto; display: flex; align-items: flex-start; justify-content: space-between; gap: 20px 48px; }
 .lm-emp-workshops__lead { flex: 0 1 600px; max-width: 600px; text-align: right; }
 .lm-emp-workshops__list { max-width: var(--lm-max); margin: 48px auto 0; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
@@ -82,7 +82,7 @@
 .lm-emp-workshop__action .lm-btn { width: 100%; }
 
 /* Solicitar propuesta */
-.lm-emp-proposal { padding: 0 var(--lm-side) clamp(120px, 10.4167vw, 200px); }
+.lm-emp-proposal { padding: 0 var(--lm-side) calc(clamp(120px, 10.4167vw, 200px) * var(--lm-sec-k)); }
 .lm-emp-proposal__inner { max-width: var(--lm-max); margin: 0 auto; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: clamp(64px, 7.8vw, 150px); align-items: start; }
 .lm-emp-proposal__aside { position: sticky; top: calc(var(--lm-nav-h) + 48px); }
 .lm-emp-proposal__lead { margin-top: 24px; max-width: 540px; font-size: var(--lm-fs-body); line-height: 1.7; color: var(--lm-body); }
@@ -109,7 +109,7 @@
   .lm-emp-solution__body { padding: 28px 24px 32px; }
   .lm-emp-solution__title { font-size: 24px; }
   .lm-emp-steps, .lm-js .lm-emp-steps { height: auto; }
-  .lm-emp-steps__sticky { position: static; min-height: 0; padding: 64px var(--lm-side); }
+  .lm-emp-steps__sticky { position: static; min-height: 0; padding: calc(64px * var(--lm-sec-k)) var(--lm-side); }
   .lm-emp-steps__header, .lm-emp-steps__body { grid-template-columns: minmax(0,1fr); }
   .lm-emp-steps__title { font-size: 32px; }
   .lm-emp-steps__lead { grid-column: 1; font-size: 18px; }

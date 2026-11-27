@@ -260,7 +260,7 @@
         }
     }
     .lm-home-cifras {
-        padding: 96px clamp(24px, 5.2vw, 100px) 100px;
+        padding: calc(96px * var(--lm-sec-k)) clamp(24px, 5.2vw, 100px) calc(100px * var(--lm-sec-k));
         background: #faf9f5;
     }
     .lm-home-cifras__list {
@@ -311,7 +311,7 @@
         background: #e2e4e6;
     }
     .lm-home-sobre {
-        padding: clamp(96px, 8.3333vw, 160px) 0px clamp(120px, 10.4167vw, 200px);
+        padding: calc(clamp(96px, 8.3333vw, 160px) * var(--lm-sec-k)) 0px calc(clamp(120px, 10.4167vw, 200px) * var(--lm-sec-k));
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -483,8 +483,7 @@
     }
     .lm-home-ayuda {
         scroll-margin-top: 96px;
-        padding: clamp(96px, 8.3333vw, 160px) clamp(24px, 8.3333vw, 160px)
-            clamp(120px, 10.4167vw, 200px);
+        padding: calc(clamp(96px, 8.3333vw, 160px) * var(--lm-sec-k)) clamp(24px, 8.3333vw, 160px) calc(clamp(120px, 10.4167vw, 200px) * var(--lm-sec-k));
     }
     .lm-home-ayuda__header,
     .lm-home-testimonios__header {
@@ -621,8 +620,7 @@
         font-family: inherit;
     }
     .lm-home-diario {
-        padding: clamp(96px, 8.3333vw, 160px) clamp(24px, 8.3333vw, 160px)
-            clamp(120px, 10.4167vw, 200px);
+        padding: calc(clamp(96px, 8.3333vw, 160px) * var(--lm-sec-k)) clamp(24px, 8.3333vw, 160px) calc(clamp(120px, 10.4167vw, 200px) * var(--lm-sec-k));
         background: var(--lm-teal-700);
     }
     .lm-home-diario__layout {
@@ -831,8 +829,7 @@
         gap: 10px;
     }
     .lm-home-testimonios {
-        padding: clamp(96px, 8.3333vw, 160px) clamp(24px, 8.3333vw, 160px)
-            clamp(48px, 4.1667vw, 80px);
+        padding: calc(clamp(96px, 8.3333vw, 160px) * var(--lm-sec-k)) clamp(24px, 8.3333vw, 160px) calc(clamp(48px, 4.1667vw, 80px) * var(--lm-sec-k));
         overflow: hidden;
     }
     .lm-home-testimonios__stage {
@@ -974,8 +971,7 @@
         transition: background-color 400ms linear;
     }
     .lm-home-blog {
-        padding: clamp(96px, 8.3333vw, 160px) clamp(24px, 8.3333vw, 160px)
-            clamp(120px, 10.4167vw, 200px);
+        padding: calc(clamp(96px, 8.3333vw, 160px) * var(--lm-sec-k)) clamp(24px, 8.3333vw, 160px) calc(clamp(120px, 10.4167vw, 200px) * var(--lm-sec-k));
     }
     .lm-home-blog__header {
         max-width: var(--lm-max);
@@ -1118,10 +1114,10 @@
             flex: 1 1 auto;
         }
         .lm-home-cifras {
-            padding: 72px 40px 80px;
+            padding: calc(72px * var(--lm-sec-k)) 40px calc(80px * var(--lm-sec-k));
         }
         .lm-home-sobre {
-            padding: 112px 0px;
+            padding: calc(112px * var(--lm-sec-k)) 0px;
         }
         .lm-home-sobre__statement {
             font-size: 26px;
@@ -1135,7 +1131,7 @@
         .lm-home-ayuda,
         .lm-home-diario,
         .lm-home-blog {
-            padding: 112px 40px;
+            padding: calc(112px * var(--lm-sec-k)) 40px;
         }
         .lm-home-ayuda__title,
         .lm-home-diario__title,
@@ -1165,7 +1161,7 @@
             padding: 20px 12px;
         }
         .lm-home-diario__evaluaciones {
-            margin: clamp(80px, 6.25vw, 120px) -40px -112px;
+            margin: clamp(80px, 6.25vw, 120px) -40px calc(-112px * var(--lm-sec-k));
             min-height: auto;
         }
         .lm-home-diario__evaluaciones-img {
@@ -1187,7 +1183,7 @@
             max-width: 620px;
         }
         .lm-home-testimonios {
-            padding: 112px 40px 56px;
+            padding: calc(112px * var(--lm-sec-k)) 40px calc(56px * var(--lm-sec-k));
         }
         .lm-home-testimonios__stage {
             margin-top: 48px;
@@ -1226,7 +1222,7 @@
             padding: 32px 88px 0px 20px;
         }
         .lm-home-cifras {
-            padding: 56px 20px 64px;
+            padding: calc(56px * var(--lm-sec-k)) 20px calc(64px * var(--lm-sec-k));
         }
         .lm-home-cifras__list {
             flex-direction: column;
@@ -1239,7 +1235,7 @@
             margin-top: 0px;
         }
         .lm-home-sobre {
-            padding: 80px 0px;
+            padding: calc(80px * var(--lm-sec-k)) 0px;
         }
         .lm-home-sobre__statement {
             font-size: 21px;
@@ -1256,7 +1252,7 @@
         .lm-home-ayuda,
         .lm-home-diario,
         .lm-home-blog {
-            padding: 80px 20px;
+            padding: calc(80px * var(--lm-sec-k)) 20px;
         }
         .lm-home-ayuda__title,
         .lm-home-diario__title,
@@ -1355,13 +1351,13 @@
             cursor: pointer;
         }
         .lm-home-diario__evaluaciones {
-            margin: clamp(80px, 6.25vw, 120px) -20px -80px;
+            margin: clamp(80px, 6.25vw, 120px) -20px calc(-80px * var(--lm-sec-k));
         }
         .lm-home-diario__evaluaciones-inner {
             padding: 236px 20px 48px;
         }
         .lm-home-testimonios {
-            padding: 80px 20px 40px;
+            padding: calc(80px * var(--lm-sec-k)) 20px 40px;
         }
         .lm-home-testimonios__stage {
             height: 305px;
