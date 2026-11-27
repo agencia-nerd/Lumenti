@@ -912,7 +912,10 @@
         width: 56%;
     }
     .lm-home-testimonios__arrows {
-        /* margin-top: 32px; */
+        /* El JS deja 40px de colchón bajo las cards (carousel.js): se compensa para acercar las flechas. */
+        margin-top: -50px;
+        position: relative;
+        z-index: 6;
         display: flex;
         justify-content: center;
         gap: 32px;
@@ -1188,6 +1191,9 @@
         .lm-home-testimonios__stage {
             margin-top: 48px;
             height: 503px;
+        }
+        .lm-home-testimonios__arrows {
+            margin-top: -40px;
         }
         .lm-home-testimonios__card {
             width: 520px;
